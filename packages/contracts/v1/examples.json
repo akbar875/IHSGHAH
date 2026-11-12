@@ -1,0 +1,1411 @@
+[
+  {
+    "schema": "Quality",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "status": "unavailable",
+      "feed": "unavailable",
+      "last_heartbeat_at": null,
+      "reasons": [
+        "SIMULATION",
+        "MODEL_UNVALIDATED"
+      ]
+    }
+  },
+  {
+    "schema": "Probability",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "status": "unvalidated",
+      "value": null,
+      "calibration_version": null
+    }
+  },
+  {
+    "schema": "Signal",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "signal_id": "signal-sim-1",
+      "version": 1,
+      "symbol": "TEST",
+      "generated_at": "2026-11-12T03:00:00Z",
+      "data_as_of": "2026-11-12T03:00:00Z",
+      "valid_until": "2026-11-12T03:30:00Z",
+      "horizon_minutes": 30,
+      "model_version": "unvalidated-1",
+      "policy_version": "sim-policy-1",
+      "configuration_version": "config-sim-1",
+      "state": "WATCH",
+      "entry_zone": {
+        "lower_idr": "1000.00",
+        "upper_idr": "1010.00"
+      },
+      "trigger": "PRICE_AND_TREND",
+      "invalidation": "DATA_UNHEALTHY",
+      "stop_idr": "990.00",
+      "targets_idr": [
+        "1030.00"
+      ],
+      "entry_from": "2026-11-12T03:00:00Z",
+      "entry_until": "2026-11-12T03:30:00Z",
+      "exit_deadline": "2026-11-12T08:00:00Z",
+      "return_quantiles": null,
+      "target_probability": {
+        "status": "unvalidated",
+        "value": null,
+        "calibration_version": null
+      },
+      "assumptions": {
+        "reference_price_idr": "1000.00",
+        "nominal_idr": "1000000.00",
+        "fee_schedule_version": "sim-fees-1",
+        "order_type": "LIMIT"
+      }
+    }
+  },
+  {
+    "schema": "LiquidityEstimate",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "signal_id": "signal-sim-1",
+      "signal_version": 1,
+      "nominal_idr": "1000000.00",
+      "lots": 10,
+      "depth_as_of": "2026-11-12T03:00:00Z",
+      "order_policy": "LIMIT",
+      "deadline": "2026-11-12T03:30:00Z",
+      "slippage_cap_ratio": "0.001000",
+      "category": "unavailable",
+      "entry_fill_probability": {
+        "status": "unvalidated",
+        "value": null,
+        "calibration_version": null
+      },
+      "exit_fill_probability": {
+        "status": "unvalidated",
+        "value": null,
+        "calibration_version": null
+      },
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      }
+    }
+  },
+  {
+    "schema": "FillRequest",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "side": "BUY",
+      "price_idr": "1000.00",
+      "lots": 2,
+      "filled_at": "2026-11-12T03:00:00Z",
+      "fees_idr": "300.00"
+    }
+  },
+  {
+    "schema": "Fill",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "fill_id": "fill-sim-1",
+      "position_id": "position-sim-1",
+      "side": "BUY",
+      "price_idr": "1000.00",
+      "lots": 2,
+      "filled_at": "2026-11-12T03:00:00Z",
+      "fees_idr": "300.00",
+      "recorded_at": "2026-11-12T03:00:00Z",
+      "origin": "simulation"
+    }
+  },
+  {
+    "schema": "Position",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "position_id": "position-sim-1",
+      "user_id": "pilot-sim",
+      "symbol": "TEST",
+      "fills": [
+        {
+          "fill_id": "fill-sim-1",
+          "position_id": "position-sim-1",
+          "side": "BUY",
+          "price_idr": "1000.00",
+          "lots": 2,
+          "filled_at": "2026-11-12T03:00:00Z",
+          "fees_idr": "300.00",
+          "recorded_at": "2026-11-12T03:00:00Z",
+          "origin": "simulation"
+        }
+      ],
+      "remaining_lots": 2,
+      "average_price_idr": "1000.00",
+      "fees_idr": "300.00",
+      "opened_at": "2026-11-12T03:00:00Z",
+      "plan_version": 1,
+      "status": "OPEN",
+      "overnight_risk": false
+    }
+  },
+  {
+    "schema": "Alert",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "event_id": "alert-sim-1",
+      "user_id": "pilot-sim",
+      "signal_id": "signal-sim-1",
+      "position_id": "position-sim-1",
+      "type": "DATA_DISCONNECTED",
+      "created_at": "2026-11-12T03:00:00Z",
+      "delivered_at": null,
+      "status": "pending",
+      "channel": "in_app",
+      "dedup_key": "research:pilot-sim:alert-sim-1:in_app"
+    }
+  },
+  {
+    "schema": "InstrumentRule",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "symbol": "TEST",
+      "board": "SIMULATED_REGULAR",
+      "effective_from": "2026-11-01T00:00:00Z",
+      "effective_to": null,
+      "rule_version": "sim-rules-1",
+      "lot_size_shares": 100,
+      "tick_rule": [
+        {
+          "from_idr": "0.00",
+          "to_idr": null,
+          "tick_idr": "1.00"
+        }
+      ],
+      "limit_rule": {
+        "reference_price_idr": "1000.00",
+        "lower_idr": "900.00",
+        "upper_idr": "1100.00",
+        "version": "sim-limit-1"
+      },
+      "session": "sim-regular",
+      "calendar_version": "sim-calendar-1",
+      "tradability": "unsupported"
+    }
+  },
+  {
+    "schema": "BookLevel",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "price_idr": "1000.00",
+      "lots": 10,
+      "cumulative_lots": 10
+    }
+  },
+  {
+    "schema": "Depth",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "symbol": "TEST",
+      "snapshot_id": "book-sim-1",
+      "sequence": "1",
+      "depth_as_of": "2026-11-12T03:00:00Z",
+      "bids": [
+        {
+          "price_idr": "1000.00",
+          "lots": 10,
+          "cumulative_lots": 10
+        }
+      ],
+      "asks": [
+        {
+          "price_idr": "1010.00",
+          "lots": 12,
+          "cumulative_lots": 12
+        }
+      ],
+      "available_levels": 1,
+      "limited": true
+    }
+  },
+  {
+    "schema": "Trade",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "price_idr": "1000.00",
+      "lots": 2,
+      "aggressor": "unknown"
+    }
+  },
+  {
+    "schema": "FeedStatus",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "status": "disconnected",
+      "heartbeat_at": "2026-11-12T03:00:00Z"
+    }
+  },
+  {
+    "schema": "MarketEvent",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "event_id": "market-sim-1",
+      "symbol": "TEST",
+      "event_type": "trade",
+      "event_time": "2026-11-12T03:00:00Z",
+      "provider_time": null,
+      "received_at": "2026-11-12T03:00:00Z",
+      "available_at": "2026-11-12T03:00:00Z",
+      "processed_at": "2026-11-12T03:00:00Z",
+      "sequence": "1",
+      "source": "sim-fixture",
+      "payload": {
+        "price_idr": "1000.00",
+        "lots": 2,
+        "aggressor": "unknown"
+      }
+    }
+  },
+  {
+    "schema": "NewsEvent",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "event_id": "news-sim-1",
+      "entity_ids": [
+        "TEST"
+      ],
+      "published_at": "2026-11-12T03:00:00Z",
+      "first_seen_at": "2026-11-12T03:00:00Z",
+      "available_at": "2026-11-12T03:00:00Z",
+      "source_ref": "sim-source-1",
+      "dedup_id": "sim-dedup-1",
+      "event_type": "disclosure",
+      "confidence": 0.5
+    }
+  },
+  {
+    "schema": "Experiment",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "experiment_id": "experiment-sim-1",
+      "dataset_version": "sim-dataset-1",
+      "code_version": "sim-code-1",
+      "split": {
+        "train_from": "2026-01-01T00:00:00Z",
+        "train_until": "2026-06-01T00:00:00Z",
+        "validation_from": "2026-06-02T00:00:00Z",
+        "validation_until": "2026-08-01T00:00:00Z",
+        "test_from": "2026-08-02T00:00:00Z",
+        "test_until": "2026-10-01T00:00:00Z",
+        "purge_minutes": 60,
+        "embargo_minutes": 60
+      },
+      "parameters": [
+        {
+          "name": "window_minutes",
+          "value": 5
+        }
+      ],
+      "assumptions": {
+        "fee_schedule_version": "sim-fees-1",
+        "fill_model_version": "sim-fill-1",
+        "latency_ms": 1000,
+        "intrabar_policy": "conservative"
+      },
+      "metrics": [
+        {
+          "name": "net_expectancy",
+          "value": null,
+          "unit": "idr"
+        }
+      ],
+      "promotion_decision": "experimental",
+      "report_ref": null
+    }
+  },
+  {
+    "schema": "Candle",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "at": "2026-11-12T03:00:00Z",
+      "open_idr": "1000.00",
+      "high_idr": "1010.00",
+      "low_idr": "990.00",
+      "close_idr": "1000.00",
+      "volume_lots": 10
+    }
+  },
+  {
+    "schema": "Projection",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "at": "2026-11-12T03:30:00Z",
+      "median_idr": "1000.00",
+      "lower_idr": "990.00",
+      "upper_idr": "1010.00",
+      "coverage": 0.8
+    }
+  },
+  {
+    "schema": "Chart",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "symbol": "TEST",
+      "interval": "1m",
+      "candles": [
+        {
+          "at": "2026-11-12T03:00:00Z",
+          "open_idr": "1000.00",
+          "high_idr": "1010.00",
+          "low_idr": "990.00",
+          "close_idr": "1000.00",
+          "volume_lots": 10
+        }
+      ],
+      "projection": [],
+      "model_version": null,
+      "horizon_minutes": null,
+      "coverage_status": "unvalidated"
+    }
+  },
+  {
+    "schema": "Pressure",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "window_minutes": 5,
+      "buy_ratio": null,
+      "sell_ratio": null,
+      "classified_ratio": 0,
+      "method": "unavailable",
+      "validated": false
+    }
+  },
+  {
+    "schema": "StockDetail",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "symbol": "TEST",
+      "last_price_idr": "1000.00",
+      "rule": {
+        "symbol": "TEST",
+        "board": "SIMULATED_REGULAR",
+        "effective_from": "2026-11-01T00:00:00Z",
+        "effective_to": null,
+        "rule_version": "sim-rules-1",
+        "lot_size_shares": 100,
+        "tick_rule": [
+          {
+            "from_idr": "0.00",
+            "to_idr": null,
+            "tick_idr": "1.00"
+          }
+        ],
+        "limit_rule": {
+          "reference_price_idr": "1000.00",
+          "lower_idr": "900.00",
+          "upper_idr": "1100.00",
+          "version": "sim-limit-1"
+        },
+        "session": "sim-regular",
+        "calendar_version": "sim-calendar-1",
+        "tradability": "unsupported"
+      },
+      "signal": {
+        "signal_id": "signal-sim-1",
+        "version": 1,
+        "symbol": "TEST",
+        "generated_at": "2026-11-12T03:00:00Z",
+        "data_as_of": "2026-11-12T03:00:00Z",
+        "valid_until": "2026-11-12T03:30:00Z",
+        "horizon_minutes": 30,
+        "model_version": "unvalidated-1",
+        "policy_version": "sim-policy-1",
+        "configuration_version": "config-sim-1",
+        "state": "WATCH",
+        "entry_zone": {
+          "lower_idr": "1000.00",
+          "upper_idr": "1010.00"
+        },
+        "trigger": "PRICE_AND_TREND",
+        "invalidation": "DATA_UNHEALTHY",
+        "stop_idr": "990.00",
+        "targets_idr": [
+          "1030.00"
+        ],
+        "entry_from": "2026-11-12T03:00:00Z",
+        "entry_until": "2026-11-12T03:30:00Z",
+        "exit_deadline": "2026-11-12T08:00:00Z",
+        "return_quantiles": null,
+        "target_probability": {
+          "status": "unvalidated",
+          "value": null,
+          "calibration_version": null
+        },
+        "assumptions": {
+          "reference_price_idr": "1000.00",
+          "nominal_idr": "1000000.00",
+          "fee_schedule_version": "sim-fees-1",
+          "order_type": "LIMIT"
+        }
+      },
+      "liquidity": {
+        "signal_id": "signal-sim-1",
+        "signal_version": 1,
+        "nominal_idr": "1000000.00",
+        "lots": 10,
+        "depth_as_of": "2026-11-12T03:00:00Z",
+        "order_policy": "LIMIT",
+        "deadline": "2026-11-12T03:30:00Z",
+        "slippage_cap_ratio": "0.001000",
+        "category": "unavailable",
+        "entry_fill_probability": {
+          "status": "unvalidated",
+          "value": null,
+          "calibration_version": null
+        },
+        "exit_fill_probability": {
+          "status": "unvalidated",
+          "value": null,
+          "calibration_version": null
+        },
+        "quality": {
+          "status": "unavailable",
+          "feed": "unavailable",
+          "last_heartbeat_at": null,
+          "reasons": [
+            "SIMULATION",
+            "MODEL_UNVALIDATED"
+          ]
+        }
+      },
+      "depth": {
+        "symbol": "TEST",
+        "snapshot_id": "book-sim-1",
+        "sequence": "1",
+        "depth_as_of": "2026-11-12T03:00:00Z",
+        "bids": [
+          {
+            "price_idr": "1000.00",
+            "lots": 10,
+            "cumulative_lots": 10
+          }
+        ],
+        "asks": [
+          {
+            "price_idr": "1010.00",
+            "lots": 12,
+            "cumulative_lots": 12
+          }
+        ],
+        "available_levels": 1,
+        "limited": true
+      },
+      "pressure": [
+        {
+          "window_minutes": 5,
+          "buy_ratio": null,
+          "sell_ratio": null,
+          "classified_ratio": 0,
+          "method": "unavailable",
+          "validated": false
+        }
+      ]
+    }
+  },
+  {
+    "schema": "Watchlist",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "symbols": [
+        "TEST"
+      ]
+    }
+  },
+  {
+    "schema": "RiskSettings",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "configuration_version": "config-sim-1",
+      "nominal_idr": "1000000.00",
+      "capital_idr": "10000000.00",
+      "risk_per_position_ratio": "0.005000",
+      "max_combined_risk_ratio": "0.020000",
+      "max_positions": 3,
+      "fee_schedule_version": "sim-fees-1"
+    }
+  },
+  {
+    "schema": "Error",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "code": "RESYNC_REQUIRED",
+      "request_id": "request-sim-1",
+      "retryable": true,
+      "fields": [
+        "cursor"
+      ]
+    }
+  },
+  {
+    "schema": "CandidatesResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": [
+        {
+          "signal_id": "signal-sim-1",
+          "version": 1,
+          "symbol": "TEST",
+          "generated_at": "2026-11-12T03:00:00Z",
+          "data_as_of": "2026-11-12T03:00:00Z",
+          "valid_until": "2026-11-12T03:30:00Z",
+          "horizon_minutes": 30,
+          "model_version": "unvalidated-1",
+          "policy_version": "sim-policy-1",
+          "configuration_version": "config-sim-1",
+          "state": "WATCH",
+          "entry_zone": {
+            "lower_idr": "1000.00",
+            "upper_idr": "1010.00"
+          },
+          "trigger": "PRICE_AND_TREND",
+          "invalidation": "DATA_UNHEALTHY",
+          "stop_idr": "990.00",
+          "targets_idr": [
+            "1030.00"
+          ],
+          "entry_from": "2026-11-12T03:00:00Z",
+          "entry_until": "2026-11-12T03:30:00Z",
+          "exit_deadline": "2026-11-12T08:00:00Z",
+          "return_quantiles": null,
+          "target_probability": {
+            "status": "unvalidated",
+            "value": null,
+            "calibration_version": null
+          },
+          "assumptions": {
+            "reference_price_idr": "1000.00",
+            "nominal_idr": "1000000.00",
+            "fee_schedule_version": "sim-fees-1",
+            "order_type": "LIMIT"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "schema": "StockDetailResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "symbol": "TEST",
+        "last_price_idr": "1000.00",
+        "rule": {
+          "symbol": "TEST",
+          "board": "SIMULATED_REGULAR",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": null,
+          "rule_version": "sim-rules-1",
+          "lot_size_shares": 100,
+          "tick_rule": [
+            {
+              "from_idr": "0.00",
+              "to_idr": null,
+              "tick_idr": "1.00"
+            }
+          ],
+          "limit_rule": {
+            "reference_price_idr": "1000.00",
+            "lower_idr": "900.00",
+            "upper_idr": "1100.00",
+            "version": "sim-limit-1"
+          },
+          "session": "sim-regular",
+          "calendar_version": "sim-calendar-1",
+          "tradability": "unsupported"
+        },
+        "signal": {
+          "signal_id": "signal-sim-1",
+          "version": 1,
+          "symbol": "TEST",
+          "generated_at": "2026-11-12T03:00:00Z",
+          "data_as_of": "2026-11-12T03:00:00Z",
+          "valid_until": "2026-11-12T03:30:00Z",
+          "horizon_minutes": 30,
+          "model_version": "unvalidated-1",
+          "policy_version": "sim-policy-1",
+          "configuration_version": "config-sim-1",
+          "state": "WATCH",
+          "entry_zone": {
+            "lower_idr": "1000.00",
+            "upper_idr": "1010.00"
+          },
+          "trigger": "PRICE_AND_TREND",
+          "invalidation": "DATA_UNHEALTHY",
+          "stop_idr": "990.00",
+          "targets_idr": [
+            "1030.00"
+          ],
+          "entry_from": "2026-11-12T03:00:00Z",
+          "entry_until": "2026-11-12T03:30:00Z",
+          "exit_deadline": "2026-11-12T08:00:00Z",
+          "return_quantiles": null,
+          "target_probability": {
+            "status": "unvalidated",
+            "value": null,
+            "calibration_version": null
+          },
+          "assumptions": {
+            "reference_price_idr": "1000.00",
+            "nominal_idr": "1000000.00",
+            "fee_schedule_version": "sim-fees-1",
+            "order_type": "LIMIT"
+          }
+        },
+        "liquidity": {
+          "signal_id": "signal-sim-1",
+          "signal_version": 1,
+          "nominal_idr": "1000000.00",
+          "lots": 10,
+          "depth_as_of": "2026-11-12T03:00:00Z",
+          "order_policy": "LIMIT",
+          "deadline": "2026-11-12T03:30:00Z",
+          "slippage_cap_ratio": "0.001000",
+          "category": "unavailable",
+          "entry_fill_probability": {
+            "status": "unvalidated",
+            "value": null,
+            "calibration_version": null
+          },
+          "exit_fill_probability": {
+            "status": "unvalidated",
+            "value": null,
+            "calibration_version": null
+          },
+          "quality": {
+            "status": "unavailable",
+            "feed": "unavailable",
+            "last_heartbeat_at": null,
+            "reasons": [
+              "SIMULATION",
+              "MODEL_UNVALIDATED"
+            ]
+          }
+        },
+        "depth": {
+          "symbol": "TEST",
+          "snapshot_id": "book-sim-1",
+          "sequence": "1",
+          "depth_as_of": "2026-11-12T03:00:00Z",
+          "bids": [
+            {
+              "price_idr": "1000.00",
+              "lots": 10,
+              "cumulative_lots": 10
+            }
+          ],
+          "asks": [
+            {
+              "price_idr": "1010.00",
+              "lots": 12,
+              "cumulative_lots": 12
+            }
+          ],
+          "available_levels": 1,
+          "limited": true
+        },
+        "pressure": [
+          {
+            "window_minutes": 5,
+            "buy_ratio": null,
+            "sell_ratio": null,
+            "classified_ratio": 0,
+            "method": "unavailable",
+            "validated": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "schema": "DepthResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "symbol": "TEST",
+        "snapshot_id": "book-sim-1",
+        "sequence": "1",
+        "depth_as_of": "2026-11-12T03:00:00Z",
+        "bids": [
+          {
+            "price_idr": "1000.00",
+            "lots": 10,
+            "cumulative_lots": 10
+          }
+        ],
+        "asks": [
+          {
+            "price_idr": "1010.00",
+            "lots": 12,
+            "cumulative_lots": 12
+          }
+        ],
+        "available_levels": 1,
+        "limited": true
+      }
+    }
+  },
+  {
+    "schema": "ChartResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "symbol": "TEST",
+        "interval": "1m",
+        "candles": [
+          {
+            "at": "2026-11-12T03:00:00Z",
+            "open_idr": "1000.00",
+            "high_idr": "1010.00",
+            "low_idr": "990.00",
+            "close_idr": "1000.00",
+            "volume_lots": 10
+          }
+        ],
+        "projection": [],
+        "model_version": null,
+        "horizon_minutes": null,
+        "coverage_status": "unvalidated"
+      }
+    }
+  },
+  {
+    "schema": "WatchlistResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "symbols": [
+          "TEST"
+        ]
+      }
+    }
+  },
+  {
+    "schema": "RiskSettingsResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "configuration_version": "config-sim-1",
+        "nominal_idr": "1000000.00",
+        "capital_idr": "10000000.00",
+        "risk_per_position_ratio": "0.005000",
+        "max_combined_risk_ratio": "0.020000",
+        "max_positions": 3,
+        "fee_schedule_version": "sim-fees-1"
+      }
+    }
+  },
+  {
+    "schema": "PositionResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "position_id": "position-sim-1",
+        "user_id": "pilot-sim",
+        "symbol": "TEST",
+        "fills": [
+          {
+            "fill_id": "fill-sim-1",
+            "position_id": "position-sim-1",
+            "side": "BUY",
+            "price_idr": "1000.00",
+            "lots": 2,
+            "filled_at": "2026-11-12T03:00:00Z",
+            "fees_idr": "300.00",
+            "recorded_at": "2026-11-12T03:00:00Z",
+            "origin": "simulation"
+          }
+        ],
+        "remaining_lots": 2,
+        "average_price_idr": "1000.00",
+        "fees_idr": "300.00",
+        "opened_at": "2026-11-12T03:00:00Z",
+        "plan_version": 1,
+        "status": "OPEN",
+        "overnight_risk": false
+      }
+    }
+  },
+  {
+    "schema": "PositionsResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": [
+        {
+          "position_id": "position-sim-1",
+          "user_id": "pilot-sim",
+          "symbol": "TEST",
+          "fills": [
+            {
+              "fill_id": "fill-sim-1",
+              "position_id": "position-sim-1",
+              "side": "BUY",
+              "price_idr": "1000.00",
+              "lots": 2,
+              "filled_at": "2026-11-12T03:00:00Z",
+              "fees_idr": "300.00",
+              "recorded_at": "2026-11-12T03:00:00Z",
+              "origin": "simulation"
+            }
+          ],
+          "remaining_lots": 2,
+          "average_price_idr": "1000.00",
+          "fees_idr": "300.00",
+          "opened_at": "2026-11-12T03:00:00Z",
+          "plan_version": 1,
+          "status": "OPEN",
+          "overnight_risk": false
+        }
+      ]
+    }
+  },
+  {
+    "schema": "AlertsResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": [
+        {
+          "event_id": "alert-sim-1",
+          "user_id": "pilot-sim",
+          "signal_id": "signal-sim-1",
+          "position_id": "position-sim-1",
+          "type": "DATA_DISCONNECTED",
+          "created_at": "2026-11-12T03:00:00Z",
+          "delivered_at": null,
+          "status": "pending",
+          "channel": "in_app",
+          "dedup_key": "research:pilot-sim:alert-sim-1:in_app"
+        }
+      ]
+    }
+  },
+  {
+    "schema": "SignalHistoryResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": [
+        {
+          "signal_id": "signal-sim-1",
+          "version": 1,
+          "symbol": "TEST",
+          "generated_at": "2026-11-12T03:00:00Z",
+          "data_as_of": "2026-11-12T03:00:00Z",
+          "valid_until": "2026-11-12T03:30:00Z",
+          "horizon_minutes": 30,
+          "model_version": "unvalidated-1",
+          "policy_version": "sim-policy-1",
+          "configuration_version": "config-sim-1",
+          "state": "WATCH",
+          "entry_zone": {
+            "lower_idr": "1000.00",
+            "upper_idr": "1010.00"
+          },
+          "trigger": "PRICE_AND_TREND",
+          "invalidation": "DATA_UNHEALTHY",
+          "stop_idr": "990.00",
+          "targets_idr": [
+            "1030.00"
+          ],
+          "entry_from": "2026-11-12T03:00:00Z",
+          "entry_until": "2026-11-12T03:30:00Z",
+          "exit_deadline": "2026-11-12T08:00:00Z",
+          "return_quantiles": null,
+          "target_probability": {
+            "status": "unvalidated",
+            "value": null,
+            "calibration_version": null
+          },
+          "assumptions": {
+            "reference_price_idr": "1000.00",
+            "nominal_idr": "1000000.00",
+            "fee_schedule_version": "sim-fees-1",
+            "order_type": "LIMIT"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "schema": "ErrorResponse",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "code": "RESYNC_REQUIRED",
+        "request_id": "request-sim-1",
+        "retryable": true,
+        "fields": [
+          "cursor"
+        ]
+      }
+    }
+  },
+  {
+    "schema": "StreamEntity",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "signal_id": "signal-sim-1",
+      "version": 1,
+      "symbol": "TEST",
+      "generated_at": "2026-11-12T03:00:00Z",
+      "data_as_of": "2026-11-12T03:00:00Z",
+      "valid_until": "2026-11-12T03:30:00Z",
+      "horizon_minutes": 30,
+      "model_version": "unvalidated-1",
+      "policy_version": "sim-policy-1",
+      "configuration_version": "config-sim-1",
+      "state": "WATCH",
+      "entry_zone": {
+        "lower_idr": "1000.00",
+        "upper_idr": "1010.00"
+      },
+      "trigger": "PRICE_AND_TREND",
+      "invalidation": "DATA_UNHEALTHY",
+      "stop_idr": "990.00",
+      "targets_idr": [
+        "1030.00"
+      ],
+      "entry_from": "2026-11-12T03:00:00Z",
+      "entry_until": "2026-11-12T03:30:00Z",
+      "exit_deadline": "2026-11-12T08:00:00Z",
+      "return_quantiles": null,
+      "target_probability": {
+        "status": "unvalidated",
+        "value": null,
+        "calibration_version": null
+      },
+      "assumptions": {
+        "reference_price_idr": "1000.00",
+        "nominal_idr": "1000000.00",
+        "fee_schedule_version": "sim-fees-1",
+        "order_type": "LIMIT"
+      }
+    }
+  },
+  {
+    "schema": "Snapshot",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "stream_id": "stream-sim-1",
+      "subscription_id": "sub-sim-1",
+      "topic": "signals",
+      "symbol": null,
+      "user_id": "pilot-sim",
+      "cursor": "cursor-sim-1",
+      "sequence": "1",
+      "kind": "snapshot",
+      "items": [
+        {
+          "signal_id": "signal-sim-1",
+          "version": 1,
+          "symbol": "TEST",
+          "generated_at": "2026-11-12T03:00:00Z",
+          "data_as_of": "2026-11-12T03:00:00Z",
+          "valid_until": "2026-11-12T03:30:00Z",
+          "horizon_minutes": 30,
+          "model_version": "unvalidated-1",
+          "policy_version": "sim-policy-1",
+          "configuration_version": "config-sim-1",
+          "state": "WATCH",
+          "entry_zone": {
+            "lower_idr": "1000.00",
+            "upper_idr": "1010.00"
+          },
+          "trigger": "PRICE_AND_TREND",
+          "invalidation": "DATA_UNHEALTHY",
+          "stop_idr": "990.00",
+          "targets_idr": [
+            "1030.00"
+          ],
+          "entry_from": "2026-11-12T03:00:00Z",
+          "entry_until": "2026-11-12T03:30:00Z",
+          "exit_deadline": "2026-11-12T08:00:00Z",
+          "return_quantiles": null,
+          "target_probability": {
+            "status": "unvalidated",
+            "value": null,
+            "calibration_version": null
+          },
+          "assumptions": {
+            "reference_price_idr": "1000.00",
+            "nominal_idr": "1000000.00",
+            "fee_schedule_version": "sim-fees-1",
+            "order_type": "LIMIT"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "schema": "Delta",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "stream_id": "stream-sim-1",
+      "subscription_id": "sub-sim-1",
+      "topic": "signals",
+      "symbol": null,
+      "user_id": "pilot-sim",
+      "cursor": "cursor-sim-2",
+      "sequence": "2",
+      "kind": "delta",
+      "previous_sequence": "1",
+      "operations": [
+        {
+          "op": "upsert",
+          "entity_id": "signal-sim-1",
+          "entity": {
+            "signal_id": "signal-sim-1",
+            "version": 2,
+            "symbol": "TEST",
+            "generated_at": "2026-11-12T03:00:00Z",
+            "data_as_of": "2026-11-12T03:00:00Z",
+            "valid_until": "2026-11-12T03:30:00Z",
+            "horizon_minutes": 30,
+            "model_version": "unvalidated-1",
+            "policy_version": "sim-policy-1",
+            "configuration_version": "config-sim-1",
+            "state": "CANCELLED",
+            "entry_zone": {
+              "lower_idr": "1000.00",
+              "upper_idr": "1010.00"
+            },
+            "trigger": "PRICE_AND_TREND",
+            "invalidation": "DATA_UNHEALTHY",
+            "stop_idr": "990.00",
+            "targets_idr": [
+              "1030.00"
+            ],
+            "entry_from": "2026-11-12T03:00:00Z",
+            "entry_until": "2026-11-12T03:30:00Z",
+            "exit_deadline": "2026-11-12T08:00:00Z",
+            "return_quantiles": null,
+            "target_probability": {
+              "status": "unvalidated",
+              "value": null,
+              "calibration_version": null
+            },
+            "assumptions": {
+              "reference_price_idr": "1000.00",
+              "nominal_idr": "1000000.00",
+              "fee_schedule_version": "sim-fees-1",
+              "order_type": "LIMIT"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "schema": "Subscribe",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "kind": "subscribe",
+      "contract_version": "1.0.0",
+      "subscription_id": "sub-sim-1",
+      "topic": "signals",
+      "symbol": null,
+      "resume_cursor": null
+    }
+  },
+  {
+    "schema": "StreamMessage",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "stream_id": "stream-sim-1",
+      "subscription_id": "sub-sim-1",
+      "topic": "signals",
+      "symbol": null,
+      "user_id": "pilot-sim",
+      "cursor": "cursor-sim-1",
+      "sequence": "1",
+      "kind": "snapshot",
+      "items": [
+        {
+          "signal_id": "signal-sim-1",
+          "version": 1,
+          "symbol": "TEST",
+          "generated_at": "2026-11-12T03:00:00Z",
+          "data_as_of": "2026-11-12T03:00:00Z",
+          "valid_until": "2026-11-12T03:30:00Z",
+          "horizon_minutes": 30,
+          "model_version": "unvalidated-1",
+          "policy_version": "sim-policy-1",
+          "configuration_version": "config-sim-1",
+          "state": "WATCH",
+          "entry_zone": {
+            "lower_idr": "1000.00",
+            "upper_idr": "1010.00"
+          },
+          "trigger": "PRICE_AND_TREND",
+          "invalidation": "DATA_UNHEALTHY",
+          "stop_idr": "990.00",
+          "targets_idr": [
+            "1030.00"
+          ],
+          "entry_from": "2026-11-12T03:00:00Z",
+          "entry_until": "2026-11-12T03:30:00Z",
+          "exit_deadline": "2026-11-12T08:00:00Z",
+          "return_quantiles": null,
+          "target_probability": {
+            "status": "unvalidated",
+            "value": null,
+            "calibration_version": null
+          },
+          "assumptions": {
+            "reference_price_idr": "1000.00",
+            "nominal_idr": "1000000.00",
+            "fee_schedule_version": "sim-fees-1",
+            "order_type": "LIMIT"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "schema": "OpenPositionRequest",
+    "label": "SIMULATION ONLY - no market data or validated model",
+    "payload": {
+      "symbol": "TEST",
+      "signal_id": null,
+      "fill": {
+        "side": "BUY",
+        "price_idr": "1000.00",
+        "lots": 2,
+        "filled_at": "2026-11-12T03:00:00Z",
+        "fees_idr": "300.00"
+      }
+    }
+  }
+]

@@ -19,7 +19,7 @@ for (const issue of backlog.issues) {
   for (const heading of ['## Tujuan', '## Scope', '## Acceptance criteria', '## Dependency', '## Referensi PRD', '## Branch']) {
     assert.ok(body.includes(heading), `${issue.id}: missing ${heading}`);
   }
-  assert.ok(body.includes('- [ ]'), `${issue.id}: no acceptance checklist`);
+  assert.match(body, /^- \[[ xX]\] /m, `${issue.id}: no acceptance checklist`);
   seen.add(issue.id);
 }
 

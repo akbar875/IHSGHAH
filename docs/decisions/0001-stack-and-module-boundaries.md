@@ -1,9 +1,10 @@
 # ADR-0001: Stack, batas modul, konfigurasi, dan akun pilot
 
-- Status: Proposed — siap ditinjau pemilik repo; belum Accepted
+- Status: Accepted
 - Tanggal: 2026-11-12 (Asia/Jakarta)
 - Issue: [#1 / SS-001](https://github.com/akbar875/IHSGHAH/issues/1)
-- Pengambil keputusan: pemilik repo; penerimaan dicatat melalui review atau konfirmasi eksplisit sebelum status diubah
+- Pengambil keputusan: pemilik repo
+- Penerimaan: 2026-11-12, melalui instruksi pemilik dalam chat setelah ADR dipresentasikan dan di-push: “sekalian kamu selesaikan issue yang sudah kamu kerjakan”. Instruksi ini dicatat sebagai penerimaan hasil ADR dan penyelesaian SS-001.
 - Acuan: [PRD](../PRD-Saham-Signal.md) bagian 11, 12, 13, dan 16
 
 ## Konteks
@@ -31,7 +32,7 @@ Baseline berikut diverifikasi pada 12 November 2026 dari dokumentasi penerbit da
 | PostgreSQL | 18.7, jalur 18 | PostgreSQL License | Transaksi, constraint, audit, dan query point-in-time; [dukungan](https://www.postgresql.org/support/versioning/), [lisensi](https://www.postgresql.org/about/licence/) |
 | Redis Open Source | 8.2.11, jalur 8.2 | Pilihan upstream RSALv2 / SSPLv1 / AGPLv3; usulan memakai AGPLv3 | Proses server terpisah tanpa modifikasi; [rilis](https://github.com/redis/redis/releases/tag/8.2.11), [teks lisensi](https://github.com/redis/redis/blob/8.2/LICENSE.txt) |
 
-Redis 8 tidak dicatat sebagai BSD. Pemilik repo perlu menerima pilihan lisensi Redis bersama ADR ini. Image, notice, dan kewajiban distribusi diverifikasi lagi pada SS-006; distribusi publik/berbayar ditinjau sebelum G3. Jika pilihan ini tidak diterima, evaluasi Valkey dengan ADR pengganti dan uji kompatibilitas. Lisensi dependency tidak menentukan lisensi kode aplikasi; lisensi repo tetap keputusan pemilik.
+Redis 8 tidak dicatat sebagai BSD. Pilihan lisensi Redis diterima bersama ADR ini. Image, notice, dan kewajiban distribusi diverifikasi lagi pada SS-006; distribusi publik/berbayar ditinjau sebelum G3. Jika pilihan ini perlu diubah, evaluasi Valkey dengan ADR pengganti dan uji kompatibilitas. Lisensi dependency tidak menentukan lisensi kode aplikasi; lisensi repo tetap keputusan pemilik.
 
 Pin dependency transitif, driver database, server ASGI, library validasi, dan tooling pada bootstrap SS-003/004/006. Bukti kompatibilitas berupa build web, startup API/worker, koneksi database/cache, serta CI SS-007. Tidak menyatakan paket analisis atau model yang belum dipilih sudah mendukung baseline Python ini.
 
@@ -79,7 +80,7 @@ Jalur ingest pasar tidak menunggu pemrosesan berita. Data kritis tidak sehat men
 
 ### Akun pilot
 
-Usulkan pilot pribadi satu pemilik, satu akun yang diprovisikan secara administratif, tanpa registrasi publik, undangan, atau organisasi multi-user pada MVP. Tetap gunakan identitas akun persisten dan otorisasi server pada setiap akses personal, termasuk subscription WebSocket. Identitas tidak diambil dari `user_id` yang dikirim browser tanpa pemeriksaan sesi.
+Tetapkan pilot pribadi satu pemilik, satu akun yang diprovisikan secara administratif, tanpa registrasi publik, undangan, atau organisasi multi-user pada MVP. Tetap gunakan identitas akun persisten dan otorisasi server pada setiap akses personal, termasuk subscription WebSocket. Identitas tidak diambil dari `user_id` yang dikirim browser tanpa pemeriksaan sesi.
 
 SS-023 memilih mekanisme autentikasi/session dan menguji akses akun lain ditolak. Sebelum itu pengembangan hanya lokal dengan fixture research; tidak boleh dipublikasikan sebagai pilot berisi posisi pribadi. Single-account tidak berarti tanpa autentikasi. Penambahan pengguna atau distribusi publik memerlukan keputusan baru dan pemeriksaan hak display data pada G3. Persetujuan ADR juga menerima batas pilot ini.
 
@@ -101,8 +102,7 @@ SS-023 memilih mekanisme autentikasi/session dan menguji akses akun lain ditolak
 
 | Keputusan | Alasan belum final / default | Pemilik dan tindak lanjut |
 |---|---|---|
-| Penerimaan ADR, lisensi Redis dan batas akun pilot | Memerlukan penilaian pemilik terhadap dokumen konkret | Pemilik repo: review ADR ini; catat bukti penerimaan sebelum `Accepted` dan sebelum SS-001 dinyatakan selesai |
-| Format kontrak dan code generation | Belum ada skema lintas bahasa | Maintainer kontrak / SS-002: pilih source of truth, versioning dan compatibility checks |
+| Format kontrak dan code generation | SS-002 menetapkan sumber deklaratif yang menerbitkan JSON Schema 2020-12 dan OpenAPI 3.1.1; fixture diperiksa Ajv/Python | [Panduan kontrak](../../packages/contracts/README.md): versi wire exact dan major baru untuk perubahan schema; generator tipe/SDK ditetapkan SS-003/004 tanpa menduplikasi kontrak |
 | Tooling bootstrap dan dependency transitif | Belum ada build untuk membuktikan kombinasi paket | Maintainer web/backend / SS-003/004/005: pin dan lock, audit lisensi, smoke test; ubah ADR jika baseline tidak kompatibel |
 | Image, secret store dan deployment | Belum ada target hosting/anggaran | Maintainer infra / SS-006/025: image exact beserta digest, resource per mode, backup/restore dan pengelolaan secret |
 | Auth dan retensi data personal | Bergantung cara akses pilot | Maintainer backend / SS-023: session, provisioning, otorisasi per akun, ekspor/penghapusan, retensi sebelum pilot |
