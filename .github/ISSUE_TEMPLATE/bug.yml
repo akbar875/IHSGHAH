@@ -1,0 +1,22 @@
+name: Bug
+description: Perilaku yang menyimpang dari kontrak atau PRD.
+title: "[Bug] "
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Langkah reproduksi
+      description: Sertakan mode, waktu, versi, dan input tanpa rahasia/data pribadi.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Hasil yang diharapkan dan aktual
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Dampak dan bukti
+      description: Log tersanitasi atau screenshot jika tersedia.

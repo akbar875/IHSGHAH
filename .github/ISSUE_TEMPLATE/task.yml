@@ -1,0 +1,30 @@
+name: Task implementasi
+description: Satu unit pekerjaan untuk satu branch/PR.
+title: "[Task] "
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Tujuan dan referensi PRD
+      description: Jelaskan perilaku yang ingin dicapai serta FR/bagian PRD terkait.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Batas pekerjaan dan hal yang ditunda.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Gunakan checklist hasil yang bisa diverifikasi.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependency dan gerbang
+      description: Issue prasyarat, G0/G1/G2/G3 bila relevan, dan usulan branch.

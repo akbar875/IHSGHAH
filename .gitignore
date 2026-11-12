@@ -1,0 +1,29 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# JavaScript / Python
+node_modules/
+.next/
+dist/
+coverage/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local data and generated artifacts
+data/
+artifacts/
+logs/
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

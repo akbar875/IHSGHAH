@@ -1,0 +1,359 @@
+{
+  "repository": "akbar875/IHSGHAH",
+  "issues": [
+    {
+      "id": "SS-001",
+      "title": "ADR stack dan batas modul",
+      "phase": "foundation",
+      "priority": "P0",
+      "depends_on": [],
+      "branch": "chore/<issue-number>-architecture",
+      "file": "docs/issues/SS-001-architecture.md"
+    },
+    {
+      "id": "SS-002",
+      "title": "Kontrak API dan event berversi",
+      "phase": "foundation",
+      "priority": "P0",
+      "depends_on": [
+        "SS-001"
+      ],
+      "branch": "chore/<issue-number>-contracts",
+      "file": "docs/issues/SS-002-contracts.md"
+    },
+    {
+      "id": "SS-003",
+      "title": "Bootstrap web Next.js dan TypeScript",
+      "phase": "foundation",
+      "priority": "P0",
+      "depends_on": [
+        "SS-001",
+        "SS-002"
+      ],
+      "branch": "chore/<issue-number>-web-bootstrap",
+      "file": "docs/issues/SS-003-web-bootstrap.md"
+    },
+    {
+      "id": "SS-004",
+      "title": "Bootstrap API FastAPI modular",
+      "phase": "foundation",
+      "priority": "P0",
+      "depends_on": [
+        "SS-001",
+        "SS-002"
+      ],
+      "branch": "chore/<issue-number>-api-bootstrap",
+      "file": "docs/issues/SS-004-api-bootstrap.md"
+    },
+    {
+      "id": "SS-005",
+      "title": "Bootstrap worker dan lifecycle",
+      "phase": "foundation",
+      "priority": "P0",
+      "depends_on": [
+        "SS-004"
+      ],
+      "branch": "chore/<issue-number>-worker-bootstrap",
+      "file": "docs/issues/SS-005-worker-bootstrap.md"
+    },
+    {
+      "id": "SS-006",
+      "title": "Lingkungan lokal PostgreSQL dan Redis",
+      "phase": "foundation",
+      "priority": "P0",
+      "depends_on": [
+        "SS-004",
+        "SS-005"
+      ],
+      "branch": "chore/<issue-number>-local-infra",
+      "file": "docs/issues/SS-006-local-infra.md"
+    },
+    {
+      "id": "SS-007",
+      "title": "CI runtime dan quality checks",
+      "phase": "foundation",
+      "priority": "P0",
+      "depends_on": [
+        "SS-003",
+        "SS-004",
+        "SS-005",
+        "SS-006"
+      ],
+      "branch": "chore/<issue-number>-runtime-ci",
+      "file": "docs/issues/SS-007-runtime-ci.md"
+    },
+    {
+      "id": "SS-008",
+      "title": "Seleksi vendor dan audit hak data G0",
+      "phase": "A",
+      "priority": "P0",
+      "depends_on": [
+        "SS-001"
+      ],
+      "branch": "feat/<issue-number>-data-vendor",
+      "file": "docs/issues/SS-008-data-vendor.md"
+    },
+    {
+      "id": "SS-009",
+      "title": "Aturan instrumen dan kalender berversi",
+      "phase": "A",
+      "priority": "P0",
+      "depends_on": [
+        "SS-002",
+        "SS-004",
+        "SS-008"
+      ],
+      "branch": "feat/<issue-number>-instrument-rules",
+      "file": "docs/issues/SS-009-instrument-rules.md"
+    },
+    {
+      "id": "SS-010",
+      "title": "Penyimpanan point-in-time dan audit append-only",
+      "phase": "A",
+      "priority": "P0",
+      "depends_on": [
+        "SS-002",
+        "SS-006"
+      ],
+      "branch": "feat/<issue-number>-persistence",
+      "file": "docs/issues/SS-010-persistence.md"
+    },
+    {
+      "id": "SS-011",
+      "title": "Adapter feed dan normalisasi",
+      "phase": "A",
+      "priority": "P0",
+      "depends_on": [
+        "SS-005",
+        "SS-008",
+        "SS-009",
+        "SS-010"
+      ],
+      "branch": "feat/<issue-number>-market-adapter",
+      "file": "docs/issues/SS-011-market-adapter.md"
+    },
+    {
+      "id": "SS-012",
+      "title": "Kualitas feed dan abstention",
+      "phase": "A",
+      "priority": "P0",
+      "depends_on": [
+        "SS-011"
+      ],
+      "branch": "feat/<issue-number>-feed-quality",
+      "file": "docs/issues/SS-012-feed-quality.md"
+    },
+    {
+      "id": "SS-013",
+      "title": "Feature engine point-in-time dan tekanan transaksi",
+      "phase": "B",
+      "priority": "P1",
+      "depends_on": [
+        "SS-009",
+        "SS-010",
+        "SS-011",
+        "SS-012"
+      ],
+      "branch": "feat/<issue-number>-feature-engine",
+      "file": "docs/issues/SS-013-feature-engine.md"
+    },
+    {
+      "id": "SS-014",
+      "title": "Replay dan simulator eksekusi konservatif",
+      "phase": "B",
+      "priority": "P0",
+      "depends_on": [
+        "SS-009",
+        "SS-010",
+        "SS-011"
+      ],
+      "branch": "feat/<issue-number>-replay-simulator",
+      "file": "docs/issues/SS-014-replay-simulator.md"
+    },
+    {
+      "id": "SS-015",
+      "title": "Risk engine dan state machine rencana",
+      "phase": "B",
+      "priority": "P0",
+      "depends_on": [
+        "SS-009",
+        "SS-010",
+        "SS-012"
+      ],
+      "branch": "feat/<issue-number>-risk-engine",
+      "file": "docs/issues/SS-015-risk-engine.md"
+    },
+    {
+      "id": "SS-016",
+      "title": "Baseline, ranking nominal dan protokol holdout G1",
+      "phase": "B",
+      "priority": "P0",
+      "depends_on": [
+        "SS-013",
+        "SS-014",
+        "SS-015"
+      ],
+      "branch": "feat/<issue-number>-baseline-evaluation",
+      "file": "docs/issues/SS-016-baseline-evaluation.md"
+    },
+    {
+      "id": "SS-017",
+      "title": "API kandidat, detail dan stream resinkronisasi",
+      "phase": "C",
+      "priority": "P1",
+      "depends_on": [
+        "SS-002",
+        "SS-004",
+        "SS-010",
+        "SS-012",
+        "SS-015"
+      ],
+      "branch": "feat/<issue-number>-market-api",
+      "file": "docs/issues/SS-017-market-api.md"
+    },
+    {
+      "id": "SS-018",
+      "title": "Dashboard kandidat dan keadaan kosong",
+      "phase": "C",
+      "priority": "P1",
+      "depends_on": [
+        "SS-003",
+        "SS-017"
+      ],
+      "branch": "feat/<issue-number>-screener-dashboard",
+      "file": "docs/issues/SS-018-screener-dashboard.md"
+    },
+    {
+      "id": "SS-019",
+      "title": "Detail saham, chart dan order book",
+      "phase": "C",
+      "priority": "P1",
+      "depends_on": [
+        "SS-018"
+      ],
+      "branch": "feat/<issue-number>-stock-detail",
+      "file": "docs/issues/SS-019-stock-detail.md"
+    },
+    {
+      "id": "SS-020",
+      "title": "Watchlist dan konfigurasi risiko pengguna",
+      "phase": "C",
+      "priority": "P1",
+      "depends_on": [
+        "SS-010",
+        "SS-017",
+        "SS-018"
+      ],
+      "branch": "feat/<issue-number>-watchlist-settings",
+      "file": "docs/issues/SS-020-watchlist-settings.md"
+    },
+    {
+      "id": "SS-021",
+      "title": "Pencatatan fill dan pemantauan posisi parsial",
+      "phase": "C",
+      "priority": "P0",
+      "depends_on": [
+        "SS-015",
+        "SS-017",
+        "SS-020"
+      ],
+      "branch": "feat/<issue-number>-manual-positions",
+      "file": "docs/issues/SS-021-manual-positions.md"
+    },
+    {
+      "id": "SS-022",
+      "title": "Alert in-app dan deduplikasi event",
+      "phase": "C",
+      "priority": "P1",
+      "depends_on": [
+        "SS-005",
+        "SS-012",
+        "SS-015",
+        "SS-021"
+      ],
+      "branch": "feat/<issue-number>-in-app-alerts",
+      "file": "docs/issues/SS-022-in-app-alerts.md"
+    },
+    {
+      "id": "SS-023",
+      "title": "Keamanan, autentikasi dan isolasi akun",
+      "phase": "C",
+      "priority": "P0",
+      "depends_on": [
+        "SS-004",
+        "SS-010",
+        "SS-017"
+      ],
+      "branch": "feat/<issue-number>-security-isolation",
+      "file": "docs/issues/SS-023-security-isolation.md"
+    },
+    {
+      "id": "SS-024",
+      "title": "Informasi resmi dan berita internal",
+      "phase": "B",
+      "priority": "P1",
+      "depends_on": [
+        "SS-008",
+        "SS-010",
+        "SS-013",
+        "SS-023"
+      ],
+      "branch": "feat/<issue-number>-internal-news",
+      "file": "docs/issues/SS-024-internal-news.md"
+    },
+    {
+      "id": "SS-025",
+      "title": "Observabilitas, recovery dan kill switch",
+      "phase": "D",
+      "priority": "P0",
+      "depends_on": [
+        "SS-007",
+        "SS-011",
+        "SS-012",
+        "SS-022",
+        "SS-023"
+      ],
+      "branch": "feat/<issue-number>-operations",
+      "file": "docs/issues/SS-025-operations.md"
+    },
+    {
+      "id": "SS-026",
+      "title": "Acceptance terpadu dan integrasi paper live",
+      "phase": "D",
+      "priority": "P0",
+      "depends_on": [
+        "SS-016",
+        "SS-019",
+        "SS-020",
+        "SS-021",
+        "SS-022",
+        "SS-023",
+        "SS-025"
+      ],
+      "branch": "feat/<issue-number>-paper-integration",
+      "file": "docs/issues/SS-026-paper-integration.md"
+    },
+    {
+      "id": "SS-027",
+      "title": "Observasi prospektif dan laporan G2",
+      "phase": "D",
+      "priority": "P0",
+      "depends_on": [
+        "SS-026"
+      ],
+      "branch": "feat/<issue-number>-paper-observation",
+      "file": "docs/issues/SS-027-paper-observation.md"
+    },
+    {
+      "id": "SS-028",
+      "title": "Kesiapan pilot terbatas dan keputusan G3",
+      "phase": "E",
+      "priority": "P2",
+      "depends_on": [
+        "SS-027"
+      ],
+      "branch": "feat/<issue-number>-pilot-readiness",
+      "file": "docs/issues/SS-028-pilot-readiness.md"
+    }
+  ]
+}
