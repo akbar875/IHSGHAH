@@ -42,7 +42,7 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 UI boleh dikembangkan memakai fixture yang diberi label simulasi setelah kontrak disepakati. Dependency implementasi bukan izin melompati gerbang validasi. Lihat [backlog dan dependency](docs/BACKLOG.md) serta [arsitektur](docs/ARCHITECTURE.md).
 
-Fondasi issue #1 disiapkan dalam [ADR-0001](docs/decisions/0001-stack-and-module-boundaries.md): baseline stack/versi/lisensi, batas modul, konfigurasi, isolasi research/paper/live, dan usulan pilot satu akun. Status masih Proposed sampai pemilik repo menerima; belum ada dependency aplikasi yang dipasang. Prasyarat Node.js 22 di atas berlaku untuk pemeriksaan scaffold; baseline runtime aplikasi dan CI bootstrap mengikuti ADR setelah diterima.
+Fondasi issue #1 ditetapkan dalam [ADR-0001](docs/decisions/0001-stack-and-module-boundaries.md): baseline stack/versi/lisensi, batas modul, konfigurasi, isolasi research/paper/live, dan pilot satu akun. Status Accepted pada 12 November 2026; belum ada dependency aplikasi yang dipasang. Prasyarat Node.js 22 di atas berlaku untuk pemeriksaan scaffold; baseline runtime aplikasi dan CI bootstrap mengikuti ADR yang telah diterima.
 
 ## Alur issue → branch → PR
 
