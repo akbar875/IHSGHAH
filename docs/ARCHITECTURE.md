@@ -1,6 +1,6 @@
 # Arsitektur awal
 
-Status: usulan perencanaan dari PRD, belum menjadi implementasi atau keputusan versi dependency.
+Status: usulan fondasi dalam [ADR-0001](decisions/0001-stack-and-module-boundaries.md) (Proposed; menunggu penerimaan pemilik repo). Belum ada implementasi runtime. ADR tersebut menjadi rujukan baseline versi/lisensi, ownership dan arah dependency, konfigurasi, isolasi mode, serta batas akun pilot.
 
 ## Komponen
 
@@ -37,7 +37,7 @@ Fill pengguna -> posisi nyata -> pemantauan risiko -> alert -> konfirmasi exit
 
 ## Keputusan yang masih terbuka
 
-Vendor dan hak data, anggaran, akun pilot/multi-user, versi dependency, library chart berlisensi sesuai, kanal push, tarif broker, serta ambang validasi belum ditetapkan. Rekam keputusan melalui [ADR](decisions/README.md), jangan menganggap placeholder konfigurasi sebagai nilai produksi.
+ADR-0001 mengusulkan baseline stack dan pilot pribadi satu akun dengan autentikasi serta otorisasi per akun. Penerimaan pemilik repo masih diperlukan. Vendor/hak data, anggaran, tooling bootstrap, autentikasi konkret, retensi, library chart, kanal push, tarif broker, serta ambang validasi mempunyai alasan dan tindak lanjut di ADR. Jangan menganggap placeholder konfigurasi sebagai nilai produksi.
 
 ## Gerbang rilis
 
