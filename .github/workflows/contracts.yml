@@ -1,0 +1,28 @@
+name: Contract checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: packages/contracts/package-lock.json
+      - run: npm ci --ignore-scripts
+        working-directory: packages/contracts
+      - run: npm run check
+        working-directory: packages/contracts
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r packages/contracts/requirements-test.txt
+      - run: python packages/contracts/test/check_python.py

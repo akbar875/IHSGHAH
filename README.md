@@ -23,7 +23,7 @@ Perintah terakhir hanya menampilkan rencana issue (dry run). Untuk menerbitkan b
 apps/web/              Next.js + TypeScript (rencana)
 services/api/          FastAPI modular monolith (rencana)
 services/worker/       Ingest, analisis, replay, dan alert (rencana)
-packages/contracts/   Kontrak API/event lintas service (rencana)
+packages/contracts/   Kontrak API/event v1 dan fixture simulasi
 infra/                Lingkungan lokal dan deployment (rencana)
 research/             Protokol, eksperimen, dan evaluasi strategi
 tests/                Skenario integrasi dan acceptance lintas service
@@ -45,6 +45,8 @@ UI boleh dikembangkan memakai fixture yang diberi label simulasi setelah kontrak
 Fondasi issue #1 ditetapkan dalam [ADR-0001](docs/decisions/0001-stack-and-module-boundaries.md): baseline stack/versi/lisensi, batas modul, konfigurasi, isolasi research/paper/live, dan pilot satu akun. Status Accepted pada 12 November 2026; belum ada dependency aplikasi yang dipasang. Prasyarat Node.js 22 di atas berlaku untuk pemeriksaan scaffold; baseline runtime aplikasi dan CI bootstrap mengikuti ADR yang telah diterima.
 
 ## Alur issue → branch → PR
+
+Kontrak SS-002 tersedia di [packages/contracts](packages/contracts/README.md): JSON Schema 2020-12, OpenAPI 3.1.1, REST dan stream snapshot/delta. Jalankan `npm ci --ignore-scripts --prefix packages/contracts` lalu `npm --prefix packages/contracts run check`; validasi lintas bahasa Python dan petunjuk unit/versioning tersedia di panduan kontrak. Belum ada endpoint aplikasi yang berjalan.
 
 ```sh
 git switch main

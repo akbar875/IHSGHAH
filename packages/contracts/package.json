@@ -1,0 +1,16 @@
+{
+  "name": "@saham-signal/contracts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Versioned wire contracts; no domain runtime",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check && node --test test/*.test.mjs"
+  },
+  "engines": { "node": ">=22" },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  }
+}

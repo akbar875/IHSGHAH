@@ -102,7 +102,7 @@ SS-023 memilih mekanisme autentikasi/session dan menguji akses akun lain ditolak
 
 | Keputusan | Alasan belum final / default | Pemilik dan tindak lanjut |
 |---|---|---|
-| Format kontrak dan code generation | Belum ada skema lintas bahasa | Maintainer kontrak / SS-002: pilih source of truth, versioning dan compatibility checks |
+| Format kontrak dan code generation | SS-002 menetapkan sumber deklaratif yang menerbitkan JSON Schema 2020-12 dan OpenAPI 3.1.1; fixture diperiksa Ajv/Python | [Panduan kontrak](../../packages/contracts/README.md): versi wire exact dan major baru untuk perubahan schema; generator tipe/SDK ditetapkan SS-003/004 tanpa menduplikasi kontrak |
 | Tooling bootstrap dan dependency transitif | Belum ada build untuk membuktikan kombinasi paket | Maintainer web/backend / SS-003/004/005: pin dan lock, audit lisensi, smoke test; ubah ADR jika baseline tidak kompatibel |
 | Image, secret store dan deployment | Belum ada target hosting/anggaran | Maintainer infra / SS-006/025: image exact beserta digest, resource per mode, backup/restore dan pengelolaan secret |
 | Auth dan retensi data personal | Bergantung cara akses pilot | Maintainer backend / SS-023: session, provisioning, otorisasi per akun, ekspor/penghapusan, retensi sebelum pilot |
