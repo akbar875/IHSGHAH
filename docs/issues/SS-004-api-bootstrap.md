@@ -14,10 +14,10 @@ Siapkan fondasi API tanpa logika sinyal.
 
 ## Acceptance criteria
 
-- [ ] Fresh clone dapat menjalankan API menurut dokumentasi.
-- [ ] Health dan readiness membedakan proses hidup dari dependency siap.
-- [ ] Pemeriksaan lint/type dan smoke API lulus.
-- [ ] Mode tidak valid ditolak saat startup.
+- [x] Fresh clone dapat menjalankan API menurut dokumentasi.
+- [x] Health dan readiness membedakan proses hidup dari dependency siap.
+- [x] Pemeriksaan lint/type dan smoke API lulus.
+- [x] Mode tidak valid ditolak saat startup.
 
 ## Dependency
 
