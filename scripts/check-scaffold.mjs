@@ -26,7 +26,7 @@ for (const issue of backlog.issues) {
 // Check relative Markdown document links, including anchors and URL-encoded paths.
 async function checkLinks(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
-    if (['.git', 'node_modules', '.venv'].includes(entry.name)) continue;
+    if (['.git', 'node_modules', '.venv', '.work'].includes(entry.name)) continue;
     const filename = path.join(directory, entry.name);
     if (entry.isDirectory()) await checkLinks(filename);
     else if (entry.name.endsWith('.md')) {

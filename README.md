@@ -2,7 +2,7 @@
 
 Aplikasi web analisis saham intraday BEI untuk membantu keputusan manual dan paper trading. Sumber kebutuhan produk: [PRD Saham Signal](docs/PRD-Saham-Signal.md).
 
-**Status: fondasi dan shell web research.** Shell Next.js tersedia lokal melalui [setup web](apps/web/README.md). Belum ada backend berjalan, feed pasar, model, sinyal, backtest, atau bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
+**Status: fondasi, shell web research, dan bootstrap API.** Shell Next.js tersedia lokal melalui [setup web](apps/web/README.md), FastAPI melalui [setup API](services/api/README.md). Belum ada endpoint bisnis, feed pasar, model, sinyal, backtest, atau bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
 
 ## Mulai dari sini
 
@@ -21,7 +21,7 @@ Perintah terakhir hanya menampilkan rencana issue (dry run). Untuk menerbitkan b
 
 ```text
 apps/web/              Shell research Next.js + TypeScript
-services/api/          FastAPI modular monolith (rencana)
+services/api/          Bootstrap FastAPI modular, health/readiness dan konfigurasi
 services/worker/       Ingest, analisis, replay, dan alert (rencana)
 packages/contracts/   Kontrak API/event v1 dan fixture simulasi
 infra/                Lingkungan lokal dan deployment (rencana)
@@ -46,7 +46,7 @@ Fondasi issue #1 ditetapkan dalam [ADR-0001](docs/decisions/0001-stack-and-modul
 
 ## Alur issue → branch → PR
 
-Kontrak SS-002 tersedia di [packages/contracts](packages/contracts/README.md): JSON Schema 2020-12, OpenAPI 3.1.1, REST dan stream snapshot/delta. Jalankan `npm ci --ignore-scripts --prefix packages/contracts` lalu `npm --prefix packages/contracts run check`; validasi lintas bahasa Python dan petunjuk unit/versioning tersedia di panduan kontrak. Belum ada endpoint aplikasi yang berjalan.
+Kontrak SS-002 tersedia di [packages/contracts](packages/contracts/README.md): JSON Schema 2020-12, OpenAPI 3.1.1, REST dan stream snapshot/delta. Jalankan `npm ci --ignore-scripts --prefix packages/contracts` lalu `npm --prefix packages/contracts run check`; validasi lintas bahasa Python dan petunjuk unit/versioning tersedia di panduan kontrak. Bootstrap SS-004 menyediakan `/health` dan `/ready`; endpoint bisnis belum diimplementasikan. Setup API memakai uv 0.13.7, Python 3.13.18 dan `uv sync --locked` pada `services/api`.
 
 ```sh
 git switch main
