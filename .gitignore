@@ -8,6 +8,7 @@
 # JavaScript / Python
 node_modules/
 .next/
+*.tsbuildinfo
 dist/
 coverage/
 .venv/

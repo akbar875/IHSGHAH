@@ -2,7 +2,7 @@
 
 Aplikasi web analisis saham intraday BEI untuk membantu keputusan manual dan paper trading. Sumber kebutuhan produk: [PRD Saham Signal](docs/PRD-Saham-Signal.md).
 
-**Status: scaffolding dan perencanaan.** Belum ada aplikasi berjalan, feed pasar, model, sinyal, backtest, atau bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
+**Status: fondasi dan shell web research.** Shell Next.js tersedia lokal melalui [setup web](apps/web/README.md). Belum ada backend berjalan, feed pasar, model, sinyal, backtest, atau bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
 
 ## Mulai dari sini
 
@@ -15,12 +15,12 @@ node scripts/check-scaffold.mjs
 node scripts/publish-issues.mjs
 ```
 
-Perintah terakhir hanya menampilkan rencana issue (dry run). Untuk menerbitkan backlog ke GitHub, lihat [panduan backlog](docs/issues/README.md). Setup aplikasi, dependency yang dipin, dan perintah development akan ditambahkan melalui issue bootstrap masing-masing service.
+Perintah terakhir hanya menampilkan rencana issue (dry run). Untuk menerbitkan backlog ke GitHub, lihat [panduan backlog](docs/issues/README.md). Jalankan shell web dengan Node.js 24.22.3: `cd apps/web`, `npm ci --ignore-scripts`, lalu `npm run dev`. Lihat [panduan web](apps/web/README.md) untuk konfigurasi dan verifikasi. Bootstrap backend mengikuti issue service terkait.
 
 ## Struktur repo
 
 ```text
-apps/web/              Next.js + TypeScript (rencana)
+apps/web/              Shell research Next.js + TypeScript
 services/api/          FastAPI modular monolith (rencana)
 services/worker/       Ingest, analisis, replay, dan alert (rencana)
 packages/contracts/   Kontrak API/event v1 dan fixture simulasi
