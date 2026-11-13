@@ -14,10 +14,10 @@ Tambahkan pemeriksaan aplikasi pada CI setelah bootstrap.
 
 ## Acceptance criteria
 
-- [ ] PR gagal bila pemeriksaan runtime yang relevan gagal.
-- [ ] CI dapat berjalan tanpa rahasia vendor.
-- [ ] Perintah lokal dan CI didokumentasikan.
-- [ ] Fixture diberi label simulasi.
+- [x] PR gagal bila pemeriksaan runtime yang relevan gagal.
+- [x] CI dapat berjalan tanpa rahasia vendor.
+- [x] Perintah lokal dan CI didokumentasikan.
+- [x] Fixture diberi label simulasi.
 
 ## Dependency
 
@@ -34,3 +34,12 @@ Dependency adalah prasyarat implementasi. Gerbang G0/G1/G2/G3 tetap mengikuti PR
 `chore/<issue-number>-runtime-ci`
 
 Ganti `<issue-number>` dengan nomor issue GitHub sebenarnya. PR menautkan `Closes #<issue-number>`.
+
+## Implementasi
+
+Workflow Runtime CI memanggil lima reusable workflow dan menggabungkan hasilnya
+melalui `Runtime quality gate`. Backend membangun wheel dan menjalankan smoke API/
+worker dari environment runtime terpisah dengan dependency terkunci. Workflow tanpa
+secret vendor memakai permission `contents: read`. Perintah lokal, batas simulasi,
+integrasi DB/cache, dan required status check tersedia di
+[panduan CI runtime](../RUNTIME-CI.md). Branch: `codex/7-runtime-ci`.

@@ -48,3 +48,8 @@ Rujukan resmi: [instalasi Next](https://nextjs.org/docs/app/getting-started/inst
 Periksa `/` pada viewport 360px dan desktop: label simulasi tampak, status menjadi dua kolom di mobile, teks membungkus tanpa scroll horizontal, dan tautan lewati konten dapat difokuskan dengan keyboard. Tidak ada kontrol transaksi atau navigasi fitur yang belum tersedia.
 
 Override terbatas minimatch 11.0.1 (BlueOak-1.0.0) pada typescript-estree menutup [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249); kompatibilitas diperiksa melalui lint/typecheck/build. ESLint 9 sudah berstatus end-of-support dari upstream, tetapi plugin React bawaan konfigurasi Next saat ini masih mensyaratkan ESLint <=9. Gunakan patch terakhir 9.39.5 dengan audit bersih; migrasi tooling pada SS-007 saat peer plugin mendukung ESLint 10.
+
+Pemeriksaan SS-007 terhadap dependency terkunci masih menemukan peer ESLint sampai
+`^9.7` pada `eslint-plugin-react`; versi ESLint tetap 9.39.5. Upgrade mayor menunggu
+dukungan peer. Web checks kini dipanggil oleh [Runtime CI](../../docs/RUNTIME-CI.md)
+dan hasilnya wajib lulus pada `Runtime quality gate`.

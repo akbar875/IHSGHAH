@@ -1,0 +1,45 @@
+name: Runtime CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: runtime-ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scaffold:
+    uses: ./.github/workflows/scaffold.yml
+  contracts:
+    uses: ./.github/workflows/contracts.yml
+  web:
+    uses: ./.github/workflows/web.yml
+  backend:
+    uses: ./.github/workflows/api.yml
+  infrastructure:
+    uses: ./.github/workflows/local-infra.yml
+  quality:
+    name: Runtime quality gate
+    needs: [scaffold, contracts, web, backend, infrastructure]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Require every check to pass
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          results = json.loads(os.environ["RESULTS"])
+          for name, job in results.items():
+              print(f"{name}: {job['result']}")
+          if any(job["result"] != "success" for job in results.values()):
+              raise SystemExit("Runtime checks failed, were cancelled, or were skipped")
+          PY

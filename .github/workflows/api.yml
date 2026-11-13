@@ -1,8 +1,7 @@
-name: API checks
+name: Backend checks (API and worker)
 
 on:
-  push:
-  pull_request:
+  workflow_call:
 
 permissions:
   contents: read
@@ -10,6 +9,7 @@ permissions:
 jobs:
   api:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: services/api
@@ -22,6 +22,15 @@ jobs:
       - run: uv sync --locked
       - run: uv run --locked ruff check .
       - run: uv run --locked ruff format --check .
+      - run: uv run --locked ruff check ../../scripts/check-backend-smoke.py
+      - run: uv run --locked ruff format --check ../../scripts/check-backend-smoke.py
       - run: uv run --locked mypy
       - run: uv run --locked pytest
-      - run: uv build
+      - run: uv build --no-sources
+      - name: Smoke installed wheel with locked runtime dependencies
+        run: |
+          uv export --locked --no-dev --no-emit-project --format requirements-txt --output-file "$RUNNER_TEMP/runtime-requirements.txt"
+          uv venv "$RUNNER_TEMP/backend-smoke"
+          uv pip sync --require-hashes --python "$RUNNER_TEMP/backend-smoke/bin/python" "$RUNNER_TEMP/runtime-requirements.txt"
+          uv pip install --python "$RUNNER_TEMP/backend-smoke/bin/python" --no-deps dist/*.whl
+          "$RUNNER_TEMP/backend-smoke/bin/python" -I ../../scripts/check-backend-smoke.py

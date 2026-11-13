@@ -1,8 +1,7 @@
 name: Scaffold checks
 
 on:
-  push:
-  pull_request:
+  workflow_call:
 
 permissions:
   contents: read
@@ -10,10 +9,11 @@ permissions:
 jobs:
   scaffold:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: apps/web/.nvmrc
       - run: node scripts/check-scaffold.mjs
       - run: node scripts/publish-issues.mjs
