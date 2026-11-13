@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-014 menyediakan [replay dan simulator eksekusi konservatif](docs/market-data/replay-simulator.md):
+biaya bertanggal, latensi, spread/slippage, antrean, partial/unfilled, stop-before-TP
+dan gagal exit dengan laporan deterministik berlabel simulasi. Tidak ada alert live;
+validasi vendor serta G0/G1 tetap pending.
+
 SS-013 menyediakan [feature engine point-in-time](docs/market-data/feature-engine.md):
 return, volatilitas, volume relatif jam WIB, spread/depth dan komposisi antrean,
 serta pressure transaksi dengan unknown dan cakupan klasifikasi. Replay dan stream
