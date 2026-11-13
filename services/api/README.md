@@ -87,7 +87,9 @@ src/saham_signal/
 Transport/adapters bergantung pada application/domain. Worker SS-005 memasang package
 ini (contoh `uv pip install ./services/api` dari root atau wheel hasil `uv build`),
 lalu mengimpor `saham_signal.*`; tanpa manipulasi `sys.path` atau duplikasi domain.
-Worker lifecycle/job belum diimplementasikan pada SS-004.
+Lifecycle SS-005 memakai wheel ini melalui `python -m saham_signal.worker`.
+Setup, heartbeat, shutdown, dan aturan retry tersedia di [panduan worker](../worker/README.md).
+Belum ada job bisnis/vendor atau sinyal.
 
 ## Verifikasi
 

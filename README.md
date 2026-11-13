@@ -2,7 +2,7 @@
 
 Aplikasi web analisis saham intraday BEI untuk membantu keputusan manual dan paper trading. Sumber kebutuhan produk: [PRD Saham Signal](docs/PRD-Saham-Signal.md).
 
-**Status: fondasi, shell web research, dan bootstrap API.** Shell Next.js tersedia lokal melalui [setup web](apps/web/README.md), FastAPI melalui [setup API](services/api/README.md). Belum ada endpoint bisnis, feed pasar, model, sinyal, backtest, atau bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
+**Status: fondasi, shell web research, bootstrap API dan worker.** Shell Next.js tersedia lokal melalui [setup web](apps/web/README.md), FastAPI melalui [setup API](services/api/README.md). Belum ada endpoint bisnis, feed pasar, model, sinyal, backtest, atau bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
 
 ## Mulai dari sini
 
@@ -22,7 +22,7 @@ Perintah terakhir hanya menampilkan rencana issue (dry run). Untuk menerbitkan b
 ```text
 apps/web/              Shell research Next.js + TypeScript
 services/api/          Bootstrap FastAPI modular, health/readiness dan konfigurasi
-services/worker/       Ingest, analisis, replay, dan alert (rencana)
+services/worker/       Panduan lifecycle worker; job bisnis menyusul
 packages/contracts/   Kontrak API/event v1 dan fixture simulasi
 infra/                Lingkungan lokal dan deployment (rencana)
 research/             Protokol, eksperimen, dan evaluasi strategi
