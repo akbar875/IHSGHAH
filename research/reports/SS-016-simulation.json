@@ -1,0 +1,3010 @@
+{
+  "origin": "simulation",
+  "mode": "research",
+  "data_origins": [
+    "simulation"
+  ],
+  "execution_origin": "simulation",
+  "recorded_on": "2026-11-13",
+  "full_report_hash": "327e34910b90fd827750724ff0cfddeba74f82c409c6b3ffc0fe8fb8c57b6fec",
+  "protocol_hash": "5472a6c523bc510b85f6c71d242bc3afbcda3afc650a2d0540b908def062ef8e",
+  "protocol": {
+    "baselines": [
+      {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      {
+        "kind": "momentum",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "momentum",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      {
+        "kind": "volatility",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "volatility",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend-no-pressure",
+        "use_pressure": false,
+        "use_volume": true
+      },
+      {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend-no-volume",
+        "use_pressure": true,
+        "use_volume": false
+      }
+    ],
+    "bootstrap_block_sessions": 2,
+    "bootstrap_samples": 1000,
+    "champion": "trend",
+    "code_version": "SS-016-v1",
+    "context_hash": "1c075fa71f5f2a5d9371aee95ad71441422ab4cb513a4abed399168b11a00ccc",
+    "dataset_hash": "e1b10f6ea557697df4fd96b655d58559d31b1564c62c67774460294b4ef01e09",
+    "dataset_version": "invented-2026-10-v1",
+    "embargo": {
+      "microseconds": 300000000
+    },
+    "execution": {
+      "latency_ms": 250,
+      "max_book_age_ms": 1000,
+      "queue_ahead_shares": 100,
+      "slippage_ticks": 1
+    },
+    "frozen_at": "2026-10-15T02:30:00+00:00",
+    "holdout_end": "2026-10-31T02:30:00+00:00",
+    "holdout_start": "2026-10-23T02:30:00+00:00",
+    "id": "SS-016-simulation-v1",
+    "label": "target-before-stop; ambiguous bar=stop; unclosed=censored",
+    "label_horizon": {
+      "microseconds": 900000000
+    },
+    "max_drawdown_idr": "50000",
+    "maximum_brier": "0.25",
+    "minimum_calibration": 3,
+    "minimum_sessions": 4,
+    "nominals_idr": [
+      "200000",
+      "1000000"
+    ],
+    "purge": {
+      "microseconds": 900000000
+    },
+    "risk": {
+      "combined_fraction": "0.02",
+      "max_data_age": {
+        "microseconds": 5000000
+      },
+      "max_positions": 3,
+      "max_risk_fraction": "0.01",
+      "max_spread_fraction": "0.01",
+      "min_reward_risk": "1",
+      "risk_fraction": "0.005",
+      "version": "SS-015-v1/provisional"
+    },
+    "seed": 16,
+    "test_end": "2026-10-22T02:30:00+00:00",
+    "train_end": "2026-10-08T02:30:00+00:00",
+    "train_start": "2026-10-01T01:30:00+00:00",
+    "universe_evidence": "invented SIMA/SIMB; no licensed universe",
+    "validation_end": "2026-10-15T02:30:00+00:00"
+  },
+  "g1": {
+    "auto_promotion": false,
+    "checks": [
+      {
+        "baseline": "trend",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "200000",
+        "positive_expectancy_ci": true,
+        "risk_budget": true
+      },
+      {
+        "baseline": "trend",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "1000000",
+        "positive_expectancy_ci": false,
+        "risk_budget": false
+      },
+      {
+        "baseline": "momentum",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "200000",
+        "positive_expectancy_ci": true,
+        "risk_budget": true
+      },
+      {
+        "baseline": "momentum",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "1000000",
+        "positive_expectancy_ci": false,
+        "risk_budget": false
+      },
+      {
+        "baseline": "volatility",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "200000",
+        "positive_expectancy_ci": true,
+        "risk_budget": true
+      },
+      {
+        "baseline": "volatility",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "1000000",
+        "positive_expectancy_ci": false,
+        "risk_budget": false
+      },
+      {
+        "baseline": "trend-no-pressure",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "200000",
+        "positive_expectancy_ci": true,
+        "risk_budget": true
+      },
+      {
+        "baseline": "trend-no-pressure",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "1000000",
+        "positive_expectancy_ci": false,
+        "risk_budget": false
+      },
+      {
+        "baseline": "trend-no-volume",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "200000",
+        "positive_expectancy_ci": true,
+        "risk_budget": true
+      },
+      {
+        "baseline": "trend-no-volume",
+        "calibration": true,
+        "diversified": false,
+        "no_failed_exits": false,
+        "nominal_idr": "1000000",
+        "positive_expectancy_ci": false,
+        "risk_budget": false
+      }
+    ],
+    "decision": "no-go",
+    "reasons": [
+      "G0 evidence not adjudicated",
+      "portfolio risk and independent release approval required"
+    ],
+    "status": "experiment"
+  },
+  "status": "experiment",
+  "auto_promotion": false,
+  "excluded_cases": [
+    "SIMA-2026-10-08",
+    "SIMA-2026-10-15",
+    "SIMA-2026-10-22",
+    "SIMA-2026-10-23",
+    "SIMB-2026-10-08",
+    "SIMB-2026-10-15",
+    "SIMB-2026-10-22",
+    "SIMB-2026-10-23"
+  ],
+  "limitations": [
+    "hypothetical independent plans, not a portfolio backtest or executable signal",
+    "realized closed-plan drawdown excludes unrealized losses; open positions block G1",
+    "session-block percentile bootstrap; draws are not independent market observations",
+    "target calibration conditional on complete exit; no fill/projection model",
+    "G0 vendor evidence and independent portfolio/risk review still required"
+  ],
+  "experiments": [
+    {
+      "experiment_id": "0db6ae21ed0ffb601bd4409dc893783a30f216fc63e2752e846847304f3c2f09",
+      "status": "experiment",
+      "baseline": {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      "nominal_idr": "200000",
+      "role": "champion",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "1": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4500",
+          "expectancy_95_block_ci_idr": [
+            "11.0333333333333333333333333333333333333333333333333333333333",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.9",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 200,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1669000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "-1818.45",
+            "3670.00"
+          ],
+          "expectancy_net_idr": "11.0333333333333333333333333333333333333333333333333333333333",
+          "fill_share_rate": "1",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90",
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "66.20",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "1409000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "1474.62",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.8",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 100,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "7306.90",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1568500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "3500",
+          "expectancy_95_block_ci_idr": [
+            "-7306.90",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "5865.38",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "29326.90",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "1237000"
+        }
+      }
+    },
+    {
+      "experiment_id": "2352590b143df21ae329e11a87750b581a6a8ce0416f8f3101e3125b8867b99e",
+      "status": "experiment",
+      "baseline": {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      "nominal_idr": "1000000",
+      "role": "champion",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "1": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25500",
+          "expectancy_95_block_ci_idr": [
+            "-26475.10",
+            "89973.8142857142857142857142857142857142857142857142857142857"
+          ],
+          "expectancy_net_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "fill_share_rate": "0.728571428571428571428571428571428571428571428571428571428571",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "234582.10",
+          "observations": 10,
+          "open_shares": 1400,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9091000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-34699.50",
+            "25690.00"
+          ],
+          "expectancy_net_idr": "-14569.6666666666666666666666666666666666666666666666666666667",
+          "fill_share_rate": "0.892857142857142857142857142857142857142857142857142857142857",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30",
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "-87418.00",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "189946.30",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "8567000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-24830.22",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "46066.2142857142857142857142857142857142857142857142857142857",
+          "fill_share_rate": "0.714285714285714285714285714285714285714285714285714285714286",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "322463.50",
+          "observations": 10,
+          "open_shares": 700,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "51148.30",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9683500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "24500",
+          "expectancy_95_block_ci_idr": [
+            "-51148.30",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "41057.66",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "205288.30",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "8659000"
+        }
+      }
+    },
+    {
+      "experiment_id": "5a36dc3225633d6269c1357756dc815b9211afe6b38387acfcffc80dd9dc16cf",
+      "status": "experiment",
+      "baseline": {
+        "kind": "momentum",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "momentum",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      "nominal_idr": "200000",
+      "role": "challenger",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "2": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 2,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4500",
+          "expectancy_95_block_ci_idr": [
+            "11.0333333333333333333333333333333333333333333333333333333333",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.9",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 200,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1669000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 2,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "-1818.45",
+            "3670.00"
+          ],
+          "expectancy_net_idr": "11.0333333333333333333333333333333333333333333333333333333333",
+          "fill_share_rate": "1",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90",
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "66.20",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "1409000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "1474.62",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.8",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 100,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "7306.90",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1568500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "3500",
+          "expectancy_95_block_ci_idr": [
+            "-7306.90",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "5865.38",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "29326.90",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "1237000"
+        }
+      }
+    },
+    {
+      "experiment_id": "2d71d71c81c384f77ef7c35cc914fdd87f43eb0a3938cbc0e39fec70a14995d5",
+      "status": "experiment",
+      "baseline": {
+        "kind": "momentum",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "momentum",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      "nominal_idr": "1000000",
+      "role": "challenger",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "2": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 2,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25500",
+          "expectancy_95_block_ci_idr": [
+            "-26475.10",
+            "89973.8142857142857142857142857142857142857142857142857142857"
+          ],
+          "expectancy_net_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "fill_share_rate": "0.728571428571428571428571428571428571428571428571428571428571",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "234582.10",
+          "observations": 10,
+          "open_shares": 1400,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9091000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 2,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-34699.50",
+            "25690.00"
+          ],
+          "expectancy_net_idr": "-14569.6666666666666666666666666666666666666666666666666666667",
+          "fill_share_rate": "0.892857142857142857142857142857142857142857142857142857142857",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30",
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "-87418.00",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "189946.30",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "8567000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-24830.22",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "46066.2142857142857142857142857142857142857142857142857142857",
+          "fill_share_rate": "0.714285714285714285714285714285714285714285714285714285714286",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "322463.50",
+          "observations": 10,
+          "open_shares": 700,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "51148.30",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9683500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "24500",
+          "expectancy_95_block_ci_idr": [
+            "-51148.30",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "41057.66",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "205288.30",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "8659000"
+        }
+      }
+    },
+    {
+      "experiment_id": "dc0f1eabf5c5db8fbf3e1cb3f2c7b6d89cea458fe5dc7433310a310d7db8d2d8",
+      "status": "experiment",
+      "baseline": {
+        "kind": "volatility",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "volatility",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      "nominal_idr": "200000",
+      "role": "challenger",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "2": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 2,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4500",
+          "expectancy_95_block_ci_idr": [
+            "11.0333333333333333333333333333333333333333333333333333333333",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.9",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 200,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1669000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 2,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "-1818.45",
+            "3670.00"
+          ],
+          "expectancy_net_idr": "11.0333333333333333333333333333333333333333333333333333333333",
+          "fill_share_rate": "1",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90",
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "66.20",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "1409000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "1474.62",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.8",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 100,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "7306.90",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1568500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "3500",
+          "expectancy_95_block_ci_idr": [
+            "-7306.90",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "5865.38",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "29326.90",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "1237000"
+        }
+      }
+    },
+    {
+      "experiment_id": "d8cc29adf078d7c8dad41ddbb3e5e1f0597d2f5f3ac159eeb33cf6048b1f58ff",
+      "status": "experiment",
+      "baseline": {
+        "kind": "volatility",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "volatility",
+        "use_pressure": true,
+        "use_volume": true
+      },
+      "nominal_idr": "1000000",
+      "role": "challenger",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "2": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 2,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25500",
+          "expectancy_95_block_ci_idr": [
+            "-26475.10",
+            "89973.8142857142857142857142857142857142857142857142857142857"
+          ],
+          "expectancy_net_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "fill_share_rate": "0.728571428571428571428571428571428571428571428571428571428571",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "234582.10",
+          "observations": 10,
+          "open_shares": 1400,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9091000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 2,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-34699.50",
+            "25690.00"
+          ],
+          "expectancy_net_idr": "-14569.6666666666666666666666666666666666666666666666666666667",
+          "fill_share_rate": "0.892857142857142857142857142857142857142857142857142857142857",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30",
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "-87418.00",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "189946.30",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "8567000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-24830.22",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "46066.2142857142857142857142857142857142857142857142857142857",
+          "fill_share_rate": "0.714285714285714285714285714285714285714285714285714285714286",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "322463.50",
+          "observations": 10,
+          "open_shares": 700,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "51148.30",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9683500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "24500",
+          "expectancy_95_block_ci_idr": [
+            "-51148.30",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "41057.66",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "205288.30",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "8659000"
+        }
+      }
+    },
+    {
+      "experiment_id": "cc0f8e627a8e88dd574c5ed26526db3613c2a7728a7a7af960396fdb62a60e24",
+      "status": "experiment",
+      "baseline": {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend-no-pressure",
+        "use_pressure": false,
+        "use_volume": true
+      },
+      "nominal_idr": "200000",
+      "role": "challenger",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "1": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4500",
+          "expectancy_95_block_ci_idr": [
+            "11.0333333333333333333333333333333333333333333333333333333333",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.9",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 200,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1669000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "-1818.45",
+            "3670.00"
+          ],
+          "expectancy_net_idr": "11.0333333333333333333333333333333333333333333333333333333333",
+          "fill_share_rate": "1",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90",
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "66.20",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "1409000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "1474.62",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.8",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 100,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "7306.90",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1568500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "3500",
+          "expectancy_95_block_ci_idr": [
+            "-7306.90",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "5865.38",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "29326.90",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "1237000"
+        }
+      }
+    },
+    {
+      "experiment_id": "b88431b5b69ea1538bda80dcca46d56199cc48249123989f9635f85ca8d2e39e",
+      "status": "experiment",
+      "baseline": {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend-no-pressure",
+        "use_pressure": false,
+        "use_volume": true
+      },
+      "nominal_idr": "1000000",
+      "role": "challenger",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "1": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25500",
+          "expectancy_95_block_ci_idr": [
+            "-26475.10",
+            "89973.8142857142857142857142857142857142857142857142857142857"
+          ],
+          "expectancy_net_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "fill_share_rate": "0.728571428571428571428571428571428571428571428571428571428571",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "234582.10",
+          "observations": 10,
+          "open_shares": 1400,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9091000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-34699.50",
+            "25690.00"
+          ],
+          "expectancy_net_idr": "-14569.6666666666666666666666666666666666666666666666666666667",
+          "fill_share_rate": "0.892857142857142857142857142857142857142857142857142857142857",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30",
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "-87418.00",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "189946.30",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "8567000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-24830.22",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "46066.2142857142857142857142857142857142857142857142857142857",
+          "fill_share_rate": "0.714285714285714285714285714285714285714285714285714285714286",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "322463.50",
+          "observations": 10,
+          "open_shares": 700,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "51148.30",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9683500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "24500",
+          "expectancy_95_block_ci_idr": [
+            "-51148.30",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "41057.66",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "205288.30",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "8659000"
+        }
+      }
+    },
+    {
+      "experiment_id": "33a8908cbd8383ad0e303ee5874f38d79ac8f9eec12bfb3784355d0c30f55396",
+      "status": "experiment",
+      "baseline": {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend-no-volume",
+        "use_pressure": true,
+        "use_volume": false
+      },
+      "nominal_idr": "200000",
+      "role": "challenger",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "1": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4500",
+          "expectancy_95_block_ci_idr": [
+            "11.0333333333333333333333333333333333333333333333333333333333",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.9",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 200,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1669000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "-1818.45",
+            "3670.00"
+          ],
+          "expectancy_net_idr": "11.0333333333333333333333333333333333333333333333333333333333",
+          "fill_share_rate": "1",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90",
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "66.20",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "1409000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "4000",
+          "expectancy_95_block_ci_idr": [
+            "1474.62",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "fill_share_rate": "0.8",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "58620.70",
+          "observations": 10,
+          "open_shares": 100,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "7306.90",
+          "sessions": 5,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "1568500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "3500",
+          "expectancy_95_block_ci_idr": [
+            "-7306.90",
+            "14646.90"
+          ],
+          "expectancy_net_idr": "5865.38",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-7306.90",
+            "-7306.90"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "29326.90",
+          "observations": 8,
+          "open_shares": 200,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "14613.80",
+          "sessions": 4,
+          "tail_5pct_idr": "-7306.90",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "1237000"
+        }
+      }
+    },
+    {
+      "experiment_id": "a0e3c5baf4ea80c8f478ae39ffab87131412b443385870f0e6d9934d7ce6a1e7",
+      "status": "experiment",
+      "baseline": {
+        "kind": "trend",
+        "maximum_volatility": "0.02",
+        "minimum_return": "0.001",
+        "name": "trend-no-volume",
+        "use_pressure": true,
+        "use_volume": false
+      },
+      "nominal_idr": "1000000",
+      "role": "challenger",
+      "calibration_source": "validation only",
+      "calibration_bins": {
+        "1": "0.6"
+      },
+      "metrics": {
+        "holdout": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+            "count": 7,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 7,
+                "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25500",
+          "expectancy_95_block_ci_idr": [
+            "-26475.10",
+            "89973.8142857142857142857142857142857142857142857142857142857"
+          ],
+          "expectancy_net_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "fill_share_rate": "0.728571428571428571428571428571428571428571428571428571428571",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "234582.10",
+          "observations": 10,
+          "open_shares": 1400,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9091000"
+        },
+        "test": {
+          "abstention": "0",
+          "calibration": {
+            "brier": "0.293333333333333333333333333333333333333333333333333333333333",
+            "count": 6,
+            "coverage": "1",
+            "fill_probability": null,
+            "reliability": [
+              {
+                "bin": 1,
+                "count": 6,
+                "observed": "0.333333333333333333333333333333333333333333333333333333333333",
+                "predicted": "0.6"
+              }
+            ]
+          },
+          "closed": 6,
+          "closed_fill_coverage": "0.75",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-34699.50",
+            "25690.00"
+          ],
+          "expectancy_net_idr": "-14569.6666666666666666666666666666666666666666666666666666667",
+          "fill_share_rate": "0.892857142857142857142857142857142857142857142857142857142857",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30",
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "-87418.00",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.333333333333333333333333333333333333333333333333333333333333",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "189946.30",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.333333333333333333333333333333333333333333333333333333333333",
+          "turnover_idr": "8567000"
+        },
+        "train": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 7,
+          "closed_fill_coverage": "0.7",
+          "coverage": "1",
+          "eligible": 10,
+          "entry_slippage_idr": "25000",
+          "expectancy_95_block_ci_idr": [
+            "-24830.22",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "46066.2142857142857142857142857142857142857142857142857142857",
+          "fill_share_rate": "0.714285714285714285714285714285714285714285714285714285714286",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "322463.50",
+          "observations": 10,
+          "open_shares": 700,
+          "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "51148.30",
+          "sessions": 5,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+          "turnover_idr": "9683500"
+        },
+        "validation": {
+          "abstention": "0",
+          "calibration": {
+            "brier": null,
+            "count": 0,
+            "coverage": "0",
+            "fill_probability": null,
+            "reliability": []
+          },
+          "closed": 5,
+          "closed_fill_coverage": "0.625",
+          "coverage": "1",
+          "eligible": 8,
+          "entry_slippage_idr": "24500",
+          "expectancy_95_block_ci_idr": [
+            "-51148.30",
+            "102528.30"
+          ],
+          "expectancy_net_idr": "41057.66",
+          "fill_share_rate": "0.875",
+          "losses_idr": [
+            "-51148.30",
+            "-51148.30"
+          ],
+          "mean_time_to_first_fill_seconds": "1.0",
+          "net_idr": "205288.30",
+          "observations": 8,
+          "open_shares": 1400,
+          "precision_net_positive": "0.6",
+          "projection_interval_coverage": null,
+          "realized_plan_drawdown_idr": "102296.60",
+          "sessions": 4,
+          "tail_5pct_idr": "-51148.30",
+          "tp_before_stop": "0.6",
+          "turnover_idr": "8659000"
+        }
+      }
+    }
+  ],
+  "champion_holdout_breakdown": [
+    {
+      "nominal_idr": "200000",
+      "breakdown": {
+        "horizon_seconds": {
+          "900": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+              "count": 7,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 7,
+                  "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 7,
+            "closed_fill_coverage": "0.7",
+            "coverage": "1",
+            "eligible": 10,
+            "entry_slippage_idr": "4500",
+            "expectancy_95_block_ci_idr": [
+              "11.0333333333333333333333333333333333333333333333333333333333",
+              "14646.90"
+            ],
+            "expectancy_net_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+            "fill_share_rate": "0.9",
+            "losses_idr": [
+              "-7306.90",
+              "-7306.90"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "58620.70",
+            "observations": 10,
+            "open_shares": 200,
+            "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "14613.80",
+            "sessions": 5,
+            "tail_5pct_idr": "-7306.90",
+            "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+            "turnover_idr": "1669000"
+          }
+        },
+        "liquidity": {
+          "deep": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.24",
+              "count": 5,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 5,
+                  "observed": "0.6",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 5,
+            "closed_fill_coverage": "0.625",
+            "coverage": "1",
+            "eligible": 8,
+            "entry_slippage_idr": "3500",
+            "expectancy_95_block_ci_idr": [
+              "-7306.90",
+              "14646.90"
+            ],
+            "expectancy_net_idr": "5865.38",
+            "fill_share_rate": "0.875",
+            "losses_idr": [
+              "-7306.90",
+              "-7306.90"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "29326.90",
+            "observations": 8,
+            "open_shares": 200,
+            "precision_net_positive": "0.6",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "14613.80",
+            "sessions": 4,
+            "tail_5pct_idr": "-7306.90",
+            "tp_before_stop": "0.6",
+            "turnover_idr": "1237000"
+          },
+          "shallow": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.16",
+              "count": 2,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 2,
+                  "observed": "1",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 2,
+            "closed_fill_coverage": "1",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "1000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "14646.90",
+            "fill_share_rate": "1",
+            "losses_idr": [],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "29293.80",
+            "observations": 2,
+            "open_shares": 0,
+            "precision_net_positive": "1",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "0",
+            "sessions": 2,
+            "tail_5pct_idr": "14646.90",
+            "tp_before_stop": "1",
+            "turnover_idr": "432000"
+          }
+        },
+        "regime": {
+          "ranging": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.21",
+              "count": 4,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 4,
+                  "observed": "0.75",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 4,
+            "closed_fill_coverage": "0.8",
+            "coverage": "1",
+            "eligible": 5,
+            "entry_slippage_idr": "2500",
+            "expectancy_95_block_ci_idr": [
+              "3670.00",
+              "14646.90"
+            ],
+            "expectancy_net_idr": "9158.45",
+            "fill_share_rate": "1",
+            "losses_idr": [
+              "-7306.90"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "36633.80",
+            "observations": 5,
+            "open_shares": 100,
+            "precision_net_positive": "0.75",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "7306.90",
+            "sessions": 4,
+            "tail_5pct_idr": "-7306.90",
+            "tp_before_stop": "0.75",
+            "turnover_idr": "942500"
+          },
+          "trending": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.226666666666666666666666666666666666666666666666666666666667",
+              "count": 3,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 3,
+                  "observed": "0.666666666666666666666666666666666666666666666666666666666667",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 3,
+            "closed_fill_coverage": "0.6",
+            "coverage": "1",
+            "eligible": 5,
+            "entry_slippage_idr": "2000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "7328.96666666666666666666666666666666666666666666666666666667",
+            "fill_share_rate": "0.8",
+            "losses_idr": [
+              "-7306.90"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "21986.90",
+            "observations": 5,
+            "open_shares": 100,
+            "precision_net_positive": "0.666666666666666666666666666666666666666666666666666666666667",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "7306.90",
+            "sessions": 3,
+            "tail_5pct_idr": "-7306.90",
+            "tp_before_stop": "0.666666666666666666666666666666666666666666666666666666666667",
+            "turnover_idr": "726500"
+          }
+        },
+        "session": {
+          "2026-10-26": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.16",
+              "count": 1,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 1,
+                  "observed": "1",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 1,
+            "closed_fill_coverage": "0.5",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "500",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "14646.90",
+            "fill_share_rate": "0.5",
+            "losses_idr": [],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "14646.90",
+            "observations": 2,
+            "open_shares": 0,
+            "precision_net_positive": "1",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "0",
+            "sessions": 1,
+            "tail_5pct_idr": "14646.90",
+            "tp_before_stop": "1",
+            "turnover_idr": "216000"
+          },
+          "2026-10-27": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.26",
+              "count": 2,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 2,
+                  "observed": "0.5",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 2,
+            "closed_fill_coverage": "1",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "1000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "3670.00",
+            "fill_share_rate": "1",
+            "losses_idr": [
+              "-7306.90"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "7340.00",
+            "observations": 2,
+            "open_shares": 0,
+            "precision_net_positive": "0.5",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "7306.90",
+            "sessions": 1,
+            "tail_5pct_idr": "-7306.90",
+            "tp_before_stop": "0.5",
+            "turnover_idr": "410000"
+          },
+          "2026-10-28": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.36",
+              "count": 1,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 1,
+                  "observed": "0",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 1,
+            "closed_fill_coverage": "0.5",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "1000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "-7306.90",
+            "fill_share_rate": "1",
+            "losses_idr": [
+              "-7306.90"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "-7306.90",
+            "observations": 2,
+            "open_shares": 100,
+            "precision_net_positive": "0",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "7306.90",
+            "sessions": 1,
+            "tail_5pct_idr": "-7306.90",
+            "tp_before_stop": "0",
+            "turnover_idr": "294500"
+          },
+          "2026-10-29": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.16",
+              "count": 1,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 1,
+                  "observed": "1",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 1,
+            "closed_fill_coverage": "0.5",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "1000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "14646.90",
+            "fill_share_rate": "1",
+            "losses_idr": [],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "14646.90",
+            "observations": 2,
+            "open_shares": 100,
+            "precision_net_positive": "1",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "0",
+            "sessions": 1,
+            "tail_5pct_idr": "14646.90",
+            "tp_before_stop": "1",
+            "turnover_idr": "316500"
+          },
+          "2026-10-30": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.16",
+              "count": 2,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 2,
+                  "observed": "1",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 2,
+            "closed_fill_coverage": "1",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "1000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "14646.90",
+            "fill_share_rate": "1",
+            "losses_idr": [],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "29293.80",
+            "observations": 2,
+            "open_shares": 0,
+            "precision_net_positive": "1",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "0",
+            "sessions": 1,
+            "tail_5pct_idr": "14646.90",
+            "tp_before_stop": "1",
+            "turnover_idr": "432000"
+          }
+        },
+        "symbol": {
+          "SIMA": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.226666666666666666666666666666666666666666666666666666666667",
+              "count": 3,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 3,
+                  "observed": "0.666666666666666666666666666666666666666666666666666666666667",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 3,
+            "closed_fill_coverage": "0.6",
+            "coverage": "1",
+            "eligible": 5,
+            "entry_slippage_idr": "2000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "7328.96666666666666666666666666666666666666666666666666666667",
+            "fill_share_rate": "0.8",
+            "losses_idr": [
+              "-7306.90"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "21986.90",
+            "observations": 5,
+            "open_shares": 100,
+            "precision_net_positive": "0.666666666666666666666666666666666666666666666666666666666667",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "7306.90",
+            "sessions": 3,
+            "tail_5pct_idr": "-7306.90",
+            "tp_before_stop": "0.666666666666666666666666666666666666666666666666666666666667",
+            "turnover_idr": "726500"
+          },
+          "SIMB": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.21",
+              "count": 4,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 4,
+                  "observed": "0.75",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 4,
+            "closed_fill_coverage": "0.8",
+            "coverage": "1",
+            "eligible": 5,
+            "entry_slippage_idr": "2500",
+            "expectancy_95_block_ci_idr": [
+              "3670.00",
+              "14646.90"
+            ],
+            "expectancy_net_idr": "9158.45",
+            "fill_share_rate": "1",
+            "losses_idr": [
+              "-7306.90"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "36633.80",
+            "observations": 5,
+            "open_shares": 100,
+            "precision_net_positive": "0.75",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "7306.90",
+            "sessions": 4,
+            "tail_5pct_idr": "-7306.90",
+            "tp_before_stop": "0.75",
+            "turnover_idr": "942500"
+          }
+        }
+      }
+    },
+    {
+      "nominal_idr": "1000000",
+      "breakdown": {
+        "horizon_seconds": {
+          "900": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.217142857142857142857142857142857142857142857142857142857143",
+              "count": 7,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 7,
+                  "observed": "0.714285714285714285714285714285714285714285714285714285714286",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 7,
+            "closed_fill_coverage": "0.7",
+            "coverage": "1",
+            "eligible": 10,
+            "entry_slippage_idr": "25500",
+            "expectancy_95_block_ci_idr": [
+              "-26475.10",
+              "89973.8142857142857142857142857142857142857142857142857142857"
+            ],
+            "expectancy_net_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+            "fill_share_rate": "0.728571428571428571428571428571428571428571428571428571428571",
+            "losses_idr": [
+              "-51148.30",
+              "-51148.30"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "234582.10",
+            "observations": 10,
+            "open_shares": 1400,
+            "precision_net_positive": "0.714285714285714285714285714285714285714285714285714285714286",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "102296.60",
+            "sessions": 5,
+            "tail_5pct_idr": "-51148.30",
+            "tp_before_stop": "0.714285714285714285714285714285714285714285714285714285714286",
+            "turnover_idr": "9091000"
+          }
+        },
+        "liquidity": {
+          "deep": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.24",
+              "count": 5,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 5,
+                  "observed": "0.6",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 5,
+            "closed_fill_coverage": "0.625",
+            "coverage": "1",
+            "eligible": 8,
+            "entry_slippage_idr": "24500",
+            "expectancy_95_block_ci_idr": [
+              "-51148.30",
+              "102528.30"
+            ],
+            "expectancy_net_idr": "41057.66",
+            "fill_share_rate": "0.875",
+            "losses_idr": [
+              "-51148.30",
+              "-51148.30"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "205288.30",
+            "observations": 8,
+            "open_shares": 1400,
+            "precision_net_positive": "0.6",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "102296.60",
+            "sessions": 4,
+            "tail_5pct_idr": "-51148.30",
+            "tp_before_stop": "0.6",
+            "turnover_idr": "8659000"
+          },
+          "shallow": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.16",
+              "count": 2,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 2,
+                  "observed": "1",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 2,
+            "closed_fill_coverage": "1",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "1000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "14646.90",
+            "fill_share_rate": "0.142857142857142857142857142857142857142857142857142857142857",
+            "losses_idr": [],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "29293.80",
+            "observations": 2,
+            "open_shares": 0,
+            "precision_net_positive": "1",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "0",
+            "sessions": 2,
+            "tail_5pct_idr": "14646.90",
+            "tp_before_stop": "1",
+            "turnover_idr": "432000"
+          }
+        },
+        "regime": {
+          "ranging": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.21",
+              "count": 4,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 4,
+                  "observed": "0.75",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 4,
+            "closed_fill_coverage": "0.8",
+            "coverage": "1",
+            "eligible": 5,
+            "entry_slippage_idr": "14500",
+            "expectancy_95_block_ci_idr": [
+              "-18250.70",
+              "102528.30"
+            ],
+            "expectancy_net_idr": "42138.80",
+            "fill_share_rate": "0.828571428571428571428571428571428571428571428571428571428571",
+            "losses_idr": [
+              "-51148.30"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "168555.20",
+            "observations": 5,
+            "open_shares": 700,
+            "precision_net_positive": "0.75",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "51148.30",
+            "sessions": 4,
+            "tail_5pct_idr": "-51148.30",
+            "tp_before_stop": "0.75",
+            "turnover_idr": "5301500"
+          },
+          "trending": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.226666666666666666666666666666666666666666666666666666666667",
+              "count": 3,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 3,
+                  "observed": "0.666666666666666666666666666666666666666666666666666666666667",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 3,
+            "closed_fill_coverage": "0.6",
+            "coverage": "1",
+            "eligible": 5,
+            "entry_slippage_idr": "11000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "22008.9666666666666666666666666666666666666666666666666666667",
+            "fill_share_rate": "0.628571428571428571428571428571428571428571428571428571428571",
+            "losses_idr": [
+              "-51148.30"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "66026.90",
+            "observations": 5,
+            "open_shares": 700,
+            "precision_net_positive": "0.666666666666666666666666666666666666666666666666666666666667",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "51148.30",
+            "sessions": 3,
+            "tail_5pct_idr": "-51148.30",
+            "tp_before_stop": "0.666666666666666666666666666666666666666666666666666666666667",
+            "turnover_idr": "3789500"
+          }
+        },
+        "session": {
+          "2026-10-26": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.16",
+              "count": 1,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 1,
+                  "observed": "1",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 1,
+            "closed_fill_coverage": "0.5",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "500",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "14646.90",
+            "fill_share_rate": "0.0714285714285714285714285714285714285714285714285714285714286",
+            "losses_idr": [],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "14646.90",
+            "observations": 2,
+            "open_shares": 0,
+            "precision_net_positive": "1",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "0",
+            "sessions": 1,
+            "tail_5pct_idr": "14646.90",
+            "tp_before_stop": "1",
+            "turnover_idr": "216000"
+          },
+          "2026-10-27": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.26",
+              "count": 2,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 2,
+                  "observed": "0.5",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 2,
+            "closed_fill_coverage": "1",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "4000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "-18250.70",
+            "fill_share_rate": "0.571428571428571428571428571428571428571428571428571428571429",
+            "losses_idr": [
+              "-51148.30"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "-36501.40",
+            "observations": 2,
+            "open_shares": 0,
+            "precision_net_positive": "0.5",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "51148.30",
+            "sessions": 1,
+            "tail_5pct_idr": "-51148.30",
+            "tp_before_stop": "0.5",
+            "turnover_idr": "1574000"
+          },
+          "2026-10-28": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.36",
+              "count": 1,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 1,
+                  "observed": "0",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 1,
+            "closed_fill_coverage": "0.5",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "7000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "-51148.30",
+            "fill_share_rate": "1",
+            "losses_idr": [
+              "-51148.30"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "-51148.30",
+            "observations": 2,
+            "open_shares": 700,
+            "precision_net_positive": "0",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "51148.30",
+            "sessions": 1,
+            "tail_5pct_idr": "-51148.30",
+            "tp_before_stop": "0",
+            "turnover_idr": "2061500"
+          },
+          "2026-10-29": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.16",
+              "count": 1,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 1,
+                  "observed": "1",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 1,
+            "closed_fill_coverage": "0.5",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "7000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "102528.30",
+            "fill_share_rate": "1",
+            "losses_idr": [],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "102528.30",
+            "observations": 2,
+            "open_shares": 700,
+            "precision_net_positive": "1",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "0",
+            "sessions": 1,
+            "tail_5pct_idr": "102528.30",
+            "tp_before_stop": "1",
+            "turnover_idr": "2215500"
+          },
+          "2026-10-30": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.16",
+              "count": 2,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 2,
+                  "observed": "1",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 2,
+            "closed_fill_coverage": "1",
+            "coverage": "1",
+            "eligible": 2,
+            "entry_slippage_idr": "7000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "102528.30",
+            "fill_share_rate": "1",
+            "losses_idr": [],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "205056.60",
+            "observations": 2,
+            "open_shares": 0,
+            "precision_net_positive": "1",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "0",
+            "sessions": 1,
+            "tail_5pct_idr": "102528.30",
+            "tp_before_stop": "1",
+            "turnover_idr": "3024000"
+          }
+        },
+        "symbol": {
+          "SIMA": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.226666666666666666666666666666666666666666666666666666666667",
+              "count": 3,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 3,
+                  "observed": "0.666666666666666666666666666666666666666666666666666666666667",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 3,
+            "closed_fill_coverage": "0.6",
+            "coverage": "1",
+            "eligible": 5,
+            "entry_slippage_idr": "11000",
+            "expectancy_95_block_ci_idr": null,
+            "expectancy_net_idr": "22008.9666666666666666666666666666666666666666666666666666667",
+            "fill_share_rate": "0.628571428571428571428571428571428571428571428571428571428571",
+            "losses_idr": [
+              "-51148.30"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "66026.90",
+            "observations": 5,
+            "open_shares": 700,
+            "precision_net_positive": "0.666666666666666666666666666666666666666666666666666666666667",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "51148.30",
+            "sessions": 3,
+            "tail_5pct_idr": "-51148.30",
+            "tp_before_stop": "0.666666666666666666666666666666666666666666666666666666666667",
+            "turnover_idr": "3789500"
+          },
+          "SIMB": {
+            "abstention": "0",
+            "calibration": {
+              "brier": "0.21",
+              "count": 4,
+              "coverage": "1",
+              "fill_probability": null,
+              "reliability": [
+                {
+                  "bin": 1,
+                  "count": 4,
+                  "observed": "0.75",
+                  "predicted": "0.6"
+                }
+              ]
+            },
+            "closed": 4,
+            "closed_fill_coverage": "0.8",
+            "coverage": "1",
+            "eligible": 5,
+            "entry_slippage_idr": "14500",
+            "expectancy_95_block_ci_idr": [
+              "-18250.70",
+              "102528.30"
+            ],
+            "expectancy_net_idr": "42138.80",
+            "fill_share_rate": "0.828571428571428571428571428571428571428571428571428571428571",
+            "losses_idr": [
+              "-51148.30"
+            ],
+            "mean_time_to_first_fill_seconds": "1.0",
+            "net_idr": "168555.20",
+            "observations": 5,
+            "open_shares": 700,
+            "precision_net_positive": "0.75",
+            "projection_interval_coverage": null,
+            "realized_plan_drawdown_idr": "51148.30",
+            "sessions": 4,
+            "tail_5pct_idr": "-51148.30",
+            "tp_before_stop": "0.75",
+            "turnover_idr": "5301500"
+          }
+        }
+      }
+    }
+  ]
+}

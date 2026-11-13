@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-016 menyediakan [baseline, ranking nominal dan evaluasi holdout](docs/market-data/baseline-evaluation.md):
+protokol/hash beku, purge/embargo, kalibrasi validation-only, replay per nominal,
+metrik OOS, breakdown dan audit champion/challenger/ablation. [Laporan simulasi](research/reports/SS-016-simulation.md)
+mencatat G1 **no-go / experiment**; probabilitas produk tetap null dan tidak ada
+auto-promotion. Bukti vendor G0 serta risiko portofolio masih diperlukan.
+
 SS-015 menyediakan [risk engine dan state rencana](docs/market-data/risk-engine.md):
 sizing Decimal/integer dari kas, risiko dan likuiditas; state WATCH/READY/EXPIRED/
 CANCELLED yang idempotent dan bisa direplay; validasi biaya/level/tenggat serta
