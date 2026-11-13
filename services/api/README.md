@@ -4,6 +4,11 @@ Fondasi SS-004: package `saham-signal-backend` yang dapat dipasang API dan worke
 konfigurasi startup tervalidasi, probe dependency, CORS dan error contract SS-002.
 Belum ada endpoint bisnis, autentikasi, ingest, sinyal, migrasi, atau alert.
 
+SS-009 menambahkan service internal [referensi instrumen point-in-time](../../docs/market-data/instrument-rules.md).
+`lookup` memilih versi berdasarkan waktu berlaku dan `available_at`; `check_entry`
+memeriksa board/pasar, status, aksi korporasi, sesi, lot, fraksi dan limit.
+Adapter default kosong dan seluruh fixture berlabel simulasi; belum ada feed produksi.
+
 ## Fresh clone / menjalankan lokal
 
 Prasyarat: Git dan [uv 0.13.7](https://docs.astral.sh/uv/getting-started/installation/).
