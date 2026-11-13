@@ -106,3 +106,17 @@ Pemilik repo menindaklanjuti penawaran, izin/sampel dan anggaran; maintainer dat
 mengevaluasi sampel; pemilik menyetujui pilihan akhir. Issue #8 belum memenuhi
 seluruh acceptance dan tidak boleh ditandai selesai hanya karena audit di-push.
 SS-008 sampai SS-012 tetap harus memberikan bukti G0 bersama sebelum promosi.
+
+## Pembaruan SS-012 — 13 November 2026
+
+[Kebijakan kualitas feed](feed-quality.md) kini menyediakan status
+live/delayed/degraded/stale/disconnected, SLA yang dapat dikonfigurasi, pemisahan
+umur trade dan heartbeat, abstention sampai resnapshot, serta event gangguan
+posisi tanpa membuat exit. Acceptance PRD 1/2/7 diuji dengan fixture sintetis;
+hasil ini adalah bukti perilaku perangkat lunak, bukan pengukuran feed vendor.
+
+**G0 tetap PENDING**: sampel vendor tetap 0 record/NOT_ASSESSED, SLA numerik final,
+lisensi, biaya/kapasitas dan recovery pada transport vendor belum dibuktikan.
+Timeout default 10 detik mengikuti target awal PRD; stale 30 detik, disconnected
+60 detik dan clock skew 1 detik adalah parameter simulasi sementara. Semua ambang
+wajib dicocokkan dengan SLA dan uji beban sumber terpilih sebelum promosi.

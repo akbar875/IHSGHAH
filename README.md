@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-012 menyediakan [kualitas feed dan abstention](docs/market-data/feed-quality.md):
+timeout heartbeat, status feed, pengaman entry sampai resnapshot dan warning
+posisi tanpa exit dari data tidak sehat. Acceptance PRD 1/2/7 teruji simulasi;
+SLA final dan bukti vendor belum tersedia sehingga **G0 tetap pending**.
+
 Fondasi parsial SS-011 tersedia dalam [adapter feed](docs/market-data/feed-adapter.md):
 normalisasi fixture, dedup/koreksi sesi dan recovery book teruji simulasi.
 Belum ada feed vendor atau contract test sampel berizin; issue #11 dan G0 tetap
