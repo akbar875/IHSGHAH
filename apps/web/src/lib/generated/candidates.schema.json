@@ -387,6 +387,813 @@
           ]
         }
       ]
+    },
+    "StockDetailResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "1.0.0"
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "mode": {
+          "enum": [
+            "research",
+            "paper",
+            "live"
+          ]
+        },
+        "data_origin": {
+          "enum": [
+            "simulation",
+            "market"
+          ]
+        },
+        "quality": {
+          "$ref": "#/$defs/Quality"
+        },
+        "data": {
+          "$ref": "#/$defs/StockDetail"
+        }
+      },
+      "required": [
+        "contract_version",
+        "as_of",
+        "mode",
+        "data_origin",
+        "quality",
+        "data"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "data_origin": {
+                "const": "simulation"
+              }
+            },
+            "required": [
+              "data_origin"
+            ]
+          },
+          "then": {
+            "properties": {
+              "mode": {
+                "enum": [
+                  "research",
+                  "paper"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "StockDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9.]{0,11}$"
+        },
+        "last_price_idr": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rule": {
+          "$ref": "#/$defs/InstrumentRule"
+        },
+        "signal": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Signal"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "liquidity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LiquidityEstimate"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "depth": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Depth"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pressure": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Pressure"
+          },
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "symbol",
+        "last_price_idr",
+        "rule",
+        "signal",
+        "liquidity",
+        "depth",
+        "pressure"
+      ]
+    },
+    "InstrumentRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9.]{0,11}$"
+        },
+        "board": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "effective_from": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "effective_to": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rule_version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "lot_size_shares": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "tick_rule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "from_idr": {
+                "type": "string",
+                "pattern": "^(?:0|[1-9][0-9]{0,15})\\.[0-9]{2}$"
+              },
+              "to_idr": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "tick_idr": {
+                "type": "string",
+                "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+              }
+            },
+            "required": [
+              "from_idr",
+              "to_idr",
+              "tick_idr"
+            ]
+          },
+          "maxItems": 1000,
+          "minItems": 1
+        },
+        "limit_rule": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reference_price_idr": {
+              "type": "string",
+              "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+            },
+            "lower_idr": {
+              "type": "string",
+              "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+            },
+            "upper_idr": {
+              "type": "string",
+              "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+            }
+          },
+          "required": [
+            "reference_price_idr",
+            "lower_idr",
+            "upper_idr",
+            "version"
+          ]
+        },
+        "session": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "calendar_version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "tradability": {
+          "enum": [
+            "tradable",
+            "suspended",
+            "unsupported",
+            "closed"
+          ]
+        }
+      },
+      "required": [
+        "symbol",
+        "board",
+        "effective_from",
+        "effective_to",
+        "rule_version",
+        "lot_size_shares",
+        "tick_rule",
+        "limit_rule",
+        "session",
+        "calendar_version",
+        "tradability"
+      ]
+    },
+    "LiquidityEstimate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "signal_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "signal_version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "nominal_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "lots": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "depth_as_of": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "order_policy": {
+          "const": "LIMIT"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "slippage_cap_ratio": {
+          "type": "string",
+          "pattern": "^-?(?:0|[1-9][0-9]{0,15})\\.[0-9]{6}$"
+        },
+        "category": {
+          "enum": [
+            "sufficient",
+            "limited",
+            "insufficient",
+            "unavailable"
+          ]
+        },
+        "entry_fill_probability": {
+          "$ref": "#/$defs/Probability"
+        },
+        "exit_fill_probability": {
+          "$ref": "#/$defs/Probability"
+        },
+        "quality": {
+          "$ref": "#/$defs/Quality"
+        }
+      },
+      "required": [
+        "signal_id",
+        "signal_version",
+        "nominal_idr",
+        "lots",
+        "depth_as_of",
+        "order_policy",
+        "deadline",
+        "slippage_cap_ratio",
+        "category",
+        "entry_fill_probability",
+        "exit_fill_probability",
+        "quality"
+      ]
+    },
+    "Depth": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9.]{0,11}$"
+        },
+        "snapshot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "sequence": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        "depth_as_of": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BookLevel"
+          },
+          "maxItems": 50
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BookLevel"
+          },
+          "maxItems": 50
+        },
+        "available_levels": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "limited": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "symbol",
+        "snapshot_id",
+        "sequence",
+        "depth_as_of",
+        "bids",
+        "asks",
+        "available_levels",
+        "limited"
+      ]
+    },
+    "BookLevel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "price_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "lots": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "cumulative_lots": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "price_idr",
+        "lots",
+        "cumulative_lots"
+      ]
+    },
+    "Pressure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "window_minutes": {
+          "enum": [
+            1,
+            5,
+            15
+          ]
+        },
+        "buy_ratio": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sell_ratio": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "classified_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "method": {
+          "enum": [
+            "provider",
+            "estimated",
+            "unavailable"
+          ]
+        },
+        "validated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "window_minutes",
+        "buy_ratio",
+        "sell_ratio",
+        "classified_ratio",
+        "method",
+        "validated"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "validated": {
+                "const": false
+              }
+            },
+            "required": [
+              "validated"
+            ]
+          },
+          "then": {
+            "properties": {
+              "buy_ratio": {
+                "type": "null"
+              },
+              "sell_ratio": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ChartResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "1.0.0"
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "mode": {
+          "enum": [
+            "research",
+            "paper",
+            "live"
+          ]
+        },
+        "data_origin": {
+          "enum": [
+            "simulation",
+            "market"
+          ]
+        },
+        "quality": {
+          "$ref": "#/$defs/Quality"
+        },
+        "data": {
+          "$ref": "#/$defs/Chart"
+        }
+      },
+      "required": [
+        "contract_version",
+        "as_of",
+        "mode",
+        "data_origin",
+        "quality",
+        "data"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "data_origin": {
+                "const": "simulation"
+              }
+            },
+            "required": [
+              "data_origin"
+            ]
+          },
+          "then": {
+            "properties": {
+              "mode": {
+                "enum": [
+                  "research",
+                  "paper"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Chart": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9.]{0,11}$"
+        },
+        "interval": {
+          "enum": [
+            "1m",
+            "5m",
+            "15m"
+          ]
+        },
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Candle"
+          },
+          "maxItems": 1000
+        },
+        "projection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Projection"
+          },
+          "maxItems": 1000
+        },
+        "model_version": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "horizon_minutes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coverage_status": {
+          "enum": [
+            "unvalidated",
+            "validated",
+            "unavailable"
+          ]
+        }
+      },
+      "required": [
+        "symbol",
+        "interval",
+        "candles",
+        "projection",
+        "model_version",
+        "horizon_minutes",
+        "coverage_status"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "coverage_status": {
+                "enum": [
+                  "unvalidated",
+                  "unavailable"
+                ]
+              }
+            },
+            "required": [
+              "coverage_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "projection": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Candle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "open_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "high_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "low_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "close_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "volume_lots": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "at",
+        "open_idr",
+        "high_idr",
+        "low_idr",
+        "close_idr",
+        "volume_lots"
+      ]
+    },
+    "Projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "median_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "lower_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "upper_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "at",
+        "median_idr",
+        "lower_idr",
+        "upper_idr",
+        "coverage"
+      ]
+    },
+    "SignalHistoryResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "1.0.0"
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "mode": {
+          "enum": [
+            "research",
+            "paper",
+            "live"
+          ]
+        },
+        "data_origin": {
+          "enum": [
+            "simulation",
+            "market"
+          ]
+        },
+        "quality": {
+          "$ref": "#/$defs/Quality"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Signal"
+          },
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "contract_version",
+        "as_of",
+        "mode",
+        "data_origin",
+        "quality",
+        "data"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "data_origin": {
+                "const": "simulation"
+              }
+            },
+            "required": [
+              "data_origin"
+            ]
+          },
+          "then": {
+            "properties": {
+              "mode": {
+                "enum": [
+                  "research",
+                  "paper"
+                ]
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

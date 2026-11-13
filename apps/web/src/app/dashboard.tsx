@@ -13,7 +13,7 @@ function CandidateCard({ signal, rank, now, blocked }: { signal: Candidate; rank
   const state = expired && ['WATCH', 'READY'].includes(signal.state) ? 'EXPIRED' : signal.state;
   return <article className="candidate" aria-label={`Kandidat ${signal.symbol}`}>
     <div className="candidate-heading">
-      <div className="ticker"><span className="rank">{rank.toString().padStart(2, '0')}</span><div><h3>{signal.symbol}</h3><span className="muted">Simulasi · {signal.horizon_minutes} menit</span></div></div>
+      <div className="ticker"><span className="rank">{rank.toString().padStart(2, '0')}</span><div><h3><Link href={`/stocks/${encodeURIComponent(signal.symbol)}`}>{signal.symbol}</Link></h3><span className="muted">Simulasi · {signal.horizon_minutes} menit</span></div></div>
       <span className={`tag ${state === 'READY' && !blocked ? 'ready' : ''}`}>{state === 'READY' && blocked ? 'Entry ditahan' : labels[state]}</span>
     </div>
     <dl className="plan-grid">
