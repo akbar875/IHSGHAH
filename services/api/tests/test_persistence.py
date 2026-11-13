@@ -89,6 +89,17 @@ def test_envelope_guards() -> None:
         record("MarketEvent").document("paper", "")
 
 
+def test_simulated_fills_cannot_be_relabelled_and_future_fills_are_hidden() -> None:
+    for kind in ("Fill", "Position"):
+        value = record(kind)
+        with pytest.raises(ValueError, match="provenance"):
+            replace(value, data_origin="market").document("research", "pilot-sim")
+    position = record("Position")
+    position.payload["fills"][0]["recorded_at"] = "2026-11-12T04:00:00Z"
+    with pytest.raises(ValueError, match="newer"):
+        position.document("research", "pilot-sim")
+
+
 @pytest.fixture
 def database() -> Iterator[tuple[str, str]]:
     dsn = os.environ.get("PERSISTENCE_TEST_DSN")

@@ -115,6 +115,21 @@ class Record:
             datetime.fromisoformat(self.payload[name]) > self.available_at for name in known_times
         ):
             raise ValueError("Snapshot contains information newer than available_at")
+        fills = (
+            [self.payload]
+            if self.kind == "Fill"
+            else self.payload["fills"]
+            if self.kind == "Position"
+            else []
+        )
+        for fill in fills:
+            if fill["origin"] == "simulation" and self.data_origin != "simulation":
+                raise ValueError("Simulated fills must retain simulation provenance")
+            if any(
+                datetime.fromisoformat(fill[name]) > self.available_at
+                for name in ("filled_at", "recorded_at")
+            ):
+                raise ValueError("Position contains fills newer than available_at")
         return document
 
 
