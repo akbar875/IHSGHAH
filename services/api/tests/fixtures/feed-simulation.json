@@ -1,0 +1,36 @@
+{
+  "schema": "simulation-feed/1",
+  "data_origin": "simulation",
+  "events": [
+    {
+      "event_id": "snapshot-1", "symbol": "SIM", "kind": "book_snapshot",
+      "sequence": 1, "revision": 1,
+      "event_time": "2026-11-13T10:00:00+07:00", "provider_time": "2026-11-13T03:00:00.001Z",
+      "payload": {"bids": [{"price_idr": "1000.00", "quantity": 500}], "asks": [{"price_idr": "1010.00", "quantity": 600}]}
+    },
+    {
+      "event_id": "delta-2", "symbol": "SIM", "kind": "book_delta",
+      "sequence": 2, "revision": 1,
+      "event_time": "2026-11-13T03:00:01Z", "provider_time": null,
+      "payload": {"bids": [{"price_idr": "1000.00", "quantity": 0}, {"price_idr": "995.00", "quantity": 300}], "asks": []}
+    },
+    {
+      "event_id": "trade-1", "symbol": "SIM", "kind": "trade",
+      "sequence": 1, "revision": 1,
+      "event_time": "2026-11-13T03:00:01Z", "provider_time": null,
+      "payload": {"price_idr": "1000.00", "quantity": 200, "aggressor": "unknown"}
+    },
+    {
+      "event_id": "candle-1m-0300", "symbol": "SIM", "kind": "candle",
+      "sequence": 1, "revision": 1,
+      "event_time": "2026-11-13T03:01:00Z", "provider_time": null,
+      "payload": {"at": "2026-11-13T03:00:00Z", "open_idr": "1000.00", "high_idr": "1010.00", "low_idr": "995.00", "close_idr": "1005.00", "quantity": 800}
+    },
+    {
+      "event_id": "heartbeat-1", "symbol": "SIM", "kind": "heartbeat",
+      "sequence": 1, "revision": 1,
+      "event_time": "2026-11-13T03:01:00Z", "provider_time": null,
+      "payload": {"status": "healthy"}
+    }
+  ]
+}

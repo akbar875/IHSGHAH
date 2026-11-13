@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+Fondasi parsial SS-011 tersedia dalam [adapter feed](docs/market-data/feed-adapter.md):
+normalisasi fixture, dedup/koreksi sesi dan recovery book teruji simulasi.
+Belum ada feed vendor atau contract test sampel berizin; issue #11 dan G0 tetap
+pending. Candle belum memiliki envelope persistensi dalam kontrak v1.
+
 SS-010 menyediakan [penyimpanan point-in-time dan audit append-only](docs/PERSISTENCE.md):
 migrasi PostgreSQL, snapshot berversi, deduplikasi transaksi, Decimal untuk
 pembukuan, dan isolasi akun/mode. Kebijakan retensi berizin serta gerbang G0 tetap

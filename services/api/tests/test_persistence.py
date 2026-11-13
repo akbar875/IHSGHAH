@@ -18,13 +18,54 @@ from jsonschema import ValidationError
 from psycopg import sql
 from psycopg.conninfo import make_conninfo
 
+from saham_signal.adapters.feed import (
+    SIMULATION_PROFILE,
+    MarketJournalSink,
+    simulation_messages,
+    validate_observation,
+)
 from saham_signal.adapters.persistence import SCHEMA, Journal, PersistenceConflict
+from saham_signal.application.feed import FeedIngestor
 from saham_signal.domain.persistence import Kind, Record
 from saham_signal.migrate import migrate
 
 ROOT = Path(__file__).resolve().parents[3]
 EXAMPLES = json.loads((ROOT / "packages/contracts/v1/examples.json").read_text())
 NOW = datetime(2026, 11, 12, 3, tzinfo=UTC)
+
+
+def test_feed_journal_roundtrip(database: tuple[str, str]) -> None:
+    _, runtime = database
+    journal = Journal(runtime, "research", "")
+    ingestor = FeedIngestor(
+        SIMULATION_PROFILE,
+        "research",
+        lot_shares=lambda *_: 100,
+        validate=validate_observation,
+        commit=MarketJournalSink(journal),
+        snapshot_request=lambda *_: None,
+    )
+    messages = list(simulation_messages(Path(__file__).parent / "fixtures/feed-simulation.json"))
+    received = datetime(2026, 11, 13, 3, 2, tzinfo=UTC)
+    trade = messages[2]
+    for message in [
+        messages[0],
+        messages[1],
+        trade,
+        replace(trade, revision=2, payload={**trade.payload, "quantity": 300}),
+        messages[4],
+        trade,
+    ]:
+        ingestor.ingest(message, received_at=received, available_at=received, processed_at=received)
+    rows = journal.replay(received)
+    assert len(rows) == 5
+    assert {row["data_origin"] for row in rows} == {"simulation"}
+    trade_rows = [row for row in rows if row["payload"]["event_type"] == "trade"]
+    assert {row["version"] for row in trade_rows} == {1, 2}
+    latest = journal.snapshot("MarketEvent", trade_rows[0]["entity_id"], received)
+    assert latest is not None
+    assert latest["payload"]["lots"] == 3
+    assert journal.replay(received - timedelta(microseconds=1)) == []
 
 
 def test_packaged_contract_matches_canonical() -> None:
