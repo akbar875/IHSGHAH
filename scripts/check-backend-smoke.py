@@ -9,9 +9,12 @@ import tempfile
 import time
 from importlib.resources import files
 from urllib.error import HTTPError, URLError
-from urllib.request import ProxyHandler, build_opener
+from urllib.request import ProxyHandler, Request, build_opener
+
+from websockets.sync.client import connect
 
 from saham_signal.adapters.persistence import SCHEMA
+from saham_signal.application.market import validate
 
 
 def main() -> None:
@@ -24,6 +27,7 @@ def main() -> None:
         dependency_port = unavailable.getsockname()[1]
         port = http_port.getsockname()[1]
         http_port.close()
+        fixture_token = os.urandom(32).hex()
         env = {
             **os.environ,
             "APP_MODE": "research",
@@ -33,7 +37,12 @@ def main() -> None:
             ),
             "REDIS_URL": f"redis://:simulation@127.0.0.1:{dependency_port}/0",
             "REDIS_NAMESPACE": "saham-signal:research:",
-            "CORS_ORIGINS": "[]",
+            "CORS_ORIGINS": '["http://localhost:3000"]',
+            "MARKET_FIXTURE_ENABLED": "true",
+            "MARKET_FIXTURE_TOKEN": fixture_token,
+            "MARKET_NOMINAL_IDR": "1000000.00",
+            "MARKET_HORIZON_MINUTES": "30",
+            "PILOT_ACCOUNT_ID": "fixture-smoke",
             "READINESS_TIMEOUT_SECONDS": "0.1",
             "WORKER_HEARTBEAT_SECONDS": "0.05",
             "WORKER_MAX_ATTEMPTS": "1",
@@ -62,9 +71,13 @@ def main() -> None:
                     deadline = time.monotonic() + 20
                     while True:
                         if process.poll() is not None:
-                            raise RuntimeError("Installed API exited before becoming healthy")
+                            raise RuntimeError(
+                                "Installed API exited before becoming healthy"
+                            )
                         try:
-                            with opener.open(f"http://127.0.0.1:{port}/health", timeout=1) as r:
+                            with opener.open(
+                                f"http://127.0.0.1:{port}/health", timeout=1
+                            ) as r:
                                 assert r.status == 200
                                 assert json.load(r) == {
                                     "status": "ok",
@@ -73,7 +86,9 @@ def main() -> None:
                             break
                         except (URLError, TimeoutError):
                             if time.monotonic() >= deadline:
-                                raise RuntimeError("Installed API health timed out") from None
+                                raise RuntimeError(
+                                    "Installed API health timed out"
+                                ) from None
                             time.sleep(0.1)
                     try:
                         opener.open(f"http://127.0.0.1:{port}/ready", timeout=5)
@@ -86,6 +101,38 @@ def main() -> None:
                             assert payload["data_origin"] == "simulation"
                     else:
                         raise AssertionError("Readiness must fail without DB/cache")
+                    request = Request(
+                        f"http://127.0.0.1:{port}/api/v1/candidates",
+                        headers={"Cookie": f"saham_session={fixture_token}"},
+                    )
+                    with opener.open(request, timeout=5) as r:
+                        validate("CandidatesResponse", json.load(r))
+                        assert r.headers["Cache-Control"] == "private, no-store"
+                    subscription = {
+                        "kind": "subscribe",
+                        "contract_version": "1.0.0",
+                        "subscription_id": "wheel-smoke",
+                        "topic": "signals",
+                        "symbol": None,
+                        "resume_cursor": None,
+                    }
+                    with connect(
+                        f"ws://127.0.0.1:{port}/api/v1/stream",
+                        origin="http://localhost:3000",
+                        additional_headers={"Cookie": f"saham_session={fixture_token}"},
+                        open_timeout=5,
+                        close_timeout=2,
+                        proxy=None,
+                    ) as ws:
+                        ws.send(json.dumps(subscription))
+                        snapshot = json.loads(ws.recv(timeout=5))
+                        validate("Snapshot", snapshot)
+                        assert snapshot["user_id"] == "fixture-smoke"
+                        subscription["resume_cursor"] = snapshot["cursor"]
+                        ws.send(json.dumps(subscription))
+                        error = json.loads(ws.recv(timeout=5))
+                        validate("ErrorResponse", error)
+                        assert error["data"]["code"] == "RESYNC_REQUIRED"
                 finally:
                     process.terminate()
                     try:

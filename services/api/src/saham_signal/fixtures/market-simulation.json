@@ -1,0 +1,325 @@
+{
+  "CandidatesResponse": {
+    "contract_version": "1.0.0",
+    "as_of": "2026-11-12T03:00:00Z",
+    "mode": "research",
+    "data_origin": "simulation",
+    "quality": {
+      "status": "unavailable",
+      "feed": "unavailable",
+      "last_heartbeat_at": null,
+      "reasons": [
+        "SIMULATION",
+        "MODEL_UNVALIDATED"
+      ]
+    },
+    "data": [
+      {
+        "signal_id": "signal-sim-1",
+        "version": 1,
+        "symbol": "TEST",
+        "generated_at": "2026-11-12T03:00:00Z",
+        "data_as_of": "2026-11-12T03:00:00Z",
+        "valid_until": "2026-11-12T03:30:00Z",
+        "horizon_minutes": 30,
+        "model_version": "unvalidated-1",
+        "policy_version": "sim-policy-1",
+        "configuration_version": "config-sim-1",
+        "state": "WATCH",
+        "entry_zone": {
+          "lower_idr": "1000.00",
+          "upper_idr": "1010.00"
+        },
+        "trigger": "PRICE_AND_TREND",
+        "invalidation": "DATA_UNHEALTHY",
+        "stop_idr": "990.00",
+        "targets_idr": [
+          "1030.00"
+        ],
+        "entry_from": "2026-11-12T03:00:00Z",
+        "entry_until": "2026-11-12T03:30:00Z",
+        "exit_deadline": "2026-11-12T08:00:00Z",
+        "return_quantiles": null,
+        "target_probability": {
+          "status": "unvalidated",
+          "value": null,
+          "calibration_version": null
+        },
+        "assumptions": {
+          "reference_price_idr": "1000.00",
+          "nominal_idr": "1000000.00",
+          "fee_schedule_version": "sim-fees-1",
+          "order_type": "LIMIT"
+        }
+      }
+    ]
+  },
+  "StockDetailResponse": {
+    "contract_version": "1.0.0",
+    "as_of": "2026-11-12T03:00:00Z",
+    "mode": "research",
+    "data_origin": "simulation",
+    "quality": {
+      "status": "unavailable",
+      "feed": "unavailable",
+      "last_heartbeat_at": null,
+      "reasons": [
+        "SIMULATION",
+        "MODEL_UNVALIDATED"
+      ]
+    },
+    "data": {
+      "symbol": "TEST",
+      "last_price_idr": "1000.00",
+      "rule": {
+        "symbol": "TEST",
+        "board": "SIMULATED_REGULAR",
+        "effective_from": "2026-11-01T00:00:00Z",
+        "effective_to": null,
+        "rule_version": "sim-rules-1",
+        "lot_size_shares": 100,
+        "tick_rule": [
+          {
+            "from_idr": "0.00",
+            "to_idr": null,
+            "tick_idr": "1.00"
+          }
+        ],
+        "limit_rule": {
+          "reference_price_idr": "1000.00",
+          "lower_idr": "900.00",
+          "upper_idr": "1100.00",
+          "version": "sim-limit-1"
+        },
+        "session": "sim-regular",
+        "calendar_version": "sim-calendar-1",
+        "tradability": "unsupported"
+      },
+      "signal": {
+        "signal_id": "signal-sim-1",
+        "version": 1,
+        "symbol": "TEST",
+        "generated_at": "2026-11-12T03:00:00Z",
+        "data_as_of": "2026-11-12T03:00:00Z",
+        "valid_until": "2026-11-12T03:30:00Z",
+        "horizon_minutes": 30,
+        "model_version": "unvalidated-1",
+        "policy_version": "sim-policy-1",
+        "configuration_version": "config-sim-1",
+        "state": "WATCH",
+        "entry_zone": {
+          "lower_idr": "1000.00",
+          "upper_idr": "1010.00"
+        },
+        "trigger": "PRICE_AND_TREND",
+        "invalidation": "DATA_UNHEALTHY",
+        "stop_idr": "990.00",
+        "targets_idr": [
+          "1030.00"
+        ],
+        "entry_from": "2026-11-12T03:00:00Z",
+        "entry_until": "2026-11-12T03:30:00Z",
+        "exit_deadline": "2026-11-12T08:00:00Z",
+        "return_quantiles": null,
+        "target_probability": {
+          "status": "unvalidated",
+          "value": null,
+          "calibration_version": null
+        },
+        "assumptions": {
+          "reference_price_idr": "1000.00",
+          "nominal_idr": "1000000.00",
+          "fee_schedule_version": "sim-fees-1",
+          "order_type": "LIMIT"
+        }
+      },
+      "liquidity": {
+        "signal_id": "signal-sim-1",
+        "signal_version": 1,
+        "nominal_idr": "1000000.00",
+        "lots": 10,
+        "depth_as_of": "2026-11-12T03:00:00Z",
+        "order_policy": "LIMIT",
+        "deadline": "2026-11-12T03:30:00Z",
+        "slippage_cap_ratio": "0.001000",
+        "category": "unavailable",
+        "entry_fill_probability": {
+          "status": "unvalidated",
+          "value": null,
+          "calibration_version": null
+        },
+        "exit_fill_probability": {
+          "status": "unvalidated",
+          "value": null,
+          "calibration_version": null
+        },
+        "quality": {
+          "status": "unavailable",
+          "feed": "unavailable",
+          "last_heartbeat_at": null,
+          "reasons": [
+            "SIMULATION",
+            "MODEL_UNVALIDATED"
+          ]
+        }
+      },
+      "depth": {
+        "symbol": "TEST",
+        "snapshot_id": "book-sim-1",
+        "sequence": "1",
+        "depth_as_of": "2026-11-12T03:00:00Z",
+        "bids": [
+          {
+            "price_idr": "1000.00",
+            "lots": 10,
+            "cumulative_lots": 10
+          }
+        ],
+        "asks": [
+          {
+            "price_idr": "1010.00",
+            "lots": 12,
+            "cumulative_lots": 12
+          }
+        ],
+        "available_levels": 1,
+        "limited": true
+      },
+      "pressure": [
+        {
+          "window_minutes": 5,
+          "buy_ratio": null,
+          "sell_ratio": null,
+          "classified_ratio": 0,
+          "method": "unavailable",
+          "validated": false
+        }
+      ]
+    }
+  },
+  "DepthResponse": {
+    "contract_version": "1.0.0",
+    "as_of": "2026-11-12T03:00:00Z",
+    "mode": "research",
+    "data_origin": "simulation",
+    "quality": {
+      "status": "unavailable",
+      "feed": "unavailable",
+      "last_heartbeat_at": null,
+      "reasons": [
+        "SIMULATION",
+        "MODEL_UNVALIDATED"
+      ]
+    },
+    "data": {
+      "symbol": "TEST",
+      "snapshot_id": "book-sim-1",
+      "sequence": "1",
+      "depth_as_of": "2026-11-12T03:00:00Z",
+      "bids": [
+        {
+          "price_idr": "1000.00",
+          "lots": 10,
+          "cumulative_lots": 10
+        }
+      ],
+      "asks": [
+        {
+          "price_idr": "1010.00",
+          "lots": 12,
+          "cumulative_lots": 12
+        }
+      ],
+      "available_levels": 1,
+      "limited": true
+    }
+  },
+  "ChartResponse": {
+    "contract_version": "1.0.0",
+    "as_of": "2026-11-12T03:00:00Z",
+    "mode": "research",
+    "data_origin": "simulation",
+    "quality": {
+      "status": "unavailable",
+      "feed": "unavailable",
+      "last_heartbeat_at": null,
+      "reasons": [
+        "SIMULATION",
+        "MODEL_UNVALIDATED"
+      ]
+    },
+    "data": {
+      "symbol": "TEST",
+      "interval": "1m",
+      "candles": [
+        {
+          "at": "2026-11-12T03:00:00Z",
+          "open_idr": "1000.00",
+          "high_idr": "1010.00",
+          "low_idr": "990.00",
+          "close_idr": "1000.00",
+          "volume_lots": 10
+        }
+      ],
+      "projection": [],
+      "model_version": null,
+      "horizon_minutes": null,
+      "coverage_status": "unvalidated"
+    }
+  },
+  "SignalHistoryResponse": {
+    "contract_version": "1.0.0",
+    "as_of": "2026-11-12T03:00:00Z",
+    "mode": "research",
+    "data_origin": "simulation",
+    "quality": {
+      "status": "unavailable",
+      "feed": "unavailable",
+      "last_heartbeat_at": null,
+      "reasons": [
+        "SIMULATION",
+        "MODEL_UNVALIDATED"
+      ]
+    },
+    "data": [
+      {
+        "signal_id": "signal-sim-1",
+        "version": 1,
+        "symbol": "TEST",
+        "generated_at": "2026-11-12T03:00:00Z",
+        "data_as_of": "2026-11-12T03:00:00Z",
+        "valid_until": "2026-11-12T03:30:00Z",
+        "horizon_minutes": 30,
+        "model_version": "unvalidated-1",
+        "policy_version": "sim-policy-1",
+        "configuration_version": "config-sim-1",
+        "state": "WATCH",
+        "entry_zone": {
+          "lower_idr": "1000.00",
+          "upper_idr": "1010.00"
+        },
+        "trigger": "PRICE_AND_TREND",
+        "invalidation": "DATA_UNHEALTHY",
+        "stop_idr": "990.00",
+        "targets_idr": [
+          "1030.00"
+        ],
+        "entry_from": "2026-11-12T03:00:00Z",
+        "entry_until": "2026-11-12T03:30:00Z",
+        "exit_deadline": "2026-11-12T08:00:00Z",
+        "return_quantiles": null,
+        "target_probability": {
+          "status": "unvalidated",
+          "value": null,
+          "calibration_version": null
+        },
+        "assumptions": {
+          "reference_price_idr": "1000.00",
+          "nominal_idr": "1000000.00",
+          "fee_schedule_version": "sim-fees-1",
+          "order_type": "LIMIT"
+        }
+      }
+    ]
+  }
+}

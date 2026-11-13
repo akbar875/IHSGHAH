@@ -2,7 +2,7 @@
 
 Aplikasi web analisis saham intraday BEI untuk membantu keputusan manual dan paper trading. Sumber kebutuhan produk: [PRD Saham Signal](docs/PRD-Saham-Signal.md).
 
-**Status: fondasi, shell web research, bootstrap API dan worker.** Shell Next.js tersedia lokal melalui [setup web](apps/web/README.md), FastAPI melalui [setup API](services/api/README.md). Belum ada endpoint bisnis, feed pasar, model, sinyal, backtest, atau bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
+**Status: fondasi, shell web research, API fixture dan worker.** Shell Next.js tersedia lokal melalui [setup web](apps/web/README.md), FastAPI melalui [setup API](services/api/README.md). API market tersedia sebagai simulasi research; belum ada feed pasar atau model produksi tervalidasi maupun bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
 
 ## Mulai dari sini
 
@@ -33,6 +33,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 ```
 
 ## Urutan pengembangan
+
+SS-017 menyediakan [API market dan stream resinkronisasi](docs/market-data/market-api.md)
+untuk UI: kandidat, detail, depth, chart dan riwayat dengan kontrak v1 serta snapshot/delta.
+Fixture research diaktifkan eksplisit, memakai sesi lokal dan label simulasi;
+reconnect wajib snapshot baru. Model produksi/paper/live tetap tidak tersedia sebelum
+integrasi artefak SS-016 dan bukti gerbang terkait. G0/G1 belum lulus.
 
 SS-016 menyediakan [baseline, ranking nominal dan evaluasi holdout](docs/market-data/baseline-evaluation.md):
 protokol/hash beku, purge/embargo, kalibrasi validation-only, replay per nominal,

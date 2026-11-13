@@ -2,7 +2,8 @@
 
 Fondasi SS-004: package `saham-signal-backend` yang dapat dipasang API dan worker,
 konfigurasi startup tervalidasi, probe dependency, CORS dan error contract SS-002.
-Belum ada endpoint bisnis, autentikasi, ingest, sinyal, atau alert.
+SS-017 menambahkan [API market dan stream fixture research](../../docs/market-data/market-api.md).
+Belum ada autentikasi produksi, ingest vendor, model tervalidasi, atau alert live.
 
 SS-009 menambahkan service internal [referensi instrumen point-in-time](../../docs/market-data/instrument-rules.md).
 `lookup` memilih versi berdasarkan waktu berlaku dan `available_at`; `check_entry`
@@ -47,8 +48,9 @@ Koneksi probe selalu ditutup. Readiness 200 berisi `status`, `mode`, dan
 Compose PostgreSQL/Redis tersedia di [setup lokal SS-006](../../infra/README.md).
 Jalankan `node scripts/local-infra.mjs up research` dari root; default Settings dan
 file env contoh cocok dengan credential Compose. Migrasi bisnis mengikuti SS-010.
-Swagger lokal di `/docs`; `/openapi.json` mendokumentasikan endpoint bootstrap saja,
-terpisah dari kontrak bisnis rencana di `packages/contracts/v1/openapi.json`.
+Swagger lokal di `/docs`; `/openapi.json` mencantumkan bootstrap dan rute market.
+Schema wire market otoritatif tetap `packages/contracts/v1/openapi.json` beserta
+`schema.json`; payload aktual divalidasi terhadap schema yang dibundel di wheel.
 
 ## Konfigurasi dan isolasi
 
@@ -73,7 +75,8 @@ mode sesuai ADR-0001/SS-006. Nomor logical Redis DB saja tidak cukup. Mode paper
 tidak mengaktifkan fitur live apa pun. Bootstrap hanya boleh diakses lokal sebelum
 autentikasi/otorisasi SS-023 dan gerbang terkait dibuktikan.
 
-CORS mengizinkan GET dan header Accept/Content-Type saja; credentials dimatikan.
+CORS mengizinkan GET dan header Accept/Content-Type saja; credentials hanya aktif
+saat fixture research diaktifkan, untuk origin lokal eksplisit yang dikonfigurasi.
 Header `X-Request-ID` dibuat server, tersedia pada sukses/error dan diekspos untuk
 origin yang diizinkan. Error HTTP/validasi/internal mengikuti
 `packages/contracts/v1/schema.json#/$defs/ErrorResponse`:
