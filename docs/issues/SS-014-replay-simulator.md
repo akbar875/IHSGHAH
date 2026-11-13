@@ -14,10 +14,14 @@ Bangun simulasi biaya dan fill yang dapat diuji.
 
 ## Acceptance criteria
 
-- [ ] ARA tanpa penjual tidak dianggap pembelian terisi.
-- [ ] ARB tanpa pembeli tidak menutup posisi otomatis.
-- [ ] Satu replay deterministik dapat diulang dengan input/seed sama.
-- [ ] Semua asumsi dan limit data masuk laporan.
+- [x] ARA tanpa penjual tidak dianggap pembelian terisi.
+- [x] ARB tanpa pembeli tidak menutup posisi otomatis.
+- [x] Satu replay deterministik dapat diulang dengan input/seed sama.
+- [x] Semua asumsi dan limit data masuk laporan.
+
+Bukti implementasi dan batas validasi: [panduan simulator](../market-data/replay-simulator.md),
+`services/api/tests/test_replay.py`. Acceptance diuji dengan data sintetis;
+validasi vendor SS-011 dan gerbang G0/G1 tetap pending.
 
 ## Dependency
 
