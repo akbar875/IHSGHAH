@@ -22,6 +22,9 @@ Hentikan dengan Ctrl+C (Windows/POSIX) atau SIGTERM (POSIX). Untuk smoke portabe
 Worker mulai tanpa PostgreSQL/Redis karena belum ada job, vendor, ingest, sinyal,
 alert, atau resource eksternal yang dibuka. Heartbeat hanya membuktikan proses hidup,
 bukan readiness feed/database/model maupun kelulusan G0/G1/G2/G3.
+Untuk dependency lokal, jalankan `node scripts/local-infra.mjs up research` dari
+root sesuai [panduan infra](../../infra/README.md). DSN env contoh worker cocok
+dengan default Compose; ubah juga DSN worker bila port/password infra diubah.
 
 Deployment memasang wheel backend yang sama dengan API, lalu menjalankan
 `python -m saham_signal.worker`; gunakan environment/secret store tanpa file lokal.

@@ -1,0 +1,42 @@
+name: Local infrastructure checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: apps/web/.nvmrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: services/api/.python-version
+      - run: python -m pip install uv==0.13.7
+      - run: uv sync --locked --project services/api
+      - run: services/api/.venv/bin/ruff check infra/probe.py
+      - run: services/api/.venv/bin/ruff format --check infra/probe.py
+      - run: node --test scripts/local-infra.test.mjs
+      - run: node scripts/local-infra.mjs check research
+      - run: node scripts/local-infra.mjs check paper
+      - run: node scripts/local-infra.mjs check live
+      - name: Exercise configurable paper ports and credentials
+        run: |
+          cat > infra/.env.paper <<'EOF'
+          LOCAL_POSTGRES_PORT=15433
+          LOCAL_REDIS_PORT=16380
+          LOCAL_POSTGRES_PASSWORD=ci_local_paper_postgres
+          LOCAL_REDIS_PASSWORD=ci_local_paper_redis
+          EOF
+      - run: node scripts/check-local-infra.mjs
+      - name: Reset disposable CI data
+        if: always()
+        run: |
+          node scripts/local-infra.mjs reset research --confirm-local-reset=saham-signal-local-research
+          node scripts/local-infra.mjs reset paper --confirm-local-reset=saham-signal-local-paper

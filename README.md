@@ -24,7 +24,7 @@ apps/web/              Shell research Next.js + TypeScript
 services/api/          Bootstrap FastAPI modular, health/readiness dan konfigurasi
 services/worker/       Panduan lifecycle worker; job bisnis menyusul
 packages/contracts/   Kontrak API/event v1 dan fixture simulasi
-infra/                Lingkungan lokal dan deployment (rencana)
+infra/                Compose PostgreSQL/Redis lokal dengan isolasi mode
 research/             Protokol, eksperimen, dan evaluasi strategi
 tests/                Skenario integrasi dan acceptance lintas service
 docs/                 PRD, arsitektur, keputusan, dan backlog
@@ -47,6 +47,12 @@ Fondasi issue #1 ditetapkan dalam [ADR-0001](docs/decisions/0001-stack-and-modul
 ## Alur issue → branch → PR
 
 Kontrak SS-002 tersedia di [packages/contracts](packages/contracts/README.md): JSON Schema 2020-12, OpenAPI 3.1.1, REST dan stream snapshot/delta. Jalankan `npm ci --ignore-scripts --prefix packages/contracts` lalu `npm --prefix packages/contracts run check`; validasi lintas bahasa Python dan petunjuk unit/versioning tersedia di panduan kontrak. Bootstrap SS-004 menyediakan `/health` dan `/ready`; endpoint bisnis belum diimplementasikan. Setup API memakai uv 0.13.7, Python 3.13.18 dan `uv sync --locked` pada `services/api`.
+
+SS-006 menyediakan [PostgreSQL/Redis lokal](infra/README.md): dengan Docker Desktop
+Linux/Engine lokal aktif, jalankan `node scripts/local-infra.mjs up research`
+dari root. Healthcheck, volume persisten, port/password yang dapat dikonfigurasi,
+instance terpisah per mode, shutdown dan reset lokal eksplisit tersedia dalam panduan.
+Default API/worker cocok dengan Compose; `/ready` menolak dependency yang belum sehat.
 
 ```sh
 git switch main
