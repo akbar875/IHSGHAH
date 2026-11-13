@@ -38,7 +38,7 @@ Signal satu versi append-only; perubahan membuat versi baru. READY tidak membuka
 
 ## REST publik
 
-Base `/api/v1`, JSON, seluruh rute memerlukan sesi. Nama cookie pada OpenAPI adalah interface awal; autentikasi final/CSRF di SS-023. Server menentukan akun/mode dari sesi/deployment. Request fill tidak menerima user_id atau mode; fees_idr adalah biaya pengisian pengguna. Endpoint berikut baru spesifikasi:
+Base `/api/v1`, JSON, seluruh rute memerlukan sesi. Nama cookie pada OpenAPI adalah interface awal; autentikasi final/CSRF di SS-023. Server menentukan akun/mode dari sesi/deployment. Request fill tidak menerima user_id atau mode; fees_idr adalah biaya pengisian pengguna. SS-017 menyediakan [query market dan stream fixture research](../../docs/market-data/market-api.md); rute lainnya masih spesifikasi:
 
 | Rute | Kontrak |
 |---|---|

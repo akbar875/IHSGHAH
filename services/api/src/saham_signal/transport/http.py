@@ -12,10 +12,12 @@ from starlette.exceptions import HTTPException
 from starlette.types import ASGIApp
 
 from saham_signal.adapters.probes import PostgresProbe, RedisProbe
+from saham_signal.application.market import FixtureMarket
 from saham_signal.application.readiness import DependencyProbe, check_dependencies
 from saham_signal.config import Settings, load_settings
 from saham_signal.domain.mode import Mode
 from saham_signal.transport.errors import ErrorCode, ErrorResponse, error_response
+from saham_signal.transport.market import market_router
 
 
 class HealthResponse(BaseModel):
@@ -30,6 +32,7 @@ class ReadyResponse(HealthResponse):
 def create_app(
     settings: Settings | None = None,
     probes: dict[str, DependencyProbe] | None = None,
+    market: FixtureMarket | None = None,
 ) -> ASGIApp:
     config = settings if settings is not None else load_settings()
     dependencies: dict[str, DependencyProbe] = (
@@ -54,6 +57,7 @@ def create_app(
     app = FastAPI(title="Saham Signal bootstrap API", version="0.1.0", lifespan=lifespan)
     app.state.started = False
     app.state.mode = config.app_mode
+    app.include_router(market_router(config, market if market is not None else FixtureMarket()))
 
     @app.middleware("http")
     async def request_id(
@@ -107,7 +111,7 @@ def create_app(
     return CORSMiddleware(
         app,
         allow_origins=config.cors_origins,
-        allow_credentials=False,
+        allow_credentials=config.market_fixture_enabled,
         allow_methods=["GET"],
         allow_headers=["Accept", "Content-Type"],
         expose_headers=["X-Request-ID", "Retry-After"],

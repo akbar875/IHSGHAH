@@ -1,3 +1,4 @@
+import re
 from typing import Self
 from urllib.parse import unquote, urlsplit
 
@@ -20,6 +21,31 @@ class Settings(BaseSettings):
     readiness_timeout_seconds: float = Field(default=3, ge=0.1, le=10)
     session_secret: SecretStr | None = None
     pilot_account_id: str | None = None
+    market_fixture_enabled: bool = False
+    market_fixture_token: SecretStr | None = None
+    market_nominal_idr: str = Field(
+        default="1000000.00",
+        pattern=r"^(?:0\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\.[0-9]{2})$",
+    )
+    market_horizon_minutes: int = Field(default=30)
+
+    @model_validator(mode="after")
+    def validate_market_fixture(self) -> Self:
+        if (
+            self.market_fixture_enabled
+            and self.pilot_account_id
+            and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,127}", self.pilot_account_id)
+        ):
+            raise ValueError("Invalid fixture account identifier")
+        if self.market_horizon_minutes not in {15, 30, 60, 240}:
+            raise ValueError("Unsupported market horizon")
+        if self.market_fixture_enabled and (
+            self.app_mode != "research"
+            or not self.market_fixture_token
+            or len(self.market_fixture_token.get_secret_value()) < 32
+        ):
+            raise ValueError("Market fixtures require research mode and a 32+ character token")
+        return self
 
     @field_validator("cors_origins")
     @classmethod
