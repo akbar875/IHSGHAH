@@ -1,5 +1,6 @@
 /* Generated from packages/contracts/v1/schema.json. Run npm run contracts. */
 
+export type MarketResponse = (CandidatesResponse | StockDetailResponse | ChartResponse | SignalHistoryResponse)
 export type CandidatesResponse = ({
 [k: string]: unknown
 } & {
@@ -21,6 +22,66 @@ calibration_version: null
 status: "validated"
 value: number
 calibration_version: string
+})
+export type StockDetailResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+data: StockDetail
+})
+export type Pressure = ({
+[k: string]: unknown
+} & {
+window_minutes: (1 | 5 | 15)
+buy_ratio: (number | null)
+sell_ratio: (number | null)
+classified_ratio: number
+method: ("provider" | "estimated" | "unavailable")
+validated: boolean
+})
+export type ChartResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+data: Chart
+})
+export type Chart = ({
+[k: string]: unknown
+} & {
+symbol: string
+interval: ("1m" | "5m" | "15m")
+/**
+ * @maxItems 1000
+ */
+candles: Candle[]
+/**
+ * @maxItems 1000
+ */
+projection: Projection[]
+model_version: (string | null)
+horizon_minutes: (number | null)
+coverage_status: ("unvalidated" | "validated" | "unavailable")
+})
+export type SignalHistoryResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+/**
+ * @maxItems 1000
+ */
+data: Signal[]
 })
 
 export interface Quality {
@@ -72,4 +133,96 @@ nominal_idr: string
 fee_schedule_version: string
 order_type: "LIMIT"
 }
+}
+export interface StockDetail {
+symbol: string
+last_price_idr: (string | null)
+rule: InstrumentRule
+signal: (Signal | null)
+liquidity: (LiquidityEstimate | null)
+depth: (Depth | null)
+/**
+ * @maxItems 3
+ */
+pressure: Pressure[]
+}
+export interface InstrumentRule {
+symbol: string
+board: string
+effective_from: string
+effective_to: (string | null)
+rule_version: string
+lot_size_shares: number
+/**
+ * @minItems 1
+ * @maxItems 1000
+ */
+tick_rule: [{
+from_idr: string
+to_idr: (string | null)
+tick_idr: string
+}, ...({
+from_idr: string
+to_idr: (string | null)
+tick_idr: string
+})[]]
+limit_rule: {
+reference_price_idr: string
+lower_idr: string
+upper_idr: string
+version: string
+}
+session: string
+calendar_version: string
+tradability: ("tradable" | "suspended" | "unsupported" | "closed")
+}
+export interface LiquidityEstimate {
+signal_id: string
+signal_version: number
+nominal_idr: string
+lots: number
+depth_as_of: string
+order_policy: "LIMIT"
+deadline: string
+slippage_cap_ratio: string
+category: ("sufficient" | "limited" | "insufficient" | "unavailable")
+entry_fill_probability: Probability
+exit_fill_probability: Probability
+quality: Quality
+}
+export interface Depth {
+symbol: string
+snapshot_id: string
+sequence: string
+depth_as_of: string
+/**
+ * @maxItems 50
+ */
+bids: BookLevel[]
+/**
+ * @maxItems 50
+ */
+asks: BookLevel[]
+available_levels: number
+limited: boolean
+}
+export interface BookLevel {
+price_idr: string
+lots: number
+cumulative_lots: number
+}
+export interface Candle {
+at: string
+open_idr: string
+high_idr: string
+low_idr: string
+close_idr: string
+volume_lots: number
+}
+export interface Projection {
+at: string
+median_idr: string
+lower_idr: string
+upper_idr: string
+coverage: number
 }

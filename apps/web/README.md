@@ -1,9 +1,16 @@
-# Web — dashboard research SS-018
+# Web — dashboard dan detail research SS-018/019
 
 Dashboard Next.js App Router + TypeScript untuk research, selalu berlabel
 **Research / Simulasi**. Menampilkan kandidat simulasi dari API #17, input nominal,
 pencarian/filter aktif, rencana entry/stop/target/horizon dan kondisi data.
 Belum ada feed pasar, model tervalidasi atau autentikasi pilot; G0/G1/G2/G3 belum lulus.
+
+Klik ticker untuk membuka detail saham (`/stocks/TEST`), rencana, chart candle/volume,
+interval 1m/5m/15m, proyeksi bila tersedia/tervalidasi, book dan pressure. Horizon
+tidak berubah saat mengganti interval. Book diganti sebagai snapshot penuh, maksimal
+lima tingkat tiap sisi dan berlabel saat terbatas. Library Lightweight Charts 5.2.0
+berlisensi Apache-2.0 dengan atribusi TradingView pada halaman.
+Lihat [panduan detail dan batas simulasi](../../docs/market-data/stock-detail.md).
 
 ## Setup
 

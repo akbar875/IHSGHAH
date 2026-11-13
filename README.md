@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-019 menyediakan [detail saham, chart dan order book](docs/market-data/stock-detail.md):
+candle/volume, entry/stop/TP/expiry, proyeksi putus-putus bertingkat cakupan,
+horizon tetap saat interval berubah, snapshot book konsisten, pressure/cakupan
+dan layout sentuh 360px. Data tetap simulasi; proyeksi/pressure belum tersedia
+pada fixture API dan tidak diganti angka buatan. G0/G1 belum lulus.
+
 SS-018 menyediakan [dashboard kandidat](docs/market-data/dashboard.md): input nominal,
 pencarian/filter aktif, rencana entry/stop/target dan waktu WIB, validasi kontrak,
 keadaan loading/kosong/gangguan, serta tampilan mobile 360px. Query nominal diisolasi

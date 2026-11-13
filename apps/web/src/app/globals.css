@@ -59,7 +59,21 @@ button:hover { background: #104c3b; }
 .timing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 24px 0 0; padding-top: 20px; border-top: 1px solid var(--line); }
 .timing-grid dd { font-size: 12px; }
 .entry-warning { font-size: 12px; color: #63582d; margin: 18px 0 0; }
+.detail-section { margin-top: 24px; padding: 24px; }
+.detail-section h2 { margin-bottom: 18px; }
+.intervals { display: flex; gap: 8px; margin-top: 16px; }
+.intervals button[aria-pressed="false"] { background: #eef3ef; color: var(--ink); }
+.price-chart { width: 100%; height: 380px; min-width: 0; }
+.projection-legend { padding: 12px; background: #f2edf9; color: #594080; font-size: 13px; }
+.chart-attribution { font-size: 11px; color: var(--muted); }
+.book-sides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
+.book-sides table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.book-sides caption { text-align: left; font-weight: 700; }
+.book-sides th, .book-sides td { text-align: right; padding: 8px 4px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.book-sides th { font-size: 11px; }
 @media (max-width: 640px) {
+  .detail-section { padding: 16px; }
+  .book-sides { grid-template-columns: 1fr; gap: 16px; }
   .header { padding: 16px 20px; flex-wrap: wrap; }
   .brand { font-size: 19px; }
   .workspace { padding: 36px 20px; }
