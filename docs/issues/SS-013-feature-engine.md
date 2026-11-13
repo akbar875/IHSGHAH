@@ -14,10 +14,14 @@ Hitung fitur yang identik pada riset dan live.
 
 ## Acceptance criteria
 
-- [ ] Replay dan stream menghasilkan fitur identik pada cutoff sama.
-- [ ] Tidak menggunakan event sebelum available_at.
-- [ ] Pressure disembunyikan jika cakupan tidak memadai.
-- [ ] Tidak menampilkan jumlah investor dari data transaksi.
+- [x] Replay dan stream menghasilkan fitur identik pada cutoff sama.
+- [x] Tidak menggunakan event sebelum available_at.
+- [x] Pressure disembunyikan jika cakupan tidak memadai.
+- [x] Tidak menampilkan jumlah investor dari data transaksi.
+
+Bukti implementasi dan batas validasi simulasi: [feature engine](../market-data/feature-engine.md).
+Validasi vendor SS-011 dan gerbang G0/G1 tetap pending; implementasi ini tidak
+mengizinkan rilis live.
 
 ## Dependency
 

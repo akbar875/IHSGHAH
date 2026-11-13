@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-013 menyediakan [feature engine point-in-time](docs/market-data/feature-engine.md):
+return, volatilitas, volume relatif jam WIB, spread/depth dan komposisi antrean,
+serta pressure transaksi dengan unknown dan cakupan klasifikasi. Replay dan stream
+memakai reducer yang sama, teruji simulasi; validasi vendor dan G0/G1 tetap pending.
+
 SS-012 menyediakan [kualitas feed dan abstention](docs/market-data/feed-quality.md):
 timeout heartbeat, status feed, pengaman entry sampai resnapshot dan warning
 posisi tanpa exit dari data tidak sehat. Acceptance PRD 1/2/7 teruji simulasi;
