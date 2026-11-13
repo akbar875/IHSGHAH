@@ -28,6 +28,9 @@ for (const [path, method, operationId, result, body] of endpoints) {
     schema: { type: 'string', minLength: 1, maxLength: 128 } });
   if (operationId === 'getChart') parameters.push({ name: 'interval', in: 'query', required: true,
     schema: { enum: ['1m', '5m', '15m'] } });
+  if (operationId === 'listCandidates') parameters.push({ name: 'nominal_idr', in: 'query', required: false,
+    description: 'Requested sizing nominal. Defaults to server setting; never changes account, mode or horizon. Simulation does not imply validated sizing or ranking.',
+    schema: schema.$defs.Signal.properties.assumptions.properties.nominal_idr });
   paths[path] ??= {};
   paths[path][method] = {
     operationId, parameters,

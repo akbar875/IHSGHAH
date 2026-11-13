@@ -3,6 +3,8 @@
 import asyncio
 import hmac
 import json
+import re
+from dataclasses import replace
 from datetime import timedelta
 from email.utils import format_datetime
 from typing import Annotated, Any, Literal
@@ -50,10 +52,19 @@ def market_router(config: Settings, market: FixtureMarket) -> APIRouter:
         response.headers["Expires"] = format_datetime(
             market.started + timedelta(minutes=scope.horizon_minutes), usegmt=True
         )
-        # Account/mode/nominal/horizon are server-owned, never query overrides.
+        # Identity/mode/horizon remain server-owned. Only candidate sizing is selectable.
         allowed = {"interval"} if request.url.path.endswith("/chart") else set()
+        if request.url.path.endswith("/candidates"):
+            allowed = {"nominal_idr"}
         if set(request.query_params) - allowed:
             raise HTTPException(422)
+        if "nominal_idr" in request.query_params:
+            values = request.query_params.getlist("nominal_idr")
+            if len(values) != 1 or not re.fullmatch(
+                r"(?:0\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\.[0-9]{2})", values[0]
+            ):
+                raise HTTPException(422)
+            scope = replace(scope, nominal_idr=values[0])
         return scope
 
     def read(

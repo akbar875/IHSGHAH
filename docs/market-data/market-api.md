@@ -58,9 +58,16 @@ schema v1 beku. Header HTTP `Expires` mencatat batas skenario tanpa menambah fie
 wire; `Cache-Control: private, no-store` dan `Vary: Cookie` mencegah cache bersama.
 Cache internal LRU maksimum 128 entri menggunakan akun, mode, nominal, horizon,
 versi konfigurasi, resource, simbol dan interval; pergantian phase expiry
-membatalkan hasil lama. Caller mendapat salinan independen. Nominal/horizon adalah
-setting server; query akun/mode/nominal ditolak. Mengubah setting memerlukan
-restart dan subscription baru.
+membatalkan hasil lama. Caller mendapat salinan independen. SS-018 menambahkan
+query opsional `/candidates?nominal_idr=2500000.00`: decimal positif dengan dua
+angka pecahan, maksimum 16 digit bilangan bulat, tanpa key duplikat. Default tetap
+`MARKET_NOMINAL_IDR`. Nominal hanya memilih scope query tersebut; tidak mengubah
+setting global, akun, mode, horizon atau scope WebSocket. Query akun/mode/horizon
+dan nominal pada endpoint lain tetap ditolak. OpenAPI mendokumentasikan parameter
+tambahan ini; schema respons v1 tidak berubah. Fixture menyajikan ulang skenario
+WATCH dengan asumsi nominal terpilih, **bukan** perhitungan kapasitas/slippage atau
+ranking personal tervalidasi. Estimasi yang belum tersedia tetap null. Integrasi
+produksi tetap memerlukan sizing/ranking SS-015/016 dan gerbang yang disetujui.
 
 ## WebSocket `/api/v1/stream`
 
