@@ -12,9 +12,9 @@ class Settings(BaseSettings):
 
     app_mode: Mode = "research"
     database_url: SecretStr = SecretStr(
-        "postgresql://saham_signal_research:local_only@127.0.0.1:5432/saham_signal_research"
+        "postgresql://saham_signal_research:local_only_research@127.0.0.1:5432/saham_signal_research"
     )
-    redis_url: SecretStr = SecretStr("redis://127.0.0.1:6379/0")
+    redis_url: SecretStr = SecretStr("redis://:local_redis_research@127.0.0.1:6379/0")
     redis_namespace: str = "saham-signal:research:"
     cors_origins: list[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
     readiness_timeout_seconds: float = Field(default=3, ge=0.1, le=10)

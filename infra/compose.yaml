@@ -1,0 +1,48 @@
+# Local development only. Use scripts/local-infra.mjs to select an isolated mode.
+services:
+  postgres:
+    image: postgres:18.7@sha256:9f4fd4aa918f52ae3d6f3b687f1de90d8f867cd4d520021545a9a50c120eae3b
+    environment:
+      POSTGRES_USER: saham_signal_${LOCAL_MODE:?Use local-infra.mjs}
+      POSTGRES_DB: saham_signal_${LOCAL_MODE}
+      POSTGRES_PASSWORD: ${LOCAL_POSTGRES_PASSWORD:?Set local password}
+      TZ: UTC
+    ports:
+      - "127.0.0.1:${LOCAL_POSTGRES_PORT:?Set local port}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, 'PGPASSWORD="$$POSTGRES_PASSWORD" psql -h 127.0.0.1 -U "$$POSTGRES_USER" -d "$$POSTGRES_DB" -tAc "SELECT 1" | grep -qx 1']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    labels:
+      io.saham-signal.scope: local-only
+  redis:
+    image: redis:8.2.11@sha256:b0b01167ff47bc3868e56a967895a26be4230891a1f42a78ab61cdd227accc8d
+    environment:
+      REDIS_PASSWORD: ${LOCAL_REDIS_PASSWORD:?Set local password}
+    command:
+      - /bin/sh
+      - -ec
+      - 'exec /usr/local/bin/docker-entrypoint.sh redis-server --appendonly yes --requirepass "$$REDIS_PASSWORD"'
+    ports:
+      - "127.0.0.1:${LOCAL_REDIS_PORT:?Set local port}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH="$$REDIS_PASSWORD" redis-cli ping | grep -qx PONG']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+    labels:
+      io.saham-signal.scope: local-only
+volumes:
+  postgres-data:
+    labels:
+      io.saham-signal.scope: local-only
+  redis-data:
+    labels:
+      io.saham-signal.scope: local-only

@@ -33,7 +33,9 @@ Redis `PING`. Setiap request readiness mengulang pemeriksaan secara paralel, tim
 per dependency (default 3 detik), tanpa cache status dan tanpa menampilkan DSN/exception.
 Koneksi probe selalu ditutup. Readiness 200 berisi `status`, `mode`, dan
 `dependencies: {"postgresql": true, "redis": true}`. Tidak ada klaim kesiapan feed/model.
-Compose/database/migrasi mengikuti SS-006/010; belum dibutuhkan untuk health/smoke.
+Compose PostgreSQL/Redis tersedia di [setup lokal SS-006](../../infra/README.md).
+Jalankan `node scripts/local-infra.mjs up research` dari root; default Settings dan
+file env contoh cocok dengan credential Compose. Migrasi bisnis mengikuti SS-010.
 Swagger lokal di `/docs`; `/openapi.json` mendokumentasikan endpoint bootstrap saja,
 terpisah dari kontrak bisnis rencana di `packages/contracts/v1/openapi.json`.
 
@@ -47,7 +49,7 @@ mencetak nilai environment bila tidak valid.
 |---|---|
 | `APP_MODE` | `research`; hanya `research`, `paper`, `live` |
 | `DATABASE_URL` | PostgreSQL lokal research; nama DB wajib `saham_signal_<mode>`, query override ditolak |
-| `REDIS_URL` | `redis://127.0.0.1:6379/0`; hanya `redis`/`rediss`, query override ditolak |
+| `REDIS_URL` | Redis localhost:6379/0 dengan password lokal research sesuai env contoh; hanya `redis`/`rediss`, query override ditolak |
 | `REDIS_NAMESPACE` | `saham-signal:research:`; wajib sama dengan mode |
 | `CORS_ORIGINS` | JSON array origin HTTP(S) eksplisit, default localhost/127.0.0.1:3000; wildcard/path ditolak; `[]` mematikan CORS |
 | `READINESS_TIMEOUT_SECONDS` | 3; rentang 0.1–10 |
@@ -107,7 +109,8 @@ uv build
 Test mencakup health, dependency gagal/timeout/pulih, lifecycle readiness, kontrak error,
 CORS allow/deny, mode/isolasi/secret, serta kegagalan startup proses nyata. Probe
 diganti test double untuk tes deterministik; integrasi server PostgreSQL/Redis hidup
-dan matriks CI lintas service mengikuti SS-006/007. Dependency langsung dipin exact,
+tersedia melalui `node scripts/check-local-infra.mjs` dari root dan CI SS-006.
+Matriks CI lintas service berikutnya mengikuti SS-007. Dependency langsung dipin exact,
 transitif dan hash artifact terkunci pada `uv.lock`; gunakan `--locked` agar drift gagal.
 
 Baseline FastAPI 0.162.5/Python 3.13.18 mengikuti ADR. uv adalah tooling MIT/Apache-2.0;
