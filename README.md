@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-009 menyediakan [lookup aturan instrumen dan kalender point-in-time](docs/market-data/instrument-rules.md)
+untuk backend/replay: lot, fraksi, limit harian, sesi, suspensi dan aksi korporasi
+berversi. Referensi kosong/tidak lengkap menahan entry; fixture hanya simulasi.
+Belum ada master instrumen produksi atau feed berizin dan G0 tetap pending.
+
 Audit SS-008 tersedia dalam [perbandingan vendor dan hak data](docs/market-data/vendor-audit.md),
 [ADR-0002](docs/decisions/0002-market-data-procurement.md), dan
 [protokol penawaran/sampel](docs/market-data/vendor-evaluation.md). Prioritas pencarian
