@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-010 menyediakan [penyimpanan point-in-time dan audit append-only](docs/PERSISTENCE.md):
+migrasi PostgreSQL, snapshot berversi, deduplikasi transaksi, Decimal untuk
+pembukuan, dan isolasi akun/mode. Kebijakan retensi berizin serta gerbang G0 tetap
+memerlukan bukti terpisah; belum ada feed atau endpoint bisnis.
+
 SS-009 menyediakan [lookup aturan instrumen dan kalender point-in-time](docs/market-data/instrument-rules.md)
 untuk backend/replay: lot, fraksi, limit harian, sesi, suspensi dan aksi korporasi
 berversi. Referensi kosong/tidak lengkap menahan entry; fixture hanya simulasi.

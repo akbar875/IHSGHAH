@@ -2,7 +2,7 @@
 
 Fondasi SS-004: package `saham-signal-backend` yang dapat dipasang API dan worker,
 konfigurasi startup tervalidasi, probe dependency, CORS dan error contract SS-002.
-Belum ada endpoint bisnis, autentikasi, ingest, sinyal, migrasi, atau alert.
+Belum ada endpoint bisnis, autentikasi, ingest, sinyal, atau alert.
 
 SS-009 menambahkan service internal [referensi instrumen point-in-time](../../docs/market-data/instrument-rules.md).
 `lookup` memilih versi berdasarkan waktu berlaku dan `available_at`; `check_entry`
@@ -129,3 +129,8 @@ ditinjau ulang saat upgrade; pin bukan klaim bebas vulnerability.
 Referensi implementasi: [FastAPI lifespan](https://fastapi.tiangolo.com/advanced/events/),
 [settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/),
 [psycopg async/Windows](https://www.psycopg.org/psycopg3/docs/advanced/async.html).
+## Penyimpanan SS-010
+
+Migrasi PostgreSQL dijalankan eksplisit dengan `uv run --locked python -m saham_signal.migrate`.
+Lihat [panduan persistence](../../docs/PERSISTENCE.md) untuk schema append-only,
+repository transaksi, isolasi role/akun/mode, retensi dan pengujian PostgreSQL.

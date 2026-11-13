@@ -19,6 +19,7 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .work/
+services/api/src/saham_signal/storage_contract.json
 
 # Local data and generated artifacts
 data/
