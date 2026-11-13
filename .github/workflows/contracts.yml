@@ -1,8 +1,7 @@
 name: Contract checks
 
 on:
-  push:
-  pull_request:
+  workflow_call:
 
 permissions:
   contents: read
@@ -10,11 +9,12 @@ permissions:
 jobs:
   contracts:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: apps/web/.nvmrc
           cache: npm
           cache-dependency-path: packages/contracts/package-lock.json
       - run: npm ci --ignore-scripts
@@ -23,6 +23,6 @@ jobs:
         working-directory: packages/contracts
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version-file: services/api/.python-version
       - run: python -m pip install -r packages/contracts/requirements-test.txt
       - run: python packages/contracts/test/check_python.py

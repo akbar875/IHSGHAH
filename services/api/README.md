@@ -110,7 +110,8 @@ Test mencakup health, dependency gagal/timeout/pulih, lifecycle readiness, kontr
 CORS allow/deny, mode/isolasi/secret, serta kegagalan startup proses nyata. Probe
 diganti test double untuk tes deterministik; integrasi server PostgreSQL/Redis hidup
 tersedia melalui `node scripts/check-local-infra.mjs` dari root dan CI SS-006.
-Matriks CI lintas service berikutnya mengikuti SS-007. Dependency langsung dipin exact,
+Matriks CI lintas service tersedia dalam [panduan SS-007](../../docs/RUNTIME-CI.md),
+termasuk smoke wheel terpasang tanpa dependency dev. Dependency langsung dipin exact,
 transitif dan hash artifact terkunci pada `uv.lock`; gunakan `--locked` agar drift gagal.
 
 Baseline FastAPI 0.162.5/Python 3.13.18 mengikuti ADR. uv adalah tooling MIT/Apache-2.0;

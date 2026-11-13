@@ -52,6 +52,11 @@ Fondasi issue #1 ditetapkan dalam [ADR-0001](docs/decisions/0001-stack-and-modul
 
 ## Alur issue → branch → PR
 
+[CI runtime SS-007](docs/RUNTIME-CI.md) menjalankan scaffold, kontrak, web,
+backend API/worker dan integrasi PostgreSQL/Redis pada setiap push/PR. Job
+`Runtime quality gate` memerlukan semua pemeriksaan lulus. Panduan mencantumkan
+perintah lokal, smoke wheel terpasang, serta pengaturan required check untuk `main`.
+
 Kontrak SS-002 tersedia di [packages/contracts](packages/contracts/README.md): JSON Schema 2020-12, OpenAPI 3.1.1, REST dan stream snapshot/delta. Jalankan `npm ci --ignore-scripts --prefix packages/contracts` lalu `npm --prefix packages/contracts run check`; validasi lintas bahasa Python dan petunjuk unit/versioning tersedia di panduan kontrak. Bootstrap SS-004 menyediakan `/health` dan `/ready`; endpoint bisnis belum diimplementasikan. Setup API memakai uv 0.13.7, Python 3.13.18 dan `uv sync --locked` pada `services/api`.
 
 SS-006 menyediakan [PostgreSQL/Redis lokal](infra/README.md): dengan Docker Desktop

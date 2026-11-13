@@ -1,6 +1,7 @@
 # Acceptance tests
 
-Status: placeholder; belum ada runtime/fitur.
+Status: acceptance fitur terpadu belum diimplementasikan. Bootstrap runtime sudah
+memiliki unit/integration checks pada service terkait dan [CI SS-007](../docs/RUNTIME-CI.md).
 
 Rencana: Skenario lintas service. Mulai dari [SS-026](../docs/BACKLOG.md).
 
