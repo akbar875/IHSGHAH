@@ -10,6 +10,20 @@ jobs:
   api:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:18.7@sha256:9f4fd4aa918f52ae3d6f3b687f1de90d8f867cd4d520021545a9a50c120eae3b
+        env:
+          POSTGRES_USER: saham_signal_research
+          POSTGRES_PASSWORD: ci_disposable_only
+          POSTGRES_DB: saham_signal_research
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U saham_signal_research"
+          --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      PERSISTENCE_TEST_DSN: postgresql://saham_signal_research:ci_disposable_only@127.0.0.1:5432/saham_signal_research
     defaults:
       run:
         working-directory: services/api

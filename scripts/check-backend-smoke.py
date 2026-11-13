@@ -7,11 +7,16 @@ import subprocess
 import sys
 import tempfile
 import time
+from importlib.resources import files
 from urllib.error import HTTPError, URLError
 from urllib.request import ProxyHandler, build_opener
 
+from saham_signal.adapters.persistence import SCHEMA
+
 
 def main() -> None:
+    assert SCHEMA["$defs"]["MarketEvent"]
+    assert files("saham_signal.migrations").joinpath("001_journal.sql").is_file()
     # Reserve a non-listening port so neither dependency can accidentally be healthy.
     with socket.socket() as unavailable, socket.socket() as http_port:
         unavailable.bind(("127.0.0.1", 0))
