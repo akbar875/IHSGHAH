@@ -9,6 +9,12 @@ SS-009 menambahkan service internal [referensi instrumen point-in-time](../../do
 memeriksa board/pasar, status, aksi korporasi, sesi, lot, fraksi dan limit.
 Adapter default kosong dan seluruh fixture berlabel simulasi; belum ada feed produksi.
 
+SS-015 menambahkan [risk engine dan state rencana](../../docs/market-data/risk-engine.md)
+internal research/paper. `evaluate` menghitung lot dengan Decimal, `transition`
+memperbarui WATCH/READY/EXPIRED/CANCELLED secara idempotent dan berversi, dan
+`audit_document` menyediakan artefak replay. Tidak ada Fill/Position atau alert live
+yang dibuat; reservasi portofolio atomik tetap tanggung jawab service pemanggil.
+
 ## Fresh clone / menjalankan lokal
 
 Prasyarat: Git dan [uv 0.13.7](https://docs.astral.sh/uv/getting-started/installation/).

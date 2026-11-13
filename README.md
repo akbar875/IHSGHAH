@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-015 menyediakan [risk engine dan state rencana](docs/market-data/risk-engine.md):
+sizing Decimal/integer dari kas, risiko dan likuiditas; state WATCH/READY/EXPIRED/
+CANCELLED yang idempotent dan bisa direplay; validasi biaya/level/tenggat serta
+trailing tanpa memperlebar risiko. READY tidak membuka posisi. Default risiko
+adalah konfigurasi desain, bukan jaminan kerugian; G0/G1 tetap pending.
+
 SS-014 menyediakan [replay dan simulator eksekusi konservatif](docs/market-data/replay-simulator.md):
 biaya bertanggal, latensi, spread/slippage, antrean, partial/unfilled, stop-before-TP
 dan gagal exit dengan laporan deterministik berlabel simulasi. Tidak ada alert live;
