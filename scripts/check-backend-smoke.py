@@ -62,13 +62,9 @@ def main() -> None:
                     deadline = time.monotonic() + 20
                     while True:
                         if process.poll() is not None:
-                            raise RuntimeError(
-                                "Installed API exited before becoming healthy"
-                            )
+                            raise RuntimeError("Installed API exited before becoming healthy")
                         try:
-                            with opener.open(
-                                f"http://127.0.0.1:{port}/health", timeout=1
-                            ) as r:
+                            with opener.open(f"http://127.0.0.1:{port}/health", timeout=1) as r:
                                 assert r.status == 200
                                 assert json.load(r) == {
                                     "status": "ok",
@@ -77,9 +73,7 @@ def main() -> None:
                             break
                         except (URLError, TimeoutError):
                             if time.monotonic() >= deadline:
-                                raise RuntimeError(
-                                    "Installed API health timed out"
-                                ) from None
+                                raise RuntimeError("Installed API health timed out") from None
                             time.sleep(0.1)
                     try:
                         opener.open(f"http://127.0.0.1:{port}/ready", timeout=5)
