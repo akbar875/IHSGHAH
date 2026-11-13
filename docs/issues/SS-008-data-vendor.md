@@ -34,3 +34,13 @@ Dependency adalah prasyarat implementasi. Gerbang G0/G1/G2/G3 tetap mengikuti PR
 `feat/<issue-number>-data-vendor`
 
 Ganti `<issue-number>` dengan nomor issue GitHub sebenarnya. PR menautkan `Closes #<issue-number>`.
+
+## Hasil inspeksi — 13 November 2026
+
+[Audit vendor](../market-data/vendor-audit.md), [ADR-0002 Proposed](../decisions/0002-market-data-procurement.md),
+dan [protokol penawaran/evaluasi](../market-data/vendor-evaluation.md) tersedia.
+Prioritas pencarian: IQ Plus SCF; pembanding ICE, alternatif lokal RTI.
+Pemilik belum memiliki vendor, sampel berizin, atau anggaran. Hak spesifik aplikasi,
+keputusan vendor final, dan pengukuran sampel belum terpenuhi; acceptance terkait
+tetap belum dicentang. G0 **pending**. Gunakan `Refs #8` pada PR tahap audit agar
+merge dokumentasi tidak menutup issue sebelum bukti eksternal dilengkapi.

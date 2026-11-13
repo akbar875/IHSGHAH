@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+Audit SS-008 tersedia dalam [perbandingan vendor dan hak data](docs/market-data/vendor-audit.md),
+[ADR-0002](docs/decisions/0002-market-data-procurement.md), dan
+[protokol penawaran/sampel](docs/market-data/vendor-evaluation.md). Prioritas pencarian
+adalah IQ Plus, dengan ICE sebagai pembanding dan RTI sebagai alternatif lokal.
+Belum ada kontrak, sampel berizin, atau anggaran disetujui; **G0 tetap pending**.
+
 1. Fondasi: keputusan arsitektur, kontrak, bootstrap web/API/worker, lingkungan lokal, dan CI runtime.
 2. Fase A: vendor dan hak data, referensi instrumen, penyimpanan point-in-time, adapter, dan kualitas feed (G0).
 3. Fase B: fitur, replay/fill/biaya, kebijakan risiko, baseline, dan evaluasi holdout (G1).
