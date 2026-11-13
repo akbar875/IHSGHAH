@@ -222,3 +222,21 @@ def test_snapshot_from_before_timeout_cannot_recover_even_within_lag_budget() ->
     assert not ingestor.assess_quality("SIM", at).entry_allowed
     send(ingestor, 0, 14, sequence=3)
     assert ingestor.assess_quality("SIM", NOW + timedelta(seconds=14)).entry_allowed
+
+
+def test_disconnect_with_equal_heartbeat_time_needs_new_healthy_heartbeat() -> None:
+    ingestor = ready()
+    at = NOW + timedelta(seconds=1)
+    disconnect = replace(
+        messages()[4],
+        profile=ingestor.profile,
+        event_time=NOW,
+        event_id="disconnect-same-time",
+        payload={"status": "disconnected"},
+    )
+    ingestor.ingest(disconnect, received_at=at, available_at=at, processed_at=at)
+    send(ingestor, 0, 2, sequence=2)
+    assert ingestor.assess_quality("SIM", NOW + timedelta(seconds=2)).status == "disconnected"
+    send(ingestor, 4, 3)
+    send(ingestor, 0, 4, sequence=3)
+    assert ingestor.assess_quality("SIM", NOW + timedelta(seconds=4)).entry_allowed

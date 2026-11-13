@@ -192,11 +192,18 @@ class FeedQuality:
         self.assess(message.symbol, now)
         state = self.streams[message.symbol]
         if message.kind == "heartbeat":
-            # Source heartbeat time, not receipt time: replayed stale heartbeats
-            # cannot impersonate a healthy stream. Ignore out-of-order status.
-            if state.heartbeat is None or message.event_time > state.heartbeat:
-                state.heartbeat = message.event_time
+            # An unhealthy report always fails closed, including equal/older
+            # timestamps. Only a strictly newer healthy heartbeat can clear it.
+            if message.payload["status"] != "healthy":
                 state.heartbeat_status = message.payload["status"]
+                state.heartbeat = (
+                    max(state.heartbeat, message.event_time)
+                    if state.heartbeat is not None
+                    else message.event_time
+                )
+            elif state.heartbeat is None or message.event_time > state.heartbeat:
+                state.heartbeat = message.event_time
+                state.heartbeat_status = "healthy"
             if not self._healthy(state, now):
                 self.invalidate(message.symbol)
         elif message.kind == "trade":
