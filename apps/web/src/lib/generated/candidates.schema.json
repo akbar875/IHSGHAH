@@ -1,0 +1,392 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref": "#/$defs/CandidatesResponse",
+  "$defs": {
+    "CandidatesResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "1.0.0"
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "mode": {
+          "enum": [
+            "research",
+            "paper",
+            "live"
+          ]
+        },
+        "data_origin": {
+          "enum": [
+            "simulation",
+            "market"
+          ]
+        },
+        "quality": {
+          "$ref": "#/$defs/Quality"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Signal"
+          },
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "contract_version",
+        "as_of",
+        "mode",
+        "data_origin",
+        "quality",
+        "data"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "data_origin": {
+                "const": "simulation"
+              }
+            },
+            "required": [
+              "data_origin"
+            ]
+          },
+          "then": {
+            "properties": {
+              "mode": {
+                "enum": [
+                  "research",
+                  "paper"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "healthy",
+            "degraded",
+            "stale",
+            "disconnected",
+            "unavailable"
+          ]
+        },
+        "feed": {
+          "enum": [
+            "live",
+            "delayed",
+            "disconnected",
+            "unavailable"
+          ]
+        },
+        "last_heartbeat_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "SIMULATION",
+              "SEQUENCE_GAP",
+              "HEARTBEAT_TIMEOUT",
+              "DELAYED_FEED",
+              "INSUFFICIENT_DATA",
+              "MODEL_UNVALIDATED",
+              "MARKET_CLOSED",
+              "RESYNC_REQUIRED"
+            ]
+          },
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "status",
+        "feed",
+        "last_heartbeat_at",
+        "reasons"
+      ]
+    },
+    "Signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "signal_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "symbol": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9.]{0,11}$"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "data_as_of": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "valid_until": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "horizon_minutes": {
+          "enum": [
+            15,
+            30,
+            60,
+            240
+          ]
+        },
+        "model_version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "policy_version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "configuration_version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "state": {
+          "enum": [
+            "WATCH",
+            "READY",
+            "EXPIRED",
+            "CANCELLED"
+          ]
+        },
+        "entry_zone": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "lower_idr": {
+              "type": "string",
+              "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+            },
+            "upper_idr": {
+              "type": "string",
+              "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+            }
+          },
+          "required": [
+            "lower_idr",
+            "upper_idr"
+          ]
+        },
+        "trigger": {
+          "enum": [
+            "PRICE_AND_TREND",
+            "PRICE_BREAKOUT",
+            "PRICE_PULLBACK"
+          ]
+        },
+        "invalidation": {
+          "enum": [
+            "PRICE_BREACH",
+            "DATA_UNHEALTHY",
+            "TIME_EXPIRED"
+          ]
+        },
+        "stop_idr": {
+          "type": "string",
+          "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+        },
+        "targets_idr": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+          },
+          "maxItems": 2,
+          "minItems": 1
+        },
+        "entry_from": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "entry_until": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "exit_deadline": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "return_quantiles": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "p10": {
+                  "type": "string",
+                  "pattern": "^-?(?:0|[1-9][0-9]{0,15})\\.[0-9]{6}$"
+                },
+                "p50": {
+                  "type": "string",
+                  "pattern": "^-?(?:0|[1-9][0-9]{0,15})\\.[0-9]{6}$"
+                },
+                "p90": {
+                  "type": "string",
+                  "pattern": "^-?(?:0|[1-9][0-9]{0,15})\\.[0-9]{6}$"
+                },
+                "net_of_fees": {
+                  "const": true
+                }
+              },
+              "required": [
+                "p10",
+                "p50",
+                "p90",
+                "net_of_fees"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_probability": {
+          "$ref": "#/$defs/Probability"
+        },
+        "assumptions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reference_price_idr": {
+              "type": "string",
+              "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+            },
+            "nominal_idr": {
+              "type": "string",
+              "pattern": "^(?:0\\.(?:0[1-9]|[1-9][0-9])|[1-9][0-9]{0,15}\\.[0-9]{2})$"
+            },
+            "fee_schedule_version": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+            },
+            "order_type": {
+              "const": "LIMIT"
+            }
+          },
+          "required": [
+            "reference_price_idr",
+            "nominal_idr",
+            "fee_schedule_version",
+            "order_type"
+          ]
+        }
+      },
+      "required": [
+        "signal_id",
+        "version",
+        "symbol",
+        "generated_at",
+        "data_as_of",
+        "valid_until",
+        "horizon_minutes",
+        "model_version",
+        "policy_version",
+        "configuration_version",
+        "state",
+        "entry_zone",
+        "trigger",
+        "invalidation",
+        "stop_idr",
+        "targets_idr",
+        "entry_from",
+        "entry_until",
+        "exit_deadline",
+        "return_quantiles",
+        "target_probability",
+        "assumptions"
+      ]
+    },
+    "Probability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": [
+                "unvalidated",
+                "unavailable"
+              ]
+            },
+            "value": {
+              "type": "null"
+            },
+            "calibration_version": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "calibration_version"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "const": "validated"
+            },
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "calibration_version": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+            }
+          },
+          "required": [
+            "status",
+            "value",
+            "calibration_version"
+          ]
+        }
+      ]
+    }
+  }
+}

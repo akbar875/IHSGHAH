@@ -8,7 +8,7 @@ workflow tetap memeriksa seluruh bootstrap. Lima reusable workflow dijalankan pa
 |---|---|---|
 | Scaffold | Backlog, dependency, tautan dokumen, dry run publisher | `node scripts/check-scaffold.mjs` dan `node scripts/publish-issues.mjs` |
 | Contracts | Schema/fixture JavaScript dan Python | Lihat perintah di bawah |
-| Web | ESLint, TypeScript, build Next.js | `npm ci --ignore-scripts --prefix apps/web` lalu `npm --prefix apps/web run check` |
+| Web | Generated kontrak, ESLint, TypeScript, build Next.js, browser dashboard Chromium | `npm ci --ignore-scripts --prefix apps/web`, `npm --prefix apps/web run check`, lalu dari apps/web `npx playwright install chromium` dan `npm test` |
 | Backend | Ruff lint/format, mypy, pytest API/worker, build wheel, smoke wheel | Lihat perintah di bawah |
 | Infrastructure | Validasi konfigurasi/mode, DB/cache nyata, persistensi, outage/recovery, isolasi | Lihat perintah di bawah |
 

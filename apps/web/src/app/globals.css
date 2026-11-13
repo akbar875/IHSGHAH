@@ -3,6 +3,7 @@
 body { margin: 0; background: #f6f8f5; color: var(--ink); font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.6; }
 a { color: inherit; }
 a:focus-visible { outline: 3px solid #137757; outline-offset: 5px; }
+input:focus-visible, button:focus-visible { outline: 3px solid #137757; outline-offset: 3px; }
 .skip-link { position: absolute; top: -100px; left: 16px; padding: 10px; background: white; z-index: 1; }
 .skip-link:focus { top: 12px; }
 .header { min-height: 88px; padding: 20px 6%; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); background: #fff; }
@@ -31,6 +32,33 @@ h3 { font-size: 17px; margin: 0 0 8px; }
 .empty-state p { color: var(--muted); font-size: 14px; max-width: 430px; margin: auto; }
 .footnote { font-size: 12px; color: var(--muted); margin: 22px 0 0; }
 .footer { max-width: 1000px; margin: 0 auto; padding: 22px 28px; display: flex; justify-content: space-between; gap: 16px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
+.overview { margin: 0 0 24px; border: 1px solid var(--line); border-radius: 10px; background: white; }
+.controls { padding: 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; border-bottom: 1px solid var(--line); }
+.nominal-form, .search-control { flex: 1 1 240px; min-width: 0; }
+label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 7px; }
+input:not([type="checkbox"]) { width: 100%; min-width: 0; border: 1px solid #9bb0a7; background: white; color: var(--ink); border-radius: 6px; padding: 11px 12px; font: inherit; font-size: 14px; }
+.input-action { display: flex; gap: 8px; }
+button { border: 0; border-radius: 6px; padding: 11px 16px; background: var(--green); color: white; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 44px; }
+button:hover { background: #104c3b; }
+.checkbox { display: flex; align-items: center; gap: 8px; min-height: 44px; margin: 0; }
+.checkbox input { width: 18px; height: 18px; accent-color: var(--green); }
+.field-error { font-size: 13px; color: #9d3029; margin: 6px 0 0; }
+.retry { margin-top: 18px; }
+.data-notices { background: #faf8eb; border-bottom: 1px solid #e9e4c7; padding: 14px 24px; color: #63582d; font-size: 13px; }
+.data-notices p { margin: 4px 0; }
+.results-heading { display: flex; justify-content: space-between; gap: 12px; padding: 16px 24px; font-size: 12px; color: var(--muted); }
+.candidate { border-top: 1px solid var(--line); padding: 24px; }
+.candidate-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px; }
+.ticker { display: flex; gap: 14px; align-items: center; }
+.ticker h3 { margin: 0; font-size: 21px; letter-spacing: -.02em; }
+.rank { font-size: 13px; color: var(--muted); background: #f1f4f2; border-radius: 8px; padding: 8px; font-variant-numeric: tabular-nums; }
+.muted { font-size: 12px; color: var(--muted); }
+.ready { background: #e3f2ea; color: var(--green); }
+.plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin: 0; }
+.plan-grid dd { font-size: 16px; font-variant-numeric: tabular-nums; }
+.timing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 24px 0 0; padding-top: 20px; border-top: 1px solid var(--line); }
+.timing-grid dd { font-size: 12px; }
+.entry-warning { font-size: 12px; color: #63582d; margin: 18px 0 0; }
 @media (max-width: 640px) {
   .header { padding: 16px 20px; flex-wrap: wrap; }
   .brand { font-size: 19px; }
@@ -38,5 +66,13 @@ h3 { font-size: 17px; margin: 0 0 8px; }
   .status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; padding: 20px; }
   .panel-heading { padding: 18px 20px; }
   .notice { padding: 18px 16px; }
+  .controls, .candidate { padding: 20px; }
+  .controls { gap: 16px; }
+  .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
+  .entry { grid-column: 1 / -1; }
+  .plan-grid dd { font-size: 15px; }
+  .timing-grid { grid-template-columns: 1fr; }
+  .data-notices { padding: 14px 20px; }
+  .results-heading { padding: 14px 20px; flex-wrap: wrap; }
   .footer { padding: 20px; flex-direction: column; gap: 4px; }
 }

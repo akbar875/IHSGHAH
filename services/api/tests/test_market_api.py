@@ -84,7 +84,14 @@ def test_missing_predictions_and_intervals_are_not_invented(
         ("/stocks/TEST/chart", 422),
         ("/candidates?account=other", 422),
         ("/candidates?mode=live", 422),
-        ("/candidates?nominal_idr=2000000.00", 422),
+        ("/candidates?nominal_idr=0.00", 422),
+        ("/candidates?nominal_idr=NaN", 422),
+        ("/candidates?nominal_idr=-1.00", 422),
+        ("/candidates?nominal_idr=2000000", 422),
+        ("/candidates?nominal_idr=1.001", 422),
+        ("/candidates?nominal_idr=10000000000000000.00", 422),
+        ("/candidates?nominal_idr=1.00&nominal_idr=2.00", 422),
+        ("/stocks/TEST?nominal_idr=2000000.00", 422),
     ],
 )
 def test_safe_query_errors(
@@ -111,6 +118,22 @@ def test_fixture_requires_opt_in_and_valid_session(
         Settings(market_fixture_enabled=True, market_fixture_token=SecretStr("short"))
     with pytest.raises(ValidationError):
         Settings(market_horizon_minutes=42)
+
+
+def test_candidate_nominal_requests_are_isolated(
+    setup: tuple[TestClient, FixtureMarket, Clock],
+) -> None:
+    client, _, _ = setup
+    for nominal in ["1000000.00", "2500000.00", "0.01", "9999999999999999.99", "1000000.00"]:
+        response = client.get("/api/v1/candidates", params={"nominal_idr": nominal})
+        assert response.status_code == 200
+        body = response.json()
+        validate("CandidatesResponse", body)
+        assert body["data"][0]["assumptions"]["nominal_idr"] == nominal
+        assert body["data"][0]["target_probability"]["value"] is None
+        assert body["data"][0]["state"] == "WATCH"
+    default = client.get("/api/v1/candidates").json()
+    assert default["data"][0]["assumptions"]["nominal_idr"] == "1000000.00"
 
 
 def test_cache_isolation_copy_bounds_and_expiry() -> None:

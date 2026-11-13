@@ -22,3 +22,5 @@ jobs:
           cache-dependency-path: apps/web/package-lock.json
       - run: npm ci --ignore-scripts
       - run: npm run check
+      - run: npx playwright install --with-deps chromium
+      - run: npm test

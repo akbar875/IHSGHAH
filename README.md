@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-018 menyediakan [dashboard kandidat](docs/market-data/dashboard.md): input nominal,
+pencarian/filter aktif, rencana entry/stop/target dan waktu WIB, validasi kontrak,
+keadaan loading/kosong/gangguan, serta tampilan mobile 360px. Query nominal diisolasi
+per permintaan; fixture tetap simulasi tanpa ranking atau probabilitas tervalidasi.
+
 SS-017 menyediakan [API market dan stream resinkronisasi](docs/market-data/market-api.md)
 untuk UI: kandidat, detail, depth, chart dan riwayat dengan kontrak v1 serta snapshot/delta.
 Fixture research diaktifkan eksplisit, memakai sesi lokal dan label simulasi;
