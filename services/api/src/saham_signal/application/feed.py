@@ -5,13 +5,19 @@ The commit port runs before any in-memory cursor/book advances.
 """
 
 import re
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 from copy import deepcopy
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Any, Literal
 
+from saham_signal.application.feed_quality import (
+    FeedAssessment,
+    FeedQuality,
+    FeedSLA,
+    PositionDataDisruption,
+)
 from saham_signal.domain.instruments import aware
 from saham_signal.domain.mode import Mode
 from saham_signal.domain.persistence import Record, digest
@@ -117,6 +123,7 @@ class FeedIngestor:
         validate: Callable[[str, dict[str, Any]], None],
         commit: Callable[[Observation], None],
         snapshot_request: Callable[[str, int], None],
+        sla: FeedSLA | None = None,
     ) -> None:
         if mode not in ("research", "paper", "live"):
             raise ValueError("Unknown mode")
@@ -125,6 +132,7 @@ class FeedIngestor:
         self.profile, self.mode = profile, mode
         self.lot_shares, self.validate, self.commit = lot_shares, validate, commit
         self.snapshot_request = snapshot_request
+        self.quality_monitor = FeedQuality(profile, sla or FeedSLA(), mode)
         self.connection = 1
         self.books: dict[str, Book] = {}
         self.seen: dict[tuple[str, int], str] = {}
@@ -134,17 +142,47 @@ class FeedIngestor:
 
     def reconnect(self) -> None:
         self.connection += 1
+        self.quality_monitor.reconnect()
         for symbol in self.books:
             self.books[symbol] = Book()
         for symbol in self.books:
             self.snapshot_request(symbol, self.connection)
 
     def _resync(self, symbol: str, sequence: int) -> None:
+        self.quality_monitor.invalidate(symbol, gap=sequence >= 0)
         book = self.books.setdefault(symbol, Book())
         book.synchronized = False
         book.floor = max(book.floor, sequence)
         # Retry the request on subsequent messages if a prior request failed.
         self.snapshot_request(symbol, self.connection)
+
+    def assess_quality(
+        self,
+        symbol: str,
+        now: datetime,
+        *,
+        active_positions: Iterable[str] = (),
+        emit: Callable[[PositionDataDisruption], None] | None = None,
+    ) -> FeedAssessment:
+        """Poll on a timer and immediately before using inputs for entry/exit.
+
+        Caller supplies account-scoped active position IDs and a durable warning
+        sink. A warning never closes a position. Entry still needs all other gates.
+        """
+        self.quality_monitor.assess(symbol, now)
+        state = self.quality_monitor.streams[symbol]
+        book = self.books.get(symbol)
+        request_snapshot = state.invalidate_book and book is not None and book.synchronized
+        state.invalidate_book = False
+        if request_snapshot and book is not None:
+            book.synchronized = False
+        assessment = self.quality_monitor.assess(
+            symbol, now, active_positions=active_positions, emit=emit
+        )
+        # Publish warnings even if the disconnected transport cannot request data.
+        if request_snapshot:
+            self.snapshot_request(symbol, self.connection)
+        return assessment
 
     def _lots(self, quantity: Any, message: FeedMessage, known_at: datetime) -> int:
         if type(quantity) is not int or quantity < 0:
@@ -213,6 +251,7 @@ class FeedIngestor:
             aware(message.provider_time)
         if not received_at <= available_at <= processed_at:
             raise ValueError("Invalid availability order")
+        self.assess_quality(message.symbol, processed_at)
         if (
             type(message.sequence) is not int
             or not 0 <= message.sequence < 10**20
@@ -395,4 +434,5 @@ class FeedIngestor:
         )
         if next_book is not None:
             self.books[message.symbol] = next_book
+        self.quality_monitor.observe(observation)
         return "committed"
