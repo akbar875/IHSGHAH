@@ -69,6 +69,11 @@ untuk alert/job nyata mengikuti modul persistence/integrasi terkait sesuai ADR.
 
 ## Verifikasi
 
+Fondasi normalisasi/recovery SS-011 berada di `application/feed.py` dengan adapter
+fixture terpisah. Belum dipasang sebagai job `work`: transport vendor, sampel,
+checkpoint lintas restart dan persistensi candle masih pending. Lihat
+[batas integrasi adapter](../../docs/market-data/feed-adapter.md).
+
 Dari `services/api`:
 
 ```powershell
