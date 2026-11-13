@@ -8,7 +8,8 @@ permissions:
 
 jobs:
   web:
-    runs-on: ubuntu-latest
+    # Pin a Chromium-supported OS; ubuntu-latest may advance before Playwright.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     defaults:
       run:

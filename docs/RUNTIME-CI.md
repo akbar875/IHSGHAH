@@ -12,6 +12,9 @@ workflow tetap memeriksa seluruh bootstrap. Lima reusable workflow dijalankan pa
 | Backend | Ruff lint/format, mypy, pytest API/worker, build wheel, smoke wheel | Lihat perintah di bawah |
 | Infrastructure | Validasi konfigurasi/mode, DB/cache nyata, persistensi, outage/recovery, isolasi | Lihat perintah di bawah |
 
+Job web dipin ke Ubuntu 24.04 yang didukung Chromium/Playwright 1.58.2; tidak
+mengikuti perpindahan `ubuntu-latest` ke OS yang belum didukung browser test.
+
 Job **Runtime quality gate** memakai `always()` dan memerlukan hasil `success` dari
 kelima kelompok. Status gagal, cancelled, atau skipped membuat gate gagal. Tidak ada
 `continue-on-error`, secret vendor, atau `secrets: inherit`. Permission workflow hanya
