@@ -16,4 +16,5 @@ jobs:
         with:
           node-version-file: apps/web/.nvmrc
       - run: node scripts/check-scaffold.mjs
+      - run: node scripts/check-secret-boundaries.mjs
       - run: node scripts/publish-issues.mjs

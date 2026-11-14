@@ -1,7 +1,6 @@
 """Contract-v1 market queries and conservative websocket resynchronization."""
 
 import asyncio
-import hmac
 import json
 import re
 from dataclasses import replace
@@ -36,6 +35,7 @@ from saham_signal.application.preferences import (
     fees_current,
     validate_preference,
 )
+from saham_signal.application.security import valid_session
 from saham_signal.config import Settings
 from saham_signal.transport.errors import ErrorCode
 
@@ -52,12 +52,7 @@ def market_router(
     def authorize(cookie: str | None) -> MarketScope:
         if not config.market_fixture_enabled:
             raise HTTPException(503)
-        expected = config.market_fixture_token
-        if (
-            not expected
-            or not cookie
-            or not hmac.compare_digest(cookie.encode(), expected.get_secret_value().encode())
-        ):
+        if not valid_session(config, cookie):
             raise HTTPException(401)
         return MarketScope(
             account=config.pilot_account_id or "fixture-pilot",
@@ -375,6 +370,10 @@ def market_router(
     @router.websocket("/stream")
     async def stream(ws: WebSocket) -> None:
         try:
+            if config.deployment_tls_required and ws.url.scheme != "wss":
+                raise HTTPException(403)
+            if not ws.app.state.security_budget.allow("http"):
+                raise HTTPException(429)
             scope = authorize(ws.cookies.get("saham_session"))
             if ws.headers.get("origin") not in config.cors_origins or ws.query_params:
                 raise HTTPException(403)
@@ -406,9 +405,19 @@ def market_router(
 
         try:
             while True:
+                if not valid_session(config, ws.cookies.get("saham_session")):
+                    await ws.close(code=1008)
+                    return
                 received = True
                 try:
-                    message = await asyncio.wait_for(ws.receive_json(), timeout=0.25)
+                    raw = await asyncio.wait_for(ws.receive_text(), timeout=0.25)
+                    if len(raw.encode()) > config.request_max_bytes:
+                        await ws.close(code=1009)
+                        return
+                    if not ws.app.state.security_budget.allow("websocket-messages"):
+                        await ws.close(code=1008)
+                        return
+                    message = json.loads(raw)
                 except TimeoutError:
                     received = False
                     message = None
