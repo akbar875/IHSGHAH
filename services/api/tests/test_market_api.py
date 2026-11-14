@@ -4,6 +4,7 @@ from typing import Any
 
 import pytest
 from fastapi.testclient import TestClient
+from preference_store import MemoryPreferences
 from pydantic import SecretStr, ValidationError
 from starlette.websockets import WebSocketDisconnect
 
@@ -27,7 +28,10 @@ def setup() -> Iterator[tuple[TestClient, FixtureMarket, Clock]]:
     clock = Clock()
     market = FixtureMarket(clock)
     config = Settings(market_fixture_enabled=True, market_fixture_token=SecretStr(TOKEN))
-    with TestClient(create_app(config, market=market), raise_server_exceptions=False) as client:
+    with TestClient(
+        create_app(config, market=market, preferences=MemoryPreferences()),
+        raise_server_exceptions=False,
+    ) as client:
         client.cookies.set("saham_session", TOKEN)
         yield client, market, clock
 

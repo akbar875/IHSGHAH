@@ -130,6 +130,14 @@ export const defs = {
     signal: nullable(ref('Signal')), liquidity: nullable(ref('LiquidityEstimate')),
     depth: nullable(ref('Depth')), pressure: array(ref('Pressure'), { maxItems: 3 }) }),
   Watchlist: object({ symbols: array(symbol, { uniqueItems: true, maxItems: 200 }) }),
+  UserFeeSchedule: object({ version: id,
+    buy_ratio: { type: 'string', pattern: '^(?:0\\.[0-9]{6}|1\\.000000)$' },
+    sell_ratio: { type: 'string', pattern: '^(?:0\\.[0-9]{6}|1\\.000000)$' },
+    effective_from: timestamp, effective_to: timestamp, source: text,
+    verification: { const: 'user_assumption' } }),
+  SettingsEligibility: object({ configuration_version: id, risk_budget_idr: money,
+    combined_budget_idr: money, budget_lots_ceiling: { type: 'integer', minimum: 0 },
+    eligible_lots: { const: 0 }, reason: enumeration('MODEL_UNVALIDATED', 'FEE_SCHEDULE_EXPIRED') }),
   RiskSettings: object({ configuration_version: id, nominal_idr: positive, capital_idr: positive,
     risk_per_position_ratio: decimal, max_combined_risk_ratio: decimal, max_positions: lots,
     fee_schedule_version: id }),
@@ -138,6 +146,8 @@ export const defs = {
     request_id: id, retryable: { type: 'boolean' }, fields: array(enumeration('price_idr', 'lots', 'filled_at', 'fees_idr',
       'symbol', 'interval', 'cursor', 'configuration_version', 'nominal_idr', 'risk_per_position_ratio', 'contract_version')) }),
 };
+// New endpoint profile preserves the frozen RiskSettings v1 payload unchanged.
+defs.RiskProfile = object({ ...defs.RiskSettings.properties, fee_schedule: ref('UserFeeSchedule') });
 // A tagged payload prevents a book being accepted as a trade (and vice versa).
 defs.MarketEvent.allOf = Object.entries({ trade: 'Trade', book_snapshot: 'Depth', feed_status: 'FeedStatus' }).map(([tag, type]) => ({
   if: { properties: { event_type: { const: tag } }, required: ['event_type'] },
@@ -159,7 +169,7 @@ defs.Pressure.allOf = [{
 for (const [name, type] of Object.entries({
   CandidatesResponse: array(ref('Signal')), StockDetailResponse: ref('StockDetail'),
   DepthResponse: ref('Depth'), ChartResponse: ref('Chart'), WatchlistResponse: ref('Watchlist'),
-  RiskSettingsResponse: ref('RiskSettings'), PositionResponse: ref('Position'),
+  RiskSettingsResponse: ref('RiskSettings'), RiskProfileResponse: ref('RiskProfile'), SettingsEligibilityResponse: ref('SettingsEligibility'), PositionResponse: ref('Position'),
   PositionsResponse: array(ref('Position')), AlertsResponse: array(ref('Alert')),
   SignalHistoryResponse: array(ref('Signal')), ErrorResponse: ref('Error'),
 })) defs[name] = response(type);

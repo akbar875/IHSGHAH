@@ -13,6 +13,11 @@ menyediakan kandidat pasar. Boolean konfigurasi bukan bukti kelulusan gerbang.
 
 Ikuti setup [API](../../services/api/README.md), kemudian atur `.env` lokal:
 
+Sejak SS-020, query market juga membaca profil akun terbaru dari PostgreSQL.
+Jalankan infra research dan migrasi `uv run --locked python -m saham_signal.migrate`
+sebelum mencoba fixture. Database tidak tersedia atau migrasi belum dijalankan
+menghasilkan 503; tidak ada fallback yang melewati konfigurasi risiko pengguna.
+
 ```dotenv
 APP_MODE=research
 MARKET_FIXTURE_ENABLED=true
@@ -61,7 +66,9 @@ versi konfigurasi, resource, simbol dan interval; pergantian phase expiry
 membatalkan hasil lama. Caller mendapat salinan independen. SS-018 menambahkan
 query opsional `/candidates?nominal_idr=2500000.00`: decimal positif dengan dua
 angka pecahan, maksimum 16 digit bilangan bulat, tanpa key duplikat. Default tetap
-`MARKET_NOMINAL_IDR`. Nominal hanya memilih scope query tersebut; tidak mengubah
+`MARKET_NOMINAL_IDR` bila belum ada profil SS-020. Profil tersimpan selalu menjadi
+sumber nominal/versi biaya/konfigurasi pada query dan stream. Nominal query hanya
+memilih scope sementara pada akun yang belum memiliki profil; tidak mengubah
 setting global, akun, mode, horizon atau scope WebSocket. Query akun/mode/horizon
 dan nominal pada endpoint lain tetap ditolak. OpenAPI mendokumentasikan parameter
 tambahan ini; schema respons v1 tidak berubah. Fixture menyajikan ulang skenario

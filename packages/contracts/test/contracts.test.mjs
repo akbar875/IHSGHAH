@@ -113,7 +113,7 @@ test('REST operations have versioned responses, errors, authentication and valid
       }
     }
   }
-  assert.equal(ids.size, 14);
+  assert.equal(ids.size, 17);
 });
 
 test('stream topic rejects another entity; sequences remain exact beyond JS safe integer', () => {

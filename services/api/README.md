@@ -3,6 +3,9 @@
 Fondasi SS-004: package `saham-signal-backend` yang dapat dipasang API dan worker,
 konfigurasi startup tervalidasi, probe dependency, CORS dan error contract SS-002.
 SS-017 menambahkan [API market dan stream fixture research](../../docs/market-data/market-api.md).
+SS-020 menambahkan [watchlist dan profil risiko/biaya per akun](../../docs/market-data/watchlist-settings.md),
+penyimpanan PostgreSQL append-only dan evaluasi budget simulasi. Migrasi eksplisit
+`uv run --locked python -m saham_signal.migrate` diperlukan sebelum akses pengaturan.
 Belum ada autentikasi produksi, ingest vendor, model tervalidasi, atau alert live.
 
 SS-009 menambahkan service internal [referensi instrumen point-in-time](../../docs/market-data/instrument-rules.md).
@@ -75,7 +78,7 @@ mode sesuai ADR-0001/SS-006. Nomor logical Redis DB saja tidak cukup. Mode paper
 tidak mengaktifkan fitur live apa pun. Bootstrap hanya boleh diakses lokal sebelum
 autentikasi/otorisasi SS-023 dan gerbang terkait dibuktikan.
 
-CORS mengizinkan GET dan header Accept/Content-Type saja; credentials hanya aktif
+CORS mengizinkan GET/PUT dan header Accept/Content-Type/Idempotency-Key; credentials hanya aktif
 saat fixture research diaktifkan, untuk origin lokal eksplisit yang dikonfigurasi.
 Header `X-Request-ID` dibuat server, tersedia pada sukses/error dan diekspos untuk
 origin yang diizinkan. Error HTTP/validasi/internal mengikuti

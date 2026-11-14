@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState, type FormEvent } from 'react';
 import { fetchCandidates, MarketError, money, nominalValue, statusMessages, time, type Candidate } from '@/lib/market';
 import type { CandidatesResponse } from '@/lib/generated/candidates';
+import { preference } from '@/lib/preferences';
 
 type Result = { key: string; response: CandidatesResponse | null; error: string | null };
 const labels = { WATCH: 'Tunggu', READY: 'Siap masuk', EXPIRED: 'Kedaluwarsa', CANCELLED: 'Dibatalkan' };
@@ -44,6 +45,8 @@ export default function Dashboard() {
   const [activeOnly, setActiveOnly] = useState(true);
   const [revision, setRevision] = useState(0);
   const [now, setNow] = useState(0);
+  const [configured, setConfigured] = useState(false);
+  const [preferencesReady, setPreferencesReady] = useState(false);
   const [result, setResult] = useState<Result>({ key: '', response: null, error: null });
   const key = `${nominal}:${revision}`;
   const loading = result.key !== key;
@@ -51,6 +54,22 @@ export default function Dashboard() {
   const error = loading ? null : result.error;
 
   useEffect(() => {
+    let disposed = false;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    preference('/settings/profile', undefined, controller.signal).then(value => {
+      if (disposed) return;
+      if (value) { setNominal(value.data.nominal_idr); setInput(value.data.nominal_idr); setConfigured(true); }
+      setPreferencesReady(true);
+    }).catch(() => {
+      // Fail closed: do not render a candidate for an unknown personal configuration.
+      if (!disposed) setInputError('Pengaturan belum dapat dimuat. Muat ulang halaman.');
+    }).finally(() => clearTimeout(timeout));
+    return () => { disposed = true; controller.abort(); clearTimeout(timeout); };
+  }, []);
+
+  useEffect(() => {
+    if (!preferencesReady) return;
     let disposed = false;
     let pending = false;
     let controller: AbortController | null = null;
@@ -75,7 +94,7 @@ export default function Dashboard() {
     void load();
     const refresh = setInterval(() => void load(), 15000);
     return () => { disposed = true; clearInterval(refresh); controller?.abort(); };
-  }, [key, nominal]);
+  }, [key, nominal, preferencesReady]);
 
   useEffect(() => {
     const timer = setInterval(() => setNow(Date.now()), 1000);
@@ -104,6 +123,7 @@ export default function Dashboard() {
     <header className="header">
       <Link className="brand" href="/" aria-label="Saham Signal, beranda"><span className="brand-icon" aria-hidden="true">S</span><span>Saham<span className="brand-light"> Signal</span></span></Link>
       <span className="mode">Research / Simulasi</span>
+      <Link href="/settings">Pengaturan & watchlist</Link>
     </header>
     <main id="utama" className="workspace">
       <div className="eyebrow">RUANG KERJA RESEARCH</div>
@@ -122,11 +142,11 @@ export default function Dashboard() {
       <section className="panel" aria-labelledby="candidates-title">
         <div className="panel-heading"><h2 id="candidates-title">Daftar kandidat</h2><span className="tag">Simulasi</span></div>
         <div className="controls">
-          <form className="nominal-form" onSubmit={applyNominal}>
+          {configured ? <div className="nominal-form"><p>Nominal tersimpan: {money(nominal)}</p><Link href="/settings">Ubah nominal, biaya & risiko</Link></div> : <form className="nominal-form" onSubmit={applyNominal}>
             <label htmlFor="nominal">Nominal transaksi (Rp)</label>
             <div className="input-action"><input id="nominal" inputMode="numeric" value={input} onChange={e => setInput(e.target.value)} aria-invalid={!!inputError} aria-describedby={inputError ? 'nominal-error' : undefined} /><button type="submit">Terapkan</button></div>
             {inputError && <p id="nominal-error" className="field-error" role="alert">{inputError}</p>}
-          </form>
+          </form>}
           <div className="search-control"><label htmlFor="search">Cari kode saham</label><input id="search" type="search" placeholder="Cari ticker, mis. TEST" value={query} onChange={e => setQuery(e.target.value)} /></div>
           <label className="checkbox"><input type="checkbox" checked={activeOnly} onChange={e => setActiveOnly(e.target.checked)} />Kandidat aktif</label>
         </div>

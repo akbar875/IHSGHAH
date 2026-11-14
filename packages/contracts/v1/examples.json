@@ -1407,5 +1407,111 @@
         "fees_idr": "300.00"
       }
     }
+  },
+  {
+    "schema": "UserFeeSchedule",
+    "payload": {
+      "version": "user-assumption-1",
+      "buy_ratio": "0.001500",
+      "sell_ratio": "0.002500",
+      "effective_from": "2026-11-01T00:00:00Z",
+      "effective_to": "2026-12-01T00:00:00Z",
+      "source": "User simulation input; not verified broker fees",
+      "verification": "user_assumption"
+    }
+  },
+  {
+    "schema": "SettingsEligibility",
+    "payload": {
+      "configuration_version": "config-sim-1",
+      "risk_budget_idr": "50000.00",
+      "combined_budget_idr": "200000.00",
+      "budget_lots_ceiling": 9,
+      "eligible_lots": 0,
+      "reason": "MODEL_UNVALIDATED"
+    }
+  },
+  {
+    "schema": "SettingsEligibilityResponse",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "configuration_version": "config-sim-1",
+        "risk_budget_idr": "50000.00",
+        "combined_budget_idr": "200000.00",
+        "budget_lots_ceiling": 9,
+        "eligible_lots": 0,
+        "reason": "MODEL_UNVALIDATED"
+      }
+    }
+  },
+  {
+    "schema": "RiskProfile",
+    "payload": {
+      "configuration_version": "config-sim-1",
+      "nominal_idr": "1000000.00",
+      "capital_idr": "10000000.00",
+      "risk_per_position_ratio": "0.005000",
+      "max_combined_risk_ratio": "0.020000",
+      "max_positions": 3,
+      "fee_schedule_version": "user-assumption-1",
+      "fee_schedule": {
+        "version": "user-assumption-1",
+        "buy_ratio": "0.001500",
+        "sell_ratio": "0.002500",
+        "effective_from": "2026-11-01T00:00:00Z",
+        "effective_to": "2026-12-01T00:00:00Z",
+        "source": "User simulation input; not verified broker fees",
+        "verification": "user_assumption"
+      }
+    }
+  },
+  {
+    "schema": "RiskProfileResponse",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "configuration_version": "config-sim-1",
+        "nominal_idr": "1000000.00",
+        "capital_idr": "10000000.00",
+        "risk_per_position_ratio": "0.005000",
+        "max_combined_risk_ratio": "0.020000",
+        "max_positions": 3,
+        "fee_schedule_version": "user-assumption-1",
+        "fee_schedule": {
+          "version": "user-assumption-1",
+          "buy_ratio": "0.001500",
+          "sell_ratio": "0.002500",
+          "effective_from": "2026-11-01T00:00:00Z",
+          "effective_to": "2026-12-01T00:00:00Z",
+          "source": "User simulation input; not verified broker fees",
+          "verification": "user_assumption"
+        }
+      }
+    }
   }
 ]

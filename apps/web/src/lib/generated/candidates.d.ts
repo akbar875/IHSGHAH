@@ -1,6 +1,6 @@
 /* Generated from packages/contracts/v1/schema.json. Run npm run contracts. */
 
-export type MarketResponse = (CandidatesResponse | StockDetailResponse | ChartResponse | SignalHistoryResponse)
+export type MarketResponse = (CandidatesResponse | StockDetailResponse | ChartResponse | SignalHistoryResponse | WatchlistResponse | RiskSettingsResponse | RiskProfileResponse | SettingsEligibilityResponse)
 export type CandidatesResponse = ({
 [k: string]: unknown
 } & {
@@ -82,6 +82,46 @@ quality: Quality
  * @maxItems 1000
  */
 data: Signal[]
+})
+export type WatchlistResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+data: Watchlist
+})
+export type RiskSettingsResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+data: RiskSettings
+})
+export type RiskProfileResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+data: RiskProfile
+})
+export type SettingsEligibilityResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+data: SettingsEligibility
 })
 
 export interface Quality {
@@ -225,4 +265,46 @@ median_idr: string
 lower_idr: string
 upper_idr: string
 coverage: number
+}
+export interface Watchlist {
+/**
+ * @maxItems 200
+ */
+symbols: string[]
+}
+export interface RiskSettings {
+configuration_version: string
+nominal_idr: string
+capital_idr: string
+risk_per_position_ratio: string
+max_combined_risk_ratio: string
+max_positions: number
+fee_schedule_version: string
+}
+export interface RiskProfile {
+configuration_version: string
+nominal_idr: string
+capital_idr: string
+risk_per_position_ratio: string
+max_combined_risk_ratio: string
+max_positions: number
+fee_schedule_version: string
+fee_schedule: UserFeeSchedule
+}
+export interface UserFeeSchedule {
+version: string
+buy_ratio: string
+sell_ratio: string
+effective_from: string
+effective_to: string
+source: string
+verification: "user_assumption"
+}
+export interface SettingsEligibility {
+configuration_version: string
+risk_budget_idr: string
+combined_budget_idr: string
+budget_lots_ceiling: number
+eligible_lots: 0
+reason: ("MODEL_UNVALIDATED" | "FEE_SCHEDULE_EXPIRED")
 }

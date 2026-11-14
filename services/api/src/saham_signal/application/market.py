@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from functools import lru_cache
 from importlib.resources import files
+from threading import RLock
 from typing import Any
 
 from jsonschema import Draft202012Validator, FormatChecker
@@ -58,6 +59,7 @@ class FixtureMarket:
 
     def __init__(self, clock: Callable[[], datetime] | None = None) -> None:
         self.clock = clock or (lambda: datetime.now(UTC))
+        self.lock = RLock()
         self.started = self.clock()
         self.fixture = json.loads(
             files("saham_signal").joinpath("fixtures/market-simulation.json").read_text()
@@ -67,6 +69,12 @@ class FixtureMarket:
         )
 
     def read(
+        self, scope: MarketScope, resource: str, symbol: str | None = None, interval: str = "1m"
+    ) -> dict[str, Any]:
+        with self.lock:
+            return self._read(scope, resource, symbol, interval)
+
+    def _read(
         self, scope: MarketScope, resource: str, symbol: str | None = None, interval: str = "1m"
     ) -> dict[str, Any]:
         if scope.mode != "research":
