@@ -10,6 +10,7 @@ from email.utils import format_datetime
 from typing import Annotated, Any, Literal
 from uuid import uuid4
 
+import psycopg
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, WebSocket
 from jsonschema import ValidationError
 from starlette.websockets import WebSocketDisconnect
@@ -21,11 +22,20 @@ from saham_signal.application.market import (
     MarketUnavailable,
     validate,
 )
+from saham_signal.application.preferences import (
+    PreferenceConflict,
+    PreferenceStore,
+    eligibility,
+    fees_current,
+    validate_preference,
+)
 from saham_signal.config import Settings
 from saham_signal.transport.errors import ErrorCode
 
 
-def market_router(config: Settings, market: FixtureMarket) -> APIRouter:
+def market_router(
+    config: Settings, market: FixtureMarket, preferences: PreferenceStore
+) -> APIRouter:
     router = APIRouter(prefix="/api/v1")
 
     def authorize(cookie: str | None) -> MarketScope:
@@ -67,11 +77,129 @@ def market_router(config: Settings, market: FixtureMarket) -> APIRouter:
             scope = replace(scope, nominal_idr=values[0])
         return scope
 
+    def personal(scope: MarketScope, kind: str) -> dict[str, Any] | None:
+        try:
+            return preferences.get(scope, kind)
+        except psycopg.Error:
+            raise HTTPException(503) from None
+
+    def envelope(scope: MarketScope, kind: str, data: dict[str, Any]) -> dict[str, Any]:
+        result = market.read(scope, "candidates")
+        result["data"] = data
+        result["as_of"] = market.clock().isoformat().replace("+00:00", "Z")
+        validate(kind + "Response", result)
+        return result
+
+    @router.get("/watchlist")
+    def watchlist(scope: Annotated[MarketScope, Depends(session)]) -> dict[str, Any]:
+        return envelope(scope, "Watchlist", personal(scope, "Watchlist") or {"symbols": []})
+
+    @router.get("/settings/risk")
+    def risk_settings(scope: Annotated[MarketScope, Depends(session)]) -> dict[str, Any]:
+        settings = personal(scope, "RiskSettings")
+        if settings is None:
+            raise HTTPException(404)
+        return envelope(
+            scope, "RiskSettings", {k: v for k, v in settings.items() if k != "fee_schedule"}
+        )
+
+    @router.get("/settings/profile")
+    def risk_profile(scope: Annotated[MarketScope, Depends(session)]) -> dict[str, Any]:
+        settings = personal(scope, "RiskSettings")
+        if settings is None:
+            raise HTTPException(404)
+        return envelope(scope, "RiskProfile", settings)
+
+    @router.get("/settings/eligibility")
+    def risk_eligibility(scope: Annotated[MarketScope, Depends(session)]) -> dict[str, Any]:
+        settings = personal(scope, "RiskSettings")
+        if settings is None:
+            raise HTTPException(404)
+        return envelope(scope, "SettingsEligibility", eligibility(settings, market.clock()))
+
+    def save(
+        request: Request, scope: MarketScope, kind: str, data: dict[str, Any]
+    ) -> dict[str, Any]:
+        if request.headers.get("origin") not in config.cors_origins:
+            raise HTTPException(403)
+        key = request.headers.get("idempotency-key", "")
+        if not 1 <= len(key) <= 128:
+            raise HTTPException(422)
+        try:
+            validate_preference(kind, data)
+            result = preferences.put(scope, kind, key, data)
+        except PreferenceConflict:
+            raise HTTPException(409) from None
+        except (ValidationError, ValueError):
+            raise HTTPException(422) from None
+        except psycopg.Error:
+            raise HTTPException(503) from None
+        # Scope/version keys also isolate other processes; evict this account locally.
+        with market.lock:
+            for cached in list(market.cache):
+                if cached[0].account == scope.account and cached[0].mode == scope.mode:
+                    del market.cache[cached]
+        return envelope(scope, "RiskProfile" if kind == "RiskSettings" else kind, result)
+
+    @router.put("/watchlist")
+    def replace_watchlist(
+        request: Request, data: dict[str, Any], scope: Annotated[MarketScope, Depends(session)]
+    ) -> dict[str, Any]:
+        return save(request, scope, "Watchlist", data)
+
+    @router.put("/settings/risk")
+    def replace_settings(
+        request: Request, data: dict[str, Any], scope: Annotated[MarketScope, Depends(session)]
+    ) -> dict[str, Any]:
+        try:
+            validate("RiskSettings", data)
+        except ValidationError:
+            raise HTTPException(422) from None
+        current = personal(scope, "RiskSettings")
+        if current is None or current["fee_schedule_version"] != data["fee_schedule_version"]:
+            raise HTTPException(422)
+        result = save(
+            request, scope, "RiskSettings", {**data, "fee_schedule": current["fee_schedule"]}
+        )
+        result["data"].pop("fee_schedule")
+        validate("RiskSettingsResponse", result)
+        return result
+
+    @router.put("/settings/profile")
+    def replace_profile(
+        request: Request, data: dict[str, Any], scope: Annotated[MarketScope, Depends(session)]
+    ) -> dict[str, Any]:
+        return save(request, scope, "RiskSettings", data)
+
     def read(
         scope: MarketScope, resource: str, symbol: str | None = None, interval: str = "1m"
     ) -> dict[str, Any]:
         try:
-            return market.read(scope, resource, symbol, interval)
+            # Persisted personal settings override the transient dashboard nominal.
+            settings = personal(scope, "RiskSettings")
+            if settings:
+                scope = replace(
+                    scope,
+                    nominal_idr=settings["nominal_idr"],
+                    configuration_version=settings["configuration_version"],
+                )
+            result = market.read(scope, resource, symbol, interval)
+            signals = (
+                result["data"]
+                if resource in {"candidates", "history"}
+                else ([result["data"]["signal"]] if resource == "detail" else [])
+            )
+            if settings:
+                for signal in signals:
+                    signal["assumptions"]["fee_schedule_version"] = settings["fee_schedule_version"]
+                    # Without validated feed/model/portfolio the contract must abstain.
+                    # Re-evaluate on every read, including fee expiry and config changes.
+                    if signal["state"] in {"WATCH", "READY"}:
+                        signal["state"] = "WATCH"
+                        signal["invalidation"] = "DATA_UNHEALTHY"
+                if not fees_current(settings, market.clock()):
+                    result["quality"]["status"] = "unavailable"
+            return result
         except MarketNotFound:
             raise HTTPException(404) from None
         except MarketUnavailable:
@@ -167,8 +295,8 @@ def market_router(config: Settings, market: FixtureMarket) -> APIRouter:
                         continue
                     try:
                         response = state(message["topic"], message["symbol"])
-                    except HTTPException:
-                        await error("NOT_FOUND")
+                    except HTTPException as exc:
+                        await error("DATA_UNAVAILABLE" if exc.status_code == 503 else "NOT_FOUND")
                         continue
                     snapshot = {k: v for k, v in response.items() if k != "data"}
                     snapshot.update(

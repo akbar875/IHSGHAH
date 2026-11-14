@@ -191,7 +191,7 @@ def test_empty_migration_repeat_and_checksum(database: tuple[str, str]) -> None:
     owner, _ = database
     migrate(owner)
     with psycopg.connect(owner) as connection:
-        assert connection.execute("SELECT count(*) FROM schema_migrations").fetchone() == (1,)
+        assert connection.execute("SELECT count(*) FROM schema_migrations").fetchone() == (2,)
         connection.execute("UPDATE schema_migrations SET checksum = 'tampered'")
     with pytest.raises(RuntimeError, match="checksum"):
         migrate(owner)

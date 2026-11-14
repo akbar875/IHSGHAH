@@ -90,3 +90,13 @@ button:hover { background: #104c3b; }
   .results-heading { padding: 14px 20px; flex-wrap: wrap; }
   .footer { padding: 20px; flex-direction: column; gap: 4px; }
 }
+/* Personal configuration remains readable on narrow touch screens. */
+.settings-fields { border: 0; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.settings-fields label { display: grid; gap: 8px; min-width: 0; }
+.settings-fields input { width: 100%; min-width: 0; }
+.settings-fields button { align-self: end; }
+.watchlist { list-style: none; padding: 0; }
+.watchlist li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.preferences-workspace .panel { margin-top: 24px; padding: 24px; }
+.preferences-workspace .panel h2 { margin-bottom: 16px; }
+button:disabled { cursor: wait; opacity: .55; }

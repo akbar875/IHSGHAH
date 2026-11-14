@@ -1,6 +1,10 @@
 import { test, expect, type Page } from '@playwright/test';
 import fixture from '../../../services/api/src/saham_signal/fixtures/market-simulation.json';
 
+test.beforeEach(async ({ page }) => {
+  await page.route('**/api/v1/settings/profile', route => route.fulfill({ status: 404, json: {} }));
+});
+
 function snapshot(nominal = '1000000.00') {
   const value = structuredClone(fixture.CandidatesResponse);
   const now = Date.now();

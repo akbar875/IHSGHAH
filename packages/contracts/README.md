@@ -74,6 +74,12 @@ Contoh: snapshot seq 1 → delta previous 1, seq 2; seq 2 ulang diabaikan; delta
 
 ## Kompatibilitas
 
+SS-020 menambahkan endpoint profil atomik `/settings/profile` dan evaluasi budget
+simulasi `/settings/eligibility`, memakai `RiskProfile`, `UserFeeSchedule` dan
+`SettingsEligibility`. `RiskSettings` lama tetap identik. Biaya profil berlabel
+`user_assumption`, bertanggal UTC dan bukan tarif broker terverifikasi. Lihat
+[panduan pengaturan](../../docs/market-data/watchlist-settings.md).
+
 Kontrak v1 dibekukan pada rilis ini. Karena objek ditutup/versi exact, perubahan field/enum/required/nullable/unit/arti atau set nilai valid memerlukan major baru dengan direktori/path baru (`v2`, `/api/v2`). Penambahan endpoint tanpa mengubah schema lama boleh dirilis terpisah; jangan menganggap penambahan field kompatibel. Patch hanya dokumentasi/fixture yang tidak mengubah set payload valid; contract_version wire tetap 1.0.0. Pertahankan v1 selama migrasi; deploy server mendukung versi baru sebelum client. Consumer menolak versi asing. Perubahan model/policy tidak mengubah versi wire. Review kontrak dan check JS/Python wajib; build --check mendeteksi drift generate, bukan bukti kompatibilitas semantik otomatis.
 
 Dasar format: [JSON Schema 2020-12](https://json-schema.org/draft/2020-12), [OpenAPI 3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [Ajv formats](https://ajv.js.org/packages/ajv-formats.html). Scope produk: [PRD §12 dan FR-01/06/08/12](../../docs/PRD-Saham-Signal.md).

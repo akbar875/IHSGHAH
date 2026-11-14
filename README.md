@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-020 menyediakan [watchlist dan pengaturan pribadi](docs/market-data/watchlist-settings.md):
+penyimpanan PostgreSQL per akun/mode, profil risiko dan biaya bertanggal berlabel
+asumsi pengguna, validasi serta perhitungan ulang budget simulasi. Kontrak v1 lama
+dipertahankan; lot layak eksekusi tetap nol sampai feed/model tervalidasi.
+
 SS-019 menyediakan [detail saham, chart dan order book](docs/market-data/stock-detail.md):
 candle/volume, entry/stop/TP/expiry, proyeksi putus-putus bertingkat cakupan,
 horizon tetap saat interval berubah, snapshot book konsisten, pressure/cakupan

@@ -1,5 +1,10 @@
 # Web — dashboard dan detail research SS-018/019
 
+SS-020 menambahkan `/settings` untuk watchlist dan profil nominal/risiko/biaya
+bertanggal. Data disimpan per akun/mode melalui API dan PostgreSQL; form biaya
+awal kosong, selalu berlabel asumsi pengguna. Jalankan migrasi API sebelum
+menggunakan halaman ini. Lihat [panduan pengaturan](../../docs/market-data/watchlist-settings.md).
+
 Dashboard Next.js App Router + TypeScript untuk research, selalu berlabel
 **Research / Simulasi**. Menampilkan kandidat simulasi dari API #17, input nominal,
 pencarian/filter aktif, rencana entry/stop/target/horizon dan kondisi data.
