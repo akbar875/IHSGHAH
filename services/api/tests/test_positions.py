@@ -216,7 +216,8 @@ def test_postgres_restart_races_and_rls(database: tuple[str, str]) -> None:  # n
     assert all(result == results[0] for result in results)
     assert len(PostgresPositions(dsn).list(SCOPE)) == 1
     assert store.list(replace(SCOPE, account="bob")) == []
-    assert store.list(replace(SCOPE, mode="paper")) == []
+    with pytest.raises(ValueError, match="Database does not match repository mode"):
+        store.list(replace(SCOPE, mode="paper"))
     pid = results[0]["position"]["position_id"]
     sell = {**BUY, "side": "SELL", "lots": 1}
 
