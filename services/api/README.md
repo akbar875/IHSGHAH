@@ -150,3 +150,9 @@ command posisi dan alert terkait sekarang commit atomik. Kontrak Alert v1 tetap 
 Migrasi PostgreSQL dijalankan eksplisit dengan `uv run --locked python -m saham_signal.migrate`.
 Lihat [panduan persistence](../../docs/PERSISTENCE.md) untuk schema append-only,
 repository transaksi, isolasi role/akun/mode, retensi dan pengujian PostgreSQL.
+
+## Keamanan SS-023
+
+Sesi admin bertanda tangan, batas HTTP/WS, TLS dan kebijakan ekspor/penghapusan
+dijelaskan dalam [panduan keamanan](../../docs/SECURITY.md). Konfigurasi research
+lokal tetap kompatibel; gunakan sesi bertanda tangan untuk akses dengan TLS.

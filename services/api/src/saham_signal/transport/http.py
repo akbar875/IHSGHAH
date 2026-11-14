@@ -24,6 +24,7 @@ from saham_signal.config import Settings, load_settings
 from saham_signal.domain.mode import Mode
 from saham_signal.transport.errors import ErrorCode, ErrorResponse, error_response
 from saham_signal.transport.market import market_router
+from saham_signal.transport.security import SecurityBudget, configure_server_logging
 
 
 class HealthResponse(BaseModel):
@@ -66,6 +67,8 @@ def create_app(
     app = FastAPI(title="Saham Signal bootstrap API", version="0.1.0", lifespan=lifespan)
     app.state.started = False
     app.state.mode = config.app_mode
+    app.state.security_budget = SecurityBudget(config.rate_limit_per_minute)
+    configure_server_logging()
     app.include_router(
         market_router(
             config,
@@ -82,8 +85,28 @@ def create_app(
     ) -> Response:
         # Generate IDs server-side; do not reflect untrusted request headers.
         request.state.request_id = str(uuid4())
+        if config.deployment_tls_required and request.url.scheme != "https":
+            return error_response(request, 403, "FORBIDDEN")
+        if request.url.path.startswith("/api/"):
+            if not app.state.security_budget.allow("http"):
+                response: Response = error_response(request, 429, "RATE_LIMITED")
+                response.headers["Retry-After"] = "60"
+                response.headers["Cache-Control"] = "private, no-store"
+                return response
+            body = bytearray()
+            async for chunk in request.stream():
+                if len(body) + len(chunk) > config.request_max_bytes:
+                    return error_response(request, 413, "INVALID_REQUEST")
+                body.extend(chunk)
+            request._body = bytes(body)
         response = await call_next(request)
         response.headers["X-Request-ID"] = request.state.request_id
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Referrer-Policy"] = "no-referrer"
+        if request.url.path.startswith("/api/"):
+            response.headers["Cache-Control"] = "private, no-store"
+        if config.deployment_tls_required:
+            response.headers["Strict-Transport-Security"] = "max-age=31536000"
         return response
 
     @app.exception_handler(HTTPException)
@@ -142,6 +165,8 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Local Saham Signal API")
     parser.add_argument("--env-file", default=None)
+    parser.add_argument("--ssl-certfile", default=None)
+    parser.add_argument("--ssl-keyfile", default=None)
     args = parser.parse_args()
     # Psycopg async connections require a selector loop on Windows.
     if sys.platform == "win32":
@@ -152,6 +177,11 @@ def main() -> None:
         host="127.0.0.1",
         port=8000,
         env_file=args.env_file,
+        access_log=False,
+        proxy_headers=False,
+        ws_max_size=65536,
+        ssl_certfile=args.ssl_certfile,
+        ssl_keyfile=args.ssl_keyfile,
     )
 
 

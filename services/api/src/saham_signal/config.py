@@ -21,6 +21,10 @@ class Settings(BaseSettings):
     readiness_timeout_seconds: float = Field(default=3, ge=0.1, le=10)
     session_secret: SecretStr | None = None
     pilot_account_id: str | None = None
+    session_ttl_seconds: int = Field(default=3600, ge=60, le=28800)
+    deployment_tls_required: bool = False
+    rate_limit_per_minute: int = Field(default=120, ge=1, le=10000)
+    request_max_bytes: int = Field(default=65536, ge=1024, le=1048576)
     market_fixture_enabled: bool = False
     market_fixture_token: SecretStr | None = None
     market_nominal_idr: str = Field(
@@ -31,10 +35,17 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_market_fixture(self) -> Self:
-        if (
-            self.market_fixture_enabled
-            and self.pilot_account_id
-            and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,127}", self.pilot_account_id)
+        if self.session_secret and (
+            len(self.session_secret.get_secret_value()) < 32 or not self.pilot_account_id
+        ):
+            raise ValueError("Sessions require a 32+ character secret and pilot account")
+        if self.deployment_tls_required and (
+            not self.session_secret
+            or any(not origin.startswith("https://") for origin in self.cors_origins)
+        ):
+            raise ValueError("TLS deployment requires sessions and HTTPS origins")
+        if self.pilot_account_id and not re.fullmatch(
+            r"[A-Za-z0-9][A-Za-z0-9._:-]{0,127}", self.pilot_account_id
         ):
             raise ValueError("Invalid fixture account identifier")
         if self.market_horizon_minutes not in {15, 30, 60, 240}:

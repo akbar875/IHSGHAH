@@ -63,7 +63,11 @@ def error_response(request: Request, status: int, code: ErrorCode) -> JSONRespon
             code=code, request_id=request_id, retryable=status >= 500 or status == 429, fields=[]
         ),
     )
-    headers = {"X-Request-ID": request_id}
+    headers = {
+        "X-Request-ID": request_id,
+        "Cache-Control": "private, no-store",
+        "X-Content-Type-Options": "nosniff",
+    }
     if status in {429, 503}:
         headers["Retry-After"] = "3"
     return JSONResponse(

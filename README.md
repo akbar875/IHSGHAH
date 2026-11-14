@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-023 menyediakan [batas keamanan dan kebijakan data pribadi](docs/SECURITY.md):
+sesi admin bertanda tangan dan kedaluwarsa, otorisasi akun/mode, rate limit HTTP/WS,
+batas payload, TLS dan log tersanitasi. Ekspor/penghapusan memakai prosedur operator;
+fetch dokumen eksternal tetap dinonaktifkan. G0–G3 belum lulus.
+
 SS-022 menyediakan [alert in-app dan deduplikasi persisten](docs/market-data/in-app-alerts.md):
 inbox `/alerts`, prioritas risiko/data, hysteresis/cooldown, retry/reconnect tanpa
 salinan serta batas pengiriman offline. Alert exit tidak membuat fill jual; replay
