@@ -34,3 +34,12 @@ Dependency adalah prasyarat implementasi. Gerbang G0/G1/G2/G3 tetap mengikuti PR
 `feat/<issue-number>-pilot-readiness`
 
 Ganti `<issue-number>` dengan nomor issue GitHub sebenarnya. PR menautkan `Closes #<issue-number>`.
+
+## Hasil inspeksi — 15 November 2026
+
+[Keputusan teknis G3: no-go dan runbook pilot](../market-data/pilot-readiness.md)
+serta [matriks acceptance](../../research/reports/SS-028-inspection.md) tersedia
+untuk review. #27 sudah closed di GitHub, tetapi G2 masih pending dengan nol
+kredit prospektif; #8/#26 masih open dan G1 no-go. Bukti recovery fixture tidak
+menggantikan drill deployment/canary. Persetujuan dokumen/retensi/legal/rilis
+belum tersedia; checklist penyelesaian tetap terbuka. Tidak ada aktivasi pilot.

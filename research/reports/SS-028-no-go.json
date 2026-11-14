@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "timezone": "Asia/Jakarta",
+  "issue": 28,
+  "scope": "technical_readiness_review_only",
+  "decision": "no-go",
+  "release_accountable": "akbar875",
+  "decision_approval": "pending",
+  "pilot_enabled": false,
+  "model_promoted": false,
+  "broker_integration": false,
+  "gates": {
+    "g0": "pending",
+    "g1": "no-go",
+    "g2": "pending",
+    "g3": "no-go"
+  },
+  "github_issue_snapshot": {
+    "8": "open",
+    "26": "open",
+    "27": "closed",
+    "28": "open"
+  },
+  "g2_credited_sessions": 0,
+  "g2_credited_trades": 0,
+  "approvals": {
+    "release": "pending",
+    "legal_distribution": "pending",
+    "vendor_rights_cost": "pending",
+    "pilot_documentation": "pending",
+    "retention": "pending"
+  },
+  "qualification": {
+    "component_recovery": "simulation_only",
+    "deployment_rollback": "not_demonstrated",
+    "deployment_access_limits": "not_demonstrated",
+    "canary": "not_started",
+    "actual_results": "unavailable"
+  },
+  "blockers": [
+    "G0_LICENSED_FEED_RIGHTS_QUALITY_COST_MISSING",
+    "G1_MARKET_VALIDATION_NO_GO",
+    "SS026_PROSPECTIVE_INTEGRATION_INCOMPLETE",
+    "G2_PROSPECTIVE_OBSERVATION_AND_TOLERANCES_MISSING",
+    "DEPLOYMENT_RECOVERY_ROLLBACK_ACCESS_DRILL_MISSING",
+    "LEGAL_DOCUMENTATION_RETENTION_RELEASE_APPROVALS_MISSING"
+  ],
+  "issue_completion": "incomplete",
+  "evidence_hash_format": "sha256_utf8_crlf_normalized_to_lf",
+  "evidence": [
+    {
+      "path": "docs/market-data/vendor-audit.md",
+      "sha256": "5abcb3814827f68612720848e032c8c2190a85987a5a72a68592f04da47ec349"
+    },
+    {
+      "path": "docs/decisions/0002-market-data-procurement.md",
+      "sha256": "e24bce8f52377545bfd986499395c0eab540ca6da76774ce5a0d9e349696a03e"
+    },
+    {
+      "path": "research/reports/SS-016-simulation.json",
+      "sha256": "2418303c62aa2616aa862a434df3ace8033a9719365a406fd1881266b3909cd7"
+    },
+    {
+      "path": "research/reports/SS-025-simulation.json",
+      "sha256": "88a5b60170502175164aaf5b6ef6913a1689f8b5afc0611be0d675a936b0b729"
+    },
+    {
+      "path": "docs/market-data/paper-integration.md",
+      "sha256": "2098b0076bf7803d87405490b907dbc5eac3d03683cbfeec9210f4dc5dfe2ac4"
+    },
+    {
+      "path": "research/reports/SS-027-pending.json",
+      "sha256": "eefb6b2811e58303d121cdee8bacd46c463955500c9dd4e9878887d95f434109"
+    },
+    {
+      "path": "docs/SECURITY.md",
+      "sha256": "d9b46497ec14875c13768bcb20eab9cd5afbbfc506b96cad9771eb49134c5d03"
+    },
+    {
+      "path": "docs/market-data/pilot-readiness.md",
+      "sha256": "466551fdf5b70a227878b8a520925cee1075e7320f956bc023ac050a2fab29b2"
+    },
+    {
+      "path": "apps/web/src/app/dashboard.tsx",
+      "sha256": "1180dffe9b3387e4d70ac94f6cb2120af28fcc29ed882ee3a42dd3c999bb5e1c"
+    },
+    {
+      "path": "apps/web/src/app/stocks/[symbol]/stock-detail.tsx",
+      "sha256": "3a4598422173b41aa97d09a815d4780298ab310b8184fa89f11f11d35b3f658f"
+    }
+  ],
+  "limits": [
+    "Technical review is not owner approval or legal advice",
+    "Issue closure and CI do not pass release gates",
+    "Hashes detect changes; they do not authenticate evidence or authorize runtime",
+    "Simulation recovery receipts do not prove production deployment readiness"
+  ]
+}
