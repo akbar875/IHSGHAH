@@ -60,7 +60,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: paper-backend-${{ github.run_id }}
-          path: .work/paper-*
+          path: |
+            .work/paper-backend.xml
+            .work/paper-simulation.json
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
       - name: Retain synthetic operations qualification
@@ -69,6 +72,7 @@ jobs:
         with:
           name: operations-backend-${{ github.run_id }}
           path: .work/operations-*.json
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 14
       - run: uv build --no-sources

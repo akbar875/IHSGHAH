@@ -33,6 +33,7 @@ jobs:
         with:
           name: paper-browser-${{ github.run_id }}
           path: .work/paper-browser.json
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
       - name: Retain synthetic browser latency evidence
@@ -41,5 +42,6 @@ jobs:
         with:
           name: operations-browser-${{ github.run_id }}
           path: .work/web-test-results/**/operations-load.json
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 14

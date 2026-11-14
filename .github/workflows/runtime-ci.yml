@@ -41,6 +41,7 @@ jobs:
         with:
           name: paper-acceptance-${{ github.run_id }}
           path: .work/paper-acceptance.json
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
   quality:
