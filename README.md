@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-024 menyediakan [jalur berita internal point-in-time](docs/market-data/internal-news.md):
+job operator terpisah, izin sumber eksplisit, receipt/revisi append-only, pemetaan
+emiten dan deduplikasi, ekstraksi data terbatas serta ablation berpasangan SS-016.
+Tidak ada berita pada UI atau promosi ranking otomatis. Sumber berizin belum tersedia,
+#8 dan G0–G3 tetap pending; bukti hanya simulasi.
+
 SS-023 menyediakan [batas keamanan dan kebijakan data pribadi](docs/SECURITY.md):
 sesi admin bertanda tangan dan kedaluwarsa, otorisasi akun/mode, rate limit HTTP/WS,
 batas payload, TLS dan log tersanitasi. Ekspor/penghapusan memakai prosedur operator;
