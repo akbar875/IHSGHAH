@@ -15,6 +15,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response, WebSoc
 from jsonschema import ValidationError
 from starlette.websockets import WebSocketDisconnect
 
+from saham_signal.application.alerts import AlertStore, source_events
 from saham_signal.application.market import (
     FixtureMarket,
     MarketNotFound,
@@ -40,7 +41,11 @@ from saham_signal.transport.errors import ErrorCode
 
 
 def market_router(
-    config: Settings, market: FixtureMarket, preferences: PreferenceStore, positions: PositionStore
+    config: Settings,
+    market: FixtureMarket,
+    preferences: PreferenceStore,
+    positions: PositionStore,
+    alerts: AlertStore,
 ) -> APIRouter:
     router = APIRouter(prefix="/api/v1")
 
@@ -153,6 +158,20 @@ def market_router(
     def list_positions(scope: Annotated[MarketScope, Depends(session)]) -> dict[str, Any]:
         data = [monitor(state, market.clock())["position"] for state in position_states(scope)]
         return position_envelope(scope, "Positions", data)
+
+    @router.get("/alerts")
+    def list_alerts(scope: Annotated[MarketScope, Depends(session)]) -> dict[str, Any]:
+        now = market.clock()
+        # Fixture service has only TEST; it cannot be substituted for a live feed.
+        history = market.read(scope, "history", "TEST")
+        states = [monitor(state, now) for state in position_states(scope)]
+        try:
+            data = alerts.refresh(
+                scope, source_events(history["data"], history["quality"], states, now), now
+            )
+        except psycopg.Error:
+            raise HTTPException(503) from None
+        return position_envelope(scope, "Alerts", data)
 
     @router.get("/positions/{position_id}")
     def get_position(

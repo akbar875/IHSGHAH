@@ -7,9 +7,11 @@ import psycopg
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
+from saham_signal.adapters.alerts import persist_alerts
 from saham_signal.adapters.persistence import Journal
+from saham_signal.application.alerts import source_events
 from saham_signal.application.market import MarketScope
-from saham_signal.application.positions import PositionConflict, transition
+from saham_signal.application.positions import PositionConflict, monitor, transition
 
 
 class PostgresPositions:
@@ -62,5 +64,12 @@ class PostgresPositions:
                     Jsonb(command),
                     Jsonb(snapshot),
                 ),
+            )
+            # Commit the manual change and its alert together, even with no browser open.
+            persist_alerts(
+                connection,
+                scope,
+                source_events([], {"status": "healthy"}, [monitor(snapshot, at)], at),
+                at,
             )
             return snapshot

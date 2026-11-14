@@ -71,6 +71,10 @@ membuktikan ranking/sizing produksi.
 
 ## Dependency
 
+Inbox `/alerts` dijelaskan pada [panduan SS-022](../../docs/market-data/in-app-alerts.md).
+Daftar simulasi dipoll setiap 5 detik dengan deduplikasi, prioritas risiko/data,
+pesan exit tanpa fill jual, dan keadaan offline/reconnect. Push belum tersedia.
+
 Versi langsung exact dan transitif terkunci di package-lock.json. Next.js 16.4.6,
 React/React DOM 19.3.1, TypeScript 6.0.3 mengikuti ADR-0001. ESLint tetap 9.39.5 karena
 peer eslint-plugin-react belum mendukung ESLint 10. Override minimatch 11.0.1 pada
