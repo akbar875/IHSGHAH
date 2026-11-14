@@ -12,6 +12,7 @@ from typing import Any, Literal
 
 from saham_signal.application.feed_quality import FeedAssessment
 from saham_signal.application.instruments import ReferenceRepository, check_entry, lookup, select
+from saham_signal.application.operations import Control
 from saham_signal.application.replay import FeeSchedule
 from saham_signal.domain.instruments import JAKARTA, ReferenceUnavailable, aware, positive_integer
 from saham_signal.domain.mode import Mode
@@ -141,6 +142,7 @@ class RiskInputs:
     liquidity_shares: int  # Conservative executable capacity, not raw displayed volume.
     trigger_met: bool
     invalidated: bool = False
+    operations: Control = Control()
 
     def __post_init__(self) -> None:
         aware(self.at)
@@ -180,6 +182,8 @@ def evaluate(
         return RiskDecision(False, reason, policy_version=policy.version)
 
     at, book, feed = inputs.at, inputs.portfolio, inputs.feed
+    if inputs.operations.blocked:
+        return reject("operations_blocked")
     if (spec.account, spec.mode) != (book.account, book.mode):
         return reject("portfolio_scope")
     if spec.mode == "live":

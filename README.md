@@ -34,6 +34,13 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-025 menyediakan [kontrol operasi dan runbook recovery](docs/market-data/operations.md):
+kill switch PostgreSQL append-only, default fail-closed, metrik proses terbatas,
+drift→abstention, rollback operator serta backup/restore logical konsisten yang
+selalu kembali pause. [Bukti simulasi](research/reports/SS-025-simulation.md)
+menguji beban komponen/browser, outage/reconnect dan restore PostgreSQL;
+integrasi paper penuh, feed vendor dan G0–G3 tetap pending.
+
 SS-024 menyediakan [jalur berita internal point-in-time](docs/market-data/internal-news.md):
 job operator terpisah, izin sumber eksplisit, receipt/revisi append-only, pemetaan
 emiten dan deduplikasi, ekstraksi data terbatas serta ablation berpasangan SS-016.
@@ -107,7 +114,7 @@ SLA final dan bukti vendor belum tersedia sehingga **G0 tetap pending**.
 
 Fondasi parsial SS-011 tersedia dalam [adapter feed](docs/market-data/feed-adapter.md):
 normalisasi fixture, dedup/koreksi sesi dan recovery book teruji simulasi.
-Belum ada feed vendor atau contract test sampel berizin; issue #11 dan G0 tetap
+Belum ada feed vendor atau contract test sampel berizin; validasi vendor dan G0 tetap
 pending. Candle belum memiliki envelope persistensi dalam kontrak v1.
 
 SS-010 menyediakan [penyimpanan point-in-time dan audit append-only](docs/PERSISTENCE.md):

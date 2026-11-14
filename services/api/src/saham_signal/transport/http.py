@@ -2,6 +2,8 @@ import asyncio
 import sys
 from collections.abc import AsyncIterator, Awaitable, Callable
 from contextlib import asynccontextmanager
+from datetime import UTC, datetime
+from time import perf_counter
 from uuid import uuid4
 
 from fastapi import FastAPI, Request, Response
@@ -12,14 +14,17 @@ from starlette.exceptions import HTTPException
 from starlette.types import ASGIApp
 
 from saham_signal.adapters.alerts import PostgresAlerts
+from saham_signal.adapters.operations import PostgresControl
 from saham_signal.adapters.positions import PostgresPositions
 from saham_signal.adapters.preferences import PostgresPreferences
 from saham_signal.adapters.probes import PostgresProbe, RedisProbe
 from saham_signal.application.alerts import AlertStore
 from saham_signal.application.market import FixtureMarket
+from saham_signal.application.operations import Operations
 from saham_signal.application.positions import PositionStore
 from saham_signal.application.preferences import PreferenceStore
 from saham_signal.application.readiness import DependencyProbe, check_dependencies
+from saham_signal.application.security import valid_session
 from saham_signal.config import Settings, load_settings
 from saham_signal.domain.mode import Mode
 from saham_signal.transport.errors import ErrorCode, ErrorResponse, error_response
@@ -43,8 +48,14 @@ def create_app(
     preferences: PreferenceStore | None = None,
     positions: PositionStore | None = None,
     alerts: AlertStore | None = None,
+    operations: Operations | None = None,
 ) -> ASGIApp:
     config = settings if settings is not None else load_settings()
+    ops = operations or Operations(
+        PostgresControl(config.database_url.get_secret_value()), config.app_mode
+    )
+    if ops.mode != config.app_mode:
+        raise ValueError("Operations mode mismatch")
     dependencies: dict[str, DependencyProbe] = (
         probes
         if probes is not None
@@ -76,6 +87,7 @@ def create_app(
             preferences or PostgresPreferences(config.database_url.get_secret_value()),
             positions or PostgresPositions(config.database_url.get_secret_value()),
             alerts or PostgresAlerts(config.database_url.get_secret_value()),
+            ops,
         )
     )
 
@@ -109,6 +121,23 @@ def create_app(
             response.headers["Strict-Transport-Security"] = "max-age=31536000"
         return response
 
+    @app.middleware("http")
+    async def metrics(
+        request: Request, call_next: Callable[[Request], Awaitable[Response]]
+    ) -> Response:
+        started = perf_counter()
+        try:
+            response = await call_next(request)
+            if response.status_code >= 500:
+                ops.telemetry.count("http_failed")
+            return response
+        except Exception:
+            ops.telemetry.count("http_failed")
+            raise
+        finally:
+            ops.telemetry.count("http_requests")
+            ops.telemetry.latency(perf_counter() - started)
+
     @app.exception_handler(HTTPException)
     async def http_error(request: Request, exc: HTTPException) -> Response:
         codes: dict[int, ErrorCode] = {
@@ -137,6 +166,15 @@ def create_app(
     @app.get("/health", response_model=HealthResponse)
     async def health() -> HealthResponse:
         return HealthResponse(status="ok", mode=config.app_mode)
+
+    @app.get("/api/ops/status")
+    def operations_status(request: Request) -> dict[str, object]:
+        # Administrative signed sessions only, never the legacy fixture token.
+        if not config.session_secret or not valid_session(
+            config, request.cookies.get("saham_session")
+        ):
+            raise HTTPException(401)
+        return ops.status(datetime.now(UTC))
 
     @app.get("/ready", response_model=ReadyResponse, responses={503: {"model": ErrorResponse}})
     async def ready(request: Request) -> ReadyResponse | Response:

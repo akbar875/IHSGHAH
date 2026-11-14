@@ -22,6 +22,7 @@ from saham_signal.application.market import (
     MarketUnavailable,
     validate,
 )
+from saham_signal.application.operations import Operations
 from saham_signal.application.positions import (
     PositionConflict,
     PositionMissing,
@@ -46,6 +47,7 @@ def market_router(
     preferences: PreferenceStore,
     positions: PositionStore,
     alerts: AlertStore,
+    operations: Operations,
 ) -> APIRouter:
     router = APIRouter(prefix="/api/v1")
 
@@ -160,11 +162,13 @@ def market_router(
         # Fixture service has only TEST; it cannot be substituted for a live feed.
         history = market.read(scope, "history", "TEST")
         states = [monitor(state, now) for state in position_states(scope)]
+        events = source_events(history["data"], history["quality"], states, now)
+        if operations.entry_blocked():
+            events = [replace(e, active=False) if e.kind == "ENTRY_READY" else e for e in events]
         try:
-            data = alerts.refresh(
-                scope, source_events(history["data"], history["quality"], states, now), now
-            )
+            data = alerts.refresh(scope, events, now)
         except psycopg.Error:
+            operations.telemetry.count("alert_failed")
             raise HTTPException(503) from None
         return position_envelope(scope, "Alerts", data)
 
@@ -333,6 +337,12 @@ def market_router(
                         signal["invalidation"] = "DATA_UNHEALTHY"
                 if not fees_current(settings, market.clock()):
                     result["quality"]["status"] = "unavailable"
+            if resource in {"candidates", "detail"} and operations.entry_blocked():
+                for signal in signals:
+                    if signal["state"] == "READY":
+                        signal.update(state="WATCH", invalidation="DATA_UNHEALTHY")
+            if resource == "candidates":
+                operations.telemetry.gauge("active_candidates", float(len(signals)))
             return result
         except MarketNotFound:
             raise HTTPException(404) from None

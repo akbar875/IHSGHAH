@@ -47,3 +47,7 @@ dataset, konteks referensi/biaya dan full report. `full_report_hash` merujuk
 laporan `Study.run` lengkap sebelum dipangkas, bukan hash file ringkasan ini.
 Cara reproduksi dan batas integrasi terdapat dalam
 [panduan evaluasi](../../docs/market-data/baseline-evaluation.md).
+
+Reproduksi 14 November 2026 (SS-025): snapshot kontrol operasi eksplisit kini ikut
+fingerprint input risiko. Hash protokol/dataset/laporan diperbarui; seluruh metrik
+eksekusi pada eksperimen tetap sama, G1 tetap no-go. Bukan holdout pasar baru.

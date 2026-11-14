@@ -18,6 +18,7 @@ from saham_signal.application.feed_quality import (
     FeedSLA,
     PositionDataDisruption,
 )
+from saham_signal.application.operations import Operations
 from saham_signal.domain.instruments import aware
 from saham_signal.domain.mode import Mode
 from saham_signal.domain.persistence import Record, digest
@@ -124,6 +125,7 @@ class FeedIngestor:
         commit: Callable[[Observation], None],
         snapshot_request: Callable[[str, int], None],
         sla: FeedSLA | None = None,
+        operations: Operations | None = None,
     ) -> None:
         if mode not in ("research", "paper", "live"):
             raise ValueError("Unknown mode")
@@ -133,6 +135,7 @@ class FeedIngestor:
         self.lot_shares, self.validate, self.commit = lot_shares, validate, commit
         self.snapshot_request = snapshot_request
         self.quality_monitor = FeedQuality(profile, sla or FeedSLA(), mode)
+        self.operations = operations
         self.connection = 1
         self.books: dict[str, Book] = {}
         self.seen: dict[tuple[str, int], str] = {}
@@ -179,6 +182,11 @@ class FeedIngestor:
         assessment = self.quality_monitor.assess(
             symbol, now, active_positions=active_positions, emit=emit
         )
+        if self.operations is not None:
+            heartbeat = assessment.last_heartbeat_at
+            self.operations.feed(
+                assessment.reasons, (now - heartbeat).total_seconds() if heartbeat else None
+            )
         # Publish warnings even if the disconnected transport cannot request data.
         if request_snapshot:
             self.snapshot_request(symbol, self.connection)

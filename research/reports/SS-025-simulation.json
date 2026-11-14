@@ -1,0 +1,70 @@
+{
+  "recorded_on": "2026-11-14",
+  "data_origin": "simulation",
+  "mode": "research",
+  "gates_passed": false,
+  "component": {
+    "data_origin": "simulation",
+    "symbols": 100,
+    "cycles": 20,
+    "messages": 2000,
+    "component_p95_seconds": 0.004913499999929627,
+    "max_cycle_seconds": 0.4625623000001724,
+    "browser_display_tested": false,
+    "vendor_sla_tested": false
+  },
+  "browser": {
+    "data_origin": "simulation",
+    "users": 1,
+    "candidates": 100,
+    "snapshots": 20,
+    "boundary": "mock_received_at_to_browser_two_animation_frames",
+    "p95_ms": 459.7368999999999,
+    "samples_ms": [
+      752.9749999999995,
+      343.0030000000006,
+      285.6179999999995,
+      459.7368999999999,
+      278.20330000000104,
+      333.6275000000005,
+      268.33619999999974,
+      412.933500000001,
+      279.8563000000013,
+      311.1933000000008,
+      361.1787999999997,
+      342.7543999999998,
+      349.1900000000005,
+      249.59330000000045,
+      287.3130999999994,
+      335.0578999999998,
+      248.4501999999993,
+      250.53589999999895,
+      333.3878999999997,
+      287.0064999999995
+    ],
+    "vendor_sla_tested": false,
+    "automatic_polling_tested": false
+  },
+  "restore": {
+    "data_origin": "simulation",
+    "tables_restored": {
+      "journal": 1,
+      "retention_policy": 1,
+      "personal_preferences": 1,
+      "manual_position_events": 1,
+      "in_app_alerts": 1,
+      "alert_gates": 1,
+      "internal_news": 1,
+      "operation_events": 1
+    },
+    "all_rows_equal_except_appended_pause": true,
+    "restored_entry_blocked": true,
+    "retry_deduplicated": true,
+    "nonempty_target_rejected": true,
+    "checksum_tamper_rejected": true,
+    "runtime_role_backup_rejected": true,
+    "failed_restore_atomic": true,
+    "new_identity_after_restore": true,
+    "source_unchanged": true
+  }
+}

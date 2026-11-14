@@ -1,5 +1,5 @@
 {
-  "label": "SIMULATION ONLY \u2014 no measured production benefit",
+  "label": "SIMULATION ONLY — no measured production benefit",
   "ranking_enabled": false,
   "variants": {
     "absent": {
@@ -147,8 +147,8 @@
         }
       ],
       "news_dataset_hash": "6ce241f6674fbef99fc601ee0a2fd343466a45a6c737c88588ee1938ade61c5c",
-      "protocol_hash": "582beb4308f3f474ed7edacaf3ca7f163bf1f95f0b316ac71f28722f83e11813",
-      "report_hash": "b8d8505ee13a9d728db34e77a48d5380cc56e3a28de543775d5674b62e93d04a"
+      "protocol_hash": "6520fc948dd7f059fb86bb899a82e6a27a42f74d86f7aa774ba9261905c61167",
+      "report_hash": "6115a6d288eba5cfb8fc976af53e7bbb7652210a9b4bbd76c079701d5ebe48ca"
     },
     "all_mapped": {
       "decision": "disabled_pending_licensed_oos_and_independent_review",
@@ -295,8 +295,8 @@
         }
       ],
       "news_dataset_hash": "20eb4a956555986d3180fb440aa8940b8b83ef3511925a0772b364ecb22bc91f",
-      "protocol_hash": "cd63c33297d9e524d1a2bc8fdaf0b859fafc7b40d685b65494f33cc5aee2c6a1",
-      "report_hash": "cfe0515552c72dea34db61c9c853ff139a1839e9c36ea07d92ad6a40bc82314a"
+      "protocol_hash": "23b602106f7dfa7b79892166add6e934a9d40ee1ff16446316fea6ad8092c645",
+      "report_hash": "35ce95cc321738ed3d820f2c77ae0f19fb9dffc0b82bdd2301ab135eefdc048f"
     }
   }
 }

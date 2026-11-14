@@ -12,6 +12,7 @@ from test_instruments import refs as refs  # noqa: F401
 
 from saham_signal.adapters.instrument_references import MemoryReferences
 from saham_signal.application.feed_quality import FeedAssessment
+from saham_signal.application.operations import Control
 from saham_signal.application.replay import FeeSchedule
 from saham_signal.application.risk import (
     Plan,
@@ -59,7 +60,17 @@ FEED = FeedAssessment(
     "simulation",
 )
 BOOK = Portfolio("alice", "research", AT, D("10000000"), D("1000000"))
-INPUTS = RiskInputs(AT, BOOK, FEED, AT, 995, 1000, 10000, True)
+INPUTS = RiskInputs(
+    AT,
+    BOOK,
+    FEED,
+    AT,
+    995,
+    1000,
+    10000,
+    True,
+    operations=Control(1, False, "resume", "synthetic-test-only"),
+)
 
 
 def run(refs: MemoryReferences, inputs: RiskInputs = INPUTS, **kwargs: Any) -> RiskDecision:

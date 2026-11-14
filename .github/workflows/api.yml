@@ -24,6 +24,8 @@ jobs:
           --health-interval 3s --health-timeout 3s --health-retries 20
     env:
       PERSISTENCE_TEST_DSN: postgresql://saham_signal_research:ci_disposable_only@127.0.0.1:5432/saham_signal_research
+      OPERATIONS_REPORT: ${{ github.workspace }}/.work/operations-load.json
+      OPERATIONS_RESTORE_REPORT: ${{ github.workspace }}/.work/operations-restore.json
     defaults:
       run:
         working-directory: services/api
@@ -39,7 +41,16 @@ jobs:
       - run: uv run --locked ruff check ../../scripts/check-backend-smoke.py
       - run: uv run --locked ruff format --check ../../scripts/check-backend-smoke.py
       - run: uv run --locked mypy
+      - run: mkdir -p ../../.work
       - run: uv run --locked pytest
+      - name: Retain synthetic operations qualification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: operations-backend-${{ github.run_id }}
+          path: .work/operations-*.json
+          if-no-files-found: ignore
+          retention-days: 14
       - run: uv build --no-sources
       - name: Smoke installed wheel with locked runtime dependencies
         run: |

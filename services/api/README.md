@@ -1,5 +1,11 @@
 # API FastAPI
 
+SS-025 menambahkan [kontrol operasi, telemetry dan runbook recovery](../../docs/market-data/operations.md).
+Jalankan migrasi eksplisit `006_operations.sql`; runtime hanya memerlukan SELECT
+pada `operation_events`, sedangkan CLI operator menggunakan credential terpisah.
+Default kontrol menahan entry; restore selalu menambahkan pause. Tidak ada
+mutation endpoint publik atau perubahan kelulusan gerbang.
+
 Fondasi SS-004: package `saham-signal-backend` yang dapat dipasang API dan worker,
 konfigurasi startup tervalidasi, probe dependency, CORS dan error contract SS-002.
 SS-017 menambahkan [API market dan stream fixture research](../../docs/market-data/market-api.md).

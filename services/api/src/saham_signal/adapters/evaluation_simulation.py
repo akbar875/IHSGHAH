@@ -18,6 +18,7 @@ from saham_signal.application.evaluation import (
 from saham_signal.application.features import FeatureEngine, FeaturePolicy
 from saham_signal.application.feed import FeedProfile
 from saham_signal.application.feed_quality import FeedAssessment
+from saham_signal.application.operations import Control
 from saham_signal.application.replay import FeeSchedule, Frame, ReplayPolicy
 from saham_signal.application.risk import PlanSpec, Portfolio, RiskInputs, RiskPolicy
 from saham_signal.domain.instruments import (
@@ -114,6 +115,7 @@ def fixture() -> tuple[Protocol, tuple[Case, ...], MemoryReferences, tuple[FeeSc
                 1000,
                 10000,
                 True,
+                operations=Control(1, False, "resume", "SS-016-simulation-only"),
             )
             features = replace(
                 engine.snapshot(symbol, stamp),
