@@ -27,6 +27,7 @@ from saham_signal.adapters.feed import (
 )
 from saham_signal.adapters.persistence import SCHEMA, Journal, PersistenceConflict
 from saham_signal.application.feed import FeedIngestor
+from saham_signal.domain.mode import Mode
 from saham_signal.domain.persistence import Kind, Record
 from saham_signal.migrate import migrate
 
@@ -143,13 +144,14 @@ def test_simulated_fills_cannot_be_relabelled_and_future_fills_are_hidden() -> N
 
 
 @contextmanager
-def disposable_database() -> Iterator[tuple[str, str]]:
-    dsn = os.environ.get("PERSISTENCE_TEST_DSN")
+def disposable_database(mode: Mode = "research") -> Iterator[tuple[str, str]]:
+    env_name = "PERSISTENCE_TEST_DSN" if mode == "research" else "PERSISTENCE_PAPER_TEST_DSN"
+    dsn = os.environ.get(env_name)
     if not dsn:
-        pytest.skip("Set PERSISTENCE_TEST_DSN to a disposable PostgreSQL research database")
+        pytest.skip(f"Set {env_name} to a disposable PostgreSQL {mode} database")
     name = "ss010_" + uuid4().hex
     with psycopg.connect(dsn, autocommit=True) as admin:
-        assert admin.execute("SELECT current_database()").fetchone() == ("saham_signal_research",)
+        assert admin.execute("SELECT current_database()").fetchone() == (f"saham_signal_{mode}",)
         admin.execute(sql.SQL("CREATE SCHEMA {}").format(sql.Identifier(name)))
         admin.execute(sql.SQL("CREATE ROLE {} NOLOGIN").format(sql.Identifier(name)))
     owner = make_conninfo(dsn, options=f"-c search_path={name},public")
@@ -198,7 +200,7 @@ def test_empty_migration_repeat_and_checksum(database: tuple[str, str]) -> None:
     owner, _ = database
     migrate(owner)
     with psycopg.connect(owner) as connection:
-        assert connection.execute("SELECT count(*) FROM schema_migrations").fetchone() == (6,)
+        assert connection.execute("SELECT count(*) FROM schema_migrations").fetchone() == (7,)
         connection.execute("UPDATE schema_migrations SET checksum = 'tampered'")
     with pytest.raises(RuntimeError, match="checksum"):
         migrate(owner)

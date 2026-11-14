@@ -169,3 +169,11 @@ lokal tetap kompatibel; gunakan sesi bertanda tangan untuk akses dengan TLS.
 migrasi `005_internal_news.sql`, job operator `python -m saham_signal.news_ingest`,
 registry tepercaya dan DSN `NEWS_DATABASE_URL` role khusus research. Tidak ada fetch
 atau pemanggilan LLM; sumber produksi dan integrasi ranking belum diaktifkan.
+
+## Kualifikasi paper SS-026
+
+Jalankan `uv run --locked python -m saham_signal.paper` untuk receipt offline.
+Persistensi opsional `--persist` hanya pada konfigurasi/database paper terisolasi
+dengan akun fixture `simulation-account`; migrasi harus diterapkan sebelumnya.
+`GET /api/ops/paper` memerlukan sesi admin bertanda tangan dan mode paper.
+Panduan serta batas gerbang ada di [integrasi paper](../../docs/market-data/paper-integration.md).

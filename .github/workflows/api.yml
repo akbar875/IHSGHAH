@@ -26,6 +26,8 @@ jobs:
       PERSISTENCE_TEST_DSN: postgresql://saham_signal_research:ci_disposable_only@127.0.0.1:5432/saham_signal_research
       OPERATIONS_REPORT: ${{ github.workspace }}/.work/operations-load.json
       OPERATIONS_RESTORE_REPORT: ${{ github.workspace }}/.work/operations-restore.json
+      PERSISTENCE_PAPER_TEST_DSN: postgresql://saham_signal_research:ci_disposable_only@127.0.0.1:5432/saham_signal_paper
+      PAPER_SIMULATION_REPORT: ${{ github.workspace }}/.work/paper-simulation.json
     defaults:
       run:
         working-directory: services/api
@@ -40,9 +42,27 @@ jobs:
       - run: uv run --locked ruff format --check .
       - run: uv run --locked ruff check ../../scripts/check-backend-smoke.py
       - run: uv run --locked ruff format --check ../../scripts/check-backend-smoke.py
+      - run: uv run --locked ruff check ../../scripts/check-paper-acceptance.py
+      - run: uv run --locked ruff format --check ../../scripts/check-paper-acceptance.py
       - run: uv run --locked mypy
       - run: mkdir -p ../../.work
-      - run: uv run --locked pytest
+      - name: Create disposable paper database
+        run: |
+          uv run --locked python - <<'PY'
+          import os
+          import psycopg
+          with psycopg.connect(os.environ["PERSISTENCE_TEST_DSN"], autocommit=True) as conn:
+              conn.execute("CREATE DATABASE saham_signal_paper")
+          PY
+      - run: uv run --locked pytest --junitxml=../../.work/paper-backend.xml
+      - name: Retain paper acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-backend-${{ github.run_id }}
+          path: .work/paper-*
+          if-no-files-found: error
+          retention-days: 14
       - name: Retain synthetic operations qualification
         if: always()
         uses: actions/upload-artifact@v4

@@ -1,0 +1,594 @@
+{
+  "format": "SS-026-qualification-v1",
+  "mode": "paper",
+  "account": "simulation-account",
+  "origin": "simulation",
+  "as_of": "2026-10-01T02:31:01Z",
+  "input_hash": "0f27797eb967118b66a0cedbcf406afbaf66802b33010da8cb7078e6a6460e91",
+  "baseline": {
+    "name": "paper-smoke",
+    "kind": "trend",
+    "minimum_return": "0",
+    "maximum_volatility": "0.1",
+    "use_pressure": false,
+    "use_volume": false
+  },
+  "baseline_score": 0,
+  "features": {
+    "symbol": "SIMA",
+    "as_of": "2026-10-01T02:30:00+00:00",
+    "window_start": "2026-10-01T02:25:00+00:00",
+    "policy": {
+      "reference": "SS-013/simulation-v1",
+      "window": {
+        "microseconds": 300000000
+      },
+      "minimum_coverage": "0.8",
+      "depth_levels": 5,
+      "book_max_age": {
+        "microseconds": 10000000
+      }
+    },
+    "source": "simulation:SS-026",
+    "mode": "paper",
+    "data_origin": "simulation",
+    "delivery": "live",
+    "return_fraction": "0.010050251256281407035175879",
+    "volatility_fraction": "0.00001256281407035175879397000000",
+    "volume_lots": 3,
+    "relative_volume": null,
+    "baseline_sessions": [],
+    "buy_lots": 3,
+    "sell_lots": 0,
+    "unknown_lots": 0,
+    "classification_coverage": "1",
+    "buy_pressure": "1",
+    "sell_pressure": "0",
+    "pressure_method": "feed-aggressor-v1",
+    "pressure_hidden_reason": null,
+    "spread_idr": "5.00",
+    "bid_depth_lots": 100,
+    "ask_depth_lots": 100,
+    "available_levels": 1,
+    "limited_depth": true,
+    "book_imbalance": "0.5",
+    "depth_as_of": "2026-10-01T02:30:00+00:00",
+    "book_hidden_reason": null
+  },
+  "plan": {
+    "engine_version": "SS-015-v1",
+    "live_enabled": false,
+    "plan": {
+      "spec": {
+        "id": "SIMA-2026-10-01",
+        "account": "simulation-account",
+        "mode": "paper",
+        "symbol": "SIMA",
+        "entry_idr": 1010,
+        "stop_idr": 950,
+        "target_idr": 1150,
+        "entry_from": "2026-10-01T02:30:00+00:00",
+        "expires_at": "2026-10-01T02:33:00+00:00",
+        "entry_cutoff": "2026-10-01T02:35:00+00:00",
+        "exit_deadline": "2026-10-01T02:40:00+00:00",
+        "friction_per_share_idr": "5",
+        "trigger": "synthetic-rule",
+        "invalidation": "synthetic-invalidation"
+      },
+      "version": 1,
+      "state": "READY",
+      "decision": {
+        "allowed": true,
+        "reason": "eligible",
+        "lots": 6,
+        "shares": 600,
+        "cash_idr": "606666.60",
+        "risk_idr": "43863.60",
+        "reward_idr": "75884.40",
+        "policy_version": "SS-015-v1/provisional",
+        "reference_versions": [
+          "sim-reference-v1",
+          "sim-reference-v1",
+          "sim-reference-v1",
+          "sim-reference-v1"
+        ],
+        "fee_version": "sim-reference-v1"
+      },
+      "as_of": "2026-10-01T02:30:00+00:00",
+      "commands": [
+        {
+          "id": "paper-decision",
+          "expected_version": 0,
+          "action": "evaluate",
+          "inputs": {
+            "at": "2026-10-01T02:30:00+00:00",
+            "portfolio": {
+              "account": "simulation-account",
+              "mode": "paper",
+              "as_of": "2026-10-01T02:30:00+00:00",
+              "capital_idr": "10000000",
+              "free_cash_idr": "1000000",
+              "committed_risk_idr": "0",
+              "occupied_slots": 0
+            },
+            "feed": {
+              "symbol": "SIMA",
+              "as_of": "2026-10-01T02:30:00+00:00",
+              "status": "live",
+              "reasons": [
+                "SIMULATION"
+              ],
+              "last_heartbeat_at": "2026-10-01T02:30:00+00:00",
+              "last_trade_at": "2026-10-01T02:29:59+00:00",
+              "trade_age": {
+                "microseconds": 1000000
+              },
+              "entry_allowed": false,
+              "price_exit_allowed": false,
+              "sla_reference": "PRD-8/provisional",
+              "mode": "paper",
+              "data_origin": "simulation"
+            },
+            "quote_as_of": "2026-10-01T02:30:00+00:00",
+            "bid_idr": 1000,
+            "ask_idr": 1005,
+            "liquidity_shares": 10000,
+            "trigger_met": true,
+            "invalidated": false,
+            "operations": {
+              "revision": 1,
+              "blocked": false,
+              "reason": "resume",
+              "release": "SS-026-offline-only"
+            }
+          },
+          "stop_idr": null
+        }
+      ],
+      "policy": {
+        "version": "SS-015-v1/provisional",
+        "risk_fraction": "0.005",
+        "max_risk_fraction": "0.01",
+        "combined_fraction": "0.02",
+        "max_positions": 3,
+        "min_reward_risk": "1",
+        "max_spread_fraction": "0.01",
+        "max_data_age": {
+          "microseconds": 5000000
+        }
+      },
+      "initial_spec": {
+        "id": "SIMA-2026-10-01",
+        "account": "simulation-account",
+        "mode": "paper",
+        "symbol": "SIMA",
+        "entry_idr": 1010,
+        "stop_idr": 950,
+        "target_idr": 1150,
+        "entry_from": "2026-10-01T02:30:00+00:00",
+        "expires_at": "2026-10-01T02:33:00+00:00",
+        "entry_cutoff": "2026-10-01T02:35:00+00:00",
+        "exit_deadline": "2026-10-01T02:40:00+00:00",
+        "friction_per_share_idr": "5",
+        "trigger": "synthetic-rule",
+        "invalidation": "synthetic-invalidation"
+      }
+    },
+    "sha256": "551ff3891e24de65628db266845db4ef3d66251ccddae73a8b6c738a540c0be4"
+  },
+  "execution": {
+    "model_version": "SS-014-v1",
+    "mode": "paper",
+    "origin": "simulation",
+    "live_alerts_enabled": false,
+    "seed": 0,
+    "policy": {
+      "latency_ms": 250,
+      "slippage_ticks": 1,
+      "queue_ahead_shares": 100,
+      "max_book_age_ms": 1000
+    },
+    "assumptions": [
+      "simulation only; no actual fills, live alerts, or broker orders",
+      "long-only regular continuous market; point-in-time reference and fee lookup",
+      "orders compete by submitted_at then id; frames by available_at then id",
+      "marketable limit orders only; resting orders are not filled from price touches",
+      "spread paid by crossing opposite book; adverse slippage rounded in ticks",
+      "queue reserve removed per level; executed depth never reused at that price in this replay",
+      "each fill slice pays rounded-up broker/levy/tax and configured minimum",
+      "stop wins when stop and target touch the same candle; trigger latency starts at availability",
+      "exit triggers do not close positions; only available bid volume can reduce holdings"
+    ],
+    "limitations": [
+      "synthetic execution model, not calibrated fill probabilities or vendor certification",
+      "no inferred hidden liquidity, replenishment, cancellations, or exact queue position",
+      "no OHLC-only fills, auctions, shorting, cash/risk sizing, or corporate-action adjustment",
+      "no automatic liquidation or mark-to-market for remaining positions",
+      "caller supplies complete synchronized books and candle ranges available only after bar close",
+      "G0/G1 pending; licensed vendor evidence and out-of-sample evaluation required separately",
+      "SS-026 offline flat-start simulation; no prospective G2 credit"
+    ],
+    "orders": [
+      {
+        "id": "entry",
+        "remaining_shares": 0,
+        "status": "filled"
+      },
+      {
+        "id": "exit",
+        "remaining_shares": 0,
+        "status": "filled"
+      }
+    ],
+    "fills": [
+      {
+        "origin": "simulation",
+        "order_id": "entry",
+        "frame_id": "event-5:1",
+        "symbol": "SIMA",
+        "side": "buy",
+        "shares": 600,
+        "price_idr": 1010,
+        "gross_idr": "606000",
+        "fee_idr": "666.60",
+        "fee_version": "sim-reference-v1",
+        "reference_versions": [
+          "sim-reference-v1",
+          "sim-reference-v1",
+          "sim-reference-v1",
+          "sim-reference-v1"
+        ],
+        "filled_at": "2026-10-01T02:30:01+00:00",
+        "trigger": "limit"
+      },
+      {
+        "origin": "simulation",
+        "order_id": "exit",
+        "frame_id": "event-9:1",
+        "symbol": "SIMA",
+        "side": "sell",
+        "shares": 600,
+        "price_idr": 1150,
+        "gross_idr": "690000",
+        "fee_idr": "1449.00",
+        "fee_version": "sim-reference-v1",
+        "reference_versions": [
+          "sim-reference-v1",
+          "sim-reference-v1",
+          "sim-reference-v1",
+          "sim-reference-v1"
+        ],
+        "filled_at": "2026-10-01T02:31:01+00:00",
+        "trigger": "target"
+      }
+    ],
+    "decisions": [
+      {
+        "order_id": "entry",
+        "frame_id": "event-4:1",
+        "reason": "latency_or_pre_order_book"
+      },
+      {
+        "order_id": "exit",
+        "frame_id": "event-4:1",
+        "reason": "bracket_not_triggered"
+      },
+      {
+        "order_id": "entry",
+        "frame_id": "event-5:1",
+        "reason": "filled"
+      },
+      {
+        "order_id": "exit",
+        "frame_id": "event-5:1",
+        "reason": "bracket_not_triggered"
+      },
+      {
+        "order_id": "exit",
+        "frame_id": "event-8:1",
+        "reason": "latency_or_pre_order_book"
+      },
+      {
+        "order_id": "exit",
+        "frame_id": "event-9:1",
+        "reason": "filled"
+      }
+    ],
+    "positions": {
+      "SIMA": 0
+    },
+    "net_cash_flow_idr": "81884.40",
+    "references": {
+      "event-5:1": {
+        "rule": {
+          "version": {
+            "id": "sim-reference-v1",
+            "effective_from": "2026-09-30T02:30:00+00:00",
+            "effective_to": "2026-11-01T02:30:00+00:00",
+            "available_at": "2026-09-29T02:30:00+00:00",
+            "source_ref": "simulation:SS-016",
+            "data_origin": "simulation"
+          },
+          "symbol": "SIMA",
+          "board": "main",
+          "market": "regular",
+          "lot_shares": 100,
+          "ticks": [
+            {
+              "lower_idr": 1,
+              "upper_idr": null,
+              "step_idr": 5
+            }
+          ],
+          "limit_rule_id": "sim-limits",
+          "calendar_id": "SIM"
+        },
+        "day": {
+          "version": {
+            "id": "sim-reference-v1",
+            "effective_from": "2026-09-30T02:30:00+00:00",
+            "effective_to": "2026-11-01T02:30:00+00:00",
+            "available_at": "2026-09-29T02:30:00+00:00",
+            "source_ref": "simulation:SS-016",
+            "data_origin": "simulation"
+          },
+          "calendar_id": "SIM",
+          "trading_date": "2026-10-01",
+          "sessions": [
+            {
+              "name": "I",
+              "opens": "09:00:00",
+              "closes": "11:30:00",
+              "mechanism": "continuous"
+            }
+          ]
+        },
+        "state": {
+          "version": {
+            "id": "sim-reference-v1",
+            "effective_from": "2026-09-30T02:30:00+00:00",
+            "effective_to": "2026-11-01T02:30:00+00:00",
+            "available_at": "2026-09-29T02:30:00+00:00",
+            "source_ref": "simulation:SS-016",
+            "data_origin": "simulation"
+          },
+          "symbol": "SIMA",
+          "market": "regular",
+          "status": "active",
+          "corporate_actions": [],
+          "actions_resolved": true
+        },
+        "limits": {
+          "version": {
+            "id": "sim-reference-v1",
+            "effective_from": "2026-09-30T02:30:00+00:00",
+            "effective_to": "2026-11-01T02:30:00+00:00",
+            "available_at": "2026-09-29T02:30:00+00:00",
+            "source_ref": "simulation:SS-016",
+            "data_origin": "simulation"
+          },
+          "symbol": "SIMA",
+          "market": "regular",
+          "trading_date": "2026-10-01",
+          "rule_id": "sim-limits",
+          "reference_price_idr": 1000,
+          "lower_idr": 850,
+          "upper_idr": 1250
+        }
+      },
+      "event-9:1": {
+        "rule": {
+          "version": {
+            "id": "sim-reference-v1",
+            "effective_from": "2026-09-30T02:30:00+00:00",
+            "effective_to": "2026-11-01T02:30:00+00:00",
+            "available_at": "2026-09-29T02:30:00+00:00",
+            "source_ref": "simulation:SS-016",
+            "data_origin": "simulation"
+          },
+          "symbol": "SIMA",
+          "board": "main",
+          "market": "regular",
+          "lot_shares": 100,
+          "ticks": [
+            {
+              "lower_idr": 1,
+              "upper_idr": null,
+              "step_idr": 5
+            }
+          ],
+          "limit_rule_id": "sim-limits",
+          "calendar_id": "SIM"
+        },
+        "day": {
+          "version": {
+            "id": "sim-reference-v1",
+            "effective_from": "2026-09-30T02:30:00+00:00",
+            "effective_to": "2026-11-01T02:30:00+00:00",
+            "available_at": "2026-09-29T02:30:00+00:00",
+            "source_ref": "simulation:SS-016",
+            "data_origin": "simulation"
+          },
+          "calendar_id": "SIM",
+          "trading_date": "2026-10-01",
+          "sessions": [
+            {
+              "name": "I",
+              "opens": "09:00:00",
+              "closes": "11:30:00",
+              "mechanism": "continuous"
+            }
+          ]
+        },
+        "state": {
+          "version": {
+            "id": "sim-reference-v1",
+            "effective_from": "2026-09-30T02:30:00+00:00",
+            "effective_to": "2026-11-01T02:30:00+00:00",
+            "available_at": "2026-09-29T02:30:00+00:00",
+            "source_ref": "simulation:SS-016",
+            "data_origin": "simulation"
+          },
+          "symbol": "SIMA",
+          "market": "regular",
+          "status": "active",
+          "corporate_actions": [],
+          "actions_resolved": true
+        },
+        "limits": {
+          "version": {
+            "id": "sim-reference-v1",
+            "effective_from": "2026-09-30T02:30:00+00:00",
+            "effective_to": "2026-11-01T02:30:00+00:00",
+            "available_at": "2026-09-29T02:30:00+00:00",
+            "source_ref": "simulation:SS-016",
+            "data_origin": "simulation"
+          },
+          "symbol": "SIMA",
+          "market": "regular",
+          "trading_date": "2026-10-01",
+          "rule_id": "sim-limits",
+          "reference_price_idr": 1000,
+          "lower_idr": 850,
+          "upper_idr": 1250
+        }
+      }
+    },
+    "fee_schedules": [
+      {
+        "version": {
+          "id": "sim-reference-v1",
+          "effective_from": "2026-09-30T02:30:00+00:00",
+          "effective_to": "2026-11-01T02:30:00+00:00",
+          "available_at": "2026-09-29T02:30:00+00:00",
+          "source_ref": "simulation:SS-016",
+          "data_origin": "simulation"
+        },
+        "buy_broker": "0.001",
+        "sell_broker": "0.001",
+        "levy": "0.0001",
+        "sell_tax": "0.001",
+        "minimum_idr": "0"
+      }
+    ],
+    "order_inputs": [
+      {
+        "id": "entry",
+        "symbol": "SIMA",
+        "side": "buy",
+        "shares": 600,
+        "limit_idr": 1010,
+        "submitted_at": "2026-10-01T02:30:00+00:00",
+        "deadline": "2026-10-01T02:33:00+00:00",
+        "stop_idr": null,
+        "target_idr": null
+      },
+      {
+        "id": "exit",
+        "symbol": "SIMA",
+        "side": "sell",
+        "shares": 600,
+        "limit_idr": 850,
+        "submitted_at": "2026-10-01T02:30:00+00:00",
+        "deadline": "2026-10-01T02:40:00+00:00",
+        "stop_idr": 950,
+        "target_idr": 1150
+      }
+    ],
+    "input_hash": "ad170bc1b22a2be16615b64f8a5ae9c96a7ca32b0a79515b27d09ab665b98840",
+    "report_hash": "c831ff83aaf4fcd2159346cecdf0e3765ccd564aeefb5389bf41ba4edaf16d40"
+  },
+  "paper_fills": [
+    {
+      "origin": "simulation",
+      "order_id": "entry",
+      "frame_id": "event-5:1",
+      "symbol": "SIMA",
+      "side": "buy",
+      "shares": 600,
+      "price_idr": 1010,
+      "gross_idr": "606000",
+      "fee_idr": "666.60",
+      "fee_version": "sim-reference-v1",
+      "reference_versions": [
+        "sim-reference-v1",
+        "sim-reference-v1",
+        "sim-reference-v1",
+        "sim-reference-v1"
+      ],
+      "filled_at": "2026-10-01T02:30:01+00:00",
+      "trigger": "limit"
+    },
+    {
+      "origin": "simulation",
+      "order_id": "exit",
+      "frame_id": "event-9:1",
+      "symbol": "SIMA",
+      "side": "sell",
+      "shares": 600,
+      "price_idr": 1150,
+      "gross_idr": "690000",
+      "fee_idr": "1449.00",
+      "fee_version": "sim-reference-v1",
+      "reference_versions": [
+        "sim-reference-v1",
+        "sim-reference-v1",
+        "sim-reference-v1",
+        "sim-reference-v1"
+      ],
+      "filled_at": "2026-10-01T02:31:01+00:00",
+      "trigger": "target"
+    }
+  ],
+  "paper_positions": {
+    "SIMA": 0
+  },
+  "actual_fills": [],
+  "actual_fill_source": "excluded:manual_position_events",
+  "alert_preview": null,
+  "live_alerts_enabled": false,
+  "protocol": {
+    "manifest": {
+      "frozen_at": "2026-09-30T02:30:00+00:00",
+      "starts_at": "2026-10-02T02:30:00+00:00",
+      "validation_ref": null,
+      "maximum_brier": null,
+      "maximum_fill_rate_error": null,
+      "maximum_drawdown_idr": null,
+      "minimum_sessions": 60,
+      "minimum_trades": 300
+    },
+    "sha256": "d5ee65fc2eeffbf43d433dcb7c6d7e6980e5356aead55ce1d7d49ff890ec0957",
+    "budgets_complete": false
+  },
+  "readiness": {
+    "paper_live_enabled": false,
+    "g0": "pending",
+    "g1": "no-go",
+    "g2": "not-started",
+    "reasons": [
+      "G0_PENDING_LICENSED_DATA",
+      "G1_NO_GO",
+      "PROSPECTIVE_ADAPTER_UNAVAILABLE",
+      "VALIDATION_TOLERANCES_MISSING",
+      "CRITICAL_ACCEPTANCE_INCOMPLETE"
+    ],
+    "missing_scenarios": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "observed_sessions": 0,
+    "eligible_prospective_trades": 0
+  },
+  "sha256": "1404bc8f7776af52497a1bdc1e882523abf239b433e1b7052171281e54dc5ec7"
+}

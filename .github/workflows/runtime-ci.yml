@@ -23,9 +23,29 @@ jobs:
     uses: ./.github/workflows/api.yml
   infrastructure:
     uses: ./.github/workflows/local-infra.yml
+  paper-acceptance:
+    name: Paper acceptance qualification
+    needs: [backend, web]
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: paper-*-${{ github.run_id }}
+          path: .work/paper-evidence
+          merge-multiple: true
+      - run: python scripts/check-paper-acceptance.py .work/paper-evidence/paper-backend.xml .work/paper-evidence/paper-browser.json .work/paper-acceptance.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: paper-acceptance-${{ github.run_id }}
+          path: .work/paper-acceptance.json
+          if-no-files-found: error
+          retention-days: 14
   quality:
     name: Runtime quality gate
-    needs: [scaffold, contracts, web, backend, infrastructure]
+    needs: [scaffold, contracts, web, backend, infrastructure, paper-acceptance]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 1

@@ -11,15 +11,19 @@ workflow tetap memeriksa seluruh bootstrap. Lima reusable workflow dijalankan pa
 | Web | Generated kontrak, ESLint, TypeScript, build Next.js, browser dashboard Chromium | `npm ci --ignore-scripts --prefix apps/web`, `npm --prefix apps/web run check`, lalu dari apps/web `npx playwright install chromium` dan `npm test` |
 | Backend | Ruff lint/format, mypy, pytest API/worker, build wheel, smoke wheel | Lihat perintah di bawah |
 | Infrastructure | Validasi konfigurasi/mode, DB/cache nyata, persistensi, outage/recovery, isolasi | Lihat perintah di bawah |
+| Paper acceptance | Gabungkan XML pytest dan JSON browser menjadi receipt 12 skenario PRD | [Panduan SS-026](market-data/paper-integration.md) |
 
 Job web dipin ke Ubuntu 24.04 yang didukung Chromium/Playwright 1.58.2; tidak
 mengikuti perpindahan `ubuntu-latest` ke OS yang belum didukung browser test.
 
 Job **Runtime quality gate** memakai `always()` dan memerlukan hasil `success` dari
-kelima kelompok. Status gagal, cancelled, atau skipped membuat gate gagal. Tidak ada
+kelima kelompok dan job **Paper acceptance qualification** setelah backend/web.
+Status gagal, cancelled, atau skipped membuat gate gagal. Tidak ada
 `continue-on-error`, secret vendor, atau `secrets: inherit`. Permission workflow hanya
 `contents: read`; checkout tidak dipakai oleh job gate. Push/PR baru membatalkan run
-lama untuk ref/PR yang sama. Setiap job dibatasi 15 menit, gate satu menit.
+lama untuk ref/PR yang sama. Job komponen dibatasi 15 menit, penggabungan receipt
+tiga menit, gate satu menit. Receipt sintetik tidak mengaktifkan paper live/G2;
+evidence acceptance hilang, skipped, gagal atau flaky menahan quality gate.
 
 Untuk mencegah merge saat CI gagal, pemilik repo perlu memilih **Runtime quality gate**
 sebagai required status check dalam ruleset/branch protection `main`. Workflow membuat
