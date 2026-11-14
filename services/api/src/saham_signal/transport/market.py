@@ -295,8 +295,8 @@ def market_router(
                         continue
                     try:
                         response = state(message["topic"], message["symbol"])
-                    except HTTPException:
-                        await error("NOT_FOUND")
+                    except HTTPException as exc:
+                        await error("DATA_UNAVAILABLE" if exc.status_code == 503 else "NOT_FOUND")
                         continue
                     snapshot = {k: v for k, v in response.items() if k != "data"}
                     snapshot.update(

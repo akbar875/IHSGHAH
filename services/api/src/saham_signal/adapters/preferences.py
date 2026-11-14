@@ -16,7 +16,7 @@ class PostgresPreferences:
         self.dsn = dsn
 
     def get(self, scope: MarketScope, kind: str) -> dict[str, Any] | None:
-        with psycopg.connect(self.dsn, row_factory=dict_row) as connection:
+        with psycopg.connect(self.dsn, row_factory=dict_row, connect_timeout=2) as connection:
             Journal(self.dsn, scope.mode, scope.account)._scope(connection)
             row = connection.execute(
                 "SELECT payload FROM personal_preferences WHERE mode=%s AND user_id=%s "
@@ -29,7 +29,7 @@ class PostgresPreferences:
         self, scope: MarketScope, kind: str, key: str, payload: dict[str, Any]
     ) -> dict[str, Any]:
         validate_preference(kind, payload)
-        with psycopg.connect(self.dsn, row_factory=dict_row) as connection:
+        with psycopg.connect(self.dsn, row_factory=dict_row, connect_timeout=2) as connection:
             Journal(self.dsn, scope.mode, scope.account)._scope(connection)
             connection.execute(
                 "SELECT pg_advisory_xact_lock(hashtextextended(%s, 0))",

@@ -270,3 +270,17 @@ def test_database_failure_does_not_serve_cached_personal_state() -> None:
             response = api.get("/api/v1" + path)
             assert response.status_code == 503
             validate("ErrorResponse", response.json())
+        with api.websocket_connect("/api/v1/stream", headers={"Origin": ORIGIN["Origin"]}) as ws:
+            ws.send_json(
+                {
+                    "kind": "subscribe",
+                    "contract_version": "1.0.0",
+                    "subscription_id": "unavailable-test",
+                    "topic": "signals",
+                    "symbol": None,
+                    "resume_cursor": None,
+                }
+            )
+            response = ws.receive_json()
+            validate("ErrorResponse", response)
+            assert response["data"]["code"] == "DATA_UNAVAILABLE"

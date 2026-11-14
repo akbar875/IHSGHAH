@@ -14,12 +14,19 @@ from urllib.request import ProxyHandler, Request, build_opener
 from websockets.sync.client import connect
 
 from saham_signal.adapters.persistence import SCHEMA
-from saham_signal.application.market import validate
+from saham_signal.application.market import FixtureMarket, MarketScope, validate
 
 
 def main() -> None:
     assert SCHEMA["$defs"]["MarketEvent"]
     assert files("saham_signal.migrations").joinpath("001_journal.sql").is_file()
+    assert files("saham_signal.migrations").joinpath("002_preferences.sql").is_file()
+    # Verify packaged scenario/schema without bypassing DB checks on HTTP routes.
+    fixture = FixtureMarket()
+    validate(
+        "CandidatesResponse",
+        fixture.read(MarketScope("fixture-smoke", "research", "1000000.00", 30), "candidates"),
+    )
     # Reserve a non-listening port so neither dependency can accidentally be healthy.
     with socket.socket() as unavailable, socket.socket() as http_port:
         unavailable.bind(("127.0.0.1", 0))
@@ -99,9 +106,16 @@ def main() -> None:
                         f"http://127.0.0.1:{port}/api/v1/candidates",
                         headers={"Cookie": f"saham_session={fixture_token}"},
                     )
-                    with opener.open(request, timeout=5) as r:
-                        validate("CandidatesResponse", json.load(r))
-                        assert r.headers["Cache-Control"] == "private, no-store"
+                    try:
+                        opener.open(request, timeout=5)
+                    except HTTPError as error:
+                        with error:
+                            payload = json.load(error)
+                            validate("ErrorResponse", payload)
+                            assert error.code == 503
+                            assert payload["data"]["code"] == "DATA_UNAVAILABLE"
+                    else:
+                        raise AssertionError("Market must not bypass unavailable personal settings")
                     subscription = {
                         "kind": "subscribe",
                         "contract_version": "1.0.0",
@@ -119,10 +133,10 @@ def main() -> None:
                         proxy=None,
                     ) as ws:
                         ws.send(json.dumps(subscription))
-                        snapshot = json.loads(ws.recv(timeout=5))
-                        validate("Snapshot", snapshot)
-                        assert snapshot["user_id"] == "fixture-smoke"
-                        subscription["resume_cursor"] = snapshot["cursor"]
+                        unavailable = json.loads(ws.recv(timeout=5))
+                        validate("ErrorResponse", unavailable)
+                        assert unavailable["data"]["code"] == "DATA_UNAVAILABLE"
+                        subscription["resume_cursor"] = "unavailable-wheel-smoke"
                         ws.send(json.dumps(subscription))
                         error = json.loads(ws.recv(timeout=5))
                         validate("ErrorResponse", error)
