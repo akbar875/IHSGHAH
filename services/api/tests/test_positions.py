@@ -111,6 +111,7 @@ def test_actual_quantity_partial_exit_stop_and_close() -> None:
     assert state["position"]["status"] == "CLOSED"
     assert not monitor(state, NOW + timedelta(days=1))["position"]["overnight_risk"]
     assert all(f["origin"] == "manual" for f in state["position"]["fills"])
+    assert len({f["fill_id"] for f in state["position"]["fills"]}) == 3
     with pytest.raises(PositionConflict):
         transition(SCOPE, state, command("fill", sell, pid), NOW)
 

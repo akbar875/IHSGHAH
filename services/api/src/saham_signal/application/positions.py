@@ -93,6 +93,8 @@ def _transition(
         fill = data if action == "fill" else None
     assert state is not None
     position = state["position"]
+    if previous is not None:
+        position["plan_version"] += 1
     if (
         state["plan"]
         and position["remaining_lots"]
@@ -167,8 +169,6 @@ def _transition(
         state["exit_reason"] = data["reason"]
     else:
         raise ValueError("Unknown position command")
-    if previous is not None:
-        position["plan_version"] += 1
     validate("Position", position)
     monitor(state, at)  # Validate every derived amount before committing the snapshot.
     return state
