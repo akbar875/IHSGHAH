@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "campaign": {
+    "campaign_id": "SS-027-empty-example",
+    "origin": "simulation",
+    "frozen_at": "2026-11-15T00:00:00Z",
+    "starts_at": "2026-11-16T00:00:00Z",
+    "ends_at": "2027-03-31T00:00:00Z",
+    "validation_ref": null,
+    "maximum_brier": null,
+    "maximum_fill_rate_error": null,
+    "maximum_drawdown_idr": null,
+    "model_version": "unavailable",
+    "fee_version": "unavailable",
+    "assumptions_ref": "SS-026-offline-only",
+    "holdout_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "calendar_ref": "unavailable-no-licensed-calendar",
+    "minimum_sessions": 60,
+    "minimum_trades": 300,
+    "minimum_effective_clusters": 30,
+    "block_sessions": 5,
+    "bootstrap_samples": 1000,
+    "seed": 27
+  },
+  "campaign_sha256": "00dd8b8d002e35db8dc3da141f7af17e30c7449c3002749e3b525e19ed6540c4",
+  "as_of": "2026-11-15T00:00:00+00:00",
+  "journal_head": "00dd8b8d002e35db8dc3da141f7af17e30c7449c3002749e3b525e19ed6540c4",
+  "g2": "pending",
+  "model_promoted": false,
+  "paper_live_enabled": false,
+  "reasons": [
+    "G0_G1_AND_SS026_PROSPECTIVE_EVIDENCE_UNAVAILABLE",
+    "OPERATOR_REVIEW_REQUIRED",
+    "SIMULATION_EXCLUDED_FROM_G2",
+    "MINIMUM_OBSERVATION_INCOMPLETE",
+    "DEPENDENT_SAMPLE_INSUFFICIENT",
+    "FROZEN_WINDOW_INCOMPLETE",
+    "VALIDATION_TOLERANCES_MISSING",
+    "UNCERTAINTY_OR_METRICS_INSUFFICIENT"
+  ],
+  "observed_sessions": 0,
+  "eligible_attempts": 0,
+  "eligible_paper_trades": 0,
+  "g2_credited_sessions": 0,
+  "g2_credited_trades": 0,
+  "first_session": null,
+  "last_session": null,
+  "elapsed_calendar_days": 0,
+  "signal_clusters": 0,
+  "largest_cluster": 0,
+  "cluster_effective_sample": "0",
+  "dependence_method": "Kish cluster weights; fully dependent within cluster; not IID trades",
+  "uncertainty_method": "95% moving session-block percentile bootstrap; validation-frozen",
+  "metrics": {
+    "brier": null,
+    "fill_rate_error": null,
+    "session_close_drawdown_idr": null
+  },
+  "intervals_95": {
+    "brier": null,
+    "fill_rate_error": null,
+    "session_close_drawdown_idr": null
+  },
+  "checks": {
+    "brier": "pending",
+    "fill_rate_error": "pending",
+    "session_close_drawdown_idr": "pending"
+  },
+  "breakdown": {
+    "symbol": {},
+    "regime": {},
+    "liquidity": {},
+    "nominal_idr": {}
+  },
+  "limits": [
+    "Imported receipts and calendar require independent verification",
+    "Session-close MTM drawdown excludes intraday peaks",
+    "Cluster ESS is a diagnostic, not proof of independent samples",
+    "Bootstrap cannot prove safety in unseen regimes"
+  ],
+  "sha256": "5088ae5e4f93f03e4a278d1674963eefe1d833ef7810a6a50e402b74175a6187"
+}

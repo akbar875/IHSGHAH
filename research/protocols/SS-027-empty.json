@@ -1,0 +1,26 @@
+{
+  "campaign": {
+    "campaign_id": "SS-027-empty-example",
+    "origin": "simulation",
+    "frozen_at": "2026-11-15T00:00:00Z",
+    "starts_at": "2026-11-16T00:00:00Z",
+    "ends_at": "2027-03-31T00:00:00Z",
+    "validation_ref": null,
+    "maximum_brier": null,
+    "maximum_fill_rate_error": null,
+    "maximum_drawdown_idr": null,
+    "model_version": "unavailable",
+    "fee_version": "unavailable",
+    "assumptions_ref": "SS-026-offline-only",
+    "holdout_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "calendar_ref": "unavailable-no-licensed-calendar",
+    "minimum_sessions": 60,
+    "minimum_trades": 300,
+    "minimum_effective_clusters": 30,
+    "block_sessions": 5,
+    "bootstrap_samples": 1000,
+    "seed": 27
+  },
+  "campaign_sha256": "00dd8b8d002e35db8dc3da141f7af17e30c7449c3002749e3b525e19ed6540c4",
+  "entries": []
+}

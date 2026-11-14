@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-027 menyediakan [fondasi laporan observasi G2](docs/market-data/paper-observation.md):
+manifest beku, receipt sesi berantai, diagnosis dependensi/sampel efektif,
+kalibrasi/fill/drawdown dan interval bootstrap sesi. [Laporan kosong](research/reports/SS-027-pending.json)
+mengakui nol kredit prospektif; #26/#8 masih open, G1 no-go dan issue #27 belum
+selesai. Tidak ada collector prospektif atau promosi model otomatis.
+
 SS-026 menyediakan [kualifikasi integrasi paper offline](docs/market-data/paper-integration.md):
 feed → fitur → baseline → risiko → replay, receipt PostgreSQL terisolasi, laporan
 web `/paper`, protokol observasi beku dan bukti 12 skenario PRD dari backend/browser.
