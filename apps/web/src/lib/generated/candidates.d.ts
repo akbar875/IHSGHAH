@@ -1,6 +1,6 @@
 /* Generated from packages/contracts/v1/schema.json. Run npm run contracts. */
 
-export type MarketResponse = (CandidatesResponse | StockDetailResponse | ChartResponse | SignalHistoryResponse | WatchlistResponse | RiskSettingsResponse | RiskProfileResponse | SettingsEligibilityResponse)
+export type MarketResponse = (CandidatesResponse | StockDetailResponse | ChartResponse | SignalHistoryResponse | WatchlistResponse | RiskSettingsResponse | RiskProfileResponse | SettingsEligibilityResponse | PositionsResponse | PositionResponse | PositionMonitorResponse)
 export type CandidatesResponse = ({
 [k: string]: unknown
 } & {
@@ -122,6 +122,58 @@ mode: ("research" | "paper" | "live")
 data_origin: ("simulation" | "market")
 quality: Quality
 data: SettingsEligibility
+})
+export type PositionsResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+/**
+ * @maxItems 1000
+ */
+data: Position[]
+})
+export type Position = ({
+[k: string]: unknown
+} & {
+position_id: string
+user_id: string
+symbol: string
+/**
+ * @minItems 1
+ * @maxItems 1000
+ */
+fills: [Fill, ...(Fill)[]]
+remaining_lots: number
+average_price_idr: string
+fees_idr: string
+opened_at: string
+plan_version: number
+status: ("OPEN" | "PARTIAL" | "EXIT_REQUESTED" | "CLOSED")
+overnight_risk: boolean
+})
+export type PositionResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+data: Position
+})
+export type PositionMonitorResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+data: PositionMonitor
 })
 
 export interface Quality {
@@ -307,4 +359,31 @@ combined_budget_idr: string
 budget_lots_ceiling: number
 eligible_lots: 0
 reason: ("MODEL_UNVALIDATED" | "FEE_SCHEDULE_EXPIRED")
+}
+export interface Fill {
+fill_id: string
+position_id: string
+side: ("BUY" | "SELL")
+price_idr: string
+lots: number
+filled_at: string
+recorded_at: string
+fees_idr: string
+origin: ("manual" | "simulation")
+}
+export interface PositionMonitor {
+position: Position
+plan: (PositionPlan | null)
+invested_idr: string
+remaining_cost_idr: string
+realized_pnl_idr: string
+stop_loss_idr: (string | null)
+target_net_idr: (string | null)
+exit_reason: (("MANUAL" | "STOP" | "TARGET" | "DEADLINE") | null)
+}
+export interface PositionPlan {
+stop_idr: string
+target_idr: string
+exit_deadline: string
+sell_fee_ratio: string
 }

@@ -22,6 +22,9 @@ const endpoints = [
   ['/positions', 'post', 'openPosition', 'PositionResponse', 'OpenPositionRequest'],
   ['/positions/{position_id}', 'get', 'getPosition', 'PositionResponse'],
   ['/positions/{position_id}/fills', 'post', 'recordFill', 'PositionResponse', 'FillRequest'],
+  ['/positions/{position_id}/monitor', 'get', 'getPositionMonitor', 'PositionMonitorResponse'],
+  ['/positions/{position_id}/plan', 'put', 'setPositionPlan', 'PositionMonitorResponse', 'PositionPlan'],
+  ['/positions/{position_id}/exit-request', 'post', 'requestPositionExit', 'PositionResponse', 'ExitRequest'],
   ['/alerts', 'get', 'listAlerts', 'AlertsResponse'],
 ];
 const paths = {};

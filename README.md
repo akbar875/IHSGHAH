@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-021 menyediakan [pencatatan fill dan posisi manual](docs/market-data/manual-positions.md):
+ledger PostgreSQL append-only per akun/mode, BUY/SELL parsial, basis biaya dan PnL
+Decimal, rencana atas lot aktual, exit pending serta peringatan overnight. Chart
+dan permintaan exit tidak membuat fill; catatan manual terpisah dari hasil simulasi.
+Halaman `/positions` tetap lingkungan research tanpa broker/feed live. G0–G3 belum lulus.
+
 SS-020 menyediakan [watchlist dan pengaturan pribadi](docs/market-data/watchlist-settings.md):
 penyimpanan PostgreSQL per akun/mode, profil risiko dan biaya bertanggal berlabel
 asumsi pengguna, validasi serta perhitungan ulang budget simulasi. Kontrak v1 lama

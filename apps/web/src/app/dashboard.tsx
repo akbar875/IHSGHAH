@@ -123,7 +123,7 @@ export default function Dashboard() {
     <header className="header">
       <Link className="brand" href="/" aria-label="Saham Signal, beranda"><span className="brand-icon" aria-hidden="true">S</span><span>Saham<span className="brand-light"> Signal</span></span></Link>
       <span className="mode">Research / Simulasi</span>
-      <Link href="/settings">Pengaturan & watchlist</Link>
+      <Link href="/settings">Pengaturan & watchlist</Link><Link href="/positions">Posisi manual</Link>
     </header>
     <main id="utama" className="workspace">
       <div className="eyebrow">RUANG KERJA RESEARCH</div>

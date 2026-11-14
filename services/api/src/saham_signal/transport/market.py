@@ -22,6 +22,12 @@ from saham_signal.application.market import (
     MarketUnavailable,
     validate,
 )
+from saham_signal.application.positions import (
+    PositionConflict,
+    PositionMissing,
+    PositionStore,
+    monitor,
+)
 from saham_signal.application.preferences import (
     PreferenceConflict,
     PreferenceStore,
@@ -34,7 +40,7 @@ from saham_signal.transport.errors import ErrorCode
 
 
 def market_router(
-    config: Settings, market: FixtureMarket, preferences: PreferenceStore
+    config: Settings, market: FixtureMarket, preferences: PreferenceStore, positions: PositionStore
 ) -> APIRouter:
     router = APIRouter(prefix="/api/v1")
 
@@ -89,6 +95,120 @@ def market_router(
         result["as_of"] = market.clock().isoformat().replace("+00:00", "Z")
         validate(kind + "Response", result)
         return result
+
+    def position_envelope(scope: MarketScope, kind: str, data: Any) -> dict[str, Any]:
+        # Environment metadata stays simulation; each confirmed fill is explicitly manual.
+        result = market.read(scope, "candidates")
+        result.update(data=data, as_of=market.clock().isoformat().replace("+00:00", "Z"))
+        validate(kind + "Response", result)
+        return result
+
+    def position_states(scope: MarketScope) -> list[dict[str, Any]]:
+        try:
+            return positions.list(scope)
+        except psycopg.Error:
+            raise HTTPException(503) from None
+
+    def position_state(scope: MarketScope, position_id: str) -> dict[str, Any]:
+        for state in position_states(scope):
+            if state["position"]["position_id"] == position_id:
+                return state
+        raise HTTPException(404)
+
+    def position_write(
+        request: Request,
+        scope: MarketScope,
+        action: str,
+        data: dict[str, Any],
+        position_id: str | None = None,
+    ) -> dict[str, Any]:
+        if request.headers.get("origin") not in config.cors_origins:
+            raise HTTPException(403)
+        key = request.headers.get("idempotency-key", "")
+        if not 1 <= len(key) <= 128:
+            raise HTTPException(422)
+        try:
+            # Resolve an elapsed deadline before a new fill can add to an exit-pending plan.
+            result = positions.execute(
+                scope,
+                key,
+                {
+                    "action": action,
+                    "data": data,
+                    "position_id": position_id,
+                },
+                market.clock(),
+            )
+            return monitor(result, market.clock())
+        except PositionMissing:
+            raise HTTPException(404) from None
+        except PositionConflict:
+            raise HTTPException(409) from None
+        except (ValidationError, ValueError):
+            raise HTTPException(422) from None
+        except psycopg.Error:
+            raise HTTPException(503) from None
+
+    @router.get("/positions")
+    def list_positions(scope: Annotated[MarketScope, Depends(session)]) -> dict[str, Any]:
+        data = [monitor(state, market.clock())["position"] for state in position_states(scope)]
+        return position_envelope(scope, "Positions", data)
+
+    @router.get("/positions/{position_id}")
+    def get_position(
+        position_id: str, scope: Annotated[MarketScope, Depends(session)]
+    ) -> dict[str, Any]:
+        data = monitor(position_state(scope, position_id), market.clock())["position"]
+        return position_envelope(scope, "Position", data)
+
+    @router.get("/positions/{position_id}/monitor")
+    def get_monitor(
+        position_id: str, scope: Annotated[MarketScope, Depends(session)]
+    ) -> dict[str, Any]:
+        return position_envelope(
+            scope, "PositionMonitor", monitor(position_state(scope, position_id), market.clock())
+        )
+
+    @router.post("/positions")
+    def open_position(
+        request: Request, data: dict[str, Any], scope: Annotated[MarketScope, Depends(session)]
+    ) -> dict[str, Any]:
+        return position_envelope(
+            scope, "Position", position_write(request, scope, "open", data)["position"]
+        )
+
+    @router.post("/positions/{position_id}/fills")
+    def record_fill(
+        position_id: str,
+        request: Request,
+        data: dict[str, Any],
+        scope: Annotated[MarketScope, Depends(session)],
+    ) -> dict[str, Any]:
+        return position_envelope(
+            scope, "Position", position_write(request, scope, "fill", data, position_id)["position"]
+        )
+
+    @router.put("/positions/{position_id}/plan")
+    def set_plan(
+        position_id: str,
+        request: Request,
+        data: dict[str, Any],
+        scope: Annotated[MarketScope, Depends(session)],
+    ) -> dict[str, Any]:
+        return position_envelope(
+            scope, "PositionMonitor", position_write(request, scope, "plan", data, position_id)
+        )
+
+    @router.post("/positions/{position_id}/exit-request")
+    def request_exit(
+        position_id: str,
+        request: Request,
+        data: dict[str, Any],
+        scope: Annotated[MarketScope, Depends(session)],
+    ) -> dict[str, Any]:
+        return position_envelope(
+            scope, "Position", position_write(request, scope, "exit", data, position_id)["position"]
+        )
 
     @router.get("/watchlist")
     def watchlist(scope: Annotated[MarketScope, Depends(session)]) -> dict[str, Any]:
