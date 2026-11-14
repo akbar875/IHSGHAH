@@ -68,7 +68,8 @@ SS-016 dan SS-024 direproduksi setelah snapshot kontrol masuk audit input:
 fingerprint berubah, metrik eksekusi/paired holdout tetap sama. G1 tetap no-go,
 ranking berita disabled dan tidak ada auto-promotion.
 
-Dependency #11 masih menunggu vendor/sampel berizin. Bukti ini tidak menutup #11
-atau membuka gerbang lain. Paper penuh, kapasitas/biaya nyata, drift model
+Dependency #11 sudah closed, tetapi contract test vendor masih menunggu
+pengadaan/sampel berizin #8/G0. Bukti ini tidak membuka gerbang lain. Paper penuh,
+kapasitas/biaya nyata, drift model
 tervalidasi, deployment rollback/canary dan SLA received_at→display terpadu harus
 dibuktikan sebelum pilot digunakan.

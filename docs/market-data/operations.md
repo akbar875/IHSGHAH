@@ -3,8 +3,10 @@
 Inspeksi issue #25, 14 November 2026: SS-007 menyediakan CI runtime, SS-011/012
 menyediakan reducer book dan recovery fail-closed, SS-022 inbox idempotent, SS-023
 sesi admin serta isolasi mode. Belum tersedia kontrol lintas proses, receipt
-restore, metrik operasi atau runbook rollback. **#11/G0 masih pending** karena
-feed/sampel berizin belum tersedia. Implementasi ini menguji operasi simulasi;
+restore, metrik operasi atau runbook rollback. Dependency #7/#11/#12/#22/#23
+sudah closed; **pengadaan vendor #8/G0 masih pending** karena feed/sampel berizin
+belum tersedia. Checklist contract-test vendor #11 belum terbukti walaupun issue
+tersebut closed. Implementasi ini menguji operasi simulasi;
 tidak membuka paper/live, mempromosikan model atau mengklaim kelulusan G0–G3.
 
 ## Kontrol dan integrasi
