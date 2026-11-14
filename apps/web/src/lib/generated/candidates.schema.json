@@ -2117,6 +2117,183 @@
         "exit_deadline",
         "sell_fee_ratio"
       ]
+    },
+    "AlertsResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "1.0.0"
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "mode": {
+          "enum": [
+            "research",
+            "paper",
+            "live"
+          ]
+        },
+        "data_origin": {
+          "enum": [
+            "simulation",
+            "market"
+          ]
+        },
+        "quality": {
+          "$ref": "#/$defs/Quality"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Alert"
+          },
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "contract_version",
+        "as_of",
+        "mode",
+        "data_origin",
+        "quality",
+        "data"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "data_origin": {
+                "const": "simulation"
+              }
+            },
+            "required": [
+              "data_origin"
+            ]
+          },
+          "then": {
+            "properties": {
+              "mode": {
+                "enum": [
+                  "research",
+                  "paper"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Alert": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "user_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "signal_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "position_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "type": {
+          "enum": [
+            "ENTRY_READY",
+            "INVALIDATED",
+            "TP",
+            "STOP",
+            "TIME_EXIT",
+            "PLAN_CHANGED",
+            "DATA_DISCONNECTED"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "delivered_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "Z$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "delivered",
+            "failed"
+          ]
+        },
+        "channel": {
+          "const": "in_app"
+        },
+        "dedup_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        }
+      },
+      "required": [
+        "event_id",
+        "user_id",
+        "signal_id",
+        "position_id",
+        "type",
+        "created_at",
+        "delivered_at",
+        "status",
+        "channel",
+        "dedup_key"
+      ],
+      "anyOf": [
+        {
+          "properties": {
+            "signal_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+            }
+          }
+        },
+        {
+          "properties": {
+            "position_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+            }
+          }
+        }
+      ]
     }
   }
 }

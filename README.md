@@ -34,6 +34,11 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-022 menyediakan [alert in-app dan deduplikasi persisten](docs/market-data/in-app-alerts.md):
+inbox `/alerts`, prioritas risiko/data, hysteresis/cooldown, retry/reconnect tanpa
+salinan serta batas pengiriman offline. Alert exit tidak membuat fill jual; replay
+dan simulasi tidak masuk jalur live. Lingkungan tetap research dan G0–G3 belum lulus.
+
 SS-021 menyediakan [pencatatan fill dan posisi manual](docs/market-data/manual-positions.md):
 ledger PostgreSQL append-only per akun/mode, BUY/SELL parsial, basis biaya dan PnL
 Decimal, rencana atas lot aktual, exit pending serta peringatan overnight. Chart

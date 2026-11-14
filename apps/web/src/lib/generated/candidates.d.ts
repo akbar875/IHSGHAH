@@ -1,6 +1,6 @@
 /* Generated from packages/contracts/v1/schema.json. Run npm run contracts. */
 
-export type MarketResponse = (CandidatesResponse | StockDetailResponse | ChartResponse | SignalHistoryResponse | WatchlistResponse | RiskSettingsResponse | RiskProfileResponse | SettingsEligibilityResponse | PositionsResponse | PositionResponse | PositionMonitorResponse)
+export type MarketResponse = (CandidatesResponse | StockDetailResponse | ChartResponse | SignalHistoryResponse | WatchlistResponse | RiskSettingsResponse | RiskProfileResponse | SettingsEligibilityResponse | PositionsResponse | PositionResponse | PositionMonitorResponse | AlertsResponse)
 export type CandidatesResponse = ({
 [k: string]: unknown
 } & {
@@ -174,6 +174,38 @@ mode: ("research" | "paper" | "live")
 data_origin: ("simulation" | "market")
 quality: Quality
 data: PositionMonitor
+})
+export type AlertsResponse = ({
+[k: string]: unknown
+} & {
+contract_version: "1.0.0"
+as_of: string
+mode: ("research" | "paper" | "live")
+data_origin: ("simulation" | "market")
+quality: Quality
+/**
+ * @maxItems 1000
+ */
+data: Alert[]
+})
+export type Alert = (Alert1 & {
+event_id: string
+user_id: string
+signal_id: (string | null)
+position_id: (string | null)
+type: ("ENTRY_READY" | "INVALIDATED" | "TP" | "STOP" | "TIME_EXIT" | "PLAN_CHANGED" | "DATA_DISCONNECTED")
+created_at: string
+delivered_at: (string | null)
+status: ("pending" | "delivered" | "failed")
+channel: "in_app"
+dedup_key: string
+})
+export type Alert1 = ({
+signal_id?: string
+[k: string]: unknown
+} | {
+position_id?: string
+[k: string]: unknown
 })
 
 export interface Quality {

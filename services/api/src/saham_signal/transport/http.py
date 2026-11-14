@@ -11,9 +11,11 @@ from pydantic import BaseModel
 from starlette.exceptions import HTTPException
 from starlette.types import ASGIApp
 
+from saham_signal.adapters.alerts import PostgresAlerts
 from saham_signal.adapters.positions import PostgresPositions
 from saham_signal.adapters.preferences import PostgresPreferences
 from saham_signal.adapters.probes import PostgresProbe, RedisProbe
+from saham_signal.application.alerts import AlertStore
 from saham_signal.application.market import FixtureMarket
 from saham_signal.application.positions import PositionStore
 from saham_signal.application.preferences import PreferenceStore
@@ -39,6 +41,7 @@ def create_app(
     market: FixtureMarket | None = None,
     preferences: PreferenceStore | None = None,
     positions: PositionStore | None = None,
+    alerts: AlertStore | None = None,
 ) -> ASGIApp:
     config = settings if settings is not None else load_settings()
     dependencies: dict[str, DependencyProbe] = (
@@ -69,6 +72,7 @@ def create_app(
             market if market is not None else FixtureMarket(),
             preferences or PostgresPreferences(config.database_url.get_secret_value()),
             positions or PostgresPositions(config.database_url.get_secret_value()),
+            alerts or PostgresAlerts(config.database_url.get_secret_value()),
         )
     )
 

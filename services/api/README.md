@@ -143,6 +143,10 @@ Referensi implementasi: [FastAPI lifespan](https://fastapi.tiangolo.com/advanced
 [psycopg async/Windows](https://www.psycopg.org/psycopg3/docs/advanced/async.html).
 ## Penyimpanan SS-010
 
+SS-022 menambah [inbox alert persisten](../../docs/market-data/in-app-alerts.md) pada
+`GET /api/v1/alerts`. Jalankan migrasi `004_alerts.sql` sebelum memakai versi ini;
+command posisi dan alert terkait sekarang commit atomik. Kontrak Alert v1 tetap sama.
+
 Migrasi PostgreSQL dijalankan eksplisit dengan `uv run --locked python -m saham_signal.migrate`.
 Lihat [panduan persistence](../../docs/PERSISTENCE.md) untuk schema append-only,
 repository transaksi, isolasi role/akun/mode, retensi dan pengujian PostgreSQL.
