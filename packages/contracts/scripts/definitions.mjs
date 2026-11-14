@@ -78,6 +78,14 @@ export const defs = {
     status: enumeration('OPEN', 'PARTIAL', 'EXIT_REQUESTED', 'CLOSED'),
     overnight_risk: { type: 'boolean' },
   }),
+  PositionPlan: object({ stop_idr: positive, target_idr: positive, exit_deadline: timestamp,
+    sell_fee_ratio: { type: 'string', pattern: '^(?:0\\.[0-9]{6}|1\\.000000)$' } }),
+  ExitRequest: object({ reason: enumeration('MANUAL', 'STOP', 'TARGET', 'DEADLINE') }),
+  PositionMonitor: object({ position: ref('Position'), plan: nullable(ref('PositionPlan')),
+    invested_idr: money, remaining_cost_idr: money,
+    realized_pnl_idr: { type: 'string', pattern: '^-?(?:0|[1-9][0-9]{0,18})\\.[0-9]{2}$' },
+    stop_loss_idr: nullable(money), target_net_idr: nullable({ type: 'string', pattern: '^-?(?:0|[1-9][0-9]{0,18})\\.[0-9]{2}$' }),
+    exit_reason: nullable(enumeration('MANUAL', 'STOP', 'TARGET', 'DEADLINE')) }),
   Alert: object({
     event_id: id, user_id: id, signal_id: nullable(id), position_id: nullable(id),
     type: enumeration('ENTRY_READY', 'INVALIDATED', 'TP', 'STOP', 'TIME_EXIT', 'PLAN_CHANGED', 'DATA_DISCONNECTED'),
@@ -170,7 +178,7 @@ for (const [name, type] of Object.entries({
   CandidatesResponse: array(ref('Signal')), StockDetailResponse: ref('StockDetail'),
   DepthResponse: ref('Depth'), ChartResponse: ref('Chart'), WatchlistResponse: ref('Watchlist'),
   RiskSettingsResponse: ref('RiskSettings'), RiskProfileResponse: ref('RiskProfile'), SettingsEligibilityResponse: ref('SettingsEligibility'), PositionResponse: ref('Position'),
-  PositionsResponse: array(ref('Position')), AlertsResponse: array(ref('Alert')),
+  PositionsResponse: array(ref('Position')), PositionMonitorResponse: ref('PositionMonitor'), AlertsResponse: array(ref('Alert')),
   SignalHistoryResponse: array(ref('Signal')), ErrorResponse: ref('Error'),
 })) defs[name] = response(type);
 const streamScope = {

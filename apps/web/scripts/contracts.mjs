@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { compile } from 'json-schema-to-typescript';
 
 const schema = JSON.parse(await readFile(new URL('../../../packages/contracts/v1/schema.json', import.meta.url), 'utf8'));
-const roots = ['CandidatesResponse', 'StockDetailResponse', 'ChartResponse', 'SignalHistoryResponse', 'WatchlistResponse', 'RiskSettingsResponse', 'RiskProfileResponse', 'SettingsEligibilityResponse'];
+const roots = ['CandidatesResponse', 'StockDetailResponse', 'ChartResponse', 'SignalHistoryResponse', 'WatchlistResponse', 'RiskSettingsResponse', 'RiskProfileResponse', 'SettingsEligibilityResponse', 'PositionsResponse', 'PositionResponse', 'PositionMonitorResponse'];
 const output = await compile({ anyOf: roots.map(name => ({ $ref: `#/$defs/${name}` })), $defs: schema.$defs }, 'MarketResponse', {
   bannerComment: '/* Generated from packages/contracts/v1/schema.json. Run npm run contracts. */',
   unreachableDefinitions: false,

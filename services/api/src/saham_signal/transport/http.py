@@ -11,9 +11,11 @@ from pydantic import BaseModel
 from starlette.exceptions import HTTPException
 from starlette.types import ASGIApp
 
+from saham_signal.adapters.positions import PostgresPositions
 from saham_signal.adapters.preferences import PostgresPreferences
 from saham_signal.adapters.probes import PostgresProbe, RedisProbe
 from saham_signal.application.market import FixtureMarket
+from saham_signal.application.positions import PositionStore
 from saham_signal.application.preferences import PreferenceStore
 from saham_signal.application.readiness import DependencyProbe, check_dependencies
 from saham_signal.config import Settings, load_settings
@@ -36,6 +38,7 @@ def create_app(
     probes: dict[str, DependencyProbe] | None = None,
     market: FixtureMarket | None = None,
     preferences: PreferenceStore | None = None,
+    positions: PositionStore | None = None,
 ) -> ASGIApp:
     config = settings if settings is not None else load_settings()
     dependencies: dict[str, DependencyProbe] = (
@@ -65,6 +68,7 @@ def create_app(
             config,
             market if market is not None else FixtureMarket(),
             preferences or PostgresPreferences(config.database_url.get_secret_value()),
+            positions or PostgresPositions(config.database_url.get_secret_value()),
         )
     )
 
@@ -121,7 +125,7 @@ def create_app(
         app,
         allow_origins=config.cors_origins,
         allow_credentials=config.market_fixture_enabled,
-        allow_methods=["GET", "PUT"],
+        allow_methods=["GET", "PUT", "POST"],
         allow_headers=["Accept", "Content-Type", "Idempotency-Key"],
         expose_headers=["X-Request-ID", "Retry-After"],
     )

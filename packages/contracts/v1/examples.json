@@ -1513,5 +1513,119 @@
         }
       }
     }
+  },
+  {
+    "schema": "PositionPlan",
+    "payload": {
+      "stop_idr": "990.00",
+      "target_idr": "1100.00",
+      "exit_deadline": "2026-11-14T08:00:00Z",
+      "sell_fee_ratio": "0.002500"
+    }
+  },
+  {
+    "schema": "ExitRequest",
+    "payload": {
+      "reason": "STOP"
+    }
+  },
+  {
+    "schema": "PositionMonitor",
+    "payload": {
+      "position": {
+        "position_id": "position-sim-1",
+        "user_id": "pilot-sim",
+        "symbol": "TEST",
+        "fills": [
+          {
+            "fill_id": "fill-sim-1",
+            "position_id": "position-sim-1",
+            "side": "BUY",
+            "price_idr": "1000.00",
+            "lots": 2,
+            "filled_at": "2026-11-12T03:00:00Z",
+            "fees_idr": "300.00",
+            "recorded_at": "2026-11-12T03:00:00Z",
+            "origin": "simulation"
+          }
+        ],
+        "remaining_lots": 2,
+        "average_price_idr": "1000.00",
+        "fees_idr": "300.00",
+        "opened_at": "2026-11-12T03:00:00Z",
+        "plan_version": 1,
+        "status": "OPEN",
+        "overnight_risk": false
+      },
+      "plan": {
+        "stop_idr": "990.00",
+        "target_idr": "1100.00",
+        "exit_deadline": "2026-11-14T08:00:00Z",
+        "sell_fee_ratio": "0.002500"
+      },
+      "invested_idr": "200300.00",
+      "remaining_cost_idr": "100150.00",
+      "realized_pnl_idr": "-1397.50",
+      "stop_loss_idr": "1397.50",
+      "target_net_idr": "9575.00",
+      "exit_reason": "STOP"
+    }
+  },
+  {
+    "schema": "PositionMonitorResponse",
+    "payload": {
+      "contract_version": "1.0.0",
+      "as_of": "2026-11-12T03:00:00Z",
+      "mode": "research",
+      "data_origin": "simulation",
+      "quality": {
+        "status": "unavailable",
+        "feed": "unavailable",
+        "last_heartbeat_at": null,
+        "reasons": [
+          "SIMULATION",
+          "MODEL_UNVALIDATED"
+        ]
+      },
+      "data": {
+        "position": {
+          "position_id": "position-sim-1",
+          "user_id": "pilot-sim",
+          "symbol": "TEST",
+          "fills": [
+            {
+              "fill_id": "fill-sim-1",
+              "position_id": "position-sim-1",
+              "side": "BUY",
+              "price_idr": "1000.00",
+              "lots": 2,
+              "filled_at": "2026-11-12T03:00:00Z",
+              "fees_idr": "300.00",
+              "recorded_at": "2026-11-12T03:00:00Z",
+              "origin": "simulation"
+            }
+          ],
+          "remaining_lots": 2,
+          "average_price_idr": "1000.00",
+          "fees_idr": "300.00",
+          "opened_at": "2026-11-12T03:00:00Z",
+          "plan_version": 1,
+          "status": "OPEN",
+          "overnight_risk": false
+        },
+        "plan": {
+          "stop_idr": "990.00",
+          "target_idr": "1100.00",
+          "exit_deadline": "2026-11-14T08:00:00Z",
+          "sell_fee_ratio": "0.002500"
+        },
+        "invested_idr": "200300.00",
+        "remaining_cost_idr": "100150.00",
+        "realized_pnl_idr": "-1397.50",
+        "stop_loss_idr": "1397.50",
+        "target_net_idr": "9575.00",
+        "exit_reason": "STOP"
+      }
+    }
   }
 ]
