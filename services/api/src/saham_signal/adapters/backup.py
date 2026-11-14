@@ -28,6 +28,7 @@ TABLES = (
     "alert_gates",
     "internal_news",
     "operation_events",
+    "paper_qualification",
 )
 
 

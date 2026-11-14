@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-026 menyediakan [kualifikasi integrasi paper offline](docs/market-data/paper-integration.md):
+feed → fitur → baseline → risiko → replay, receipt PostgreSQL terisolasi, laporan
+web `/paper`, protokol observasi beku dan bukti 12 skenario PRD dari backend/browser.
+Fill paper terpisah dari ledger manual. Scope paper live #26 masih tertahan:
+#8/G0 pending, G1 no-go, toleransi validasi belum tersedia dan G2 belum dimulai.
+
 SS-025 menyediakan [kontrol operasi dan runbook recovery](docs/market-data/operations.md):
 kill switch PostgreSQL append-only, default fail-closed, metrik proses terbatas,
 drift→abstention, rollback operator serta backup/restore logical konsisten yang

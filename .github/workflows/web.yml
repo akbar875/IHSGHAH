@@ -24,12 +24,24 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run check
       - run: npx playwright install --with-deps chromium
-      - run: npm test
+      - run: node node_modules/@playwright/test/cli.js test --reporter=list,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ github.workspace }}/.work/paper-browser.json
+      - name: Retain browser acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-browser-${{ github.run_id }}
+          path: .work/paper-browser.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
       - name: Retain synthetic browser latency evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: operations-browser-${{ github.run_id }}
           path: .work/web-test-results/**/operations-load.json
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 14

@@ -13,6 +13,7 @@ from urllib.request import ProxyHandler, Request, build_opener
 
 from websockets.sync.client import connect
 
+from saham_signal.adapters.paper_simulation import run as paper_qualification
 from saham_signal.adapters.persistence import SCHEMA
 from saham_signal.application.market import FixtureMarket, MarketScope, validate
 
@@ -21,6 +22,10 @@ def main() -> None:
     assert SCHEMA["$defs"]["MarketEvent"]
     assert files("saham_signal.migrations").joinpath("001_journal.sql").is_file()
     assert files("saham_signal.migrations").joinpath("002_preferences.sql").is_file()
+    assert files("saham_signal.migrations").joinpath("007_paper_qualification.sql").is_file()
+    paper = paper_qualification()
+    assert paper["mode"] == "paper" and paper["actual_fills"] == []
+    assert len(paper["paper_fills"]) == 2 and not paper["readiness"]["paper_live_enabled"]
     # Verify packaged scenario/schema without bypassing DB checks on HTTP routes.
     fixture = FixtureMarket()
     validate(

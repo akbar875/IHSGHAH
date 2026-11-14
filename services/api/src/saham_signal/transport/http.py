@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from time import perf_counter
 from uuid import uuid4
 
+import psycopg
 from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,6 +16,7 @@ from starlette.types import ASGIApp
 
 from saham_signal.adapters.alerts import PostgresAlerts
 from saham_signal.adapters.operations import PostgresControl
+from saham_signal.adapters.paper import PostgresPaper
 from saham_signal.adapters.positions import PostgresPositions
 from saham_signal.adapters.preferences import PostgresPreferences
 from saham_signal.adapters.probes import PostgresProbe, RedisProbe
@@ -175,6 +177,28 @@ def create_app(
         ):
             raise HTTPException(401)
         return ops.status(datetime.now(UTC))
+
+    @app.get("/api/ops/paper")
+    def paper_qualification(request: Request) -> dict[str, object]:
+        if not config.session_secret or not valid_session(
+            config, request.cookies.get("saham_session")
+        ):
+            raise HTTPException(401)
+        if config.app_mode != "paper":
+            raise HTTPException(403)
+        try:
+            receipt = PostgresPaper(
+                config.database_url.get_secret_value(), config.pilot_account_id or ""
+            ).latest()
+        except psycopg.Error:
+            raise HTTPException(503) from None
+        return {
+            "mode": "paper",
+            "origin": "simulation",
+            "paper_live_enabled": False,
+            "receipt": receipt,
+            "operations": ops.status(datetime.now(UTC)),
+        }
 
     @app.get("/ready", response_model=ReadyResponse, responses={503: {"model": ErrorResponse}})
     async def ready(request: Request) -> ReadyResponse | Response:

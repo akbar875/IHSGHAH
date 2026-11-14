@@ -115,9 +115,9 @@ python -m saham_signal.operations control resume --expected-revision 3 --release
 
 ## Backup dan restore
 
-Backup logical v1 untuk ukuran pilot mencakup delapan tabel aplikasi: journal,
+Backup logical v1 untuk ukuran pilot mencakup sembilan tabel aplikasi: journal,
 retention_policy, preferences, manual ledger, inbox, hysteresis gates, internal
-news dan kontrol operasi. Satu transaksi repeatable-read read-only mengambil
+news, kontrol operasi dan receipt paper SS-026. Satu transaksi repeatable-read read-only mengambil
 snapshot konsisten; owner/BYPASSRLS wajib agar tidak diam-diam kehilangan akun.
 Manifest mencatat mode, migration checksums, waktu UTC dan SHA-256 konten. JSON
 mempertahankan string Decimal dan integer cursor. Ini bukan backup role, secret,
@@ -138,7 +138,7 @@ python -m saham_signal.operations backup <encrypted-directory>/recovery-point.js
 python -m saham_signal.operations restore <encrypted-directory>/recovery-point.json --confirm-empty-target empty:saham_signal_research
 ```
 
-Restore hanya menerima mode dan checksums migrasi identik, delapan tabel kosong,
+Restore hanya menerima mode dan checksums migrasi identik, sembilan tabel kosong,
 serta konfirmasi nama database. Access-exclusive locks mencegah race emptiness;
 insert seluruh baris dalam satu transaksi, pertahankan PK/idempotency key dan
 atur ulang identity cursor di atas high-water mark. Tidak ada DROP/TRUNCATE,

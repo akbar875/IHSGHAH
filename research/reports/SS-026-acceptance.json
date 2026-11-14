@@ -1,0 +1,188 @@
+{
+  "format": "SS-026-acceptance-v1",
+  "revision": "c8b6983d7b80f58ccc3383e6db9ee7b9baf602c4",
+  "revision_kind": "worktree-base",
+  "origin": "simulation",
+  "scope": "component-and-browser; no licensed-feed E2E",
+  "evidence_hashes": {
+    "paper-backend.xml": "220e29df846c5b8c35a69b2cddd27a4a533e0d3edfc4ba8d97d81b45b7226be2",
+    "paper-browser.json": "e332d23cb9d31f04aa498ff929af7246eaadffc1deed24a653444380cd375dd4"
+  },
+  "scenarios": [
+    {
+      "scenario": 1,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_disconnect_warns_without_generating_exit_and_retry_failed_sink",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 2,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_quiet_stock_with_healthy_heartbeats_keeps_old_trade_age",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 3,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_exact_fee_cash_risk_and_liquidity_boundaries",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 4,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_ara_no_sellers_never_fills",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 5,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_arb_no_buyers_keeps_position_open",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 6,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_late_availability_mapping_and_untrusted_text",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 7,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_gap_stale_snapshot_and_reconnect_require_new_snapshot",
+          "status": "passed"
+        },
+        {
+          "source": "playwright",
+          "test": "full snapshot replacement removes old levels, failed refresh clears book",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 8,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_actual_quantity_partial_exit_stop_and_close",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 9,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_cache_isolation_copy_bounds_and_expiry",
+          "status": "passed"
+        },
+        {
+          "source": "playwright",
+          "test": "validated synthetic projection renders coverage bands and expires without a refetch",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 10,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_numeric_features_and_pressure_are_distinct_from_book",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 11,
+      "evidence": [
+        {
+          "source": "pytest",
+          "test": "test_durable_races_restart_scope_and_immutability",
+          "status": "passed"
+        },
+        {
+          "source": "pytest",
+          "test": "test_postgres_paper_receipt_retry_rls_immutability_and_restore",
+          "status": "passed"
+        },
+        {
+          "source": "pytest",
+          "test": "test_feed_baseline_risk_execution_report_is_deterministic_and_separate",
+          "status": "passed"
+        },
+        {
+          "source": "playwright",
+          "test": "paper report separates simulation and actual fills at 360px",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "scenario": 12,
+      "evidence": [
+        {
+          "source": "playwright",
+          "test": "touch viewport keeps plan above book and no horizontal overflow",
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "acceptance_passed": true,
+  "paper_live_enabled": false,
+  "g0": "pending",
+  "g1": "no-go",
+  "g2": "not-started",
+  "tolerances": {
+    "validation_ref": null,
+    "maximum_brier": null,
+    "maximum_fill_rate_error": null,
+    "maximum_drawdown_idr": null
+  },
+  "observation_plan": {
+    "minimum_sessions": 60,
+    "minimum_eligible_trades": 300,
+    "rule": "both minima; review effective sample dependence",
+    "synthetic_runs_count_toward_g2": false
+  },
+  "sha256": "90fd234a911018be838a860ab849206ecdcb6969fa179feddf5729d5021dbffe"
+}
