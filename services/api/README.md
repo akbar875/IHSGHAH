@@ -156,3 +156,10 @@ repository transaksi, isolasi role/akun/mode, retensi dan pengujian PostgreSQL.
 Sesi admin bertanda tangan, batas HTTP/WS, TLS dan kebijakan ekspor/penghapusan
 dijelaskan dalam [panduan keamanan](../../docs/SECURITY.md). Konfigurasi research
 lokal tetap kompatibel; gunakan sesi bertanda tangan untuk akses dengan TLS.
+
+## Berita internal SS-024
+
+[Panduan ingest, izin dan ablation](../../docs/market-data/internal-news.md) menjelaskan
+migrasi `005_internal_news.sql`, job operator `python -m saham_signal.news_ingest`,
+registry tepercaya dan DSN `NEWS_DATABASE_URL` role khusus research. Tidak ada fetch
+atau pemanggilan LLM; sumber produksi dan integrasi ranking belum diaktifkan.

@@ -13,3 +13,9 @@ split/holdout dan kebijakan dibekukan; tidak ada auto-promotion atau probabilita
 produk yang belum disetujui bukti kalibrasinya.
 
 Jangan commit data vendor atau artefak model besar. Protokol/hasil harus mencatat versi dataset, kode, split, asumsi, dan keputusan promosi.
+
+SS-024 menambah [ablation berita internal](../docs/market-data/internal-news.md)
+dengan hash dataset/protokol, gate tetap dan paired delta setelah biaya. Jalankan
+`python -m saham_signal.adapters.news_simulation` dari environment backend untuk
+[bukti simulasi](reports/SS-024-simulation.md). Ranking berita tetap disabled;
+tidak ada manfaat produksi yang telah dibuktikan.

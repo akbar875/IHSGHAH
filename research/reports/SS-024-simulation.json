@@ -1,0 +1,302 @@
+{
+  "label": "SIMULATION ONLY \u2014 no measured production benefit",
+  "ranking_enabled": false,
+  "variants": {
+    "absent": {
+      "decision": "disabled_pending_licensed_oos_and_independent_review",
+      "experiments": [
+        {
+          "baseline": "trend",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "trend",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        },
+        {
+          "baseline": "momentum",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "momentum",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        },
+        {
+          "baseline": "volatility",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "volatility",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        },
+        {
+          "baseline": "trend-no-pressure",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "trend-no-pressure",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        },
+        {
+          "baseline": "trend-no-volume",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "trend-no-volume",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": null,
+          "with_news_open_shares": 0,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        }
+      ],
+      "news_dataset_hash": "6ce241f6674fbef99fc601ee0a2fd343466a45a6c737c88588ee1938ade61c5c",
+      "protocol_hash": "582beb4308f3f474ed7edacaf3ca7f163bf1f95f0b316ac71f28722f83e11813",
+      "report_hash": "b8d8505ee13a9d728db34e77a48d5380cc56e3a28de543775d5674b62e93d04a"
+    },
+    "all_mapped": {
+      "decision": "disabled_pending_licensed_oos_and_independent_review",
+      "experiments": [
+        {
+          "baseline": "trend",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "with_news_open_shares": 200,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "trend",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "with_news_open_shares": 1400,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        },
+        {
+          "baseline": "momentum",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "with_news_open_shares": 200,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "momentum",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "with_news_open_shares": 1400,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        },
+        {
+          "baseline": "volatility",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "with_news_open_shares": 200,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "volatility",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "with_news_open_shares": 1400,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        },
+        {
+          "baseline": "trend-no-pressure",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "with_news_open_shares": 200,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "trend-no-pressure",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "with_news_open_shares": 1400,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        },
+        {
+          "baseline": "trend-no-volume",
+          "nominal_idr": "200000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "with_news_open_shares": 200,
+          "without_news_expectancy_idr": "8374.38571428571428571428571428571428571428571428571428571429",
+          "without_news_open_shares": 200
+        },
+        {
+          "baseline": "trend-no-volume",
+          "nominal_idr": "1000000",
+          "paired_holdout": {
+            "ci95_idr": null,
+            "mean_net_delta_idr": null,
+            "measurable_benefit": false,
+            "reason": "unclosed_positions"
+          },
+          "with_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "with_news_open_shares": 1400,
+          "without_news_expectancy_idr": "33511.7285714285714285714285714285714285714285714285714285714",
+          "without_news_open_shares": 1400
+        }
+      ],
+      "news_dataset_hash": "20eb4a956555986d3180fb440aa8940b8b83ef3511925a0772b364ecb22bc91f",
+      "protocol_hash": "cd63c33297d9e524d1a2bc8fdaf0b859fafc7b40d685b65494f33cc5aee2c6a1",
+      "report_hash": "cfe0515552c72dea34db61c9c853ff139a1839e9c36ea07d92ad6a40bc82314a"
+    }
+  }
+}
