@@ -106,6 +106,10 @@ feed vendor sampai perangkat pengguna atau kelulusan G0/G1.
 
 ## Protokol observasi dan pekerjaan tersisa
 
+[Fondasi laporan SS-027](paper-observation.md) dapat memeriksa receipt yang
+diimpor dengan manifest beku dan ketidakpastian. Jalur tersebut tidak memberi
+kredit G2 atau menggantikan dependency prospektif yang belum selesai di bawah.
+
 `ObservationProtocol` membekukan waktu, referensi validasi, maksimum Brier,
 galat fill rate dan drawdown IDR dengan hash. Nilai harus Decimal finite positif;
 toleransi fraksi tidak boleh melebihi satu. Bekukan sebelum observasi dimulai.
