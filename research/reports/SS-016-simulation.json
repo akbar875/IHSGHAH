@@ -5,9 +5,9 @@
     "simulation"
   ],
   "execution_origin": "simulation",
-  "recorded_on": "2026-11-13",
-  "full_report_hash": "327e34910b90fd827750724ff0cfddeba74f82c409c6b3ffc0fe8fb8c57b6fec",
-  "protocol_hash": "5472a6c523bc510b85f6c71d242bc3afbcda3afc650a2d0540b908def062ef8e",
+  "recorded_on": "2026-11-14",
+  "full_report_hash": "4098595f216c151356167602e22856bdc2b92cead4dc8f360425d3cf78c78c58",
+  "protocol_hash": "dfac477605004250bc076e64fae90553211fa548caf4e2626e20f410ae2ae17b",
   "protocol": {
     "baselines": [
       {
@@ -56,7 +56,7 @@
     "champion": "trend",
     "code_version": "SS-016-v1",
     "context_hash": "1c075fa71f5f2a5d9371aee95ad71441422ab4cb513a4abed399168b11a00ccc",
-    "dataset_hash": "e1b10f6ea557697df4fd96b655d58559d31b1564c62c67774460294b4ef01e09",
+    "dataset_hash": "32355a339e5298d3aa98e00e8b3dc1c5092d098fe7917bb1f531c8bb76070b29",
     "dataset_version": "invented-2026-10-v1",
     "embargo": {
       "microseconds": 300000000
@@ -227,7 +227,7 @@
   ],
   "experiments": [
     {
-      "experiment_id": "0db6ae21ed0ffb601bd4409dc893783a30f216fc63e2752e846847304f3c2f09",
+      "experiment_id": "46183a223ca4c091720ce444b3771f5551d946ea6fb6d0feef0fb1b27b1f0198",
       "status": "experiment",
       "baseline": {
         "kind": "trend",
@@ -407,7 +407,7 @@
       }
     },
     {
-      "experiment_id": "2352590b143df21ae329e11a87750b581a6a8ce0416f8f3101e3125b8867b99e",
+      "experiment_id": "65cc3697c55b30fea3bdec895115aa730171f89a6694672ef2ce4071d43a5d93",
       "status": "experiment",
       "baseline": {
         "kind": "trend",
@@ -587,7 +587,7 @@
       }
     },
     {
-      "experiment_id": "5a36dc3225633d6269c1357756dc815b9211afe6b38387acfcffc80dd9dc16cf",
+      "experiment_id": "df4ffe902a0b92db8db0e26b85f03f608cb655f8fbf3f7a2b608be5998374b15",
       "status": "experiment",
       "baseline": {
         "kind": "momentum",
@@ -767,7 +767,7 @@
       }
     },
     {
-      "experiment_id": "2d71d71c81c384f77ef7c35cc914fdd87f43eb0a3938cbc0e39fec70a14995d5",
+      "experiment_id": "c430e543b72bb7167c86eba1e53a3a4786803c5b7ec870a5cbcdf8dd9b035934",
       "status": "experiment",
       "baseline": {
         "kind": "momentum",
@@ -947,7 +947,7 @@
       }
     },
     {
-      "experiment_id": "dc0f1eabf5c5db8fbf3e1cb3f2c7b6d89cea458fe5dc7433310a310d7db8d2d8",
+      "experiment_id": "cdd0027efb350fc399fa281b58752c7fc02e84f1ac2663dc3a049941a959e179",
       "status": "experiment",
       "baseline": {
         "kind": "volatility",
@@ -1127,7 +1127,7 @@
       }
     },
     {
-      "experiment_id": "d8cc29adf078d7c8dad41ddbb3e5e1f0597d2f5f3ac159eeb33cf6048b1f58ff",
+      "experiment_id": "e899028d9bd694719a8ef2cf358a4c001555d3228a7a1e2d75b33d28d050eed7",
       "status": "experiment",
       "baseline": {
         "kind": "volatility",
@@ -1307,7 +1307,7 @@
       }
     },
     {
-      "experiment_id": "cc0f8e627a8e88dd574c5ed26526db3613c2a7728a7a7af960396fdb62a60e24",
+      "experiment_id": "56d2f8057194ca9e549531147061f0f3373e65f24bbbaa0748d4c3cc2a712ecb",
       "status": "experiment",
       "baseline": {
         "kind": "trend",
@@ -1487,7 +1487,7 @@
       }
     },
     {
-      "experiment_id": "b88431b5b69ea1538bda80dcca46d56199cc48249123989f9635f85ca8d2e39e",
+      "experiment_id": "7501b80524b3ab12cb16a4ae3b7aa9551c576e970bcef484c9aa79df87158e55",
       "status": "experiment",
       "baseline": {
         "kind": "trend",
@@ -1667,7 +1667,7 @@
       }
     },
     {
-      "experiment_id": "33a8908cbd8383ad0e303ee5874f38d79ac8f9eec12bfb3784355d0c30f55396",
+      "experiment_id": "ebe292f22690b15bf8a633566dda31d581df14c68c355d44af42fb7ac189ee08",
       "status": "experiment",
       "baseline": {
         "kind": "trend",
@@ -1847,7 +1847,7 @@
       }
     },
     {
-      "experiment_id": "a0e3c5baf4ea80c8f478ae39ffab87131412b443385870f0e6d9934d7ce6a1e7",
+      "experiment_id": "4177a106a9558a3490f9ce4fffd1b7d2693b6cfe05e91450208f8705ee483ab9",
       "status": "experiment",
       "baseline": {
         "kind": "trend",

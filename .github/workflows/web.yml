@@ -25,3 +25,11 @@ jobs:
       - run: npm run check
       - run: npx playwright install --with-deps chromium
       - run: npm test
+      - name: Retain synthetic browser latency evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: operations-browser-${{ github.run_id }}
+          path: .work/web-test-results/**/operations-load.json
+          if-no-files-found: ignore
+          retention-days: 14

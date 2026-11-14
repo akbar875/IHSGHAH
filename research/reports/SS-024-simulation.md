@@ -4,6 +4,10 @@ Seluruh dokumen, grant dan transaksi pada laporan ini **simulasi buatan**. Tidak
 ada data vendor, izin produksi, model berita tervalidasi atau klaim profit.
 G0–G3 tetap pending dan ranking berita disabled.
 
+Reproduksi 14 November 2026 (SS-025) memperbarui fingerprint protokol/laporan
+karena snapshot kontrol operasi menjadi input risiko SS-016. Metrik paired
+holdout dan keputusan kedua varian tetap sama; bukan holdout pasar baru.
+
 Reproduksi dari environment backend:
 
 ```sh

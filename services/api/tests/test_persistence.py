@@ -4,6 +4,7 @@ import json
 import os
 from collections.abc import Iterator
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import contextmanager
 from copy import deepcopy
 from dataclasses import replace
 from datetime import UTC, datetime, timedelta
@@ -141,8 +142,8 @@ def test_simulated_fills_cannot_be_relabelled_and_future_fills_are_hidden() -> N
         position.document("research", "pilot-sim")
 
 
-@pytest.fixture
-def database() -> Iterator[tuple[str, str]]:
+@contextmanager
+def disposable_database() -> Iterator[tuple[str, str]]:
     dsn = os.environ.get("PERSISTENCE_TEST_DSN")
     if not dsn:
         pytest.skip("Set PERSISTENCE_TEST_DSN to a disposable PostgreSQL research database")
@@ -182,6 +183,12 @@ def database() -> Iterator[tuple[str, str]]:
             admin.execute(sql.SQL("DROP ROLE {}").format(sql.Identifier(name)))
 
 
+@pytest.fixture
+def database() -> Iterator[tuple[str, str]]:
+    with disposable_database() as pair:
+        yield pair
+
+
 def scope(connection: psycopg.Connection[Any], user_id: str = "pilot-sim") -> None:
     connection.execute("SELECT set_config('ss.mode', 'research', true)")
     connection.execute("SELECT set_config('ss.user_id', %s, true)", (user_id,))
@@ -191,7 +198,7 @@ def test_empty_migration_repeat_and_checksum(database: tuple[str, str]) -> None:
     owner, _ = database
     migrate(owner)
     with psycopg.connect(owner) as connection:
-        assert connection.execute("SELECT count(*) FROM schema_migrations").fetchone() == (5,)
+        assert connection.execute("SELECT count(*) FROM schema_migrations").fetchone() == (6,)
         connection.execute("UPDATE schema_migrations SET checksum = 'tampered'")
     with pytest.raises(RuntimeError, match="checksum"):
         migrate(owner)
