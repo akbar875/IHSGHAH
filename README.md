@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+SS-028 menyediakan [keputusan teknis G3 no-go dan runbook pilot](docs/market-data/pilot-readiness.md):
+matriks bukti/persetujuan, canary satu akun, akses, monitoring aktual, rollback
+dan retensi untuk review. #27 sudah closed di GitHub, tetapi G2 tetap pending;
+G0/G1 belum lulus. Drill deployment serta persetujuan dokumentasi/retensi/legal
+belum tersedia sehingga #28 belum selesai dan pilot tidak diaktifkan.
+
 SS-027 menyediakan [fondasi laporan observasi G2](docs/market-data/paper-observation.md):
 manifest beku, receipt sesi berantai, diagnosis dependensi/sampel efektif,
 kalibrasi/fill/drawdown dan interval bootstrap sesi. [Laporan kosong](research/reports/SS-027-pending.json)
