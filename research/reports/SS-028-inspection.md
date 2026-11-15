@@ -1,5 +1,9 @@
 # SS-028 — Hasil inspeksi kesiapan pilot
 
+Catatan berikut adalah inspeksi awal pada commit `8f6c4a9`, sebelum hasil #8/#26
+diperbarui. Untuk cakupan research lokal yang dipilih pemilik dan status bukti
+lanjutan, lihat [review lokal SS-028](SS-028-local-review.md).
+
 15 November 2026 (WIB). Issue GitHub #28 cocok dengan body lokal: keputusan
 G3, kesiapan recovery/pembatasan, perilaku eksperimen saat gagal gerbang,
 serta persetujuan dokumentasi dan retensi. Branch: `feat/28-pilot-readiness`.

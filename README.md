@@ -36,15 +36,16 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 SS-028 menyediakan [keputusan teknis G3 no-go dan runbook pilot](docs/market-data/pilot-readiness.md):
 matriks bukti/persetujuan, canary satu akun, akses, monitoring aktual, rollback
-dan retensi untuk review. #27 sudah closed di GitHub, tetapi G2 tetap pending;
-G0/G1 belum lulus. Drill deployment serta persetujuan dokumentasi/retensi/legal
-belum tersedia sehingga #28 belum selesai dan pilot tidak diaktifkan.
+dan retensi untuk review. Pemilik memilih research lokal dengan pilot no-go;
+[paket review lokal](research/reports/SS-028-local-review.md) mengikuti merge PR #60.
+G0/G1/G2 belum lulus dan pilot tidak diaktifkan. Kualifikasi lokal tidak
+menyatakan kesiapan deployment atau persetujuan distribusi data.
 
 SS-027 menyediakan [fondasi laporan observasi G2](docs/market-data/paper-observation.md):
 manifest beku, receipt sesi berantai, diagnosis dependensi/sampel efektif,
 kalibrasi/fill/drawdown dan interval bootstrap sesi. [Laporan kosong](research/reports/SS-027-pending.json)
-mengakui nol kredit prospektif; #26/#8 masih open, G1 no-go dan issue #27 belum
-selesai. Tidak ada collector prospektif atau promosi model otomatis.
+mengakui nol kredit prospektif; G0 intraday pending, G1 no-go dan G2 pending
+walaupun issue #8/#27 sudah closed. Tidak ada collector prospektif atau promosi model otomatis.
 
 SS-026 menyediakan [kualifikasi integrasi paper offline](docs/market-data/paper-integration.md):
 feed → fitur → baseline → risiko → replay, receipt PostgreSQL terisolasi, laporan
