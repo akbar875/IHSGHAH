@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "timezone": "Asia/Jakarta",
+  "issue": 28,
+  "scope": "local_research_only",
+  "origin": "simulation",
+  "qualified_source_commit": "3fc42689a6dd94a719c5686ec8c9d3d09ae0de54",
+  "dependency": {
+    "pull_request": 60,
+    "merged": true
+  },
+  "decision": "no-go",
+  "pilot_enabled": false,
+  "paper_live_enabled": false,
+  "model_promoted": false,
+  "gates": {
+    "g0": "pending",
+    "g1": "no-go",
+    "g2": "pending",
+    "g3": "no-go"
+  },
+  "owner_selected_scope": "Research lokal; pilot tetap no-go",
+  "document_retention_approval": {
+    "status": "accepted_under_delegated_policy_selection",
+    "recorded_on": "2026-11-15",
+    "authority": "repository_owner_instruction_in_codex_chat",
+    "instruction": "berikan best practice yang auto",
+    "interpretation": "Agent selects best-practice defaults and finalizes local research/no-go scope without further confirmation",
+    "reviewed_package_commit": "80b802981419a0e0db7dc58946a724b8e9f9baab",
+    "policy_version": "SS028-local-retention-v1",
+    "pilot_or_legal_approval": false
+  },
+  "environment": {
+    "postgresql": "18.7",
+    "image_digest": "sha256:9f4fd4aa918f52ae3d6f3b687f1de90d8f867cd4d520021545a9a50c120eae3b",
+    "storage": "disposable tmpfs",
+    "exposure": "loopback only",
+    "data": "synthetic fixtures"
+  },
+  "verification": {
+    "backend": {
+      "passed": 81,
+      "skipped": 0
+    },
+    "browser": {
+      "passed": 2,
+      "web_tree": "d83c142e57ae25eb49118c5bdc512cfc14bf7b27"
+    },
+    "restore": {
+      "data_origin": "simulation",
+      "tables_restored": {
+        "journal": 1,
+        "retention_policy": 1,
+        "personal_preferences": 1,
+        "manual_position_events": 1,
+        "in_app_alerts": 1,
+        "alert_gates": 1,
+        "internal_news": 1,
+        "operation_events": 1,
+        "paper_qualification": 0,
+        "paper_evidence": 0
+      },
+      "all_rows_equal_except_appended_pause": true,
+      "restored_entry_blocked": true,
+      "retry_deduplicated": true,
+      "nonempty_target_rejected": true,
+      "checksum_tamper_rejected": true,
+      "runtime_role_backup_rejected": true,
+      "failed_restore_atomic": true,
+      "new_identity_after_restore": true,
+      "source_unchanged": true
+    },
+    "paper_evidence": {
+      "paper_fill_count": 2,
+      "manual_fixture_fill_count": 1,
+      "combined_pnl": null,
+      "can_advance_before": false,
+      "acceptance_passed_after": false,
+      "can_advance_after": false
+    }
+  },
+  "source_artifact_hashes": [
+    {
+      "name": "issue28-local-final.xml",
+      "sha256": "c116302420b6fee8f63726a3ce0f40391d85f92377507afa1eec4bfdfaf6e9af"
+    },
+    {
+      "name": "issue28-local-restore-final.json",
+      "sha256": "2843b754550a146989b15ea7c3df059472fe2de8735f92d89778bd40e92cf52b"
+    },
+    {
+      "name": "issue28-paper-evidence-final.json",
+      "sha256": "dc0a9d1ce2b988fc8a2320afcd3881a864e2231e62497c11f07ed85f53c47656"
+    }
+  ],
+  "limits": [
+    "No licensed feed, prospective G2 credit or broker/user trades",
+    "Local control rollback/restore is not deployment binary/schema rollback",
+    "Hashes identify test artifacts, not owner approval or licenses",
+    "Opening pilot still requires G0/G1/G2, deployment drills and separate approval"
+  ],
+  "retention_policy": {
+    "version": "SS028-local-retention-v1",
+    "ledger_preferences": "while account active and required for reconciliation; weekly review",
+    "alerts_gates_max_days": 30,
+    "sanitized_logs_max_days": 14,
+    "encrypted_backups_max_days": 30,
+    "temporary_exports_max_hours": 24,
+    "erasure_request_target_max_days": 30,
+    "legal_hold": "documented obligations override deletion until resolved",
+    "disposable_test_database": "tmpfs removed with container after drill",
+    "vendor_data": "source-specific evaluation permission only",
+    "enforcement": "SS-023 operator procedure plus disposable-test lifecycle",
+    "scheduled_janitor_implemented": false
+  }
+}

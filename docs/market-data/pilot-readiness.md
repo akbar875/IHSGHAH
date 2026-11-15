@@ -7,23 +7,40 @@ tangan persetujuan pemilik, kajian legal, atau izin menjalankan pilot.
 
 ## Bukti keputusan
 
+Cakupan tindak lanjut yang dipilih pemilik pada 15 November 2026 adalah
+**research lokal; pilot tetap no-go**. Penutupan pekerjaan pada cakupan ini tidak
+menyatakan kesiapan deployment pilot. Bukti recovery/pembatasan lokal dinilai
+terpisah dari prasyarat pilot di bawah; semua prasyarat pilot tetap berlaku
+sebelum ada penggunaan di luar research lokal.
+
 | Pemeriksaan | Bukti yang tersedia | Penilaian |
 |---|---|---|
-| G0, hak data dan biaya | [Audit vendor](vendor-audit.md), [ADR-0002](../decisions/0002-market-data-procurement.md); issue #8 open | Pending: kontrak/sampel berizin, storage, display/non-display, redistribusi, kapasitas, biaya dan anggaran belum final |
+| G0, hak data dan biaya | [Keputusan sumber gratis](free-vendor-decision.md), [audit unduhan EOD](free-vendor-audit-result.json), [ADR-0002](../decisions/0002-market-data-procurement.md); issue #8 closed melalui PR #58 | Pending untuk intraday: Aethereal dipilih hanya untuk evaluasi EOD lokal dengan anggaran vendor Rp0; trade/book, timestamp point-in-time, hak aplikasi/display/redistribusi/retensi dan SLA intraday belum terbukti |
 | G1, kelayakan strategi | [SS-016](../../research/reports/SS-016-simulation.md) | No-go: simulasi, gagal exit, risiko dan ketidakpastian belum memenuhi syarat pasar |
-| Integrasi paper | [SS-026](paper-integration.md); issue #26 open | Acceptance offline tersedia; jalur paper prospektif dan reservasi bersama belum lengkap |
+| Integrasi paper | [Review acceptance SS-026](paper-acceptance.md), PR #60 merged pada `3fc4268`; issue #26 open untuk keputusan nyata | Review operator append-only G0/G1, 12 skenario dan laporan fill terpisah tersedia; paper prospektif dan reservasi bersama belum lengkap |
 | G2, observasi prospektif | [Laporan SS-027](../../research/reports/SS-027-pending.json) | Pending: 0 sesi dan 0 transaksi dikreditkan; toleransi belum tersedia |
 | Recovery dan pembatasan | [SS-025](../../research/reports/SS-025-simulation.md), [SS-023](../SECURITY.md) | Teruji pada fixture; rollback deployment/canary, kapasitas dan recovery vendor nyata belum terbukti |
 | Legal/distribusi/retensi | [Batas satu akun](../decisions/0001-stack-and-module-boundaries.md), [retensi pribadi](../SECURITY.md) | Rancangan tersedia; review legal sesuai distribusi, hak retensi vendor dan persetujuan pilot belum tersedia |
 
-Inspeksi GitHub menemukan #27 **closed**, sedangkan #8 dan #26 **open**.
+Inspeksi lanjutan menemukan #8 dan #27 **closed**, sedangkan #26 masih **open**.
+Penyelesaian audit sumber gratis #8 tidak mengubah G0 intraday menjadi passed.
+PR #60 telah di-merge sebelum finalisasi tindak lanjut #28. Merge tersebut
+menyediakan mekanisme review/penahanan, bukan keputusan G0/G1 passed.
+CSV aktual berisi 518.956 record, 114 ticker dan 308 anomali OHLC; tidak boleh
+diubah menjadi bukti kualitas trade/book intraday atau sumber tampilan pilot.
 Dokumen SS-027 yang menyatakan issue masih open adalah catatan inspeksi sebelumnya.
 Status closed tidak menggantikan bukti 60 sesi bursa **dan** 300 transaksi paper
 layak dengan fill, kecukupan sampel efektif, ketidakpastian dan review G2.
 Minimum hitungan tidak otomatis meluluskan G2.
 
-[Receipt keputusan](../../research/reports/SS-028-no-go.json) mengikat bukti lokal
-dengan SHA-256 atas teks UTF-8 setelah normalisasi CRLF menjadi LF. Hash mendeteksi
+Hasil drill lokal dan matriks acceptance untuk cakupan no-go tersedia pada
+[review lokal SS-028](../../research/reports/SS-028-local-review.md).
+
+[Receipt keputusan awal](../../research/reports/SS-028-no-go.json) mengikat bukti
+pada commit `8f6c4a9c5365387361cf817667571c3b87183be1`, sebelum tindak lanjut #8/#26,
+dengan SHA-256 atas teks UTF-8 setelah normalisasi CRLF menjadi LF. Untuk audit
+receipt historis, ambil isi file dari commit itu; hash tidak dimaksudkan cocok
+dengan dokumen yang sudah diperbarui. Hash mendeteksi
 perubahan, bukan autentikasi atau approval. Receipt ini tidak dibaca runtime untuk
 mengaktifkan mode apa pun. Tidak ada feed/broker, deployment, rotasi sesi,
 perintah resume atau perubahan ledger yang dilakukan dalam inspeksi ini.
@@ -59,7 +76,9 @@ receipt yang telah disanitasi. Jangan mengisi nama reviewer sebagai tanda tangan
 | Dokumentasi dan retensi | Pemilik data dan operator | Versi dokumen, hak retensi vendor, ekspor/hapus, legal hold, backup dan bukti pelaksanaan |
 | Rilis akhir | akbar875 | Semua receipt di atas, hasil canary, artefak rollback kompatibel dan tanda tangan/waktu eksplisit |
 
-Semua persetujuan tersebut **pending**. Belum ada reviewer riset/legal/operator
+Semua persetujuan **pilot** tersebut tetap **pending**. Keputusan paket research
+lokal dicatat terpisah pada [review lokal SS-028](../../research/reports/SS-028-local-review.md).
+Belum ada reviewer riset/legal/operator
 bernama yang menerima penugasan atau persetujuan akhir yang tercatat.
 Kolom penanggung jawab menetapkan siapa yang harus menugaskan/memutuskan,
 bukan mengklaim orang tersebut telah menyetujui.
@@ -143,7 +162,12 @@ Market data mengikuti kontrak vendor, termasuk backup, derived data dan legal
 hold. Bila aturan bertentangan, eskalasikan ke reviewer legal sebelum ingest.
 Restore harus menerapkan daftar penghapusan sebelum service dibuka.
 
-Dokumentasi ini dan retensi berstatus **proposed / pending approval**. Catat ID
+Untuk sumber gratis yang dipilih #8, izin publik hanya mendukung evaluasi riset;
+hak arsip permanen, backup lintas pihak, model/derived data dan display aplikasi
+belum jelas. Jangan menerapkan default retensi pribadi di atas pada CSV vendor.
+Data mentah tetap di luar Git dan tidak masuk backup aplikasi atau jalur pilot.
+
+Dokumentasi dan retensi untuk **pilot** berstatus **proposed / pending approval**. Catat ID
 review, versi/hash dokumen, aktor, waktu, ruang lingkup dan masa berlaku persetujuan
 di record privat. Tidak ada persetujuan yang dapat digantikan oleh perubahan kode.
 
@@ -152,3 +176,42 @@ akses, tunjuk reviewer, peroleh persetujuan dokumen/retensi/legal/biaya, lalu
 rekam keputusan G3 bertanda tangan pemilik. Jika tetap no-go, arsipkan keputusan
 yang disetujui dan buktikan batas penggunaan/recovery yang dipersyaratkan tanpa
 membuka pilot. Sampai bukti itu tersedia, #28 tetap belum selesai.
+
+Untuk keputusan **research lokal/no-go** yang dipilih pemilik, paket penutupan
+mencakup keputusan tertulis, bukti restore/kontrol operasi/penolakan akses lokal,
+label eksperimen yang tetap berlaku, serta review dokumen dan retensi oleh
+pemilik. Persetujuan paket ini hanya menerima keputusan menahan pilot; tidak
+mengisi G0/G1/G2 sebagai passed atau menyetujui distribusi data. Canary dan
+deployment pilot tetap tidak dijalankan. Bukti dan persetujuan harus dicatat
+secara eksplisit sebelum menutup issue.
+
+## Default best practice untuk research lokal
+
+Versi kebijakan: **SS028-local-retention-v1**, berlaku 15 November 2026.
+Pemilik mendelegasikan pemilihan default melalui instruksi “berikan best practice
+yang auto”, setelah memilih research lokal/no-go. Agen menetapkan default berikut
+untuk paket penutupan tersebut; ini penerimaan melalui delegasi, bukan tanda
+tangan persetujuan legal atau persetujuan menjalankan pilot.
+
+| Jenis data | Batas kebijakan lokal |
+|---|---|
+| Ledger dan preferensi | Selama akun aktif dan diperlukan untuk rekonsiliasi; review mingguan, proses hapus saat akun ditutup |
+| Alert/gate | Maksimal 30 hari; penghapusan harus mempertahankan konsistensi dedup dan ledger |
+| Log operasional tersanitasi | Maksimal 14 hari; tanpa cookie, token, DSN atau payload posisi |
+| Backup | Terenkripsi, akses operator, rolling maksimal 30 hari; daftar penghapusan diterapkan sebelum restore dibuka |
+| Ekspor sementara | Maksimal 24 jam, terenkripsi dan dikirim lewat kanal privat |
+| Permintaan hapus | Maksimal 30 hari kecuali kewajiban retensi/legal hold yang terdokumentasi |
+| Fixture PostgreSQL disposable | tmpfs, loopback, dihapus bersama container sesudah drill |
+| Data sumber EOD | Sesuai izin evaluasi sumber #8; tanpa asumsi hak arsip, backup permanen atau distribusi |
+
+Angka 14/30 hari dan 24 jam adalah default desain lokal dari SS-023, bukan
+durasi universal yang diwajibkan standar. Prinsipnya membatasi data pada
+kebutuhan, memisahkan log dari ledger, melindungi akses, dan menerapkan masa
+retensi pada salinan/backup juga. [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+menekankan perlindungan data log dan pembuangan sesuai periode yang dibutuhkan.
+Kewajiban/izin yang lebih spesifik harus diselesaikan sebelum cakupan berubah.
+
+Pemilihan kebijakan dan finalisasi issue dilakukan secara otomatis oleh agen
+sesuai delegasi. Penegakan TTL data persisten masih melalui prosedur operator
+SS-023; **tidak ada janitor terjadwal baru** yang diaktifkan. Runtime tetap
+tidak memiliki DELETE/TRUNCATE atau hak menonaktifkan audit append-only.
