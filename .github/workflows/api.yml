@@ -28,6 +28,7 @@ jobs:
       OPERATIONS_RESTORE_REPORT: ${{ github.workspace }}/.work/operations-restore.json
       PERSISTENCE_PAPER_TEST_DSN: postgresql://saham_signal_research:ci_disposable_only@127.0.0.1:5432/saham_signal_paper
       PAPER_SIMULATION_REPORT: ${{ github.workspace }}/.work/paper-simulation.json
+      PAPER_EVIDENCE_REPORT: ${{ github.workspace }}/.work/paper-evidence-report.json
     defaults:
       run:
         working-directory: services/api
@@ -63,6 +64,7 @@ jobs:
           path: |
             .work/paper-backend.xml
             .work/paper-simulation.json
+            .work/paper-evidence-report.json
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 14

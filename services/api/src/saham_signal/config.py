@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     rate_limit_per_minute: int = Field(default=120, ge=1, le=10000)
     request_max_bytes: int = Field(default=65536, ge=1024, le=1048576)
     market_fixture_enabled: bool = False
+    paper_release_sha: str | None = Field(default=None, pattern=r"^[0-9a-f]{40}$")
     market_fixture_token: SecretStr | None = None
     market_nominal_idr: str = Field(
         default="1000000.00",

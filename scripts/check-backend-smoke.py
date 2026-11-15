@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from datetime import UTC, datetime
 from importlib.resources import files
 from urllib.error import HTTPError, URLError
 from urllib.request import ProxyHandler, Request, build_opener
@@ -15,6 +16,7 @@ from websockets.sync.client import connect
 
 from saham_signal.adapters.paper_simulation import run as paper_qualification
 from saham_signal.adapters.persistence import SCHEMA
+from saham_signal.application.acceptance import assess
 from saham_signal.application.market import FixtureMarket, MarketScope, validate
 
 
@@ -23,6 +25,8 @@ def main() -> None:
     assert files("saham_signal.migrations").joinpath("001_journal.sql").is_file()
     assert files("saham_signal.migrations").joinpath("002_preferences.sql").is_file()
     assert files("saham_signal.migrations").joinpath("007_paper_qualification.sql").is_file()
+    assert files("saham_signal.migrations").joinpath("008_paper_evidence.sql").is_file()
+    assert not assess(None, datetime.now(UTC), {}, paused=True)["can_advance"]
     paper = paper_qualification()
     assert paper["mode"] == "paper" and paper["actual_fills"] == []
     assert len(paper["paper_fills"]) == 2 and not paper["readiness"]["paper_live_enabled"]

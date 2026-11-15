@@ -17,6 +17,7 @@ from test_persistence import disposable_database
 
 from saham_signal.adapters.backup import backup, restore
 from saham_signal.adapters.paper import PostgresPaper
+from saham_signal.adapters.paper_evidence import PostgresPaperEvidence
 from saham_signal.adapters.paper_simulation import SimulationControl, run, scenario
 from saham_signal.application.operations import Operations
 from saham_signal.application.paper import qualify, readiness
@@ -177,16 +178,16 @@ def test_signed_paper_receipt_api_and_database_outage(monkeypatch: pytest.Monkey
     ) as client:
         assert client.get("/api/ops/paper").status_code == 401
         client.cookies.set("saham_session", session_cookie(settings))
-        monkeypatch.setattr(PostgresPaper, "latest", lambda _: run())
+        monkeypatch.setattr(PostgresPaperEvidence, "report", lambda *a, **k: {"receipt": run()})
         response = client.get("/api/ops/paper")
         assert response.status_code == 200
         assert response.headers["cache-control"] == "private, no-store"
         assert response.json()["receipt"]["actual_fills"] == []
 
-        def unavailable(_: Any) -> None:
+        def unavailable(*args: Any, **kwargs: Any) -> None:
             raise psycopg.OperationalError("private-dsn")
 
-        monkeypatch.setattr(PostgresPaper, "latest", unavailable)
+        monkeypatch.setattr(PostgresPaperEvidence, "report", unavailable)
         failed = client.get("/api/ops/paper")
         assert failed.status_code == 503 and "private-dsn" not in failed.text
 

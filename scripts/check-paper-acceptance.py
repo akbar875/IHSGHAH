@@ -20,18 +20,27 @@ BACKEND = {
     5: ["test_arb_no_buyers_keeps_position_open"],
     6: ["test_late_availability_mapping_and_untrusted_text"],
     7: ["test_gap_stale_snapshot_and_reconnect_require_new_snapshot"],
-    8: ["test_actual_quantity_partial_exit_stop_and_close"],
+    8: [
+        "test_actual_quantity_partial_exit_stop_and_close",
+        "test_actual_and_paper_fills_have_distinct_sources_and_no_combined_pnl",
+    ],
     9: ["test_cache_isolation_copy_bounds_and_expiry"],
     10: ["test_numeric_features_and_pressure_are_distinct_from_book"],
     11: [
         "test_durable_races_restart_scope_and_immutability",
         "test_postgres_paper_receipt_retry_rls_immutability_and_restore",
         "test_feed_baseline_risk_execution_report_is_deterministic_and_separate",
+        "test_every_scenario_has_named_evidence_and_critical_failure_blocks_progression",
+        "test_g0_g1_reviews_expiry_release_tolerances_and_control_are_required",
+        "test_database_evidence_operator_cas_report_snapshot_rls_and_restore",
     ],
     12: [],
 }
 WEB = {
-    11: ["paper report separates simulation and actual fills at 360px"],
+    11: [
+        "paper report separates simulation and actual fills at 360px",
+        "critical acceptance failure holds progression despite paper fills",
+    ],
     7: ["full snapshot replacement removes old levels, failed refresh clears book"],
     9: ["validated synthetic projection renders coverage bands and expires without a refetch"],
     12: ["touch viewport keeps plan above book and no horizontal overflow"],

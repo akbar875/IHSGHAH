@@ -177,3 +177,10 @@ Persistensi opsional `--persist` hanya pada konfigurasi/database paper terisolas
 dengan akun fixture `simulation-account`; migrasi harus diterapkan sebelumnya.
 `GET /api/ops/paper` memerlukan sesi admin bertanda tangan dan mode paper.
 Panduan serta batas gerbang ada di [integrasi paper](../../docs/market-data/paper-integration.md).
+
+Review G0/G1, import bukti CI, pemisahan ledger aktual dan command
+`python -m saham_signal.paper_evidence` dijelaskan dalam
+[acceptance SS-026](../../docs/market-data/paper-acceptance.md). Set `PAPER_RELEASE_SHA`
+ke commit artefak terpasang; import memakai operator terpisah. Migrasi `008_paper_evidence.sql`
+harus diterapkan sebelum endpoint laporan terbaru digunakan. Kegagalan/missing
+bukti kritis menahan admission; tidak ada command untuk menyalakan paper live.
