@@ -1,0 +1,27 @@
+{
+  "schema_version": "ss008-eod-audit-1",
+  "sha256": "d73c4a0229a99aff3818442824dc2f819f9780a41b150ee0c456a1c1a4805eb6",
+  "bytes": 28776712,
+  "metrics": {
+    "rows": 518956,
+    "missing_or_extra_fields": 0,
+    "invalid_date": 0,
+    "duplicate_symbol_date": 0,
+    "out_of_order_within_symbol": 0,
+    "weekend_rows": 0,
+    "invalid_numeric": 0,
+    "nonpositive_price": 0,
+    "invalid_volume": 0,
+    "zero_volume": 38850,
+    "invalid_ohlc_bounds": 308,
+    "adjusted_close_differs": 471473
+  },
+  "symbols": 114,
+  "distinct_dates": 6575,
+  "first_date": "2000-06-06",
+  "last_date": "2026-11-13",
+  "min_rows_per_symbol": 460,
+  "max_rows_per_symbol": 6575,
+  "g0": "PENDING",
+  "live_eligible": false
+}

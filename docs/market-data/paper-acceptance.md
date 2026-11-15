@@ -112,8 +112,9 @@ historis tidak ditulis ulang ketika ledger manual bertambah.
 
 ## Batas penyelesaian
 
-Hasil pengujian guard tidak memberikan keputusan G0/G1 produk. #8 belum menyediakan
-bukti feed berizin dan SS-016 masih G1 no-go. Karena itu belum ada approval nyata,
+Hasil pengujian guard tidak memberikan keputusan G0/G1 produk. #8 telah ditutup
+untuk riset EOD, tetapi [keputusan intraday](free-vendor-decision.md) masih NO-GO
+dan G0 pending. SS-016 masih G1 no-go. Karena itu belum ada approval intraday nyata,
 paper live tetap disabled, dan issue #26 belum boleh ditutup sebagai selesai penuh.
 Tiga kriteria dengan bukti kualifikasi dan pemisahan laporan dapat dicentang;
 kriteria keputusan lulus tetap menunggu bukti eksternal yang sah.

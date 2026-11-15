@@ -1,5 +1,13 @@
 # Audit vendor dan hak data SS-008
 
+**Hasil terbaru 15 November 2026:** [keputusan sumber gratis dan pengukuran
+historis aktual](free-vendor-decision.md) menggantikan kesimpulan awal di bawah.
+Sumber riset EOD dipilih; keputusan intraday NO-GO dan G0 PENDING. Angka sampel
+0/NOT_ASSESSED pada bagian lama adalah keadaan **13 November**, bukan hasil
+terbaru. Pengadaan berbayar tidak dilanjutkan pada scope anggaran Rp0.
+
+## Riwayat audit awal — 13 November 2026
+
 Tanggal pemeriksaan: **13 November 2026, Asia/Jakarta**. Status: **G0 PENDING**.
 Ini audit publik tahap awal. Tidak ada kontrak, kredensial, penawaran, sampel
 feed/historis berizin, ataupun hasil uji pasar dalam repo.

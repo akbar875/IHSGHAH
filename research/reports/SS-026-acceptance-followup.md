@@ -22,6 +22,8 @@ Wheel smoke memeriksa migrasi 008 dan guard bukti kosong yang harus tetap blocke
 
 Kriteria 1, 3 dan 4 memiliki implementasi serta bukti kualifikasi. Mekanisme
 review/prasyarat kriteria 2 tersedia, tetapi **keputusan lulus nyata G0/G1 belum
-tersedia**. #8 masih pending; SS-016 masih G1 no-go. Fixture tidak menjadi approval,
+tersedia**. #8 sudah ditutup untuk sumber riset EOD, sedangkan
+[keputusan intraday tetap NO-GO dan G0 pending](../../docs/market-data/free-vendor-decision.md).
+SS-016 masih G1 no-go. Fixture tidak menjadi approval,
 paper live tetap disabled dan tidak ada kredit G2. Issue #26 tetap terbuka untuk
 keputusan lulus dan integrasi prospektif yang memerlukan bukti eksternal tersebut.
