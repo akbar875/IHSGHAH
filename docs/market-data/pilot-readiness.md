@@ -76,7 +76,9 @@ receipt yang telah disanitasi. Jangan mengisi nama reviewer sebagai tanda tangan
 | Dokumentasi dan retensi | Pemilik data dan operator | Versi dokumen, hak retensi vendor, ekspor/hapus, legal hold, backup dan bukti pelaksanaan |
 | Rilis akhir | akbar875 | Semua receipt di atas, hasil canary, artefak rollback kompatibel dan tanda tangan/waktu eksplisit |
 
-Semua persetujuan tersebut **pending**. Belum ada reviewer riset/legal/operator
+Semua persetujuan **pilot** tersebut tetap **pending**. Keputusan paket research
+lokal dicatat terpisah pada [review lokal SS-028](../../research/reports/SS-028-local-review.md).
+Belum ada reviewer riset/legal/operator
 bernama yang menerima penugasan atau persetujuan akhir yang tercatat.
 Kolom penanggung jawab menetapkan siapa yang harus menugaskan/memutuskan,
 bukan mengklaim orang tersebut telah menyetujui.
@@ -165,7 +167,7 @@ hak arsip permanen, backup lintas pihak, model/derived data dan display aplikasi
 belum jelas. Jangan menerapkan default retensi pribadi di atas pada CSV vendor.
 Data mentah tetap di luar Git dan tidak masuk backup aplikasi atau jalur pilot.
 
-Dokumentasi ini dan retensi berstatus **proposed / pending approval**. Catat ID
+Dokumentasi dan retensi untuk **pilot** berstatus **proposed / pending approval**. Catat ID
 review, versi/hash dokumen, aktor, waktu, ruang lingkup dan masa berlaku persetujuan
 di record privat. Tidak ada persetujuan yang dapat digantikan oleh perubahan kode.
 
@@ -182,3 +184,34 @@ pemilik. Persetujuan paket ini hanya menerima keputusan menahan pilot; tidak
 mengisi G0/G1/G2 sebagai passed atau menyetujui distribusi data. Canary dan
 deployment pilot tetap tidak dijalankan. Bukti dan persetujuan harus dicatat
 secara eksplisit sebelum menutup issue.
+
+## Default best practice untuk research lokal
+
+Versi kebijakan: **SS028-local-retention-v1**, berlaku 15 November 2026.
+Pemilik mendelegasikan pemilihan default melalui instruksi “berikan best practice
+yang auto”, setelah memilih research lokal/no-go. Agen menetapkan default berikut
+untuk paket penutupan tersebut; ini penerimaan melalui delegasi, bukan tanda
+tangan persetujuan legal atau persetujuan menjalankan pilot.
+
+| Jenis data | Batas kebijakan lokal |
+|---|---|
+| Ledger dan preferensi | Selama akun aktif dan diperlukan untuk rekonsiliasi; review mingguan, proses hapus saat akun ditutup |
+| Alert/gate | Maksimal 30 hari; penghapusan harus mempertahankan konsistensi dedup dan ledger |
+| Log operasional tersanitasi | Maksimal 14 hari; tanpa cookie, token, DSN atau payload posisi |
+| Backup | Terenkripsi, akses operator, rolling maksimal 30 hari; daftar penghapusan diterapkan sebelum restore dibuka |
+| Ekspor sementara | Maksimal 24 jam, terenkripsi dan dikirim lewat kanal privat |
+| Permintaan hapus | Maksimal 30 hari kecuali kewajiban retensi/legal hold yang terdokumentasi |
+| Fixture PostgreSQL disposable | tmpfs, loopback, dihapus bersama container sesudah drill |
+| Data sumber EOD | Sesuai izin evaluasi sumber #8; tanpa asumsi hak arsip, backup permanen atau distribusi |
+
+Angka 14/30 hari dan 24 jam adalah default desain lokal dari SS-023, bukan
+durasi universal yang diwajibkan standar. Prinsipnya membatasi data pada
+kebutuhan, memisahkan log dari ledger, melindungi akses, dan menerapkan masa
+retensi pada salinan/backup juga. [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+menekankan perlindungan data log dan pembuangan sesuai periode yang dibutuhkan.
+Kewajiban/izin yang lebih spesifik harus diselesaikan sebelum cakupan berubah.
+
+Pemilihan kebijakan dan finalisasi issue dilakukan secara otomatis oleh agen
+sesuai delegasi. Penegakan TTL data persisten masih melalui prosedur operator
+SS-023; **tidak ada janitor terjadwal baru** yang diaktifkan. Runtime tetap
+tidak memiliki DELETE/TRUNCATE atau hak menonaktifkan audit append-only.

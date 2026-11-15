@@ -36,7 +36,7 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 SS-028 menyediakan [keputusan teknis G3 no-go dan runbook pilot](docs/market-data/pilot-readiness.md):
 matriks bukti/persetujuan, canary satu akun, akses, monitoring aktual, rollback
-dan retensi untuk review. Pemilik memilih research lokal dengan pilot no-go;
+dan retensi. Pemilik memilih research lokal dengan pilot no-go;
 [paket review lokal](research/reports/SS-028-local-review.md) mengikuti merge PR #60.
 G0/G1/G2 belum lulus dan pilot tidak diaktifkan. Kualifikasi lokal tidak
 menyatakan kesiapan deployment atau persetujuan distribusi data.

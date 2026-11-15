@@ -80,7 +80,7 @@ hilang. Tidak ada backup pribadi, DSN, cookie atau salinan CSV vendor di repo.
 | Keputusan tertulis dan penanggung jawab | G3 no-go; akbar875 pemilik keputusan rilis |
 | Recovery/rollback dan pembatasan penggunaan | Drill lokal pada hasil merge #60 lulus, termasuk restore/evidence/RLS/pause; bukan rollback binary/schema atau sertifikasi deployment pilot |
 | UI tetap eksperimen | Dua tes browser lulus: label research/simulasi/probabilitas unavailable dan penahanan kegagalan kritis |
-| Dokumentasi dan retensi disetujui | Paket review tersedia; approval eksplisit pemilik masih pending |
+| Dokumentasi dan retensi disetujui | Default SS028-local-retention-v1 ditetapkan agen melalui delegasi pemilik untuk memilih best practice dan finalisasi research lokal/no-go |
 
 ## Paket persetujuan pemilik
 
@@ -90,6 +90,14 @@ research lokal**, termasuk batas sumber EOD, pencatatan manual yang terpisah,
 retensi pribadi, serta larangan distribusi/retensi vendor yang belum berizin.
 Approval ini tidak boleh ditulis sebagai G0/G1/G2 passed atau izin pilot.
 
-Status persetujuan akhir: **pending**. Catat referensi instruksi eksplisit pemilik
-setelah paket bukti final tersedia; jangan menganggap merge dependency atau
-pilihan cakupan sebagai tanda tangan persetujuan dokumen/retensi.
+Status paket lokal: **diterima melalui delegasi pemilihan kebijakan** pada
+15 November 2026. Setelah paket commit `80b8029` dan seluruh CI tersedia, pemilik
+menjawab permintaan persetujuan dengan “berikan best practice yang auto”. Agen
+menafsirkan instruksi ini sebagai delegasi untuk memilih default dan menyelesaikan
+#28 tanpa konfirmasi tambahan, lalu mencatat default SS-023 dalam
+[SS028-local-retention-v1](../../docs/market-data/pilot-readiness.md).
+
+Record ini menyimpan dasar delegasi apa adanya; tidak mengklaim tanda tangan
+persetujuan legal/pilot atau bahwa pemilik memeriksa setiap nilai secara manual.
+G0/G1/G2 dan persetujuan pilot tetap mengikuti bukti terpisah. Tidak ada janitor
+terjadwal baru atau penghapusan ledger pengguna yang dijalankan.

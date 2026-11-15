@@ -22,7 +22,14 @@
   },
   "owner_selected_scope": "Research lokal; pilot tetap no-go",
   "document_retention_approval": {
-    "status": "pending"
+    "status": "accepted_under_delegated_policy_selection",
+    "recorded_on": "2026-11-15",
+    "authority": "repository_owner_instruction_in_codex_chat",
+    "instruction": "berikan best practice yang auto",
+    "interpretation": "Agent selects best-practice defaults and finalizes local research/no-go scope without further confirmation",
+    "reviewed_package_commit": "80b802981419a0e0db7dc58946a724b8e9f9baab",
+    "policy_version": "SS028-local-retention-v1",
+    "pilot_or_legal_approval": false
   },
   "environment": {
     "postgresql": "18.7",
@@ -92,5 +99,19 @@
     "Local control rollback/restore is not deployment binary/schema rollback",
     "Hashes identify test artifacts, not owner approval or licenses",
     "Opening pilot still requires G0/G1/G2, deployment drills and separate approval"
-  ]
+  ],
+  "retention_policy": {
+    "version": "SS028-local-retention-v1",
+    "ledger_preferences": "while account active and required for reconciliation; weekly review",
+    "alerts_gates_max_days": 30,
+    "sanitized_logs_max_days": 14,
+    "encrypted_backups_max_days": 30,
+    "temporary_exports_max_hours": 24,
+    "erasure_request_target_max_days": 30,
+    "legal_hold": "documented obligations override deletion until resolved",
+    "disposable_test_database": "tmpfs removed with container after drill",
+    "vendor_data": "source-specific evaluation permission only",
+    "enforcement": "SS-023 operator procedure plus disposable-test lifecycle",
+    "scheduled_janitor_implemented": false
+  }
 }

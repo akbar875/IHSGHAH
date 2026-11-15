@@ -17,7 +17,7 @@ Siapkan keputusan rilis terbatas berbasis bukti.
 - [x] Keputusan go/no-go G3 tertulis dengan penanggung jawab.
 - [x] Recovery/rollback dan pembatasan penggunaan terbukti siap.
 - [x] Jika gagal gerbang, UI tetap eksperimen tanpa klaim sinyal layak transaksi nyata.
-- [ ] Dokumentasi pilot dan kebijakan retensi disetujui.
+- [x] Dokumentasi pilot dan kebijakan retensi disetujui.
 
 ## Dependency
 
@@ -35,7 +35,7 @@ Dependency adalah prasyarat implementasi. Gerbang G0/G1/G2/G3 tetap mengikuti PR
 
 Ganti `<issue-number>` dengan nomor issue GitHub sebenarnya. PR menautkan `Closes #<issue-number>`.
 
-## Hasil inspeksi — 15 November 2026
+## Hasil inspeksi awal — 15 November 2026
 
 [Keputusan teknis G3: no-go dan runbook pilot](../market-data/pilot-readiness.md)
 serta [matriks acceptance](../../research/reports/SS-028-inspection.md) tersedia
@@ -59,3 +59,10 @@ memakai PostgreSQL nyata tanpa skip dan dua tes browser lulus. Checkbox kedua
 hanya mengkualifikasi kontrol rollback/pause, restore serta pembatasan lokal;
 tidak membuktikan rollback binary/schema atau deployment pilot. Persyaratan pilot
 tetap berlaku jika cakupan diperluas; tidak ada gerbang pasar yang diluluskan.
+
+Paket research lokal diterima melalui delegasi pemilik untuk menentukan default
+best practice (“berikan best practice yang auto”) setelah paket commit `80b8029`
+dan CI lulus tersedia. Agen menetapkan **SS028-local-retention-v1** dari default
+SS-023 dan prinsip minimisasi/proteksi/retensi OWASP. Acceptance terakhir berlaku
+pada dokumen penutupan **research lokal/no-go** tersebut; persetujuan legal dan
+rilis pilot tetap pending. Lihat record delegasi pada paket review lokal.
