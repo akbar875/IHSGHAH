@@ -29,6 +29,7 @@ TABLES = (
     "internal_news",
     "operation_events",
     "paper_qualification",
+    "paper_evidence",
 )
 
 
@@ -120,6 +121,7 @@ def restore(dsn: str, mode: Mode, document: dict[str, Any], confirmation: str) -
                 "manual_position_events",
                 "in_app_alerts",
                 "internal_news",
+                "paper_evidence",
             }:
                 conn.execute(
                     sql.SQL(

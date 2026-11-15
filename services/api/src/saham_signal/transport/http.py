@@ -16,7 +16,7 @@ from starlette.types import ASGIApp
 
 from saham_signal.adapters.alerts import PostgresAlerts
 from saham_signal.adapters.operations import PostgresControl
-from saham_signal.adapters.paper import PostgresPaper
+from saham_signal.adapters.paper_evidence import PostgresPaperEvidence
 from saham_signal.adapters.positions import PostgresPositions
 from saham_signal.adapters.preferences import PostgresPreferences
 from saham_signal.adapters.probes import PostgresProbe, RedisProbe
@@ -187,16 +187,16 @@ def create_app(
         if config.app_mode != "paper":
             raise HTTPException(403)
         try:
-            receipt = PostgresPaper(
+            evidence = PostgresPaperEvidence(
                 config.database_url.get_secret_value(), config.pilot_account_id or ""
-            ).latest()
-        except psycopg.Error:
+            ).report(config.paper_release_sha, datetime.now(UTC), paused=ops.entry_blocked())
+        except (psycopg.Error, ValueError):
             raise HTTPException(503) from None
         return {
             "mode": "paper",
             "origin": "simulation",
             "paper_live_enabled": False,
-            "receipt": receipt,
+            **evidence,
             "operations": ops.status(datetime.now(UTC)),
         }
 
@@ -213,7 +213,7 @@ def create_app(
     return CORSMiddleware(
         app,
         allow_origins=config.cors_origins,
-        allow_credentials=config.market_fixture_enabled,
+        allow_credentials=config.market_fixture_enabled or config.session_secret is not None,
         allow_methods=["GET", "PUT", "POST"],
         allow_headers=["Accept", "Content-Type", "Idempotency-Key"],
         expose_headers=["X-Request-ID", "Retry-After"],

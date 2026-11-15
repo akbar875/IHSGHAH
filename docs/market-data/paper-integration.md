@@ -1,5 +1,10 @@
 # SS-026 — Kualifikasi integrasi paper
 
+Tindak lanjut empat acceptance criteria tersedia di [review acceptance dan laporan fill](paper-acceptance.md):
+receipt 12 skenario kini terhubung ke halaman paper, review G0/G1 disimpan per rilis,
+dan ledger aktual dikueri terpisah dalam snapshot yang sama. Penjelasan offline
+di bawah menggambarkan receipt replay awal; status gerbang terkini dibaca dari evidence.
+
 Inspeksi GitHub 14 November 2026: dependency implementasi #16/#19/#20/#21/#22/
 #23/#25 sudah closed. **#8/G0 masih open**: feed, sampel berizin, biaya dan
 kapasitas vendor belum terbukti. Laporan SS-016 tetap **G1 no-go/experiment**.
@@ -44,7 +49,7 @@ Receipt menyimpan hash input/protokol, fitur, baseline, audit risiko, replay dan
 alasan blokir. Akun runtime hanya membutuhkan SELECT/INSERT pada tabel tersebut;
 tidak membutuhkan akses tulis ledger manual atau kontrol operasi.
 
-Backup SS-025 kini mencakup **sembilan tabel**, termasuk `paper_qualification`.
+Backup SS-025 kini mencakup **sepuluh tabel**, termasuk `paper_qualification` dan `paper_evidence`.
 Restore tetap hanya ke target kosong dengan manifest migrasi identik dan selalu
 pause. Backup lama dengan manifest enam migrasi harus dipulihkan memakai rilis
 yang cocok, lalu dimigrasikan; jangan mengedit checksum atau memaksa manifest.
