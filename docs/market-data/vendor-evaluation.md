@@ -1,5 +1,10 @@
 # Permintaan penawaran dan evaluasi sampel
 
+**Pembaruan 15 November 2026:** [sumber gratis sudah dipilih dan CSV historis
+dinilai](free-vendor-decision.md). Protokol di bawah tetap menjadi acuan jika
+kebutuhan feed intraday atau izin aplikasi kelak dievaluasi; tidak ada pembelian
+atau komunikasi vendor yang dijalankan oleh dokumen ini.
+
 Untuk [issue #8](https://github.com/akbar875/IHSGHAH/issues/8), mengikuti
 [ADR-0002](../decisions/0002-market-data-procurement.md) dan [audit](vendor-audit.md).
 Dokumen ini draf siap digunakan; belum dikirim ke vendor.

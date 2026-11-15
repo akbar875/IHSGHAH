@@ -1,6 +1,6 @@
 # ADR-0002: Pengadaan data pasar dan batas pilot G0
 
-- Status: Proposed — keputusan pengadaan final menunggu bukti dan persetujuan anggaran
+- Status: Proposed — keputusan teknis riset gratis tercatat; penerimaan ADR/rilis G0 belum diberikan
 - Tanggal: 2026-11-13 (Asia/Jakarta)
 - Issue: [#8 / SS-008](https://github.com/akbar875/IHSGHAH/issues/8)
 - Pengambil keputusan: pemilik repo
@@ -10,12 +10,24 @@
 
 ## Konteks
 
+**Pembaruan 15 November 2026:** pemilik mengarahkan pemilihan vendor gratis.
+Keputusan teknis saat ini memilih **Aethereal untuk evaluasi riset EOD dengan
+biaya vendor Rp0**, berdasarkan [audit aktual dan hak terbatas](../market-data/free-vendor-decision.md).
+Keputusan intraday NO-GO, G0 PENDING. Ini menggantikan prioritas berbayar untuk
+scope sekarang; rekomendasi 13 November di bawah dipertahankan sebagai riwayat.
+
+Universe audit mencakup seluruh ticker unduhan untuk mendeteksi gap. Subset riset
+maksimal 20 saham dan persyaratan point-in-time di bawah tetap berlaku sebelum
+penggunaan lebih lanjut. Data harian tidak memenuhi kriteria intraday. Hak
+display/redistribusi/training dan retensi permanen belum terbukti, sehingga tidak
+diaktifkan. Tinjau ulang saat lisensi, sumber, kebutuhan, atau anggaran berubah.
+
 Belum ada vendor, sampel berizin, atau anggaran data. Pemilik repo mengonfirmasi
 kondisi ini pada 13 November 2026 dan meminta pencarian vendor. Audit publik dapat
 menyaring kandidat, tetapi tidak mengonfirmasi entitlement akun, hak penyimpanan,
 SLA kontraktual, maupun kualitas feed aktual. G0 tetap **PENDING**.
 
-## Rekomendasi keputusan
+## Rekomendasi awal — 13 November 2026 (riwayat)
 
 1. Prioritaskan permintaan penawaran **IQ Plus SCF** untuk jalur lokal. Alasannya
    adalah produk integrasi aplikasi yang dipublikasikan serta status redistributor

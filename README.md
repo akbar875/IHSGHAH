@@ -50,7 +50,7 @@ SS-026 menyediakan [kualifikasi integrasi paper offline](docs/market-data/paper-
 feed → fitur → baseline → risiko → replay, receipt PostgreSQL terisolasi, laporan
 web `/paper`, protokol observasi beku dan bukti 12 skenario PRD dari backend/browser.
 Fill paper terpisah dari ledger manual. Scope paper live #26 masih tertahan:
-#8/G0 pending, G1 no-go, toleransi validasi belum tersedia dan G2 belum dimulai.
+G0 pending, G1 no-go, toleransi validasi belum tersedia dan G2 belum dimulai.
 
 SS-025 menyediakan [kontrol operasi dan runbook recovery](docs/market-data/operations.md):
 kill switch PostgreSQL append-only, default fail-closed, metrik proses terbatas,
@@ -63,7 +63,7 @@ SS-024 menyediakan [jalur berita internal point-in-time](docs/market-data/intern
 job operator terpisah, izin sumber eksplisit, receipt/revisi append-only, pemetaan
 emiten dan deduplikasi, ekstraksi data terbatas serta ablation berpasangan SS-016.
 Tidak ada berita pada UI atau promosi ranking otomatis. Sumber berizin belum tersedia,
-#8 dan G0–G3 tetap pending; bukti hanya simulasi.
+G0–G3 tetap pending; bukti integrasi ini hanya simulasi.
 
 SS-023 menyediakan [batas keamanan dan kebijakan data pribadi](docs/SECURITY.md):
 sesi admin bertanda tangan dan kedaluwarsa, otorisasi akun/mode, rate limit HTTP/WS,
@@ -147,9 +147,10 @@ Belum ada master instrumen produksi atau feed berizin dan G0 tetap pending.
 
 Audit SS-008 tersedia dalam [perbandingan vendor dan hak data](docs/market-data/vendor-audit.md),
 [ADR-0002](docs/decisions/0002-market-data-procurement.md), dan
-[protokol penawaran/sampel](docs/market-data/vendor-evaluation.md). Prioritas pencarian
-adalah IQ Plus, dengan ICE sebagai pembanding dan RTI sebagai alternatif lokal.
-Belum ada kontrak, sampel berizin, atau anggaran disetujui; **G0 tetap pending**.
+[protokol penawaran/sampel](docs/market-data/vendor-evaluation.md). Arahan terbaru
+memilih vendor gratis: [Aethereal untuk evaluasi riset EOD](docs/market-data/free-vendor-decision.md),
+dengan audit CSV aktual dan batas hak penggunaan tercatat. Belum ada feed intraday
+yang memenuhi kebutuhan; keputusan intraday NO-GO dan **G0 tetap pending**.
 
 1. Fondasi: keputusan arsitektur, kontrak, bootstrap web/API/worker, lingkungan lokal, dan CI runtime.
 2. Fase A: vendor dan hak data, referensi instrumen, penyimpanan point-in-time, adapter, dan kualitas feed (G0).
