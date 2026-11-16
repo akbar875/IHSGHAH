@@ -37,7 +37,10 @@ yang dibuat; reservasi portofolio atomik tetap tanggung jawab service pemanggil.
 ## Fresh clone / menjalankan lokal
 
 Prasyarat: Git dan [uv 0.13.7](https://docs.astral.sh/uv/getting-started/installation/).
-Python **3.13.18** diunduh otomatis oleh uv bila belum tersedia. Dari root repo:
+Python **3.13** dipilih melalui `.python-version`; patch mengikuti interpreter
+yang tersedia di lingkungan build. Baseline pengujian lokal adalah 3.13.18.
+Pin patch tidak digunakan agar build Vercel dapat memakai interpreter 3.13
+yang disediakannya. Dari root repo:
 
 ```powershell
 cd services/api

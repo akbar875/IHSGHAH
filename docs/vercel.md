@@ -8,6 +8,10 @@ build cache. Peringatan npm `Unknown env config "cache-dir"` berasal dari
 environment build dan tidak dengan sendirinya menunjukkan kegagalan build.
 Konfigurasi root `vercel.json` membangun `web` (Next.js, `apps/web`) dan
 `api` (FastAPI, `services/api`, entrypoint `app:app`) secara terpisah.
+API memilih Python `3.13` melalui `services/api/.python-version`, tanpa pin
+patch. Ini memungkinkan `uv sync --frozen` memakai interpreter Vercel yang
+tersedia; pin `3.13.18` dapat gagal pada katalog interpreter uv milik Vercel.
+Rentang Python pada `pyproject.toml` dan `uv.lock` tetap membatasi versi ke 3.13.
 
 Routing publik: `/api/*` ke API, semua path lain ke web. Prefix `/api`
 tetap diterima backend; route yang tersedia antara lain `/api/v1/candidates`
