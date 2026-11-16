@@ -20,7 +20,7 @@ Lihat [panduan detail dan batas simulasi](../../docs/market-data/stock-detail.md
 ## Setup
 
 Gunakan Node.js **24.22.3** sesuai `.nvmrc`/CI. Node 22.13+ kompatibel untuk pemeriksaan
-lokal. Dari root:
+lokal untuk skrip scaffold; aplikasi web menargetkan Node 24.x. Dari root:
 
 ```sh
 cd apps/web

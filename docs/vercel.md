@@ -1,6 +1,11 @@
 # Deploy research dengan Vercel Services
 
 Import repository dengan Root Directory `./` dan preset **Services**.
+Gunakan Node.js Version **24.x** di Settings → Build and Deployment.
+`package.json` root dan web sama-sama mengunci major 24 untuk pemilihan
+runtime awal serta build service. Setelah mengubah versi, redeploy tanpa
+build cache. Peringatan npm `Unknown env config "cache-dir"` berasal dari
+environment build dan tidak dengan sendirinya menunjukkan kegagalan build.
 Konfigurasi root `vercel.json` membangun `web` (Next.js, `apps/web`) dan
 `api` (FastAPI, `services/api`, entrypoint `app:app`) secara terpisah.
 
