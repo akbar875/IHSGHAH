@@ -69,7 +69,7 @@ export default function StockDetail({ symbol }: { symbol: string }) {
     <a className="skip-link" href="#utama">Lewati ke konten</a>
     <header className="header"><Link className="brand" href="/">Saham Signal</Link><span className="mode">Research / Simulasi</span></header>
     <main id="utama" className="workspace stock-workspace">
-      <Link href="/">← Daftar kandidat</Link><h1>{symbol}.</h1>
+      <Link href="/simulation">← Daftar kandidat</Link><h1>{symbol}.</h1>
       <p className="intro">Tinjau riwayat harga, rencana, dan antrean pasar.</p>
       <section className="notice"><div><h2>Lingkungan simulasi</h2><p>Harga, volume dan rencana sintetis untuk mencoba tampilan. Belum ada feed pasar atau model produksi tervalidasi. Jangan gunakan untuk transaksi nyata.</p></div></section>
       <button onClick={() => setRevision(v => v + 1)}>Muat ulang data</button>

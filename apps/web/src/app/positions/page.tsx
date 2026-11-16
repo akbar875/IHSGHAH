@@ -79,7 +79,7 @@ export default function PositionsPage() {
   function choose(id: string) { setSelected(id); setDetail(null); setError(''); setMessage(''); setConfirmed(false); }
   return <>
     <header className="header"><Link className="brand" href="/">Saham Signal</Link><span className="mode">Research / Simulasi</span></header>
-    <main className="workspace preferences-workspace"><Link href="/">← Kembali ke kandidat</Link><h1>Catatan posisi manual.</h1>
+    <main className="workspace preferences-workspace"><Link href="/simulation">← Kembali ke kandidat</Link><h1>Catatan posisi manual.</h1>
       <section className="notice"><div><h2>Konfirmasi fill aktual Anda</h2><p>Sentuhan harga chart dan status READY tidak mencatat pembelian. Permintaan exit tidak menjual saham. Catatan manual terpisah dari hasil simulasi; lingkungan ini tetap research, tanpa koneksi broker atau harga live.</p><p>1 lot = 100 saham. Masukkan rata-rata harga eksekusi, biaya total aktual dan waktu WIB. Risiko/target adalah perkiraan atas lot tersisa dengan asumsi biaya jual, tanpa jaminan fill.</p></div></section>
       {loading && <p role="status">Memuat posisi…</p>}
       {error && <p className="field-error" role="alert">{error}</p>}

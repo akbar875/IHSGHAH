@@ -25,7 +25,7 @@ test('pilot browser consumes 100 simulated candidates within the 2s p95 budget',
     received = performance.now();
     await route.fulfill({ json: response });
   });
-  await page.goto('/');
+  await page.goto('/simulation');
   for (cycle = 0; cycle < 20; cycle++) {
     if (cycle > 0) await page.getByRole('button', { name: 'Terapkan' }).click();
     await expect(page.getByRole('article', { name: `Kandidat C${cycle}`, exact: true })).toBeVisible();

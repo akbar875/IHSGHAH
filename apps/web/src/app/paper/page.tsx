@@ -86,7 +86,7 @@ export default function PaperPage() {
     return () => { disposed = true; controller.abort(); clearTimeout(timeout); };
   }, [retry]);
   return <main className="alerts-page paper-review">
-    <Link href="/">← Dashboard research</Link><h1>Laporan paper</h1>
+    <Link href="/simulation">← Dashboard research</Link><h1>Laporan paper</h1>
     <p className="muted">Paper · Simulasi offline</p>
     <section className="notice" aria-label="Status observasi"><div><h2>Paper live belum dimulai</h2>
       <p>Keputusan gerbang dan bukti acceptance ditampilkan di bawah. Hasil simulasi tidak dihitung sebagai observasi G2.</p></div></section>

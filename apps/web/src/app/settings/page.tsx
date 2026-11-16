@@ -83,7 +83,7 @@ export default function SettingsPage() {
 
   return <>
     <header className="header"><Link className="brand" href="/">Saham Signal</Link><span className="mode">Research / Simulasi</span></header>
-    <main className="workspace preferences-workspace"><Link href="/">← Kembali ke kandidat</Link><h1>Pengaturan & watchlist.</h1>
+    <main className="workspace preferences-workspace"><Link href="/simulation">← Kembali ke kandidat</Link><h1>Pengaturan & watchlist.</h1>
       <p className="intro">Simpan rencana dan saham yang Anda pantau untuk akun ini.</p>
       <section className="notice"><div><h2>Biaya adalah asumsi pengguna</h2><p>Belum diverifikasi oleh broker. Masukkan tarif lengkap Anda sebagai rasio (contoh format: 0.001500), sumber dan masa berlaku. Angka contoh bukan rekomendasi tarif.</p><p>Batas desain pilot: risiko per posisi ≤ 1%, gabungan ≤ 2%, maksimal 3 posisi. Batas ini bukan jaminan kerugian.</p></div></section>
       {loading && <p role="status">Memuat pengaturan…</p>}

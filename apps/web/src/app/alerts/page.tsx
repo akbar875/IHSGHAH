@@ -50,7 +50,7 @@ export default function AlertsPage() {
     };
   }, [retry]);
   return <main className="alerts-page">
-    <Link href="/">← Dashboard</Link>
+    <Link href="/simulation">← Dashboard</Link>
     <h1>Notifikasi</h1>
     <p className="muted">Research · Simulasi · Tidak ada alert live</p>
     <p>Alert tidak menjamin diterima tepat waktu saat perangkat offline atau halaman ditutup. Inbox dimuat ulang setiap 5 detik saat halaman ini terbuka. Push browser belum tersedia.</p>
