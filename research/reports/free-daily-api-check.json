@@ -1,0 +1,21 @@
+{
+  "scope": "actual downloaded dataset through signed-session ASGI endpoint; not a signal evaluation",
+  "checked_at": "2026-11-16T03:14:29.449751+00:00",
+  "authenticated_status": 200,
+  "unauthenticated_status": 401,
+  "mode": "research",
+  "origin": "market",
+  "frequency": "daily",
+  "latest_date": "2026-11-13",
+  "symbols": 114,
+  "source_sha256": "08f7326196a7b9b3a8c4740a040997ec46e01cf4374d72e261594f8723a87347",
+  "quality": {
+    "rows": 303743,
+    "accepted_rows": 303743,
+    "rejected_rows": 0,
+    "zero_volume_rows": 16428,
+    "published_symbols": 114,
+    "excluded_symbols": 0
+  },
+  "signals_enabled": false
+}

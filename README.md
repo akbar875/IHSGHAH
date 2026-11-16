@@ -34,6 +34,12 @@ scripts/              Validasi scaffold dan penerbitan issue
 
 ## Urutan pengembangan
 
+[Riset harian gratis](docs/market-data/free-daily-integration.md) kini memakai data
+Aethereal IDX Stock Features (CC BY 4.0) melalui collector eksplisit, karantina dan
+cache lokal ber-hash. Halaman `/research` menampilkan harga penutupan, volume dan
+indikator penyedia dengan tanggal/atribusi. Data ini bukan fixture; sinyal intraday,
+paper live dan keputusan G0/G1 tetap terpisah dan belum diaktifkan.
+
 SS-028 menyediakan [keputusan teknis G3 no-go dan runbook pilot](docs/market-data/pilot-readiness.md):
 matriks bukti/persetujuan, canary satu akun, akses, monitoring aktual, rollback
 dan retensi. Pemilik memilih research lokal dengan pilot no-go;

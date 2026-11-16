@@ -1,0 +1,8 @@
+{
+  "scope": "same-publisher cross-dataset comparison; not exchange certification",
+  "features_sha256": "08f7326196a7b9b3a8c4740a040997ec46e01cf4374d72e261594f8723a87347",
+  "prices_sha256": "d73c4a0229a99aff3818442824dc2f819f9780a41b150ee0c456a1c1a4805eb6",
+  "symbols_checked": 114,
+  "matched_close_volume_date": 114,
+  "mismatched": 0
+}

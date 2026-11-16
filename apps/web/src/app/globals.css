@@ -109,3 +109,10 @@ button:disabled { cursor: wait; opacity: .55; }
 .alerts-list li { overflow-wrap: anywhere; min-width: 0; }
 .paper-review { overflow-wrap: anywhere; }
 .paper-review details { margin: 8px 0 16px; }
+.eod-page { max-width: 1200px; padding: 24px; margin: auto; overflow-wrap: anywhere; }
+.eod-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; padding: 0; list-style: none; }
+.eod-card { padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: white; min-width: 0; }
+.eod-card .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.eod-card dt { font-size: 11px; }
+.eod-search { display: grid; gap: 8px; margin-top: 24px; max-width: 400px; }
+.eod-page button { min-height: 44px; }
