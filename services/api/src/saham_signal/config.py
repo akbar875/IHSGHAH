@@ -1,4 +1,5 @@
 import re
+from pathlib import Path
 from typing import Self
 from urllib.parse import unquote, urlsplit
 
@@ -27,6 +28,7 @@ class Settings(BaseSettings):
     request_max_bytes: int = Field(default=65536, ge=1024, le=1048576)
     market_fixture_enabled: bool = False
     paper_release_sha: str | None = Field(default=None, pattern=r"^[0-9a-f]{40}$")
+    eod_snapshot_path: Path | None = None
     market_fixture_token: SecretStr | None = None
     market_nominal_idr: str = Field(
         default="1000000.00",
@@ -36,6 +38,8 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_market_fixture(self) -> Self:
+        if self.eod_snapshot_path is not None and self.app_mode != "research":
+            raise ValueError("Daily research snapshots cannot be enabled in paper/live")
         if self.session_secret and (
             len(self.session_secret.get_secret_value()) < 32 or not self.pilot_account_id
         ):

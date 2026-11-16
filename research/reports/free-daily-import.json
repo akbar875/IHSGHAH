@@ -1,0 +1,20 @@
+{
+  "provider": "Aethereal",
+  "source": "https://dataset.aethereal.top/datasets/idx-stock-features",
+  "license": "CC BY 4.0",
+  "source_sha256": "08f7326196a7b9b3a8c4740a040997ec46e01cf4374d72e261594f8723a87347",
+  "snapshot_sha256": "e87f023b28d84d2d6390095319970257da46b6fcf61e934925f34abeb89d11fc",
+  "latest_date": "2026-11-13",
+  "available_at": "2026-11-16T03:08:19.694153+00:00",
+  "quality": {
+    "rows": 303743,
+    "accepted_rows": 303743,
+    "rejected_rows": 0,
+    "zero_volume_rows": 16428,
+    "published_symbols": 114,
+    "excluded_symbols": 0
+  },
+  "mode": "research",
+  "frequency": "daily",
+  "signals_enabled": false
+}

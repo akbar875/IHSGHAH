@@ -21,6 +21,12 @@ from saham_signal.application.market import FixtureMarket, MarketScope, validate
 
 
 def main() -> None:
+    help_result = subprocess.run(
+        [sys.executable, "-I", "-m", "saham_signal.eod", "--help"],
+        check=True,
+        capture_output=True,
+    )
+    assert b"--download" in help_result.stdout
     assert SCHEMA["$defs"]["MarketEvent"]
     assert files("saham_signal.migrations").joinpath("001_journal.sql").is_file()
     assert files("saham_signal.migrations").joinpath("002_preferences.sql").is_file()

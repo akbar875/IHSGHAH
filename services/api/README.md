@@ -1,5 +1,9 @@
 # API FastAPI
 
+Data pasar harian gratis tersedia pada `GET /api/research/eod` untuk sesi admin
+research. Impor dengan `python -m saham_signal.eod --download --output <cache.json>`
+dan set `EOD_SNAPSHOT_PATH`. Lihat [setup data harian](../../docs/market-data/free-daily-integration.md).
+
 SS-025 menambahkan [kontrol operasi, telemetry dan runbook recovery](../../docs/market-data/operations.md).
 Jalankan migrasi eksplisit `006_operations.sql`; runtime hanya memerlukan SELECT
 pada `operation_events`, sedangkan CLI operator menggunakan credential terpisah.

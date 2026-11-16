@@ -21,6 +21,7 @@ from saham_signal.adapters.positions import PostgresPositions
 from saham_signal.adapters.preferences import PostgresPreferences
 from saham_signal.adapters.probes import PostgresProbe, RedisProbe
 from saham_signal.application.alerts import AlertStore
+from saham_signal.application.eod import read_snapshot
 from saham_signal.application.market import FixtureMarket
 from saham_signal.application.operations import Operations
 from saham_signal.application.positions import PositionStore
@@ -177,6 +178,23 @@ def create_app(
         ):
             raise HTTPException(401)
         return ops.status(datetime.now(UTC))
+
+    @app.get("/api/research/eod")
+    def daily_research(request: Request) -> dict[str, object]:
+        if not config.session_secret or not valid_session(
+            config, request.cookies.get("saham_session")
+        ):
+            raise HTTPException(401)
+        if config.app_mode != "research":
+            raise HTTPException(403)
+        if request.query_params:
+            raise HTTPException(422)
+        if config.eod_snapshot_path is None:
+            raise HTTPException(503)
+        try:
+            return read_snapshot(config.eod_snapshot_path, datetime.now(UTC))
+        except (OSError, ValueError):
+            raise HTTPException(503) from None
 
     @app.get("/api/ops/paper")
     def paper_qualification(request: Request) -> dict[str, object]:
