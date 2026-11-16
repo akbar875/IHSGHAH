@@ -6,5 +6,6 @@ Salin `0000-template.md` menjadi `NNNN-judul.md` saat suatu keputusan perlu dibe
 |---|---|---|
 | [0001 — Stack, batas modul, konfigurasi, dan akun pilot](0001-stack-and-module-boundaries.md) | Accepted — 12 November 2026 | [#1 / SS-001](https://github.com/akbar875/IHSGHAH/issues/1) |
 | [0002 — Pengadaan data pasar dan batas pilot G0](0002-market-data-procurement.md) | Proposed — diperbarui 15 November 2026; sumber riset gratis dipilih, G0 pending | [#8 / SS-008](https://github.com/akbar875/IHSGHAH/issues/8) |
+| [0003 — Scope harian dengan anggaran data Rp0](0003-free-daily-research.md) | Accepted — pilihan eksplisit pemilik 16 November 2026; hasil gerbang dinilai terpisah | [#26 / SS-026](https://github.com/akbar875/IHSGHAH/issues/26) |
 
 ADR-0001 memuat baseline versi dan lisensi yang diverifikasi, ownership modul, alur konfigurasi, isolasi mode, alternatif, serta tindak lanjut. Bootstrap mengikuti keputusan yang telah diterima ini; scaffold saat ini belum memiliki dependency runtime aplikasi.

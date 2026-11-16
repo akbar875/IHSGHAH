@@ -5,6 +5,12 @@ Status: spesifikasi produk untuk implementasi; kelayakan strategi belum terbukti
 Nama kerja: Saham Signal  
 Zona waktu produk: Asia/Jakarta (WIB)
 
+**Perubahan scope 16 November 2026:** pemilik menyetujui riset/sinyal **harian**
+dengan biaya data Rp0 dan pengujian ulang, lihat bagian 19 dan
+[ADR-0003](decisions/0003-free-daily-research.md). Bagian intraday di bawah tetap
+menjadi spesifikasi jalur lama/simulasi; tidak menjadi klaim fitur live pada scope
+harian. Persetujuan ini tidak meluluskan G0/G1 atau mengaktifkan paper live.
+
 ## 1. Ringkasan keputusan
 
 Bangun aplikasi web minimalis untuk memeringkat saham BEI berdasarkan estimasi hasil bersih, peluang target tercapai, dan kemudahan eksekusi untuk nominal transaksi pengguna. Produk menyajikan zona entry, jendela waktu entry, stop loss, take profit, dan kondisi exit yang diperbarui mengikuti pasar. Pengguna membuka detail saham untuk melihat chart, proyeksi probabilistik, order book, serta tekanan beli/jual.
@@ -299,4 +305,49 @@ Repositori sapatekno/skill-saham ditinjau melalui halaman publik dan README, buk
 - BEI — Mekanisme dan Jam Perdagangan: https://www.idx.co.id/id/produk/mekanisme-dan-jam-perdagangan — rujukan untuk verifikasi aturan implementasi; PRD sengaja tidak membekukan persentase ARA/ARB.
 - Repositori opsional: https://github.com/sapatekno/skill-saham — inspeksi terbatas halaman publik/README pada 12 November 2026.
 
-Dokumen ini menetapkan kebutuhan dan gerbang keputusan. Belum ada vendor terhubung, model terlatih, backtest dijalankan, atau bukti profit. Klaim hasil hanya boleh diterbitkan setelah laporan pengujian yang dapat diaudit tersedia.
+Pada versi 1.0, belum ada vendor terhubung, model terlatih, backtest dijalankan,
+atau bukti profit. Setelah revisi scope, integrasi harian dan studi baseline
+tercatat dalam [laporan harian](../research/reports/daily-free-v1.md); hasilnya
+NO-GO. Tidak ada model produksi atau bukti profit yang dipromosikan. Klaim hasil
+hanya diterbitkan bersama laporan pengujian yang dapat diaudit.
+
+## 19. Revisi scope harian gratis — 16 November 2026
+
+Scope aktif berikutnya adalah riset harian pada data gratis Aethereal IDX Stock
+Features dengan atribusi CC BY 4.0. Halaman `/research` menampilkan data tanggal
+tertentu; muat ulang tidak berarti streaming real-time. Jalur intraday lama,
+dashboard simulasi dan seluruh receipt lamanya tetap dipisahkan.
+
+Eksperimen pertama membandingkan cash, lima saham likuid berbobot sama,
+momentum20 dan low-vol-positive. Champion momentum20 ditentukan sebelum evaluasi.
+Sinyal sesudah close memakai fitur tanggal itu; entry diasumsikan pada close sesi
+berikutnya, holding lima sesi lalu exit. Overnight diizinkan dalam eksperimen ini.
+Ini menggantikan horizon tanpa overnight pada bagian 16 untuk **scope harian**.
+Tidak ada order book/fill probability yang direkonstruksi dari indikator harian.
+
+Protokol sebelum run membekukan split validation/test/holdout, delay, biaya,
+nominal, jumlah slot, batas partisipasi, batas risiko, bootstrap blok dan seed.
+Setiap fold dibuka setelah warmup/purge 26 sesi; tidak ada siklus lintas batas
+fold. Baseline berupa aturan tetap, bukan model hasil training; kalibrasi kandidat
+hanya frekuensi hasil bersih pada validation. Semua pembanding dan stress biaya
+dua kali wajib dilaporkan, tanpa memilih pemenang baru setelah holdout dibuka.
+
+G0 harian: bedakan **file layak riset terbatas** (izin publisher, schema, nilai,
+identitas, tanggal, integritas dan biaya Rp0) dari **data layak rilis sinyal**
+(point-in-time, universe historis, corporate action/aturan efektif, hak penggunaan
+dan eksekusi). Yang belum dibuktikan tetap NOT_ASSESSED; izin publisher bukan
+sertifikasi harga bursa. G0 intraday tidak diwariskan ke scope baru atau sebaliknya.
+
+G1 harian: mean return siklus setelah biaya harus mempunyai batas bawah CI blok
+95% positif, drawdown MTM harian <=20%, minimum 60 siklus berinvestasi di holdout,
+Brier <=0,25 dari kalibrasi validation, dua tahun dan dua regime positif dengan
+sampel memadai, diversifikasi simbol, serta stress biaya yang tetap positif.
+Bukti universe/point-in-time, asumsi biaya/eksekusi, dan review rilis juga wajib.
+Nilai ini adalah anggaran eksperimen awal yang dibekukan, bukan toleransi G2 atau
+tarif broker terverifikasi. Asumsi fractional/full fill membuat hasil awal proxy
+riset; bukan laporan actual fill atau bukti transaksi lot BEI dapat dieksekusi.
+
+Hanya keputusan PASS yang berbukti pada kedua gerbang untuk scope/rilis yang sama
+dapat memenuhi checkbox kelulusan issue #26. Selesainya studi dengan NO-GO tetap
+hasil pekerjaan yang sah, tetapi tidak mencentang kelulusan atau menutup issue.
+Kegagalan menahan sinyal berkualitas transaksi, bukan memicu tuning holdout.

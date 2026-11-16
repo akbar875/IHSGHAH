@@ -1,0 +1,776 @@
+{
+  "protocol_sha256": "2fa4d803f039e80f19a3bd85c49f64ef8114557fa963b0b50b7a3ad78d5661b6",
+  "source_sha256": "08f7326196a7b9b3a8c4740a040997ec46e01cf4374d72e261594f8723a87347",
+  "code_sha256": "60855c77448ba024709e0db6795e82e07b6e56fcb483906cd6d3228e9e2ce9ba",
+  "started_at": "2026-11-16T03:46:12.430531+00:00",
+  "status": "completed",
+  "quality": {
+    "rows": 303743,
+    "accepted_rows": 303743,
+    "rejected_rows": 0,
+    "zero_volume_rows": 16428,
+    "published_symbols": 114,
+    "excluded_symbols": 0
+  },
+  "experiments": {
+    "cash": {
+      "folds": {
+        "validation": {
+          "count": 93,
+          "invested_cycles": 0,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 50000000.0,
+          "total_net_return": 0.0,
+          "mean_cycle_net_return": 0.0,
+          "mean_cycle_95_block_ci": [
+            0.0,
+            0.0
+          ],
+          "maximum_daily_mtm_drawdown": 0.0,
+          "win_frequency": 0,
+          "years": {
+            "2021": {
+              "count": 44,
+              "mean_cycle_net_return": 0.0
+            },
+            "2022": {
+              "count": 49,
+              "mean_cycle_net_return": 0.0
+            }
+          },
+          "regimes": {
+            "nonpositive": {
+              "count": 34,
+              "mean_cycle_net_return": 0.0
+            },
+            "positive": {
+              "count": 59,
+              "mean_cycle_net_return": 0.0
+            }
+          },
+          "symbols": 0,
+          "largest_absolute_symbol_pnl_share": 0,
+          "cost_scale": 1,
+          "first_decision": "2021-02-09",
+          "last_exit": "2022-12-30"
+        },
+        "test": {
+          "count": 89,
+          "invested_cycles": 0,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 50000000.0,
+          "total_net_return": 0.0,
+          "mean_cycle_net_return": 0.0,
+          "mean_cycle_95_block_ci": [
+            0.0,
+            0.0
+          ],
+          "maximum_daily_mtm_drawdown": 0.0,
+          "win_frequency": 0,
+          "years": {
+            "2023": {
+              "count": 43,
+              "mean_cycle_net_return": 0.0
+            },
+            "2024": {
+              "count": 46,
+              "mean_cycle_net_return": 0.0
+            }
+          },
+          "regimes": {
+            "positive": {
+              "count": 60,
+              "mean_cycle_net_return": 0.0
+            },
+            "nonpositive": {
+              "count": 29,
+              "mean_cycle_net_return": 0.0
+            }
+          },
+          "symbols": 0,
+          "largest_absolute_symbol_pnl_share": 0,
+          "cost_scale": 1,
+          "brier": 0,
+          "research_probability": 0,
+          "first_decision": "2023-02-08",
+          "last_exit": "2024-12-23"
+        },
+        "holdout": {
+          "count": 83,
+          "invested_cycles": 0,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 50000000.0,
+          "total_net_return": 0.0,
+          "mean_cycle_net_return": 0.0,
+          "mean_cycle_95_block_ci": [
+            0.0,
+            0.0
+          ],
+          "maximum_daily_mtm_drawdown": 0.0,
+          "win_frequency": 0,
+          "years": {
+            "2025": {
+              "count": 42,
+              "mean_cycle_net_return": 0.0
+            },
+            "2026": {
+              "count": 41,
+              "mean_cycle_net_return": 0.0
+            }
+          },
+          "regimes": {
+            "nonpositive": {
+              "count": 32,
+              "mean_cycle_net_return": 0.0
+            },
+            "positive": {
+              "count": 51,
+              "mean_cycle_net_return": 0.0
+            }
+          },
+          "symbols": 0,
+          "largest_absolute_symbol_pnl_share": 0,
+          "cost_scale": 1,
+          "brier": 0,
+          "research_probability": 0,
+          "first_decision": "2025-02-12",
+          "last_exit": "2026-11-12"
+        }
+      },
+      "double_cost_holdout": {
+        "count": 83,
+        "invested_cycles": 0,
+        "initial_capital_idr": 50000000,
+        "ending_capital_idr": 50000000.0,
+        "total_net_return": 0.0,
+        "mean_cycle_net_return": 0.0,
+        "mean_cycle_95_block_ci": [
+          0.0,
+          0.0
+        ],
+        "maximum_daily_mtm_drawdown": 0.0,
+        "win_frequency": 0,
+        "years": {
+          "2025": {
+            "count": 42,
+            "mean_cycle_net_return": 0.0
+          },
+          "2026": {
+            "count": 41,
+            "mean_cycle_net_return": 0.0
+          }
+        },
+        "regimes": {
+          "nonpositive": {
+            "count": 32,
+            "mean_cycle_net_return": 0.0
+          },
+          "positive": {
+            "count": 51,
+            "mean_cycle_net_return": 0.0
+          }
+        },
+        "symbols": 0,
+        "largest_absolute_symbol_pnl_share": 0,
+        "cost_scale": 2,
+        "first_decision": "2025-02-12",
+        "last_exit": "2026-11-12"
+      },
+      "statistical_checks": {
+        "positive_expectancy_lower_ci": false,
+        "risk_budget": true,
+        "sample_size": false,
+        "calibration": true,
+        "multiple_years_positive": false,
+        "multiple_regimes_positive": false,
+        "diversified": false,
+        "double_cost_positive": false
+      }
+    },
+    "liquid_equal_weight": {
+      "folds": {
+        "validation": {
+          "count": 93,
+          "invested_cycles": 93,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 31331706.944603603,
+          "total_net_return": -0.3733658611079279,
+          "mean_cycle_net_return": -0.004724997771278937,
+          "mean_cycle_95_block_ci": [
+            -0.008936735683214425,
+            -0.00037712876339497046
+          ],
+          "maximum_daily_mtm_drawdown": 0.3864662905958488,
+          "win_frequency": 0.44086021505376344,
+          "years": {
+            "2021": {
+              "count": 44,
+              "mean_cycle_net_return": -0.004411425134884328
+            },
+            "2022": {
+              "count": 49,
+              "mean_cycle_net_return": -0.005006573199878179
+            }
+          },
+          "regimes": {
+            "nonpositive": {
+              "count": 34,
+              "mean_cycle_net_return": 0.00042814585642711293
+            },
+            "positive": {
+              "count": 59,
+              "mean_cycle_net_return": -0.0076946059635163225
+            }
+          },
+          "symbols": 14,
+          "largest_absolute_symbol_pnl_share": 0.23211070694727096,
+          "cost_scale": 1,
+          "first_decision": "2021-02-09",
+          "last_exit": "2022-12-30"
+        },
+        "test": {
+          "count": 89,
+          "invested_cycles": 89,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 20658402.69723468,
+          "total_net_return": -0.5868319460553064,
+          "mean_cycle_net_return": -0.009489501423473769,
+          "mean_cycle_95_block_ci": [
+            -0.01458683471931051,
+            -0.004322156456988392
+          ],
+          "maximum_daily_mtm_drawdown": 0.5957638202514468,
+          "win_frequency": 0.3146067415730337,
+          "years": {
+            "2023": {
+              "count": 43,
+              "mean_cycle_net_return": -0.004766882177435184
+            },
+            "2024": {
+              "count": 46,
+              "mean_cycle_net_return": -0.013904123762162013
+            }
+          },
+          "regimes": {
+            "positive": {
+              "count": 60,
+              "mean_cycle_net_return": -0.01074151616483584
+            },
+            "nonpositive": {
+              "count": 29,
+              "mean_cycle_net_return": -0.00689912609651776
+            }
+          },
+          "symbols": 15,
+          "largest_absolute_symbol_pnl_share": 0.1666901053650496,
+          "cost_scale": 1,
+          "brier": 0.2315692792957814,
+          "research_probability": 0.44086021505376344,
+          "first_decision": "2023-02-08",
+          "last_exit": "2024-12-23"
+        },
+        "holdout": {
+          "count": 83,
+          "invested_cycles": 83,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 24168274.230314825,
+          "total_net_return": -0.5166345153937035,
+          "mean_cycle_net_return": -0.00713318499612732,
+          "mean_cycle_95_block_ci": [
+            -0.018799468937840833,
+            0.0038269252089993566
+          ],
+          "maximum_daily_mtm_drawdown": 0.6097215711888533,
+          "win_frequency": 0.3614457831325301,
+          "years": {
+            "2025": {
+              "count": 42,
+              "mean_cycle_net_return": 0.001873434713759088
+            },
+            "2026": {
+              "count": 41,
+              "mean_cycle_net_return": -0.016359478357474373
+            }
+          },
+          "regimes": {
+            "nonpositive": {
+              "count": 32,
+              "mean_cycle_net_return": -0.011007403143478207
+            },
+            "positive": {
+              "count": 51,
+              "mean_cycle_net_return": -0.004702303021318921
+            }
+          },
+          "symbols": 17,
+          "largest_absolute_symbol_pnl_share": 0.18894551291791706,
+          "cost_scale": 1,
+          "brier": 0.23710938098561432,
+          "research_probability": 0.44086021505376344,
+          "first_decision": "2025-02-12",
+          "last_exit": "2026-11-12"
+        }
+      },
+      "double_cost_holdout": {
+        "count": 83,
+        "invested_cycles": 83,
+        "initial_capital_idr": 50000000,
+        "ending_capital_idr": 14677011.504651975,
+        "total_net_return": -0.7064597699069606,
+        "mean_cycle_net_return": -0.01308156740922318,
+        "mean_cycle_95_block_ci": [
+          -0.024677957265268436,
+          -0.0021871205194622326
+        ],
+        "maximum_daily_mtm_drawdown": 0.7483578754270086,
+        "win_frequency": 0.3132530120481928,
+        "years": {
+          "2025": {
+            "count": 42,
+            "mean_cycle_net_return": -0.004128907422306805
+          },
+          "2026": {
+            "count": 41,
+            "mean_cycle_net_return": -0.02225258495679605
+          }
+        },
+        "regimes": {
+          "nonpositive": {
+            "count": 32,
+            "mean_cycle_net_return": -0.016932574657847324
+          },
+          "positive": {
+            "count": 51,
+            "mean_cycle_net_return": -0.010665249135576657
+          }
+        },
+        "symbols": 17,
+        "largest_absolute_symbol_pnl_share": 0.21092331363080444,
+        "cost_scale": 2,
+        "first_decision": "2025-02-12",
+        "last_exit": "2026-11-12"
+      },
+      "statistical_checks": {
+        "positive_expectancy_lower_ci": false,
+        "risk_budget": false,
+        "sample_size": true,
+        "calibration": true,
+        "multiple_years_positive": false,
+        "multiple_regimes_positive": false,
+        "diversified": true,
+        "double_cost_positive": false
+      }
+    },
+    "momentum20": {
+      "folds": {
+        "validation": {
+          "count": 93,
+          "invested_cycles": 93,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 107596376.94041412,
+          "total_net_return": 1.1519275388082821,
+          "mean_cycle_net_return": 0.009261954216265592,
+          "mean_cycle_95_block_ci": [
+            -0.0017354277911261267,
+            0.019158789940331905
+          ],
+          "maximum_daily_mtm_drawdown": 0.22392993520103643,
+          "win_frequency": 0.5591397849462365,
+          "years": {
+            "2021": {
+              "count": 44,
+              "mean_cycle_net_return": 0.006132157603272232
+            },
+            "2022": {
+              "count": 49,
+              "mean_cycle_net_return": 0.012072383827933098
+            }
+          },
+          "regimes": {
+            "nonpositive": {
+              "count": 34,
+              "mean_cycle_net_return": 0.019061609214603276
+            },
+            "positive": {
+              "count": 59,
+              "mean_cycle_net_return": 0.0036146954036642143
+            }
+          },
+          "symbols": 75,
+          "largest_absolute_symbol_pnl_share": 0.1528843581971444,
+          "cost_scale": 1,
+          "first_decision": "2021-02-09",
+          "last_exit": "2022-12-30"
+        },
+        "test": {
+          "count": 89,
+          "invested_cycles": 89,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 48583396.75091,
+          "total_net_return": -0.028332064981799965,
+          "mean_cycle_net_return": 0.0006484636407391015,
+          "mean_cycle_95_block_ci": [
+            -0.008585214083149776,
+            0.009417391316947809
+          ],
+          "maximum_daily_mtm_drawdown": 0.40389834926992274,
+          "win_frequency": 0.48314606741573035,
+          "years": {
+            "2023": {
+              "count": 43,
+              "mean_cycle_net_return": -0.0032265133811935
+            },
+            "2024": {
+              "count": 46,
+              "mean_cycle_net_return": 0.0042707247699369675
+            }
+          },
+          "regimes": {
+            "positive": {
+              "count": 60,
+              "mean_cycle_net_return": 0.0020914794480397475
+            },
+            "nonpositive": {
+              "count": 29,
+              "mean_cycle_net_return": -0.0023370863054001665
+            }
+          },
+          "symbols": 81,
+          "largest_absolute_symbol_pnl_share": 0.10007929770822466,
+          "cost_scale": 1,
+          "brier": 0.25549099006055126,
+          "research_probability": 0.5591397849462365,
+          "first_decision": "2023-02-08",
+          "last_exit": "2024-12-23"
+        },
+        "holdout": {
+          "count": 83,
+          "invested_cycles": 83,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 37269140.67609845,
+          "total_net_return": -0.254617186478031,
+          "mean_cycle_net_return": -0.0013921842611715547,
+          "mean_cycle_95_block_ci": [
+            -0.018526540909422795,
+            0.015334626635490147
+          ],
+          "maximum_daily_mtm_drawdown": 0.6483198332208658,
+          "win_frequency": 0.46987951807228917,
+          "years": {
+            "2025": {
+              "count": 42,
+              "mean_cycle_net_return": 0.017083089752811982
+            },
+            "2026": {
+              "count": 41,
+              "mean_cycle_net_return": -0.020318074714520542
+            }
+          },
+          "regimes": {
+            "nonpositive": {
+              "count": 32,
+              "mean_cycle_net_return": -0.00268088258453561
+            },
+            "positive": {
+              "count": 51,
+              "mean_cycle_net_return": -0.0005835892347470495
+            }
+          },
+          "symbols": 79,
+          "largest_absolute_symbol_pnl_share": 0.06681135751582207,
+          "cost_scale": 1,
+          "brier": 0.25706015181085073,
+          "research_probability": 0.5591397849462365,
+          "first_decision": "2025-02-12",
+          "last_exit": "2026-11-12"
+        }
+      },
+      "double_cost_holdout": {
+        "count": 83,
+        "invested_cycles": 83,
+        "initial_capital_idr": 50000000,
+        "ending_capital_idr": 22737306.039014794,
+        "total_net_return": -0.5452538792197041,
+        "mean_cycle_net_return": -0.007321286678600602,
+        "mean_cycle_95_block_ci": [
+          -0.024356306681045346,
+          0.009298550860812108
+        ],
+        "maximum_daily_mtm_drawdown": 0.7171310261126611,
+        "win_frequency": 0.40963855421686746,
+        "years": {
+          "2025": {
+            "count": 42,
+            "mean_cycle_net_return": 0.010989624776123036
+          },
+          "2026": {
+            "count": 41,
+            "mean_cycle_net_return": -0.026078805729780913
+          }
+        },
+        "regimes": {
+          "nonpositive": {
+            "count": 32,
+            "mean_cycle_net_return": -0.008516719711686872
+          },
+          "positive": {
+            "count": 51,
+            "mean_cycle_net_return": -0.006571211049997452
+          }
+        },
+        "symbols": 79,
+        "largest_absolute_symbol_pnl_share": 0.061643173993103144,
+        "cost_scale": 2,
+        "first_decision": "2025-02-12",
+        "last_exit": "2026-11-12"
+      },
+      "statistical_checks": {
+        "positive_expectancy_lower_ci": false,
+        "risk_budget": false,
+        "sample_size": true,
+        "calibration": false,
+        "multiple_years_positive": false,
+        "multiple_regimes_positive": false,
+        "diversified": true,
+        "double_cost_positive": false
+      }
+    },
+    "low_vol_positive": {
+      "folds": {
+        "validation": {
+          "count": 93,
+          "invested_cycles": 93,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 29948371.122994907,
+          "total_net_return": -0.4010325775401019,
+          "mean_cycle_net_return": -0.005282393088052444,
+          "mean_cycle_95_block_ci": [
+            -0.009658783016365257,
+            -0.0010065661360426303
+          ],
+          "maximum_daily_mtm_drawdown": 0.4143110192083108,
+          "win_frequency": 0.3333333333333333,
+          "years": {
+            "2021": {
+              "count": 44,
+              "mean_cycle_net_return": -0.006107084044819098
+            },
+            "2022": {
+              "count": 49,
+              "mean_cycle_net_return": -0.004541854269731366
+            }
+          },
+          "regimes": {
+            "nonpositive": {
+              "count": 34,
+              "mean_cycle_net_return": -0.003884738008224936
+            },
+            "positive": {
+              "count": 59,
+              "mean_cycle_net_return": -0.006087821439139482
+            }
+          },
+          "symbols": 62,
+          "largest_absolute_symbol_pnl_share": 0.055619282348444196,
+          "cost_scale": 1,
+          "first_decision": "2021-02-09",
+          "last_exit": "2022-12-30"
+        },
+        "test": {
+          "count": 89,
+          "invested_cycles": 89,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 39412269.02491046,
+          "total_net_return": -0.21175461950179086,
+          "mean_cycle_net_return": -0.0025082713634061787,
+          "mean_cycle_95_block_ci": [
+            -0.006219667177128669,
+            0.0015799690885597345
+          ],
+          "maximum_daily_mtm_drawdown": 0.2884826366906289,
+          "win_frequency": 0.449438202247191,
+          "years": {
+            "2023": {
+              "count": 43,
+              "mean_cycle_net_return": -0.0016744051763738937
+            },
+            "2024": {
+              "count": 46,
+              "mean_cycle_net_return": -0.003287754973023314
+            }
+          },
+          "regimes": {
+            "positive": {
+              "count": 60,
+              "mean_cycle_net_return": -0.0033800882630314498
+            },
+            "nonpositive": {
+              "count": 29,
+              "mean_cycle_net_return": -0.0007045122607332033
+            }
+          },
+          "symbols": 63,
+          "largest_absolute_symbol_pnl_share": 0.06286209103152172,
+          "cost_scale": 1,
+          "brier": 0.26092384519350814,
+          "research_probability": 0.3333333333333333,
+          "first_decision": "2023-02-08",
+          "last_exit": "2024-12-23"
+        },
+        "holdout": {
+          "count": 83,
+          "invested_cycles": 83,
+          "initial_capital_idr": 50000000,
+          "ending_capital_idr": 36043548.18288406,
+          "total_net_return": -0.2791290363423188,
+          "mean_cycle_net_return": -0.003457981349422872,
+          "mean_cycle_95_block_ci": [
+            -0.010520981844520884,
+            0.002397032976528684
+          ],
+          "maximum_daily_mtm_drawdown": 0.3696780421983734,
+          "win_frequency": 0.4578313253012048,
+          "years": {
+            "2025": {
+              "count": 42,
+              "mean_cycle_net_return": -0.0031000593289973177
+            },
+            "2026": {
+              "count": 41,
+              "mean_cycle_net_return": -0.0038246331752246586
+            }
+          },
+          "regimes": {
+            "nonpositive": {
+              "count": 32,
+              "mean_cycle_net_return": -0.00866790270688039
+            },
+            "positive": {
+              "count": 51,
+              "mean_cycle_net_return": -0.0001890110859201156
+            }
+          },
+          "symbols": 58,
+          "largest_absolute_symbol_pnl_share": 0.09371534420686015,
+          "cost_scale": 1,
+          "brier": 0.26372155287817944,
+          "research_probability": 0.3333333333333333,
+          "first_decision": "2025-02-12",
+          "last_exit": "2026-11-12"
+        }
+      },
+      "double_cost_holdout": {
+        "count": 83,
+        "invested_cycles": 83,
+        "initial_capital_idr": 50000000,
+        "ending_capital_idr": 21969111.19737809,
+        "total_net_return": -0.5606177760524382,
+        "mean_cycle_net_return": -0.009385073053898563,
+        "mean_cycle_95_block_ci": [
+          -0.016438665462993673,
+          -0.0035627668240482122
+        ],
+        "maximum_daily_mtm_drawdown": 0.6064623150801731,
+        "win_frequency": 0.3132530120481928,
+        "years": {
+          "2025": {
+            "count": 42,
+            "mean_cycle_net_return": -0.009072604674548583
+          },
+          "2026": {
+            "count": 41,
+            "mean_cycle_net_return": -0.009705162613232688
+          }
+        },
+        "regimes": {
+          "nonpositive": {
+            "count": 32,
+            "mean_cycle_net_return": -0.014494756979180422
+          },
+          "positive": {
+            "count": 51,
+            "mean_cycle_net_return": -0.006178996865486417
+          }
+        },
+        "symbols": 58,
+        "largest_absolute_symbol_pnl_share": 0.056316605238919355,
+        "cost_scale": 2,
+        "first_decision": "2025-02-12",
+        "last_exit": "2026-11-12"
+      },
+      "statistical_checks": {
+        "positive_expectancy_lower_ci": false,
+        "risk_budget": false,
+        "sample_size": true,
+        "calibration": false,
+        "multiple_years_positive": false,
+        "multiple_regimes_positive": false,
+        "diversified": true,
+        "double_cost_positive": false
+      }
+    }
+  },
+  "champion": "momentum20",
+  "g1": {
+    "scope": "daily-research",
+    "decision": "NO-GO",
+    "auto_promotion": false,
+    "statistical_checks": {
+      "positive_expectancy_lower_ci": false,
+      "risk_budget": false,
+      "sample_size": true,
+      "calibration": false,
+      "multiple_years_positive": false,
+      "multiple_regimes_positive": false,
+      "diversified": true,
+      "double_cost_positive": false
+    },
+    "evidence_checks": {
+      "historical_point_in_time": false,
+      "historical_universe": false,
+      "verified_execution_and_costs": false,
+      "independent_release_review": false
+    },
+    "paper_live_enabled": false,
+    "product_probability": null
+  },
+  "full_local_report_sha256": "a79f3ff251c49606b79c54773bd159628d269a0fca0f9d20c2d15a55b94f81b7",
+  "protocol_frozen_commit": "0635d23",
+  "study_code_commit": "dd021f6",
+  "scope_change": "Owner explicitly chose daily research/signals with free data, 2026-11-16",
+  "attribution": "Aethereal (2026), IDX Stock Features; derived aggregate research evaluation.",
+  "source": "https://dataset.aethereal.top/datasets/idx-stock-features",
+  "license": "CC BY 4.0",
+  "g0": {
+    "scope": "daily-research",
+    "research_file_decision": "PASS_FOR_LIMITED_OFFLINE_RESEARCH",
+    "signal_release_decision": "NO-GO",
+    "vendor_cost_idr": 0,
+    "checks": {
+      "publisher_license_with_attribution": "PASS",
+      "fixed_source_integrity_and_schema": "PASS",
+      "numeric_identity_and_date_quality": "PASS",
+      "historical_publication_availability": "NOT_ASSESSED",
+      "historical_instrument_universe_and_delistings": "NOT_ASSESSED",
+      "corporate_actions_and_effective_rules": "NOT_ASSESSED",
+      "independent_exchange_price_reconciliation": "NOT_ASSESSED",
+      "execution_cost_and_fill_evidence": "NOT_ASSESSED"
+    }
+  },
+  "paper_fills": [],
+  "actual_fills": [],
+  "research_exposures_only": true,
+  "limitations": [
+    "Retrospective provider features, not a historical publication journal.",
+    "Present-day selected universe; survivorship bias not eliminated.",
+    "Provider adjusted ret_1d is rounded; returns/indicators not independently recomputed.",
+    "Fractional full-fill adjusted exposure, no integer-lot/tick/auction/suspension simulator.",
+    "Buy/sell fees and slippage are frozen scenario assumptions, not verified broker tariffs.",
+    "Calendar is observed source session dates; official historical calendar not independently reconciled.",
+    "Confidence interval is for mean five-session cycle return, not cumulative return or per-trade expectancy.",
+    "Bootstrap draws are not independent market observations.",
+    "Release evidence and statistical failures both independently block promotion.",
+    "Receipt exclusive-create protects one local path; operator must not change path/delete it to reuse the opened holdout."
+  ],
+  "aggregate_sha256": "1ec819c882f6316374a736eb414b436abdedd85d159426ac6cbdff93d97a8d4f"
+}
