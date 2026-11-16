@@ -1,4 +1,43 @@
 :root { color-scheme: light; --ink: #18312c; --muted: #536b64; --line: #dbe5df; --green: #16614b; }
+.signal-page { max-width: 1160px; margin: auto; padding: 48px 28px; }
+.signal-heading { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.signal-heading h1 { max-width: 650px; font-size: clamp(30px, 4vw, 44px); }
+.signal-heading button { flex-shrink: 0; }
+.signal-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 20px 0; margin-top: 28px; color: var(--muted); font-size: 13px; border-bottom: 1px solid var(--line); }
+.signal-controls { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-top: 24px; }
+.signal-controls label { margin: 0; width: 260px; }
+.signal-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.signal-tabs button[aria-pressed="false"] { background: #e8eeea; color: var(--muted); }
+.signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.signal-card { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.signal-card-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.signal-card-heading h2 { font-size: 24px; letter-spacing: -.04em; }
+.direction { font-size: 12px; font-weight: 700; padding: 4px 10px; background: #e5f5ec; color: #116348; border-radius: 6px; }
+.bearish .direction { background: #fbeceb; color: #b43d38; }
+.signal-potential { font-size: 38px; letter-spacing: -.04em; font-weight: 700; color: #116348; margin: 22px 0; line-height: 1.2; }
+.bearish .signal-potential { color: #b43d38; }
+.signal-potential span { display: block; font-size: 12px; font-weight: 400; color: var(--muted); letter-spacing: 0; margin-top: 8px; }
+.signal-levels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; gap: 14px; }
+.signal-levels dd { font-size: 17px; font-variant-numeric: tabular-nums; }
+.signal-levels .target { color: #116348; }
+.bearish .signal-levels .target { color: #b43d38; }
+.signal-risk { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; margin: 22px 0 12px; }
+.signal-reason { font-size: 12px; color: var(--muted); margin: 0; }
+.signal-empty { border: 1px dashed #9bb0a7; border-radius: 12px; padding: 40px 24px; text-align: center; background: white; }
+.signal-empty p { color: var(--muted); font-size: 14px; }
+.signal-warning { background: #fff4dc; padding: 14px 18px; border-radius: 8px; color: #775820; font-size: 14px; }
+.signal-footer { margin-top: 32px; border-top: 1px solid var(--line); padding-top: 18px; font-size: 12px; color: var(--muted); }
+.signal-footer summary { cursor: pointer; font-weight: 700; min-height: 44px; display: list-item; padding: 10px 0; }
+@media (max-width: 720px) {
+  .signal-page { padding: 28px 18px; }
+  .signal-heading, .signal-controls { align-items: stretch; flex-direction: column; gap: 18px; }
+  .signal-heading button { align-self: start; }
+  .signal-controls label { width: 100%; }
+  .signal-grid { grid-template-columns: 1fr; }
+  .signal-card { padding: 20px; }
+  .signal-levels { gap: 8px; }
+  .signal-levels dd { font-size: 15px; }
+}
 * { box-sizing: border-box; }
 body { margin: 0; background: #f6f8f5; color: var(--ink); font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.6; }
 a { color: inherit; }

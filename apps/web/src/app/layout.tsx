@@ -4,13 +4,13 @@ import Link from 'next/link';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Saham Signal — Research',
-  description: 'Lingkungan research Saham Signal: data harian teratribusi dan simulasi, tanpa sinyal live.',
+  title: 'Saham Signal — Bullish & Bearish',
+  description: 'Screener teknikal saham BEI dengan potensi pergerakan, target take profit, dan stop loss.',
   robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return <html lang="id"><body><nav className="alerts-nav" aria-label="Navigasi"><Link href="/research">Riset harian</Link><Link href="/paper">Laporan paper</Link><Link href="/alerts">Notifikasi</Link></nav>{children}</body></html>;
+  return <html lang="id"><body><nav className="alerts-nav" aria-label="Navigasi"><Link href="/">Saham Signal</Link><Link href="/research">Data harian</Link></nav>{children}</body></html>;
 }

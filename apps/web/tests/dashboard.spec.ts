@@ -27,7 +27,7 @@ async function mock(page: Page, mutate: (value: ReturnType<typeof snapshot>) => 
 
 test('simulation, null probabilities, core numbers and no internal model content', async ({ page }) => {
   await mock(page);
-  await page.goto('/');
+  await page.goto('/simulation');
   const card = page.getByRole('article', { name: 'Kandidat TEST' });
   await expect(card).toBeVisible();
   await expect(page.getByText('Research / Simulasi', { exact: true })).toBeVisible();
@@ -45,7 +45,7 @@ test('simulation, null probabilities, core numbers and no internal model content
 
 test('search and active filter handle empty results', async ({ page }) => {
   await mock(page, value => { value.data[0].state = 'CANCELLED'; });
-  await page.goto('/');
+  await page.goto('/simulation');
   await expect(page.getByText('Belum ada kandidat aktif')).toBeVisible();
   await page.getByLabel('Kandidat aktif').uncheck();
   await expect(page.getByRole('article')).toBeVisible();
@@ -57,7 +57,7 @@ test('search and active filter handle empty results', async ({ page }) => {
 
 test('READY with unhealthy data never advertises entry readiness', async ({ page }) => {
   await mock(page, value => { value.data[0].state = 'READY'; });
-  await page.goto('/');
+  await page.goto('/simulation');
   await expect(page.getByRole('article')).toBeVisible();
   await expect(page.getByRole('article').getByText('Entry ditahan', { exact: true })).toBeVisible();
   await expect(page.getByText('Siap masuk', { exact: true })).toHaveCount(0);
@@ -65,7 +65,7 @@ test('READY with unhealthy data never advertises entry readiness', async ({ page
 
 test('nominal submits a fresh request and validates input', async ({ page }) => {
   await mock(page);
-  await page.goto('/');
+  await page.goto('/simulation');
   await expect(page.getByRole('article')).toBeVisible();
   await page.getByLabel('Nominal transaksi (Rp)').fill('2500000');
   const request = page.waitForRequest('**/candidates?nominal_idr=2500000.00');
@@ -87,7 +87,7 @@ for (const [name, mutate, message] of [
 ] as const) {
   test(`data state: ${name}`, async ({ page }) => {
     await mock(page, mutate);
-    await page.goto('/');
+    await page.goto('/simulation');
     await expect(page.getByText(message, { exact: false })).toBeVisible();
   });
 }
@@ -101,7 +101,7 @@ test('loading, network failure and retry recover without retaining old candidate
     if (fail) await route.abort();
     else await route.fulfill({ json: snapshot() });
   });
-  await page.goto('/');
+  await page.goto('/simulation');
   await expect(page.getByText('Memuat kandidat…')).toBeVisible();
   release();
   await expect(page.getByText('Data belum dapat dimuat')).toBeVisible();
@@ -113,7 +113,7 @@ test('loading, network failure and retry recover without retaining old candidate
 for (const status of [401, 503]) {
   test(`safe HTTP ${status} handling`, async ({ page }) => {
     await page.route('**/api/v1/candidates?*', route => route.fulfill({ status, body: 'PRIVATE-UPSTREAM-DETAIL' }));
-    await page.goto('/');
+    await page.goto('/simulation');
     await expect(page.getByText('Data belum dapat dimuat')).toBeVisible();
     await expect(page.locator('body')).not.toContainText('PRIVATE-UPSTREAM-DETAIL');
   });
@@ -127,7 +127,7 @@ for (const variant of ['internal-field', 'wrong-nominal', 'wrong-mode', 'bad-pro
       if (variant === 'wrong-mode') value.mode = 'live';
       if (variant === 'bad-probability') Object.assign(value.data[0].target_probability, { value: 0.99 });
     });
-    await page.goto('/');
+    await page.goto('/simulation');
     await expect(page.getByText('Data tidak sesuai permintaan.', { exact: false })).toBeVisible();
     await expect(page.getByRole('article')).toHaveCount(0);
     await expect(page.locator('body')).not.toContainText('INTERNAL-DOCUMENT');
@@ -142,7 +142,7 @@ test('late response from a previous nominal cannot overwrite the latest result',
     if (nominal === '1000000.00') await gate;
     await route.fulfill({ json: snapshot(nominal) }).catch(() => {});
   });
-  await page.goto('/');
+  await page.goto('/simulation');
   await page.getByLabel('Nominal transaksi (Rp)').fill('2500000');
   await page.getByRole('button', { name: 'Terapkan' }).click();
   await expect(page.getByRole('article')).toContainText('Rp 2.500.000');
@@ -154,7 +154,7 @@ test('expired plans disappear from the active filter without another response', 
   await page.clock.install();
   const value = snapshot();
   await page.route('**/api/v1/candidates?*', route => route.fulfill({ json: value }));
-  await page.goto('/');
+  await page.goto('/simulation');
   await expect(page.getByRole('article')).toBeVisible();
   await page.clock.fastForward(1801000);
   await expect(page.getByText('Belum ada kandidat aktif')).toBeVisible();
@@ -165,7 +165,7 @@ test('expired plans disappear from the active filter without another response', 
 test('core numbers fit at 360px with no horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await mock(page);
-  await page.goto('/');
+  await page.goto('/simulation');
   await expect(page.getByRole('article')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
   for (const dd of await page.locator('.plan-grid dd').all()) {

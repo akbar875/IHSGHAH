@@ -1,5 +1,5 @@
-import Dashboard from './dashboard';
+import Screener from './screener';
 
 export default function Home() {
-  return <Dashboard />;
+  return <Screener />;
 }

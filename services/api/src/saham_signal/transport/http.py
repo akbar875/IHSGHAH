@@ -27,6 +27,7 @@ from saham_signal.application.operations import Operations
 from saham_signal.application.positions import PositionStore
 from saham_signal.application.preferences import PreferenceStore
 from saham_signal.application.readiness import DependencyProbe, check_dependencies
+from saham_signal.application.screener import read_screener
 from saham_signal.application.security import valid_session
 from saham_signal.config import Settings, load_settings
 from saham_signal.domain.mode import Mode
@@ -178,6 +179,23 @@ def create_app(
         ):
             raise HTTPException(401)
         return ops.status(datetime.now(UTC))
+
+    @app.get("/api/research/screener")
+    def daily_screener(request: Request) -> dict[str, object]:
+        if not config.session_secret or not valid_session(
+            config, request.cookies.get("saham_session")
+        ):
+            raise HTTPException(401)
+        if config.app_mode != "research":
+            raise HTTPException(403)
+        if request.query_params:
+            raise HTTPException(422)
+        if config.eod_snapshot_path is None:
+            raise HTTPException(503)
+        try:
+            return read_screener(config.eod_snapshot_path, datetime.now(UTC))
+        except (OSError, ValueError):
+            raise HTTPException(503) from None
 
     @app.get("/api/research/eod")
     def daily_research(request: Request) -> dict[str, object]:

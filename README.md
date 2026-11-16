@@ -1,5 +1,10 @@
 # IHSGHAH — Saham Signal
 
+Halaman utama kini berupa **daftar bullish dan bearish**, dengan harga acuan,
+potensi ke target, take profit dan stop loss. Aturan teknikal harian dan batas
+estimasi dijelaskan di [panduan screener](docs/market-data/daily-screener.md).
+Dashboard simulasi lama dipindahkan ke `/simulation`.
+
 Aplikasi web riset saham BEI untuk membantu keputusan manual dan paper trading. Scope aktif berubah menjadi **harian dengan data gratis** pada 16 November 2026; jalur intraday lama tetap simulasi. Sumber kebutuhan produk: [PRD Saham Signal](docs/PRD-Saham-Signal.md).
 
 [Validasi harian pertama](research/reports/daily-free-v1.md) sudah dijalankan pada data asli dengan protokol yang dibekukan. Champion momentum20 rugi 25,46% pada holdout setelah biaya asumsi, drawdown 64,83%; **G1 NO-GO**, paper live belum diaktifkan. Kelulusan file untuk riset terbatas tidak sama dengan kelulusan G0 untuk rilis sinyal.

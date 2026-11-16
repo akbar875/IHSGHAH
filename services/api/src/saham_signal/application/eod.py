@@ -53,6 +53,7 @@ class DailyRow(Frozen):
     volume: str = Field(pattern=r"^(?:0|[1-9][0-9]{0,18})$")
     return_1d: str | None
     rsi_14: str | None
+    technical: dict[str, str | None] | None = None
 
     @model_validator(mode="after")
     def check(self) -> Self:
@@ -104,7 +105,11 @@ class Snapshot(Frozen):
             "rejected_rows", 0
         ) or self.quality.get("published_symbols") != len(self.rows):
             raise ValueError("Inconsistent quality denominator")
-        if self.sha256 and self.sha256 != digest(self.model_dump(mode="json", exclude={"sha256"})):
+        body = self.model_dump(mode="json", exclude={"sha256"})
+        for row, serialized in zip(self.rows, body["rows"], strict=True):
+            if "technical" not in row.model_fields_set:
+                serialized.pop("technical", None)
+        if self.sha256 and self.sha256 != digest(body):
             raise ValueError("Snapshot checksum mismatch")
         return self
 
@@ -212,6 +217,10 @@ def _import_csv(path: Path, available_at: datetime) -> Snapshot:
                     volume=format(volume.to_integral_value(), "f"),
                     return_1d=str(values["ret_1d"]) if values["ret_1d"] is not None else None,
                     rsi_14=str(values["rsi_14"]) if values["rsi_14"] is not None else None,
+                    technical={
+                        k: str(values[k]) if values[k] is not None else None
+                        for k in ("sma_20", "sma_50", "sma_200", "ret_20d", "avg_value_20d_idr")
+                    },
                 )
                 if day > available_at.astimezone(JAKARTA).date():
                     raise ValueError("Future daily data")

@@ -52,7 +52,7 @@ export default function DailyResearch() {
   }, [retry]);
   const visible = data?.rows.filter(row => row.symbol.includes(query.trim().toUpperCase())) ?? [];
   return <main className="eod-page">
-    <Link href="/">← Dashboard simulasi</Link><h1>Riset saham harian</h1>
+    <Link href="/">← Daftar bullish & bearish</Link><h1>Riset saham harian</h1>
     <p>Data pasar harian gratis · Aethereal · Lingkungan research</p>
     <section className="notice" aria-label="Batas penggunaan"><div><h2>Data akhir hari</h2><p>Harga penutupan dan indikator historis untuk riset harian. Sinyal intraday, peluang profit, dan eksekusi paper live belum diaktifkan.</p></div></section>
     <p role="status">{status}</p>
