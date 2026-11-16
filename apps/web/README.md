@@ -39,10 +39,12 @@ Salin `.env.example` ke `.env.local` di apps/web bila perlu.
 
 | Nama | Default | Pemakaian |
 |---|---|---|
-| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8000/api/v1` | Base URL fetch kandidat; credentials include, tanpa cache |
+| `NEXT_PUBLIC_API_BASE_URL` | `/api/v1` | Base URL fetch kandidat; credentials include, tanpa cache |
 
 Jika web dibuka pada 127.0.0.1, gunakan `http://127.0.0.1:8000/api/v1` untuk API.
-URL harus HTTP(S), tanpa credential, query atau fragment. Jangan masukkan secret pada
+Default `/api/v1` memakai domain web yang sama pada Vercel Services. Untuk dua proses
+lokal terpisah, salin `.env.example` ke `.env.local`.
+URL boleh berupa path satu domain atau HTTP(S), tanpa credential, query atau fragment. Jangan masukkan secret pada
 `NEXT_PUBLIC_*`; konfigurasi publik dibekukan saat build. Mode UI tetap research dan
 hanya menerima respons research/simulation berkontrak 1.0.0. Pengaturan APP_MODE
 backend tidak mengaktifkan paper/live pada UI.

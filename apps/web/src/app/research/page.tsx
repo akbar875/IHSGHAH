@@ -39,7 +39,8 @@ export default function DailyResearch() {
     const controller = new AbortController();
     let disposed = false;
     const timeout = setTimeout(() => controller.abort(), 10000);
-    fetch(new URL('../research/eod', `${publicConfig.apiBaseUrl}/`), { credentials: 'include', cache: 'no-store', signal: controller.signal })
+    const apiBase = new URL(`${publicConfig.apiBaseUrl}/`, window.location.origin);
+    fetch(new URL('../research/eod', apiBase), { credentials: 'include', cache: 'no-store', signal: controller.signal })
       .then(async response => {
         if (!response.ok) throw new Error(response.status === 401 || response.status === 403 ? 'Sesi admin research diperlukan.' : 'Data harian belum tersedia. Jalankan import sumber gratis pada backend.');
         return parse(await response.json());

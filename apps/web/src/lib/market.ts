@@ -20,7 +20,7 @@ export function parseCandidates(value: unknown, nominal: string): CandidatesResp
 }
 
 export async function fetchCandidates(nominal: string, signal: AbortSignal): Promise<CandidatesResponse> {
-  const url = new URL(`${publicConfig.apiBaseUrl}/candidates`);
+  const url = new URL(`${publicConfig.apiBaseUrl}/candidates`, window.location.origin);
   url.searchParams.set('nominal_idr', nominal);
   const response = await fetch(url, { credentials: 'include', cache: 'no-store', signal });
   if (!response.ok) {

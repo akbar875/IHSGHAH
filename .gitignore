@@ -8,6 +8,7 @@
 # JavaScript / Python
 node_modules/
 .next/
+.vercel/
 *.tsbuildinfo
 dist/
 coverage/

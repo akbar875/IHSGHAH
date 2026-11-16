@@ -8,6 +8,8 @@ Aplikasi web riset saham BEI untuk membantu keputusan manual dan paper trading. 
 
 ## Mulai dari sini
 
+Deployment satu domain web + API: lihat [panduan Vercel Services](docs/vercel.md).
+
 Prasyarat scaffolding: Git dan Node.js 22 atau lebih baru. Belum diperlukan instalasi dependency npm/Python, database, atau akun vendor.
 
 ```sh

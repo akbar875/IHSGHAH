@@ -74,7 +74,8 @@ export default function PaperPage() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     let disposed = false;
-    fetch(new URL('../ops/paper', `${publicConfig.apiBaseUrl}/`), { credentials: 'include', cache: 'no-store', signal: controller.signal })
+    const apiBase = new URL(`${publicConfig.apiBaseUrl}/`, window.location.origin);
+    fetch(new URL('../ops/paper', apiBase), { credentials: 'include', cache: 'no-store', signal: controller.signal })
       .then(async response => {
         if (!response.ok) throw new Error(response.status === 401 || response.status === 403 ? 'Sesi admin paper diperlukan.' : 'Layanan paper belum tersedia.');
         return parse(await response.json());
