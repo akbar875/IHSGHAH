@@ -1,6 +1,8 @@
 # IHSGHAH — Saham Signal
 
-Aplikasi web analisis saham intraday BEI untuk membantu keputusan manual dan paper trading. Sumber kebutuhan produk: [PRD Saham Signal](docs/PRD-Saham-Signal.md).
+Aplikasi web riset saham BEI untuk membantu keputusan manual dan paper trading. Scope aktif berubah menjadi **harian dengan data gratis** pada 16 November 2026; jalur intraday lama tetap simulasi. Sumber kebutuhan produk: [PRD Saham Signal](docs/PRD-Saham-Signal.md).
+
+[Validasi harian pertama](research/reports/daily-free-v1.md) sudah dijalankan pada data asli dengan protokol yang dibekukan. Champion momentum20 rugi 25,46% pada holdout setelah biaya asumsi, drawdown 64,83%; **G1 NO-GO**, paper live belum diaktifkan. Kelulusan file untuk riset terbatas tidak sama dengan kelulusan G0 untuk rilis sinyal.
 
 **Status: fondasi, shell web research, API fixture dan worker.** Shell Next.js tersedia lokal melalui [setup web](apps/web/README.md), FastAPI melalui [setup API](services/api/README.md). API market tersedia sebagai simulasi research; belum ada feed pasar atau model produksi tervalidasi maupun bukti profit. Fitur sistem dikerjakan melalui issue dan branch terpisah. Eksekusi broker otomatis berada di luar cakupan MVP.
 

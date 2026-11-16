@@ -1,5 +1,6 @@
 """Timing, missing exposure and consumed-holdout safeguards with synthetic data."""
 
+import hashlib
 import json
 from datetime import date, timedelta
 from pathlib import Path
@@ -97,3 +98,19 @@ def test_consumed_receipt_is_exclusive_and_failure_does_not_release_it(tmp_path:
     with pytest.raises(FileExistsError):
         consume(path, {"protocol": "changed"})
     assert json.loads(path.read_text()) == {"protocol": "fixed"}
+
+
+def test_published_daily_receipt_matches_frozen_code_and_protocol() -> None:
+    root = Path(__file__).resolve().parents[3]
+    report = json.loads((root / "research/reports/daily-free-v1.json").read_text())
+    claimed = report.pop("aggregate_sha256")
+    canonical = json.dumps(report, sort_keys=True, separators=(",", ":")).encode()
+    assert hashlib.sha256(canonical).hexdigest() == claimed
+    for key, relative in (
+        ("protocol_sha256", "research/protocols/daily-free-v1.json"),
+        ("code_sha256", "services/api/src/saham_signal/application/daily_study.py"),
+    ):
+        assert hashlib.sha256((root / relative).read_bytes()).hexdigest() == report[key]
+    assert not report["g1"]["paper_live_enabled"]
+    assert report["paper_fills"] == report["actual_fills"] == []
+    assert report["g0"]["signal_release_decision"] == "NO-GO"

@@ -1,5 +1,10 @@
 # API FastAPI
 
+Riset harian offline menggunakan CLI `python -m saham_signal.daily_study` dengan
+protokol, hash sumber dan receipt konsumsi holdout eksplisit. Lihat
+[hasil studi gratis](../../research/reports/daily-free-v1.md). Studi aktual selesai
+dengan G1 NO-GO; command tersebut bukan pipeline promosi atau endpoint sinyal.
+
 Data pasar harian gratis tersedia pada `GET /api/research/eod` untuk sesi admin
 research. Impor dengan `python -m saham_signal.eod --download --output <cache.json>`
 dan set `EOD_SNAPSHOT_PATH`. Lihat [setup data harian](../../docs/market-data/free-daily-integration.md).
