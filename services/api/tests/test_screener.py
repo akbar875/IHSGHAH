@@ -102,6 +102,8 @@ def test_old_sealed_snapshot_still_loads_but_requires_reimport(tmp_path: Path) -
     for candidate in snapshot["rows"]:
         candidate.pop("stale")
         candidate.pop("technical")
+        candidate.pop("history")
+        candidate.pop("backtest")
     snapshot.pop("sha256")
     snapshot["sha256"] = digest(snapshot)
     assert Snapshot.model_validate(snapshot)

@@ -4,6 +4,10 @@ Halaman utama kini berupa **daftar bullish dan bearish**, dengan harga acuan,
 potensi ke target, take profit dan stop loss. Aturan teknikal harian dan batas
 estimasi dijelaskan di [panduan screener](docs/market-data/daily-screener.md).
 Dashboard simulasi lama dipindahkan ke `/simulation`.
+Daftar kini dapat dipilih menuju [detail saham](docs/market-data/daily-stock-detail.md)
+dengan chart harga/tanggal WIB, legenda warna, dan hasil replay transaksi historis.
+Target 1.000 transaksi belum tercapai pada data yang diuji; feed real time/order book
+belum terhubung pada sumber gratis EOD.
 
 Aplikasi web riset saham BEI untuk membantu keputusan manual dan paper trading. Scope aktif berubah menjadi **harian dengan data gratis** pada 16 November 2026; jalur intraday lama tetap simulasi. Sumber kebutuhan produk: [PRD Saham Signal](docs/PRD-Saham-Signal.md).
 

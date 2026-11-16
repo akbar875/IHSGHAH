@@ -51,7 +51,7 @@ asal file, sedangkan SHA hanya membuktikan integritas, bukan otorisasi sumber.
 Endpoint `GET /api/research/eod` memerlukan sesi admin research bertanda tangan,
 path snapshot hanya dari konfigurasi server, tidak menerima query path/account.
 Paper/live menolak konfigurasi EOD saat startup. Data kosong, korup, hash salah,
-masa depan, path tidak tersedia atau file >2 MiB memberi 503 tanpa fallback
+masa depan, path tidak tersedia atau file >16 MiB memberi 503 tanpa fallback
 fixture. Respons private/no-store dan tidak bergantung pada feed vendor, broker
 atau database posisi. Readiness keseluruhan API tetap memerlukan PostgreSQL/Redis.
 

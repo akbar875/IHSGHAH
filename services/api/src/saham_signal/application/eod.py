@@ -2,8 +2,9 @@
 
 import csv
 import hashlib
+import json
 import re
-from collections import Counter
+from collections import Counter, deque
 from datetime import date, datetime, timedelta
 from decimal import Decimal, InvalidOperation, localcontext
 from pathlib import Path
@@ -39,11 +40,29 @@ FIELDS = [
     "close_usd",
 ]
 MAX_SOURCE_BYTES = 64 * 1024 * 1024
-MAX_SNAPSHOT_BYTES = 2 * 1024 * 1024
+MAX_SNAPSHOT_BYTES = 16 * 1024 * 1024
 
 
 class Frozen(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid", allow_inf_nan=False)
+
+
+class DailyHistory(Frozen):
+    date: date
+    close_idr: str
+    volume: str
+    return_1d: str | None
+
+    @model_validator(mode="after")
+    def check(self) -> Self:
+        if self.date.weekday() >= 5 or not 0 < number(self.close_idr) < Decimal("1e16"):
+            raise ValueError("Invalid historical date/close")
+        volume = number(self.volume)
+        if not 0 <= volume <= 10**18 or volume != volume.to_integral_value():
+            raise ValueError("Invalid historical volume")
+        if self.return_1d is not None and not -1 <= number(self.return_1d) <= Decimal("1e12"):
+            raise ValueError("Invalid historical return")
+        return self
 
 
 class DailyRow(Frozen):
@@ -54,6 +73,8 @@ class DailyRow(Frozen):
     return_1d: str | None
     rsi_14: str | None
     technical: dict[str, str | None] | None = None
+    history: tuple[DailyHistory, ...] = Field(default=(), max_length=253)
+    backtest: dict[str, Any] | None = None
 
     @model_validator(mode="after")
     def check(self) -> Self:
@@ -68,6 +89,12 @@ class DailyRow(Frozen):
             raise ValueError("Invalid RSI")
         if self.date.weekday() >= 5:
             raise ValueError("Unexpected weekend daily row")
+        if self.history:
+            dates = [point.date for point in self.history]
+            if dates != sorted(set(dates)) or dates[-1] != self.date:
+                raise ValueError("Invalid history ordering")
+            if self.history[-1].close_idr != self.close_idr:
+                raise ValueError("History and latest close mismatch")
         return self
 
 
@@ -107,8 +134,9 @@ class Snapshot(Frozen):
             raise ValueError("Inconsistent quality denominator")
         body = self.model_dump(mode="json", exclude={"sha256"})
         for row, serialized in zip(self.rows, body["rows"], strict=True):
-            if "technical" not in row.model_fields_set:
-                serialized.pop("technical", None)
+            for field in ("technical", "history", "backtest"):
+                if field not in row.model_fields_set:
+                    serialized.pop(field, None)
         if self.sha256 and self.sha256 != digest(body):
             raise ValueError("Snapshot checksum mismatch")
         return self
@@ -135,6 +163,8 @@ def import_csv(path: Path, available_at: datetime) -> Snapshot:
 
 
 def _import_csv(path: Path, available_at: datetime) -> Snapshot:
+    from saham_signal.application.daily_backtest import DailyReplay
+
     aware(available_at)
     if not 0 < path.stat().st_size <= MAX_SOURCE_BYTES:
         raise ValueError("Source outside size limit")
@@ -146,6 +176,8 @@ def _import_csv(path: Path, available_at: datetime) -> Snapshot:
         {"rows": 0, "accepted_rows": 0, "rejected_rows": 0, "zero_volume_rows": 0}
     )
     latest: dict[str, DailyRow] = {}
+    histories: dict[str, deque[DailyHistory]] = {}
+    replays: dict[str, DailyReplay] = {}
     previous: dict[str, date] = {}
     rejected_latest: dict[str, date] = {}
     unknown_date: set[str] = set()
@@ -225,11 +257,23 @@ def _import_csv(path: Path, available_at: datetime) -> Snapshot:
                 if day > available_at.astimezone(JAKARTA).date():
                     raise ValueError("Future daily data")
                 accepted.add(key)
+                histories.setdefault(symbol, deque(maxlen=253)).append(
+                    DailyHistory(
+                        date=row.date,
+                        close_idr=row.close_idr,
+                        volume=row.volume,
+                        return_1d=row.return_1d,
+                    )
+                )
                 latest[symbol] = row
+                replays.setdefault(symbol, DailyReplay()).observe(row.model_dump(mode="json"))
                 counts["accepted_rows"] += 1
                 if volume == 0:
                     counts["zero_volume_rows"] += 1
             except (ValueError, TypeError):
+                # A rejected record breaks the usable history; never bridge over it.
+                histories.pop(symbol, None)
+                replays.setdefault(symbol, DailyReplay()).invalid = True
                 counts["rejected_rows"] += 1
                 counts[f"{stage}_rejected"] += 1
                 if (
@@ -241,7 +285,13 @@ def _import_csv(path: Path, available_at: datetime) -> Snapshot:
                 if day is not None and isinstance(symbol, str) and symbol:
                     rejected_latest[symbol] = max(day, rejected_latest.get(symbol, day))
     published = tuple(
-        row
+        DailyRow.model_validate(
+            {
+                **row.model_dump(),
+                "history": tuple(histories.get(symbol, ())),
+                "backtest": replays[symbol].report(),
+            }
+        )
         for symbol, row in sorted(latest.items())
         if symbol not in unknown_date
         and (symbol not in rejected_latest or row.date > rejected_latest[symbol])
@@ -263,7 +313,12 @@ def read_snapshot(path: Path, at: datetime) -> dict[str, Any]:
     aware(at)
     if not 0 < path.stat().st_size <= MAX_SNAPSHOT_BYTES:
         raise ValueError("Snapshot outside size limit")
-    snapshot = Snapshot.model_validate_json(path.read_bytes())
+    body = json.loads(path.read_bytes())
+    if not isinstance(body, dict) or body.get("sha256") != digest(
+        {key: value for key, value in body.items() if key != "sha256"}
+    ):
+        raise ValueError("Snapshot checksum mismatch")
+    snapshot = Snapshot.model_validate(body)
     if not snapshot.sha256 or snapshot.available_at > at:
         raise ValueError("Unsealed or future snapshot")
     result = snapshot.model_dump(mode="json")
