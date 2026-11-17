@@ -76,7 +76,15 @@ MARKET_FIXTURE_ENABLED untuk endpoint data harian.
 Pada web, gunakan `NEXT_PUBLIC_API_BASE_URL` yang menunjuk service research.
 Misalnya `http://127.0.0.1:8000/api/v1` bila web dibuka pada hostname `127.0.0.1`;
 gunakan hostname yang sama agar cookie SameSite bekerja. Buka `/research` atau
-tautan **Riset harian**. Tombol muat ulang hanya membaca cache; jalankan ulang
+tautan **Data harian**. Jika halaman menunjukkan sesi belum aktif, buka **Akses
+research** (`/access`) dan masukkan nilai token `v1.…` yang diterbitkan administrator
+melalui `python -m saham_signal.application.security` (tanpa awalan `saham_session=`
+dan atribut cookie). Origin web harus tercantum di `CORS_ORIGINS`. Setelah aktivasi,
+daftar saham dimuat kembali. Klik kode saham di daftar kandidat atau data harian
+untuk membuka chart dan backtest. Kandidat kosong berbeda dari data gagal dimuat:
+snapshot bisa tersedia tanpa saham yang memenuhi filter tren.
+
+Tombol muat ulang hanya membaca cache; jalankan ulang
 collector secara eksplisit untuk memperbarui data. Tidak ada automation baru.
 
 ## Kandidat intraday gratis

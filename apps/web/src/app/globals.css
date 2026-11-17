@@ -201,3 +201,50 @@ button:disabled { cursor: wait; opacity: .55; }
 .eod-card dt { font-size: 11px; }
 .eod-search { display: grid; gap: 8px; margin-top: 24px; max-width: 400px; }
 .eod-page button { min-height: 44px; }
+
+/* Guided research entry and explicit recovery when market data cannot load. */
+.alerts-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 1160px; margin: auto; border-bottom: 1px solid var(--line); }
+.alerts-nav a { text-decoration: none; font-size: 14px; }
+.alerts-nav .nav-brand { font-size: 18px; font-weight: 700; color: var(--green); }
+.signal-page { padding-top: 32px; }
+.signal-guide { margin-top: 26px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: #edf4ef; }
+.signal-guide ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; list-style: none; padding: 0; margin: 14px 0; }
+.signal-guide li strong, .signal-guide li span { display: block; font-size: 14px; }
+.signal-guide li span { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.signal-guide a { font-size: 13px; font-weight: 600; }
+.signal-meta { margin-top: 8px; }
+.signal-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 20px 0; }
+.signal-summary div { border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; background: white; }
+.signal-summary dd { font-size: 28px; }
+.signal-problem { display: flex; gap: 18px; padding: 24px; margin: 24px 0; border: 1px solid #dec89a; border-radius: 12px; background: #fff8e9; }
+.signal-problem h2 { font-size: 19px; }
+.signal-problem p { margin: 8px 0 18px; color: #6e5a32; font-size: 14px; max-width: 740px; }
+.problem-icon { display: grid; place-items: center; flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #f1e2bd; color: #745a22; font-weight: 700; }
+.signal-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 13px; }
+.signal-empty .signal-actions { justify-content: center; }
+.button-link { display: inline-block; padding: 11px 16px; border-radius: 6px; text-decoration: none; background: var(--green); color: white; font-weight: 600; font-size: 14px; }
+.button-link:hover { background: #104c3b; }
+.signal-results { margin-top: 24px; }
+.signal-results > h2 { font-size: 20px; }
+.signal-results > .muted { margin: 6px 0; }
+.signal-explainer { border: 1px solid var(--line); background: white; border-radius: 12px; margin-top: 28px; padding: 24px; scroll-margin-top: 20px; }
+.signal-explainer dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-bottom: 0; }
+.signal-explainer dt { font-size: 14px; font-weight: 700; color: var(--green); }
+.signal-explainer dd { font-size: 13px; font-weight: 400; color: var(--muted); }
+.signal-loading { display: grid; gap: 12px; margin-top: 24px; }
+.signal-loading div { height: 78px; border: 1px solid var(--line); border-radius: 10px; background: linear-gradient(100deg, #e8eeea, #f9fbf9, #e8eeea); }
+.access-page { max-width: 700px; }
+.access-form { background: white; padding: 24px; border: 1px solid var(--line); border-radius: 12px; margin-top: 24px; }
+.access-form p { font-size: 13px; color: var(--muted); }
+input:disabled { background: #eef1ee; opacity: .7; }
+@media (max-width: 720px) {
+  .alerts-nav { padding: 10px 12px; flex-wrap: wrap; }
+  .alerts-nav a { padding: 8px; font-size: 13px; }
+  .signal-guide ol, .signal-explainer dl { grid-template-columns: 1fr; gap: 14px; }
+  .signal-guide, .signal-explainer, .signal-problem { padding: 18px; }
+  .signal-problem { gap: 12px; }
+  .signal-summary { gap: 8px; }
+  .signal-summary div { padding: 12px; }
+  .signal-summary dt { font-size: 11px; }
+  .signal-summary dd { font-size: 24px; }
+}

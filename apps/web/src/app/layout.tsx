@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return <html lang="id"><body><nav className="alerts-nav" aria-label="Navigasi"><Link href="/">Saham Signal</Link><Link href="/research">Data harian</Link></nav>{children}</body></html>;
+  return <html lang="id"><body><nav className="alerts-nav" aria-label="Navigasi"><Link className="nav-brand" href="/">↗ Saham Signal</Link><div><Link href="/research">Data harian</Link><Link href="/access">Akses research</Link></div></nav>{children}</body></html>;
 }

@@ -1,6 +1,7 @@
 """Scenario math, exclusion and backwards-compatible snapshot integrity."""
 
 import json
+import time
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -131,3 +132,62 @@ def test_screener_api_auth_query_and_unavailable_source(tmp_path: Path) -> None:
         assert client.get("/api/research/screener?path=private.csv").status_code == 422
         path.unlink()
         assert client.get("/api/research/screener").status_code == 503
+
+
+def test_research_session_exchange_validates_token_origin_and_cookie(tmp_path: Path) -> None:
+    data(tmp_path)
+    config = Settings(
+        session_secret=SecretStr("research-session-test-secret-12345678901234567890"),
+        pilot_account_id="research-test",
+        eod_snapshot_path=tmp_path / "snapshot.json",
+    )
+    headers = {"Origin": config.cors_origins[0]}
+    token = session_cookie(config)
+    with TestClient(create_app(config)) as client:
+        endpoint = "/api/research/session"
+        assert client.post(endpoint, json={"token": token}).status_code == 403
+        assert client.post(
+            endpoint, json={"token": token}, headers={"Origin": "https://foreign.invalid"}
+        ).status_code == 403
+        for invalid in ("invalid", token[:-1], session_cookie(config, now=int(time.time()) - 3601)):
+            response = client.post(endpoint, json={"token": invalid}, headers=headers)
+            assert response.status_code == 401
+            assert "set-cookie" not in response.headers
+            assert invalid not in response.text
+        response = client.post(endpoint, json={"token": token}, headers=headers)
+        assert response.status_code == 204 and not response.content
+        cookie = response.headers["set-cookie"]
+        assert "HttpOnly" in cookie and "SameSite=strict" in cookie and "Path=/" in cookie
+        assert "Secure" not in cookie
+        assert response.headers["cache-control"] == "private, no-store"
+        assert client.get("/api/research/screener").status_code == 200
+
+
+def test_research_session_does_not_accept_fixture_token() -> None:
+    config = Settings(market_fixture_token=SecretStr("test-fixture-token"))
+    with TestClient(create_app(config)) as client:
+        response = client.post(
+            "/api/research/session",
+            json={"token": "test-fixture-token"},
+            headers={"Origin": config.cors_origins[0]},
+        )
+        assert response.status_code == 401
+        assert "set-cookie" not in response.headers
+
+
+def test_research_session_uses_secure_cookie_on_tls() -> None:
+    config = Settings(
+        session_secret=SecretStr("research-tls-test-secret-12345678901234567890"),
+        pilot_account_id="research-test",
+        deployment_tls_required=True,
+        cors_origins=["https://research.example"],
+    )
+    with TestClient(create_app(config), base_url="https://research.example") as client:
+        response = client.post(
+            "/api/research/session",
+            json={"token": session_cookie(config)},
+            headers={"Origin": "https://research.example"},
+        )
+        assert response.status_code == 204
+        assert "Secure" in response.headers["set-cookie"]
+        assert "HttpOnly" in response.headers["set-cookie"]

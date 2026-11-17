@@ -19,6 +19,15 @@ jangan masukkan ke Git, log CI, URL, browser storage atau bundle. Pasang sebagai
 cookie host-only lewat kanal administrasi tepercaya dengan `HttpOnly`, `SameSite=Strict`,
 `Path=/`, `Max-Age` dan `Secure` pada TLS. Tidak ada endpoint publik penerbit sesi.
 
+Untuk research, halaman `/access` menerima **nilai token saja** (`v1.…`), tanpa
+awalan `saham_session=` atau atribut cookie. `POST /api/research/session` memverifikasi
+token yang sudah ditandatangani administrator dan memasangnya sebagai cookie host-only
+HttpOnly/SameSite=Strict (Secure pada TLS), dengan sisa masa berlaku token. Endpoint
+tidak menerbitkan token, tidak menerima secret server atau token fixture, menolak
+origin di luar `CORS_ORIGINS`, dan tidak tersedia untuk paper/live. Browser tidak
+menyimpan token dalam URL/localStorage/sessionStorage. Kirim kode melalui kanal
+administrasi tepercaya; jangan menyalin kode ke laporan atau tangkapan layar.
+
 Cookie HMAC-SHA256 mengikat nonce acak, expiry, akun dan mode. Tidak memuat ID akun.
 HTTP dan WebSocket memakai verifier yang sama; stream ditutup saat sesi habis.
 Rotasi `SESSION_SECRET` dan restart seluruh proses mencabut semua sesi termasuk

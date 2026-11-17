@@ -56,6 +56,7 @@ export default function DailyResearch() {
     <p>Data pasar harian gratis · Aethereal · Lingkungan research</p>
     <section className="notice" aria-label="Batas penggunaan"><div><h2>Data akhir hari</h2><p>Harga penutupan dan indikator historis untuk riset harian. Sinyal intraday, peluang profit, dan eksekusi paper live belum diaktifkan.</p></div></section>
     <p role="status">{status}</p>
+    {!data && <p>Jika sesi belum aktif atau sudah berakhir, <Link href="/access">aktifkan sesi research</Link> menggunakan kode dari pengelola.</p>}
     <button onClick={() => { setData(null); setStatus('Memuat data harian…'); setRetry(n => n + 1); }}>Muat ulang data harian</button>
     {data && <>
       <section className="panel detail-section" aria-label="Sumber dan kualitas">
@@ -68,7 +69,7 @@ export default function DailyResearch() {
       <label className="eod-search">Cari kode saham<input value={query} onChange={event => setQuery(event.target.value)} placeholder="Contoh: BBCA" maxLength={8} /></label>
       <p>{visible.length} saham sesuai pencarian · urutan alfabet, tanpa ranking rekomendasi.</p>
       <ul className="eod-grid" aria-label="Data saham harian">{visible.map(row => <li key={row.symbol} className="eod-card">
-        <h2>{row.symbol}</h2><p className="muted">Tanggal data: {dateLabel(row.date)}{row.stale ? ' · Tertinggal' : ''}</p>
+        <h2><Link href={`/stocks/${encodeURIComponent(row.symbol)}?source=daily`} aria-label={`Lihat detail ${row.symbol}`}>{row.symbol} →</Link></h2><p className="muted">Tanggal data: {dateLabel(row.date)}{row.stale ? ' · Tertinggal' : ''}</p>
         <dl className="plan-grid"><div><dt>Harga penutupan</dt><dd>{rupiah.format(Number(row.close_idr))}</dd></div>
           <div><dt>Return harian adjusted</dt><dd>{row.return_1d === null ? 'Belum tersedia' : `${(Number(row.return_1d) * 100).toFixed(2)}%`}</dd></div>
           <div><dt>Volume penyedia</dt><dd>{integer.format(BigInt(row.volume))}</dd></div>

@@ -11,7 +11,7 @@ import psycopg
 from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field, SecretStr
 from starlette.exceptions import HTTPException
 from starlette.types import ASGIApp
 
@@ -45,6 +45,11 @@ class HealthResponse(BaseModel):
 
 class ReadyResponse(HealthResponse):
     dependencies: dict[str, bool]
+
+
+class ResearchSessionRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    token: SecretStr = Field(min_length=1, max_length=256)
 
 
 def create_app(
@@ -181,6 +186,28 @@ def create_app(
         ):
             raise HTTPException(401)
         return ops.status(datetime.now(UTC))
+
+    @app.post("/api/research/session", status_code=204)
+    def activate_research_session(request: Request, data: ResearchSessionRequest) -> Response:
+        if request.headers.get("origin") not in config.cors_origins or request.query_params:
+            raise HTTPException(403)
+        if config.app_mode != "research":
+            raise HTTPException(403)
+        token = data.token.get_secret_value()
+        if not config.session_secret or not valid_session(config, token):
+            raise HTTPException(401)
+        # Exchange only an existing administrator-signed token; never mint public sessions.
+        response = Response(status_code=204)
+        response.set_cookie(
+            "saham_session",
+            token,
+            max_age=int(token.split(".")[1]) - int(datetime.now(UTC).timestamp()),
+            httponly=True,
+            secure=config.deployment_tls_required,
+            samesite="strict",
+            path="/",
+        )
+        return response
 
     @app.get("/api/research/screener")
     def daily_screener(request: Request) -> dict[str, object]:
