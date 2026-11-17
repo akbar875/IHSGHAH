@@ -146,9 +146,12 @@ def test_research_session_exchange_validates_token_origin_and_cookie(tmp_path: P
     with TestClient(create_app(config)) as client:
         endpoint = "/api/research/session"
         assert client.post(endpoint, json={"token": token}).status_code == 403
-        assert client.post(
-            endpoint, json={"token": token}, headers={"Origin": "https://foreign.invalid"}
-        ).status_code == 403
+        assert (
+            client.post(
+                endpoint, json={"token": token}, headers={"Origin": "https://foreign.invalid"}
+            ).status_code
+            == 403
+        )
         for invalid in ("invalid", token[:-1], session_cookie(config, now=int(time.time()) - 3601)):
             response = client.post(endpoint, json={"token": invalid}, headers=headers)
             assert response.status_code == 401
