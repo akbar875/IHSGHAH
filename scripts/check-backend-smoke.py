@@ -28,6 +28,7 @@ def main() -> None:
     )
     assert b"--download" in help_result.stdout
     assert SCHEMA["$defs"]["MarketEvent"]
+    assert files("saham_signal").joinpath("resources/idx-daily.json").is_file()
     assert files("saham_signal.migrations").joinpath("001_journal.sql").is_file()
     assert files("saham_signal.migrations").joinpath("002_preferences.sql").is_file()
     assert files("saham_signal.migrations").joinpath("007_paper_qualification.sql").is_file()

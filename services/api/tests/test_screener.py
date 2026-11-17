@@ -114,7 +114,7 @@ def test_old_sealed_snapshot_still_loads_but_requires_reimport(tmp_path: Path) -
     assert result["needs_reimport"] and not result["rows"]
 
 
-def test_screener_api_auth_query_and_unavailable_source(tmp_path: Path) -> None:
+def test_public_screener_query_and_unavailable_source(tmp_path: Path) -> None:
     data(tmp_path)
     path = tmp_path / "snapshot.json"
     config = Settings(
@@ -123,7 +123,7 @@ def test_screener_api_auth_query_and_unavailable_source(tmp_path: Path) -> None:
         eod_snapshot_path=path,
     )
     with TestClient(create_app(config)) as client:
-        assert client.get("/api/research/screener").status_code == 401
+        assert client.get("/api/research/screener").status_code == 200
         client.cookies.set("saham_session", session_cookie(config))
         response = client.get("/api/research/screener")
         assert response.status_code == 200

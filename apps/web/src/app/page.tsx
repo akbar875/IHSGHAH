@@ -1,5 +1,5 @@
-import Screener from './screener';
+import StockWorkspace from './stock-workspace';
 
 export default function Home() {
-  return <Screener />;
+  return <StockWorkspace />;
 }

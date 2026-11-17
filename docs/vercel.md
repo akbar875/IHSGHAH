@@ -42,10 +42,12 @@ Jangan gunakan binding pada build, middleware, atau `NEXT_PUBLIC_*`.
   `DEPLOYMENT_TLS_REQUIRED=true` untuk deployment HTTPS. Gunakan environment
   dan database terpisah untuk Preview dan Production.
 - Jalankan migrasi sesuai README API sebelum memakai penyimpanan persisten.
-  Sesi tetap diprovisikan administrator sesuai `docs/SECURITY.md`.
-  Pengguna memasukkan nilai token bertanda tangan melalui `/access`; endpoint
-  `/api/research/session` memverifikasi token dan memasang cookie HttpOnly.
-  Tidak ada penerbitan token publik. Pastikan domain produksi ada di `CORS_ORIGINS`.
+  Sesi untuk data pribadi dan kontrol admin tetap diprovisikan sesuai `docs/SECURITY.md`.
+  Daftar/detail saham harian publik tidak memerlukan sesi. Snapshot atribusi asli
+  dibundel dalam `services/api/src/saham_signal/resources/idx-daily.json`, sehingga
+  Vercel tidak memerlukan file `.work` lokal. Jika `EOD_SNAPSHOT_PATH` tidak menunjuk
+  file yang tersedia saat startup, API memakai snapshot bawaan. Pembaruan snapshot
+  memerlukan import eksplisit dan redeploy; tanggal dan status stale tetap terlihat.
 - Fixture tetap nonaktif secara default. Untuk demo simulasi terotorisasi,
   ikuti `docs/market-data/market-api.md`; token fixture tidak boleh menjadi
   variabel publik. Konfigurasi ini tidak mengaktifkan feed atau trading live.

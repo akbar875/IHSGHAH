@@ -30,8 +30,8 @@ MARKET_HORIZON_MINUTES=30
 Token adalah credential fixture satu akun, diperiksa constant-time pada cookie
 `saham_session`. Atur cookie lokal melalui klien HTTP/browser development; pada
 fetch ke origin API gunakan `credentials: 'include'`. Server tidak menyediakan
-login fixture atau menerbitkan cookie fixture. Untuk sesi research bertanda tangan,
-gunakan halaman `/access` sesuai [panduan keamanan](../SECURITY.md).
+login fixture atau menerbitkan cookie fixture. Sesi administrator mengikuti [panduan keamanan](../SECURITY.md). Data harian
+publik pada `/api/research/*` dapat dibaca langsung tanpa sesi.
 Jangan taruh token di URL atau bundle web publik.
 Akun berasal dari `PILOT_ACCOUNT_ID`, atau `fixture-pilot` bila kosong. Mekanisme
 lokal ini hanya untuk development loopback, bukan pengganti autentikasi SS-023.

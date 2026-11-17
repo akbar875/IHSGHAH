@@ -119,7 +119,7 @@ def test_signed_research_api_rejects_query_and_does_not_need_fixture_or_database
         eod_snapshot_path=output,
     )
     with TestClient(create_app(config)) as client:
-        assert client.get("/api/research/eod").status_code == 401
+        assert client.get("/api/research/eod").status_code == 200
         client.cookies.set("saham_session", session_cookie(config))
         response = client.get("/api/research/eod")
         assert response.status_code == 200 and response.json()["origin"] == "market"

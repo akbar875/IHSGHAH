@@ -104,7 +104,7 @@ def test_daily_detail_has_real_history_no_depth_and_actual_count(tmp_path: Path)
     assert detail["order_book"] is None and detail["individual_queue"] is None
 
 
-def test_daily_stock_api_requires_auth_and_rejects_query_or_unknown_symbol(tmp_path: Path) -> None:
+def test_public_daily_stock_rejects_query_or_unknown_symbol(tmp_path: Path) -> None:
     data(tmp_path)
     config = Settings(
         session_secret=SecretStr("daily-stock-research-test-secret-12345678901234567890"),
@@ -112,7 +112,7 @@ def test_daily_stock_api_requires_auth_and_rejects_query_or_unknown_symbol(tmp_p
         eod_snapshot_path=tmp_path / "snapshot.json",
     )
     with TestClient(create_app(config)) as client:
-        assert client.get("/api/research/stocks/SIM").status_code == 401
+        assert client.get("/api/research/stocks/SIM").status_code == 200
         client.cookies.set("saham_session", session_cookie(config))
         result = client.get("/api/research/stocks/SIM")
         assert result.status_code == 200 and result.json()["symbol"] == "SIM"

@@ -1,3 +1,13 @@
+# Daftar saham publik dan detail harian
+
+Homepage `/` langsung memuat saham dari snapshot atribusi Aethereal yang dibundel
+bersama API. Pengunjung tidak perlu kode akses. Daftar di kiri bisa dicari lalu
+diklik untuk mengganti chart/detail di kanan; ponsel memakai tampilan daftar dan
+detail dengan tombol kembali. `/screener` menyediakan kandidat bullish/bearish,
+`/research` menyediakan sumber/kualitas, dan `/access` lama mengarah ke `/`.
+Data merupakan penutupan harian bertanggal, bukan intraday. Lihat
+[panduan data dan pembaruan snapshot](../../docs/market-data/free-daily-integration.md).
+
 # Web — dashboard dan detail research SS-018/019
 
 SS-020 menambahkan `/settings` untuk watchlist dan profil nominal/risiko/biaya

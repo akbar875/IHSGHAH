@@ -11,7 +11,7 @@ const label = (t: Time) => {
   return new Date(`${day}T00:00:00+07:00`).toLocaleDateString('id-ID', { timeZone: 'Asia/Jakarta', day: 'numeric', month: 'short', year: 'numeric' });
 };
 
-export function DailyHistoryChart({ data, range }: { data: DailyStock; range: number }) {
+export function DailyHistoryChart({ data, range, dark = false }: { data: DailyStock; range: number; dark?: boolean }) {
   const container = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState<string | null>(null);
   const points = data.history.slice(-range);
@@ -19,7 +19,8 @@ export function DailyHistoryChart({ data, range }: { data: DailyStock; range: nu
     if (!container.current || !data.history.length) return;
     const points = data.history.slice(-range);
     const chart = createChart(container.current, {
-      autoSize: true, height: 350, layout: { textColor: '#18312c', attributionLogo: true },
+      autoSize: true, height: 350, layout: { textColor: dark ? '#aebdb6' : '#18312c', background: { color: dark ? '#111714' : '#ffffff' }, attributionLogo: true },
+      grid: { vertLines: { color: dark ? '#202c26' : '#edf1ee' }, horzLines: { color: dark ? '#202c26' : '#edf1ee' } },
       timeScale: { timeVisible: false, tickMarkFormatter: (t: Time) => label(t).replace(/\s\d{4}$/, '') },
       localization: { timeFormatter: (t: Time) => `${label(t)} · EOD WIB` },
       handleScroll: { vertTouchDrag: false, horzTouchDrag: true },
@@ -41,7 +42,7 @@ export function DailyHistoryChart({ data, range }: { data: DailyStock; range: nu
     });
     chart.timeScale().fitContent();
     return () => chart.remove();
-  }, [data, range]);
+  }, [data, range, dark]);
   return <>
     <p className="chart-hover">{hover ?? (points.length ? `${label(points[0].date)} – ${label(points.at(-1)!.date)} · penutupan harian, WIB` : 'Riwayat belum tersedia. Impor ulang snapshot dengan riwayat harga.')}</p>
     {!!points.length && <div ref={container} className="daily-history-chart" role="img" aria-label="Chart harga penutupan harian berwarna biru dan volume abu-abu. Waktu EOD dalam WIB." />}
@@ -50,13 +51,14 @@ export function DailyHistoryChart({ data, range }: { data: DailyStock; range: nu
   </>;
 }
 
-export function BacktestChart({ backtest }: { backtest: Backtest }) {
+export function BacktestChart({ backtest, dark = false }: { backtest: Backtest; dark?: boolean }) {
   const container = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState<string | null>(null);
   useEffect(() => {
     if (!container.current || !backtest.trades.length) return;
     const chart = createChart(container.current, {
-      autoSize: true, height: 300, layout: { textColor: '#18312c', attributionLogo: true },
+      autoSize: true, height: 300, layout: { textColor: dark ? '#aebdb6' : '#18312c', background: { color: dark ? '#111714' : '#ffffff' }, attributionLogo: true },
+      grid: { vertLines: { color: dark ? '#202c26' : '#edf1ee' }, horzLines: { color: dark ? '#202c26' : '#edf1ee' } },
       timeScale: { timeVisible: false, tickMarkFormatter: (t: Time) => label(t).replace(/\s\d{4}$/, '') },
       localization: { timeFormatter: (t: Time) => `${label(t)} · EOD WIB` },
       handleScroll: { vertTouchDrag: false, horzTouchDrag: true },
@@ -75,7 +77,7 @@ export function BacktestChart({ backtest }: { backtest: Backtest }) {
     });
     chart.timeScale().fitContent();
     return () => chart.remove();
-  }, [backtest]);
+  }, [backtest, dark]);
   return <>
     <p className="chart-hover">{hover ?? `${backtest.start_date} – ${backtest.end_date} · waktu transaksi berupa tanggal EOD, WIB`}</p>
     <div ref={container} className="backtest-chart" role="img" aria-label="Chart hasil backtest historis: garis ungu indeks hasil, batang hijau transaksi untung, merah transaksi rugi. Tanggal keluar dalam WIB." />

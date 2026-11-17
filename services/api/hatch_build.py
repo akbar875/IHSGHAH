@@ -16,3 +16,4 @@ class CustomBuildHook(BuildHookInterface):
         elif not target.is_file():
             raise RuntimeError("Canonical storage contract missing from source distribution")
         build_data.setdefault("artifacts", []).append("src/saham_signal/storage_contract.json")
+        build_data["artifacts"].append("src/saham_signal/resources/idx-daily.json")

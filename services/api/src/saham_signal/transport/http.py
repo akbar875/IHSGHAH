@@ -4,6 +4,7 @@ import sys
 from collections.abc import AsyncIterator, Awaitable, Callable
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime
+from pathlib import Path
 from time import perf_counter
 from uuid import uuid4
 
@@ -209,37 +210,33 @@ def create_app(
         )
         return response
 
+    # A deployment does not have the operator's local .work directory. Ship a dated,
+    # attributed snapshot so public stock browsing works on a fresh instance.
+    daily_snapshot = (
+        config.eod_snapshot_path
+        if config.eod_snapshot_path and config.eod_snapshot_path.is_file()
+        else Path(__file__).resolve().parents[1] / "resources" / "idx-daily.json"
+    )
+
     @app.get("/api/research/screener")
     def daily_screener(request: Request) -> dict[str, object]:
-        if not config.session_secret or not valid_session(
-            config, request.cookies.get("saham_session")
-        ):
-            raise HTTPException(401)
         if config.app_mode != "research":
             raise HTTPException(403)
         if request.query_params:
             raise HTTPException(422)
-        if config.eod_snapshot_path is None:
-            raise HTTPException(503)
         try:
-            return read_screener(config.eod_snapshot_path, datetime.now(UTC))
+            return read_screener(daily_snapshot, datetime.now(UTC))
         except (OSError, ValueError):
             raise HTTPException(503) from None
 
     @app.get("/api/research/stocks/{symbol}")
     def daily_stock(request: Request, symbol: str) -> dict[str, object]:
-        if not config.session_secret or not valid_session(
-            config, request.cookies.get("saham_session")
-        ):
-            raise HTTPException(401)
         if config.app_mode != "research":
             raise HTTPException(403)
         if request.query_params or not re.fullmatch(r"[A-Z][A-Z0-9]{1,7}", symbol):
             raise HTTPException(422)
-        if config.eod_snapshot_path is None:
-            raise HTTPException(503)
         try:
-            return read_daily_stock(config.eod_snapshot_path, datetime.now(UTC), symbol)
+            return read_daily_stock(daily_snapshot, datetime.now(UTC), symbol)
         except KeyError:
             raise HTTPException(404) from None
         except (OSError, ValueError):
@@ -247,18 +244,12 @@ def create_app(
 
     @app.get("/api/research/eod")
     def daily_research(request: Request) -> dict[str, object]:
-        if not config.session_secret or not valid_session(
-            config, request.cookies.get("saham_session")
-        ):
-            raise HTTPException(401)
         if config.app_mode != "research":
             raise HTTPException(403)
         if request.query_params:
             raise HTTPException(422)
-        if config.eod_snapshot_path is None:
-            raise HTTPException(503)
         try:
-            snapshot = read_snapshot(config.eod_snapshot_path, datetime.now(UTC))
+            snapshot = read_snapshot(daily_snapshot, datetime.now(UTC))
             for row in snapshot["rows"]:
                 row.pop("history", None)
                 row.pop("backtest", None)

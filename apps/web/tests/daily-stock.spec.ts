@@ -27,7 +27,7 @@ test('clicking a listed stock opens daily charts, actual backtest counts and una
   await page.setViewportSize({ width: 360, height: 820 });
   await page.route('**/api/research/screener', r => r.fulfill({ json: list }));
   await page.route('**/api/research/stocks/BULL', r => r.fulfill({ json: detail }));
-  await page.goto('/');
+  await page.goto('/screener');
   await page.getByRole('link', { name: 'Lihat detail BULL' }).click();
   await expect(page).toHaveURL(/\/stocks\/BULL\?source=daily$/);
   await expect(page.getByRole('status')).toHaveText('Detail saham tersedia.');

@@ -19,14 +19,16 @@ jangan masukkan ke Git, log CI, URL, browser storage atau bundle. Pasang sebagai
 cookie host-only lewat kanal administrasi tepercaya dengan `HttpOnly`, `SameSite=Strict`,
 `Path=/`, `Max-Age` dan `Secure` pada TLS. Tidak ada endpoint publik penerbit sesi.
 
-Untuk research, halaman `/access` menerima **nilai token saja** (`v1.…`), tanpa
-awalan `saham_session=` atau atribut cookie. `POST /api/research/session` memverifikasi
-token yang sudah ditandatangani administrator dan memasangnya sebagai cookie host-only
-HttpOnly/SameSite=Strict (Secure pada TLS), dengan sisa masa berlaku token. Endpoint
-tidak menerbitkan token, tidak menerima secret server atau token fixture, menolak
-origin di luar `CORS_ORIGINS`, dan tidak tersedia untuk paper/live. Browser tidak
-menyimpan token dalam URL/localStorage/sessionStorage. Kirim kode melalui kanal
-administrasi tepercaya; jangan menyalin kode ke laporan atau tangkapan layar.
+Data harian publik (`GET /api/research/eod`, `/screener`, dan `/stocks/{symbol}`)
+dapat dibaca tanpa sesi dalam mode research. Endpoint hanya menerbitkan harga,
+indikator, riwayat, dan backtest dari snapshot atribusi CC BY 4.0; tidak membaca
+akun, posisi, watchlist pribadi, atau kontrol operasi. Paper/live tetap menolak
+route tersebut. Halaman `/access` lama mengarah kembali ke daftar saham.
+
+`POST /api/research/session` tetap hanya menukar token administrator yang sudah
+ditandatangani menjadi cookie HttpOnly/SameSite=Strict (Secure pada TLS), tanpa
+penerbitan token publik. Endpoint ini tidak diperlukan untuk daftar/detail saham.
+Origin di luar `CORS_ORIGINS`, token fixture, dan mode paper/live tetap ditolak.
 
 Cookie HMAC-SHA256 mengikat nonce acak, expiry, akun dan mode. Tidak memuat ID akun.
 HTTP dan WebSocket memakai verifier yang sama; stream ditutup saat sesi habis.

@@ -48,11 +48,13 @@ Raw CSV dan snapshot lokal tetap di `.work`, tidak di Git. `--input` tersedia
 untuk import salinan provider yang sudah diunduh: operator bertanggung jawab atas
 asal file, sedangkan SHA hanya membuktikan integritas, bukan otorisasi sumber.
 
-Endpoint `GET /api/research/eod` memerlukan sesi admin research bertanda tangan,
-path snapshot hanya dari konfigurasi server, tidak menerima query path/account.
+Endpoint `GET /api/research/eod`, `/screener`, dan `/stocks/{symbol}` dapat dibaca
+tanpa sesi pada mode research. Path snapshot hanya dari konfigurasi server atau
+resource bawaan, tidak menerima query path/account. Endpoint pribadi/admin tetap
+memerlukan autentikasi.
 Paper/live menolak konfigurasi EOD saat startup. Data kosong, korup, hash salah,
-masa depan, path tidak tersedia atau file >16 MiB memberi 503 tanpa fallback
-fixture. Respons private/no-store dan tidak bergantung pada feed vendor, broker
+masa depan atau file >16 MiB memberi 503 tanpa fallback fixture. Jika file
+operator tidak ada saat startup, snapshot atribusi bawaan digunakan. Respons private/no-store dan tidak bergantung pada feed vendor, broker
 atau database posisi. Readiness keseluruhan API tetap memerlukan PostgreSQL/Redis.
 
 Stale harian adalah **lebih dari 7 hari kalender** berdasarkan tanggal baris atau
@@ -68,21 +70,18 @@ Dari `services/api` dengan environment backend terkunci:
 uv run --locked python -m saham_signal.eod --download --output ../../.work/eod/snapshot.json
 ```
 
-Set `EOD_SNAPSHOT_PATH` ke **path absolut** file tersebut pada konfigurasi API
-research. Siapkan SESSION_SECRET dan PILOT_ACCOUNT_ID serta sesi admin mengikuti
-[panduan keamanan](../SECURITY.md). Jalankan API seperti biasa. Tidak diperlukan
-MARKET_FIXTURE_ENABLED untuk endpoint data harian.
+Tanpa konfigurasi data tambahan, API memakai snapshot bawaan di
+`services/api/src/saham_signal/resources/idx-daily.json`. Untuk data operator,
+set `EOD_SNAPSHOT_PATH` ke path absolut file hasil import yang tersedia pada server.
+Tidak diperlukan sesi, kode akses, atau MARKET_FIXTURE_ENABLED untuk melihat saham.
 
 Pada web, gunakan `NEXT_PUBLIC_API_BASE_URL` yang menunjuk service research.
-Misalnya `http://127.0.0.1:8000/api/v1` bila web dibuka pada hostname `127.0.0.1`;
-gunakan hostname yang sama agar cookie SameSite bekerja. Buka `/research` atau
-tautan **Data harian**. Jika halaman menunjukkan sesi belum aktif, buka **Akses
-research** (`/access`) dan masukkan nilai token `v1.…` yang diterbitkan administrator
-melalui `python -m saham_signal.application.security` (tanpa awalan `saham_session=`
-dan atribut cookie). Origin web harus tercantum di `CORS_ORIGINS`. Setelah aktivasi,
-daftar saham dimuat kembali. Klik kode saham di daftar kandidat atau data harian
-untuk membuka chart dan backtest. Kandidat kosong berbeda dari data gagal dimuat:
-snapshot bisa tersedia tanpa saham yang memenuhi filter tren.
+Misalnya `http://127.0.0.1:8000/api/v1` untuk proses lokal terpisah. Homepage `/`
+menampilkan daftar semua saham sumber di kiri dan chart/detail saham terpilih di
+kanan. Pada ponsel, pilih saham untuk membuka detail lalu gunakan tombol kembali.
+`/screener` menampilkan subset kandidat tren; kandidat kosong tidak mengosongkan
+daftar saham utama. `/research` tetap menyediakan informasi sumber dan kualitas.
+`/access` lama langsung mengarah ke daftar saham, tanpa form aktivasi.
 
 Tombol muat ulang hanya membaca cache; jalankan ulang
 collector secara eksplisit untuk memperbarui data. Tidak ada automation baru.
